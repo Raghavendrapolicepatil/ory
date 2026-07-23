@@ -6,7 +6,7 @@ async function loadHomeCategories() {
 
     try {
 
-        const response = await fetch("http://localhost:5000/api/categories");
+        const response = await fetch("https://snackible-backend.onrender.com/api/categories");
 
         const categories = await response.json();
 

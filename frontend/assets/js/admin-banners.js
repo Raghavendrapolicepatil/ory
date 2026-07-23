@@ -2,7 +2,7 @@
 // Snackible Banner Management
 // ==========================================
 
-const API = "http://localhost:5000/api/banners";
+const API = "https://snackible-backend.onrender.com/api/banners";
 
 const form = document.getElementById("bannerForm");
 const bannerList = document.getElementById("bannerList");

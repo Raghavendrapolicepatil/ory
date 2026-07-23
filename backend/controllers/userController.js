@@ -69,12 +69,11 @@ const loginUser = async (req, res) => {
             });
         }
 
-        const token = jwt.sign(
-            { id: user._id },
-            "snackible-secret",
-            { expiresIn: "7d" }
-        );
-
+const token = jwt.sign(
+    { id: user._id },
+    process.env.JWT_SECRET,
+    { expiresIn: "7d" }
+);
         res.json({
             message: "Login Successful",
             token,

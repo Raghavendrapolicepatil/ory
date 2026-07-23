@@ -2,7 +2,7 @@
 // Snackible Admin Dashboard
 // ==========================================
 
-const API = "http://localhost:5000/api";
+const API = "https://snackible-backend.onrender.com/api";
 
 const productsCount = document.getElementById("products-count");
 const ordersCount = document.getElementById("orders-count");

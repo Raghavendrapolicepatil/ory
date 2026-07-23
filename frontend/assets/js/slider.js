@@ -17,7 +17,7 @@ async function loadBanners() {
 
     try {
 
-        const res = await fetch("http://localhost:5000/api/banners");
+        const res = await fetch("https://snackible-backend.onrender.com/api/banners");
 
         const banners = await res.json();
 

@@ -46,7 +46,7 @@ forgotForm.addEventListener("submit", async (e) => {
 
         /*
         const response = await fetch(
-            "http://localhost:5000/api/auth/forgot-password",
+            "https://snackible-backend.onrender.com/api/auth/forgot-password",
             {
                 method: "POST",
                 headers: {

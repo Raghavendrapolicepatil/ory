@@ -2,7 +2,7 @@
 // Snackible Admin Categories
 // ==========================================
 
-const API = "http://localhost:5000/api/categories";
+const API = "https://snackible-backend.onrender.com/api/categories";
 
 const form = document.getElementById("categoryForm");
 const categoryList = document.getElementById("categoryList");

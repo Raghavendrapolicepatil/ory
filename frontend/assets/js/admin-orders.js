@@ -1,4 +1,4 @@
-const API = "http://localhost:5000/api/orders";
+const API = "https://snackible-backend.onrender.com/api/orders";
 
 const ordersTable = document.getElementById("ordersTable");
 const searchInput = document.getElementById("searchOrder");

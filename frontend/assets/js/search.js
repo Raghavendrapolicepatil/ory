@@ -21,7 +21,7 @@ async function loadProducts(){
     try{
 
         const response =
-        await fetch("http://localhost:5000/api/products");
+        await fetch("https://snackible-backend.onrender.com/api/products");
 
         products =
         await response.json();

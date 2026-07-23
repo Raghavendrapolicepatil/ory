@@ -2,7 +2,7 @@
 // Snackible Admin Panel
 // ==========================================
 
-const API = "http://localhost:5000/api/products";
+const API = "https://snackible-backend.onrender.com/api/products";
 
 const form = document.getElementById("productForm");
 
@@ -35,7 +35,7 @@ async function loadProducts() {
             // Image URL Fix
             const imageUrl = product.image.startsWith("http")
                 ? product.image
-                : "http://localhost:5000" + product.image;
+                : "https://snackible-backend.onrender.com" + product.image;
 
             productsBox.innerHTML += `
 

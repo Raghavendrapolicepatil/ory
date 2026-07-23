@@ -6,7 +6,7 @@
    API CONFIG
 =========================== */
 
-const API_BASE_URL = "http://localhost:5000/api/orders";
+const API_BASE_URL = "https://snackible-backend.onrender.com/api/orders";
 
 /* ===========================
    STORE LOCATION

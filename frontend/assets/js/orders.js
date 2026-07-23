@@ -2,7 +2,7 @@
 // Patil Groceries Orders
 // ==========================================
 
-const API_URL = "http://localhost:5000/api/orders";
+const API_URL = "https://snackible-backend.onrender.com/api/orders";
 
 const ordersContainer = document.getElementById("orders-container");
 

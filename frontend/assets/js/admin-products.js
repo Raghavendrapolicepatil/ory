@@ -2,7 +2,7 @@
 // Snackible Admin Products
 // ==========================================
 
-const API = "http://localhost:5000/api/products";
+const API = "https://snackible-backend.onrender.com/api/products";
 
 // Elements
 const form = document.getElementById("productForm");

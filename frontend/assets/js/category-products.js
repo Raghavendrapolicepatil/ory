@@ -2,7 +2,7 @@
 // Snackible Category V3
 // ======================================
 
-const API = "http://localhost:5000/api";
+const API = "https://snackible-backend.onrender.com/api";
 
 let allProducts = [];
 let allCategories = [];

@@ -2,7 +2,7 @@
 // Patil Groceries Admin Settings
 // ==========================================
 
-const API = "http://localhost:5000/api/settings";
+const API = "https://snackible-backend.onrender.com/api/settings";
 
 const storeName = document.getElementById("storeName");
 const storePhone = document.getElementById("storePhone");

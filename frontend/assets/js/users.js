@@ -6,7 +6,7 @@ let users = [];
 
 async function loadUsers(){
 
-    const response = await fetch("http://localhost:5000/api/users");
+    const response = await fetch("https://snackible-backend.onrender.com/api/users");
 
     users = await response.json();
 
@@ -89,7 +89,7 @@ async function deleteUser(id){
 
     if(!confirm("Delete this user?")) return;
 
-    await fetch(`http://localhost:5000/api/users/${id}`,{
+    await fetch(`https://snackible-backend.onrender.com/api/users/${id}`,{
 
         method:"DELETE"
 

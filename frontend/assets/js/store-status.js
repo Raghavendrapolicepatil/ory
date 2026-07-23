@@ -1,4 +1,4 @@
-const API = "http://localhost:5000/api/settings";
+const API = "https://snackible-backend.onrender.com/api/settings";
 
 async function checkStore() {
 
