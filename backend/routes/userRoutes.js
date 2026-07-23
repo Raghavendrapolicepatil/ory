@@ -20,7 +20,7 @@ router.delete("/:id", async (req, res) => {
 
     try {
 
-        const User = require("../models/User");
+        const User = require("../models/user");
 
         await User.findByIdAndDelete(req.params.id);
 
