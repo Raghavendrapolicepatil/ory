@@ -10,24 +10,26 @@ const editBtn = document.querySelector(".edit-btn");
 // Load Saved Data
 function loadProfile() {
 
-    const savedName = localStorage.getItem("userName");
-    const savedPhone = localStorage.getItem("userPhone");
+    const user = JSON.parse(localStorage.getItem("user"));
 
-    if (savedName) {
-        profileName.textContent = savedName;
-    }
+    if (!user) return;
 
-    if (savedPhone) {
-        profilePhone.textContent = savedPhone;
-    }
+    profileName.textContent = user.name || "Guest";
+    profilePhone.textContent = user.phone || "";
 
 }
 
 // Save Profile
 function saveProfile(name, phone) {
 
-    localStorage.setItem("userName", name);
-    localStorage.setItem("userPhone", phone);
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) return;
+
+    user.name = name;
+    user.phone = phone;
+
+    localStorage.setItem("user", JSON.stringify(user));
 
     profileName.textContent = name;
     profilePhone.textContent = phone;
