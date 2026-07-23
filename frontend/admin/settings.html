@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Store Settings | Patil Groceries Admin</title>
+
+<link rel="stylesheet" href="../assets/css/admin-layout.css">
+<link rel="stylesheet" href="../assets/css/admin-settings.css">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin">
+
+<!-- Sidebar -->
+
+<aside class="sidebar">
+
+<div class="logo">
+
+Patil Groceries
+
+</div>
+
+<ul class="menu">
+
+<li>
+<a href="dashboard.html">
+<i class="ri-dashboard-line"></i>
+Dashboard
+</a>
+</li>
+
+<li>
+<a href="products.html">
+<i class="ri-shopping-bag-line"></i>
+Products
+</a>
+</li>
+
+<li>
+<a href="categories.html">
+<i class="ri-layout-grid-line"></i>
+Categories
+</a>
+</li>
+
+<li>
+<a href="orders.html">
+<i class="ri-file-list-3-line"></i>
+Orders
+</a>
+</li>
+
+<li>
+<a href="users.html">
+<i class="ri-user-3-line"></i>
+Users
+</a>
+</li>
+                <a href="banners.html">
+                    <i class="ri-image-line"></i>
+                    Banners
+                </a>
+            </li>
+<li>
+<a class="active" href="settings.html">
+<i class="ri-settings-3-line"></i>
+Store Settings
+</a>
+</li>
+
+</ul>
+
+</aside>
+
+<!-- Content -->
+
+<main class="content">
+
+<div class="topbar">
+
+<h2>
+
+<i class="ri-settings-3-line"></i>
+
+Store Settings
+
+</h2>
+
+</div>
+
+<div class="settings-container">
+
+<!-- Store -->
+
+<div class="setting-card">
+
+<h3>🏪 Store Information</h3>
+
+<input
+type="text"
+id="storeName"
+placeholder="Store Name">
+
+<input
+type="text"
+id="storePhone"
+placeholder="Mobile Number">
+
+<input
+type="email"
+id="storeEmail"
+placeholder="Email">
+
+<textarea
+id="storeAddress"
+placeholder="Store Address"></textarea>
+
+</div>
+
+<!-- Delivery -->
+
+<div class="setting-card">
+
+<h3>🚚 Delivery Settings</h3>
+
+<input
+type="number"
+id="deliveryCharge"
+placeholder="Delivery Charge">
+
+<input
+type="number"
+id="freeDeliveryAbove"
+placeholder="Free Delivery Above">
+
+<input
+type="number"
+id="minimumOrder"
+placeholder="Minimum Order Amount">
+
+<input
+type="text"
+id="deliveryTime"
+placeholder="Delivery Time (20-30 mins)">
+
+</div>
+
+<!-- Fees -->
+
+<div class="setting-card">
+
+<h3>💳 Charges</h3>
+
+<input
+type="number"
+id="platformFee"
+placeholder="Platform Fee">
+
+</div>
+
+<!-- Gift -->
+
+<div class="setting-card">
+
+<h3>🎁 Free Gift</h3>
+
+<input
+type="number"
+id="freeGiftAbove"
+placeholder="Free Gift Above">
+
+<input
+type="text"
+id="giftProduct"
+placeholder="Gift Product Name">
+
+</div>
+
+<!-- Contact -->
+
+<div class="setting-card">
+
+<h3>☎ Contact</h3>
+
+<input
+type="text"
+id="supportNumber"
+placeholder="Support Number">
+
+<input
+type="text"
+id="whatsappNumber"
+placeholder="WhatsApp Number">
+
+</div>
+
+<!-- Store Status -->
+
+<div class="setting-card">
+
+<h3>🟢 Store Status</h3>
+
+<select id="storeStatus">
+
+<option value="Open">Open</option>
+
+<option value="Closed">Closed</option>
+
+</select>
+
+</div>
+
+<button id="saveSettings">
+
+<i class="ri-save-line"></i>
+
+Save Settings
+
+</button>
+
+</div>
+
+</main>
+
+</div>
+
+<script src="../assets/js/admin-settings.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,189 @@
+/* ==========================================
+   Settings Page
+========================================== */
+
+.settings-container{
+
+    display:grid;
+
+    gap:25px;
+
+}
+
+.setting-card{
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.setting-card h3{
+
+    margin-bottom:20px;
+
+    color:#222;
+
+    font-size:20px;
+
+}
+
+.setting-card input,
+.setting-card textarea,
+.setting-card select{
+
+    width:100%;
+
+    padding:12px 15px;
+
+    margin-bottom:15px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+
+    transition:.3s;
+
+}
+
+.setting-card input:focus,
+.setting-card textarea:focus,
+.setting-card select:focus{
+
+    border-color:#16a34a;
+
+}
+
+.setting-card textarea{
+
+    min-height:120px;
+
+    resize:vertical;
+
+}
+
+#saveSettings{
+
+    background:#16a34a;
+
+    color:#fff;
+
+    border:none;
+
+    padding:15px 25px;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+#saveSettings:hover{
+
+    background:#15803d;
+
+}
+
+/* Switch */
+
+.switch{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:15px 0;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.switch:last-child{
+
+    border-bottom:none;
+
+}
+
+.switch label{
+
+    font-size:16px;
+
+    color:#333;
+
+    font-weight:500;
+
+}
+
+.switch input{
+
+    width:20px;
+
+    height:20px;
+
+    cursor:pointer;
+
+}
+
+/* Status */
+
+.status-box{
+
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:20px;
+
+    font-size:14px;
+
+    color:#fff;
+
+    background:#16a34a;
+
+}
+
+.status-box.closed{
+
+    background:#dc2626;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.setting-card{
+
+padding:20px;
+
+}
+
+.setting-card h3{
+
+font-size:18px;
+
+}
+
+#saveSettings{
+
+width:100%;
+
+}
+
+}

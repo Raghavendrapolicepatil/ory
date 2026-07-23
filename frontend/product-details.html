@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Snackible | Product Details</title>
+
+<link
+rel="stylesheet"
+href="assets/css/style.css">
+
+<link
+rel="stylesheet"
+href="assets/css/product-details.css">
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="product-page">
+
+<!-- ==========================================
+HEADER
+========================================== -->
+
+<header class="product-header">
+
+<button
+
+class="header-btn"
+
+onclick="history.back()">
+
+<i class="ri-arrow-left-line"></i>
+
+</button>
+
+<div class="header-actions">
+
+<button
+
+id="wishlist-btn"
+
+class="header-btn">
+
+<i class="ri-heart-line"></i>
+
+</button>
+
+<button
+
+id="share-btn"
+
+class="header-btn">
+
+<i class="ri-share-line"></i>
+
+</button>
+
+</div>
+
+</header>
+
+<!-- ==========================================
+PRODUCT GALLERY
+========================================== -->
+
+<section class="gallery-section">
+
+<div
+
+id="offer-badge"
+
+class="offer-badge">
+
+0% OFF
+
+</div>
+
+<div class="gallery-container">
+
+<div class="main-image-box">
+
+<img
+
+id="product-image"
+
+src="assets/images/no-image.webp"
+
+alt="Product"
+
+loading="lazy">
+
+</div>
+
+<div
+
+id="thumbnail-list"
+
+class="thumbnail-list">
+
+<!-- JS -->
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+IMAGE VIEWER
+========================================== -->
+
+<div
+
+id="image-viewer"
+
+class="image-viewer">
+
+<button
+
+id="close-viewer"
+
+class="viewer-close">
+
+<i class="ri-close-line"></i>
+
+</button>
+
+<img
+
+id="preview-image"
+
+src=""
+
+alt="Preview">
+
+</div>
+<!-- ==========================================
+PRODUCT INFORMATION
+========================================== -->
+
+<section class="product-info">
+
+<!-- Brand + Badge -->
+
+<div class="brand-row">
+
+<span
+
+id="product-brand"
+
+class="product-brand">
+
+Loading Brand
+
+</span>
+
+<div class="badge-group">
+
+<span
+
+id="best-badge"
+
+class="badge bestseller"
+
+style="display:none;">
+
+Best Seller
+
+</span>
+
+<span
+
+id="new-badge"
+
+class="badge new"
+
+style="display:none;">
+
+New
+
+</span>
+
+<span
+
+id="trend-badge"
+
+class="badge trending"
+
+style="display:none;">
+
+Trending
+
+</span>
+
+</div>
+
+</div>
+
+<!-- Product Name -->
+
+<h1
+
+id="product-name"
+
+class="product-name">
+
+Loading Product...
+
+</h1>
+
+<!-- Rating -->
+
+<div class="rating-row">
+
+<div class="rating-box">
+
+<i class="ri-star-fill"></i>
+
+<span
+
+id="product-rating">
+
+4.5
+
+</span>
+
+</div>
+
+<span
+
+id="review-count"
+
+class="review-count">
+
+0 Ratings
+
+</span>
+
+</div>
+
+<!-- Delivery -->
+
+<div class="delivery-row">
+
+<i class="ri-flashlight-fill"></i>
+
+<span>
+
+Delivery in
+
+<strong>10-15 mins</strong>
+
+</span>
+
+</div>
+
+<!-- Price -->
+
+<div class="price-section">
+
+<div>
+
+<div
+
+id="product-price"
+
+class="price">
+
+₹0
+
+</div>
+
+<div class="price-bottom">
+
+<span
+
+id="product-mrp"
+
+class="mrp">
+
+₹0
+
+</span>
+
+<span
+
+id="product-discount"
+
+class="discount">
+
+0% OFF
+
+</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Stock -->
+
+<div
+
+id="stock-status"
+
+class="stock-status">
+
+Checking Stock...
+
+</div>
+
+</section>
+
+<!-- ==========================================
+VARIANTS
+========================================== -->
+
+<section id="variant-section"
+         class="variant-section"
+         style="display:none;">
+
+    <div class="section-header">
+        <h3>Select Variant</h3>
+    </div>
+
+    <div id="variant-list"
+         class="variant-list">
+    </div>
+
+</section>
+
+
+<!-- ==========================================
+ABOUT PRODUCT
+========================================== -->
+
+<section class="accordion-card">
+
+<button
+
+id="about-toggle"
+
+class="accordion-btn">
+
+<div>
+
+<h3>
+
+About Product
+
+</h3>
+
+<p>
+
+Know more about this product
+
+</p>
+
+</div>
+
+<i class="ri-arrow-down-s-line"></i>
+
+</button>
+
+<div
+
+id="about-content"
+
+class="accordion-content">
+
+<p
+
+id="product-description">
+
+Loading...
+
+</p>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+PRODUCT DETAILS
+========================================== -->
+
+<section class="accordion-card">
+
+<button
+
+id="details-toggle"
+
+class="accordion-btn">
+
+<div>
+
+<h3>
+
+Product Details
+
+</h3>
+
+<p>
+
+Brand • Weight • Seller
+
+</p>
+
+</div>
+
+<i class="ri-arrow-down-s-line"></i>
+
+</button>
+
+<div
+
+id="details-content"
+
+class="accordion-content">
+
+<div class="details-table">
+
+<div class="detail-row">
+
+<span>Brand</span>
+
+<strong id="detail-brand">-</strong>
+
+</div>
+
+<div class="detail-row">
+
+<span>Category</span>
+
+<strong id="detail-category">-</strong>
+
+</div>
+
+<div class="detail-row">
+
+<span>Weight</span>
+
+<strong id="detail-weight">-</strong>
+
+</div>
+
+<div class="detail-row">
+
+<span>SKU</span>
+
+<strong id="detail-sku">-</strong>
+
+</div>
+
+<div class="detail-row">
+
+<span>Seller</span>
+
+<strong id="detail-seller">Snackible Grocery</strong>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+SELLER
+========================================== -->
+
+<section class="seller-card">
+
+<div class="seller-left">
+
+<div class="seller-icon">
+
+<i class="ri-store-2-fill"></i>
+
+</div>
+
+<div>
+
+<h3>
+
+Snackible Grocery
+
+</h3>
+
+<p>
+
+100% Genuine Products
+
+</p>
+
+</div>
+
+</div>
+
+<div class="seller-right">
+
+<i class="ri-shield-check-fill"></i>
+
+<span>
+
+Verified
+
+</span>
+
+</div>
+
+</section>
+
+<!-- ==========================================
+FIXED BOTTOM BAR
+========================================== -->
+
+<div class="bottom-bar">
+
+<div class="bottom-price">
+
+<div
+
+id="bottom-price">
+
+₹0
+
+</div>
+
+<span>
+
+Inclusive of all taxes
+
+</span>
+
+</div>
+
+<div class="bottom-actions">
+
+<div
+
+id="cart-box" onclick="addCurrentProduct()">
+
+
+<button
+
+id="add-cart-btn"
+
+class="add-cart-btn">
+
+<i class="ri-shopping-cart-2-line"></i>
+
+Add
+
+</button>
+
+</div>
+
+<div
+
+id="quantity-box"
+
+style="display:none;">
+
+<button id="minus-btn">
+
+<i class="ri-subtract-line"></i>
+
+</button>
+
+<span id="product-qty">
+
+1
+
+</span>
+
+<button id="plus-btn">
+
+<i class="ri-add-line"></i>
+
+</button>
+
+</div>
+
+<button
+
+id="buy-now"
+
+class="buy-btn"
+
+style="display:none;">
+
+<i class="ri-flashlight-fill"></i>
+
+Buy Now
+
+</button>
+
+</div>
+
+</div>
+<!-- ==========================================
+RELATED PRODUCTS
+========================================== -->
+
+<section class="related-section">
+
+<div class="section-header">
+
+<h3>
+
+You May Also Like
+
+</h3>
+
+<a
+href="index.html">
+
+View All
+
+</a>
+
+</div>
+
+<div
+
+id="related-products"
+
+class="related-slider">
+
+<!-- JS -->
+
+</div>
+
+</section>
+
+
+<!--flowting cart -->
+<div id="floatingCartBar" class="floating-cart-bar">
+
+    <div class="floating-cart-info">
+
+        <span id="floating-cart-count">0 Items</span>
+
+        <strong id="floating-cart-total">₹0</strong>
+
+    </div>
+
+    <button id="floating-cart-btn">
+
+        View Cart
+
+        <i class="ri-arrow-right-line"></i>
+
+    </button>
+
+</div>
+
+<!-- ==========================================
+BOTTOM SPACE
+========================================== -->
+
+<div style="height:120px;"></div>
+
+<!-- ==========================================
+PAGE LOADER
+========================================== -->
+
+<div
+
+id="page-loader"
+
+class="page-loader">
+
+<div class="loader"></div>
+
+</div>
+
+<!-- ==========================================
+TOAST
+========================================== -->
+
+<div
+
+id="toast"
+
+class="toast">
+
+<i class="ri-checkbox-circle-fill"></i>
+
+<span>
+
+Added to Cart
+
+</span>
+
+</div>
+
+<!-- ==========================================
+SCRIPTS
+========================================== -->
+
+<script src="assets/js/cart.js"></script>
+
+<script src="assets/js/wishlist.js"></script>
+
+<script src="assets/js/product-details.js"></script>
+
+</body>
+
+</html>

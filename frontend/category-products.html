@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Snackible Category</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/category-products.css">
+<link rel="stylesheet" href="assets/css/product-card.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- ==========================================
+PREMIUM CATEGORY HEADER
+========================================== -->
+
+<header class="category-header">
+
+    <div class="header-top">
+
+        <!-- Back -->
+
+        <button
+            class="back-btn"
+            onclick="history.back()">
+
+            <i class="ri-arrow-left-line"></i>
+
+        </button>
+
+        <!-- Title -->
+
+        <div class="header-title">
+
+            <h2 id="category-title">
+
+                Loading...
+
+            </h2>
+
+            <p id="product-count">
+
+                0 Products
+
+            </p>
+
+        </div>
+
+        <!-- Right Icons -->
+
+        <div class="header-actions">
+
+            <button class="icon-btn">
+
+                <i class="ri-search-line"></i>
+
+            </button>
+
+            <button class="icon-btn">
+
+                <i class="ri-heart-3-line"></i>
+
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Search -->
+
+    <div class="search-wrapper">
+
+        <div class="search-box">
+
+            <i class="ri-search-line"></i>
+
+            <input
+
+                id="searchInput"
+
+                type="text"
+
+                placeholder="Search products...">
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- ==========================================
+CATEGORY BODY
+========================================== -->
+
+<div class="category-container">
+
+    <!-- ==========================
+    LEFT CATEGORY MENU
+    ========================== -->
+
+    <aside
+        class="category-sidebar">
+
+        <div
+            id="category-sidebar">
+
+            <!-- Categories JS -->
+
+        </div>
+
+    </aside>
+
+    <!-- ==========================
+    RIGHT SIDE
+    ========================== -->
+
+    <section class="products-wrapper">
+
+        <!-- Filter Chips -->
+
+        <!-- Filter Chips -->
+
+<div class="filter-bar">
+
+    <button class="filter-chip active">
+
+        All
+
+    </button>
+
+    <button class="filter-chip">
+
+        Popular
+
+    </button>
+
+    <button class="filter-chip">
+
+        Low Price
+
+    </button>
+
+    <button class="filter-chip">
+
+        High Price
+
+    </button>
+
+    <button class="filter-chip">
+
+        Offers
+
+    </button>
+
+    <button class="filter-chip">
+
+        New
+
+    </button>
+
+    <button class="filter-chip">
+
+        Best Seller
+
+    </button>
+
+    <button class="filter-chip">
+
+        Fast Delivery
+
+    </button>
+
+    <div class="sort-btn">
+
+        <i class="ri-equalizer-line"></i>
+
+        <span>
+
+            Sort
+
+        </span>
+
+    </div>
+
+</div>
+
+        
+
+
+<!-- ==========================================
+CATEGORY INFO
+========================================== -->
+
+<div class="category-info">
+
+    <div>
+
+        <h3 id="category-heading">
+
+            Loading...
+
+        </h3>
+
+        <p id="category-description">
+
+            Fresh groceries delivered in minutes
+
+        </p>
+
+    </div>
+
+</div>
+
+        <!-- Products -->
+
+        <div
+            id="product-container"
+            class="product-grid">
+
+        </div>
+
+    </section>
+
+</div>
+
+<!-- ==========================================
+FLOATING CART
+========================================== -->
+
+<div
+class="floating-cart-bar"
+
+id="floatingCartBar"
+
+style="display:none;">
+
+    <div>
+
+        <h4 id="floating-cart-count">
+
+            0 Items
+
+        </h4>
+
+        <small>
+
+            Ready to Checkout
+
+        </small>
+
+    </div>
+
+    <a
+    href="checkout.html">
+
+        View Cart
+
+        <span id="floating-cart-total">
+
+            ₹0
+
+        </span>
+
+    </a>
+
+</div>
+
+<!-- ==========================================
+LOADING
+========================================== -->
+
+<div
+id="page-loader"
+class="page-loader">
+
+    <div class="loader-box">
+
+        <div class="loader-spinner"></div>
+
+        <p>
+
+            Loading Products...
+
+        </p>
+
+    </div>
+
+</div>
+
+<!-- ==========================================
+EMPTY STATE
+========================================== -->
+
+<div
+id="empty-state"
+class="empty-state"
+style="display:none;">
+
+    <img
+
+    src="assets/images/empty-cart.png"
+
+    alt="Empty">
+
+    <h3>
+
+        No Products Found
+
+    </h3>
+
+    <p>
+
+        Try another category.
+
+    </p>
+
+</div>
+
+<!-- ==========================================
+BOTTOM NAVIGATION
+========================================== -->
+
+<nav class="bottom-nav">
+
+   
+
+</nav>
+
+</div>
+
+
+<!-- ==========================================
+SCRIPTS
+========================================== -->
+
+<script src="assets/js/cart.js"></script>
+
+<script src="assets/js/wishlist.js"></script>
+
+<script src="assets/js/theme.js"></script>
+
+<script src="assets/js/category-products.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+/* ==========================================
+   Premium Minimal Loader
+========================================== */
+
+.loader-screen{
+
+    position:fixed;
+    inset:0;
+    background:#ffffff;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    transition:opacity .45s ease;
+
+}
+
+.loader-screen.hide{
+
+    opacity:0;
+    pointer-events:none;
+
+}
+
+.loader-content{
+
+    text-align:center;
+    animation:fadeUp .5s ease;
+
+}
+
+.loader-logo{
+
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    margin-bottom:18px;
+    animation:logoFloat 2s ease-in-out infinite;
+
+}
+
+.loader-content h2{
+
+    margin:0;
+    color:#888;
+    font-size:18px;
+    font-weight:500;
+
+}
+
+.loader-content h1{
+
+    margin:8px 0 20px;
+    color:#111;
+    font-size:32px;
+    font-weight:700;
+
+}
+
+.loader-content p{
+
+    margin-top:18px;
+    color:#888;
+    font-size:14px;
+
+}
+
+.loader-line{
+
+    width:180px;
+    height:4px;
+    margin:auto;
+    background:#ececec;
+    border-radius:50px;
+    overflow:hidden;
+
+}
+
+.loader-progress{
+
+    width:45%;
+    height:100%;
+    background:#16a34a;
+    border-radius:50px;
+    animation:progressMove 1.4s infinite ease-in-out;
+
+}
+
+@keyframes progressMove{
+
+    0%{
+
+        transform:translateX(-170%);
+
+    }
+
+    100%{
+
+        transform:translateX(330%);
+
+    }
+
+}
+
+@keyframes logoFloat{
+
+    0%,100%{
+
+        transform:translateY(0);
+
+    }
+
+    50%{
+
+        transform:translateY(-5px);
+
+    }
+
+}
+
+@keyframes fadeUp{
+
+    from{
+
+        opacity:0;
+        transform:translateY(15px);
+
+    }
+
+    to{
+
+        opacity:1;
+        transform:translateY(0);
+
+    }
+
+}

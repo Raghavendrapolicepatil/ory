@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Checkout | Patil Groceries</title>
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/checkout.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+<!-- Header -->
+
+<header class="checkout-header">
+
+<a href="javascript:history.back()" class="back-btn">
+
+<i class="fa-solid fa-arrow-left"></i>
+
+</a>
+
+<h2>Checkout</h2>
+
+</header>
+
+<!-- Delivery Address -->
+
+<section class="checkout-card">
+
+<div class="card-title">
+
+<i class="fa-solid fa-location-dot"></i>
+
+<h3>Delivery Address</h3>
+
+</div>
+
+<div id="delivery-address">
+
+<p>No Address Selected</p>
+
+</div>
+
+<a href="address.html" class="change-btn">
+
+Change Address
+
+</a>
+
+</section>
+
+<!-- Shopping Bag -->
+
+<section class="checkout-card">
+
+<div class="card-title">
+
+<i class="fa-solid fa-bag-shopping"></i>
+
+<h3>Shopping Bag</h3>
+
+</div>
+
+<div id="checkout-items">
+
+<!-- JS -->
+
+</div>
+
+</section>
+
+<!-- Bill Details -->
+
+<section class="checkout-card">
+
+<div class="card-title">
+
+<i class="fa-solid fa-file-invoice"></i>
+
+<h3>Bill Details</h3>
+
+</div>
+
+<div class="bill-row">
+
+<span>Items Total</span>
+
+<span id="items-total">₹0</span>
+
+</div>
+
+<div class="bill-row">
+
+<span>Delivery Fee</span>
+
+<span id="delivery-fee">₹0</span>
+
+</div>
+
+<p id="delivery-message" class="delivery-message"></p>
+
+<div class="bill-row">
+
+<span>Platform Fee</span>
+
+<span id="platform-fee">₹0</span>
+
+</div>
+
+<hr>
+
+<div class="bill-row total">
+
+<span>Grand Total</span>
+
+<span id="grand-total">₹0</span>
+
+</div>
+
+</section>
+
+<!-- Payment -->
+
+<section class="checkout-card">
+
+<div class="card-title">
+
+<i class="fa-solid fa-wallet"></i>
+
+<h3>Payment Method</h3>
+
+</div>
+
+<label class="payment-option">
+
+<input type="radio" name="payment" value="COD" checked>
+
+Cash on Delivery
+
+</label>
+
+<label class="payment-option">
+
+<input type="radio" name="payment" value="UPI">
+
+UPI
+
+</label>
+
+<label class="payment-option">
+
+<input type="radio" name="payment" value="Card">
+
+Credit / Debit Card
+
+</label>
+
+</section>
+
+</div>
+
+<!-- Footer -->
+
+<div class="checkout-footer">
+
+<div>
+
+<small>Total Amount</small>
+
+<h3 id="footer-total">₹0</h3>
+
+</div>
+
+<button id="place-order">
+
+Place Order
+
+</button>
+
+</div>
+
+
+<!-- Toast -->
+
+<div id="toast" class="toast"></div>
+
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/checkout.js"></script>
+<script src="assets/js/store-status.js"></script>
+<script src="assets/js/theme.js"></script>
+
+</body>
+</html>

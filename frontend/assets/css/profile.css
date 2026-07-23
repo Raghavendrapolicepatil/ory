@@ -1,0 +1,289 @@
+/* ==========================================
+   PROFILE PAGE
+========================================== */
+
+body{
+    background:#f5f5f5;
+}
+
+/* Header */
+
+.profile-header{
+
+    position:sticky;
+    top:0;
+    z-index:1000;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    background:#fff;
+
+    padding:16px 20px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.profile-header h2{
+
+    font-size:22px;
+    font-weight:700;
+    color:#222;
+
+}
+
+.back-btn{
+
+    width:42px;
+    height:42px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    text-decoration:none;
+
+    color:#222;
+
+    background:#f2f2f2;
+
+    border-radius:50%;
+
+    transition:.3s;
+
+}
+
+.back-btn:hover{
+
+    background:#16a34a;
+    color:#fff;
+
+}
+
+/* Profile Card */
+
+.profile-card{
+
+    background:#fff;
+
+    margin:20px 16px;
+
+    border-radius:20px;
+
+    padding:30px 20px;
+
+    text-align:center;
+
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
+
+}
+
+.profile-image{
+
+    width:100px;
+    height:100px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:#16a34a;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    color:#fff;
+
+    font-size:42px;
+
+}
+
+.profile-card h2{
+
+    margin-top:18px;
+
+    font-size:24px;
+
+    color:#222;
+
+}
+
+.profile-card p{
+
+    margin-top:8px;
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+.edit-btn{
+
+    margin-top:20px;
+
+    border:none;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    padding:12px 28px;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.edit-btn:hover{
+
+    background:#15803d;
+
+}
+
+/* Menu */
+
+.profile-menu{
+
+    margin:0 16px 100px;
+
+}
+
+.menu-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    color:#222;
+
+    background:#fff;
+
+    padding:18px;
+
+    margin-bottom:12px;
+
+    border-radius:16px;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+
+    transition:.3s;
+
+}
+
+.menu-item:hover{
+
+    transform:translateY(-2px);
+
+}
+
+.menu-item span{
+
+    flex:1;
+
+    margin-left:15px;
+
+    font-size:16px;
+
+    font-weight:500;
+
+}
+
+.menu-item i:first-child{
+
+    width:22px;
+
+    font-size:20px;
+
+    color:#16a34a;
+
+}
+
+.menu-item i:last-child{
+
+    color:#999;
+
+}
+
+.logout{
+
+    color:#ef4444;
+
+}
+
+.logout i:first-child{
+
+    color:#ef4444;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .profile-card{
+
+        padding:25px 15px;
+
+    }
+
+    .profile-image{
+
+        width:85px;
+        height:85px;
+
+        font-size:34px;
+
+    }
+
+    .profile-card h2{
+
+        font-size:22px;
+
+    }
+
+}
+
+/* Desktop */
+
+@media(min-width:992px){
+
+    .app{
+
+    width:100%;
+
+    max-width:1400px;
+
+    margin:0 auto;
+
+    background:#fff;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+}
+
+.profile{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    text-decoration:none;
+}

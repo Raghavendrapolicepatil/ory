@@ -1,0 +1,271 @@
+/* ==========================================
+   TODAY'S DEALS
+========================================== */
+
+.todays-deals{
+
+    padding:20px 16px;
+
+}
+
+/* Banner */
+
+.deals-banner{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:20px;
+
+    padding:12px 16px;
+
+    margin-bottom:14px;
+
+    border-radius:16px;
+
+    min-height:95px;
+
+
+    background:linear-gradient(135deg,#ff512f,#ff9800);
+
+    color:#fff;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.deals-banner::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:220px;
+
+    height:220px;
+
+    right:-60px;
+
+    top:-60px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.12);
+
+}
+
+.deals-left{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.flash-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:6px 12px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(10px);
+
+    font-size:12px;
+
+    font-weight:700;
+
+    letter-spacing:.5px;
+
+}
+
+.deals-left h2{
+
+    margin:10px 0 6px;
+
+    font-size:28px;
+
+    font-weight:800;
+
+}
+
+.deals-left p{
+
+    font-size:12px;
+
+    margin:6px 0 2px;
+
+}
+
+/* Countdown */
+
+.deals-right{
+
+    display:flex;
+
+    gap:10px;
+
+    z-index:2;
+
+}
+
+
+.countdown{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:10px;
+
+    background:rgba(255,255,255,.18);
+
+    backdrop-filter:blur(10px);
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.countdown span{
+
+    font-size:16px;
+
+    font-weight:800;
+
+    line-height:1;
+
+}
+
+.countdown small{
+
+    font-size:11px;
+
+    opacity:.9;
+
+    margin-top:2px;
+
+}
+
+/* Section Header */
+
+.todays-deals .section-title{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+.todays-deals .section-title h3{
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.todays-deals .section-title a{
+
+    text-decoration:none;
+
+    color:#16a34a;
+
+    font-weight:700;
+
+}
+
+/* Today's Deals Slider */
+
+#todays-deals{
+
+    display:flex;
+
+    gap:12px;
+
+    overflow-x:auto;
+
+    overflow-y:hidden;
+
+    scroll-behavior:smooth;
+
+    scroll-snap-type:x mandatory;
+
+    padding-bottom:6px;
+
+    -webkit-overflow-scrolling:touch;
+
+}
+
+#todays-deals::-webkit-scrollbar{
+
+    display:none;
+
+}
+
+#todays-deals .product-card{
+
+    min-width:165px;
+
+    max-width:165px;
+
+    flex:0 0 auto;
+
+    scroll-snap-align:start;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+    .deals-banner{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+    }
+
+    .deals-left h2{
+
+        font-size:22px;
+
+    }
+
+    .deals-right{
+
+        width:100%;
+
+        justify-content:space-between;
+
+    }
+
+    .countdown{
+
+        flex:1;
+
+        height:52px;
+
+    }
+
+}

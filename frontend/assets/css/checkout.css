@@ -1,0 +1,391 @@
+/* ==========================================
+   PATIL GROCERIES CHECKOUT
+========================================== */
+
+body{
+
+    margin:0;
+
+    background:#f5f5f5;
+
+    font-family:Arial,Helvetica,sans-serif;
+
+}
+
+.app{
+
+    max-width:700px;
+
+    margin:auto;
+
+    padding-bottom:110px;
+
+}
+
+/* ==========================================
+HEADER
+========================================== */
+
+.checkout-header{
+
+    position:sticky;
+
+    top:0;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    padding:18px;
+
+    z-index:100;
+
+}
+
+.checkout-header h2{
+
+    margin:0;
+
+    font-size:22px;
+
+}
+
+.back-btn{
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:22px;
+
+}
+
+/* ==========================================
+CARDS
+========================================== */
+
+.checkout-card{
+
+    background:#fff;
+
+    margin:15px;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.06);
+
+}
+
+.card-title{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-bottom:18px;
+
+}
+
+.card-title i{
+
+    color:#16a34a;
+
+    font-size:20px;
+
+}
+
+.card-title h3{
+
+    margin:0;
+
+}
+
+/* ==========================================
+ADDRESS
+========================================== */
+
+.change-btn{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    color:#16a34a;
+
+    font-weight:600;
+
+    text-decoration:none;
+
+}
+
+/* ==========================================
+PRODUCT
+========================================== */
+
+.checkout-item{
+
+    display:flex;
+
+    gap:15px;
+
+    align-items:center;
+
+    padding:15px 0;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.checkout-item:last-child{
+
+    border-bottom:none;
+
+}
+
+.checkout-item img{
+
+    width:85px;
+
+    height:85px;
+
+    object-fit:contain;
+
+    background:#fafafa;
+
+    border-radius:12px;
+
+}
+
+.checkout-info{
+
+    flex:1;
+
+}
+
+.checkout-info h4{
+
+    margin:0 0 8px;
+
+    font-size:16px;
+
+}
+
+.checkout-info p{
+
+    margin:0;
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+/* ==========================================
+QUANTITY
+========================================== */
+
+.qty-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    margin-top:12px;
+
+}
+
+.qty-btn{
+
+    width:32px;
+
+    height:32px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    font-size:18px;
+
+    cursor:pointer;
+
+}
+
+.qty-value{
+
+    min-width:25px;
+
+    text-align:center;
+
+    font-weight:bold;
+
+}
+
+.remove-btn{
+
+    margin-top:10px;
+
+    border:none;
+
+    background:none;
+
+    color:#dc2626;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+}
+
+/* ==========================================
+BILL
+========================================== */
+
+.bill-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin:14px 0;
+
+}
+
+.total{
+
+    font-size:18px;
+
+    font-weight:bold;
+
+}
+
+.delivery-message{
+
+    color:#16a34a;
+
+    font-size:14px;
+
+    font-weight:600;
+
+    margin:5px 0 15px;
+
+}
+
+/* ==========================================
+PAYMENT
+========================================== */
+
+.payment-option{
+
+    display:flex;
+
+    gap:12px;
+
+    padding:12px 0;
+
+    cursor:pointer;
+
+}
+
+/* ==========================================
+FOOTER
+========================================== */
+
+.checkout-footer{
+
+    position:fixed;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    max-width:700px;
+
+    margin:auto;
+
+    background:#fff;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:15px 20px;
+
+    box-shadow:0 -4px 15px rgba(0,0,0,.08);
+
+}
+
+.checkout-footer button{
+
+    border:none;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    padding:14px 30px;
+
+    border-radius:12px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+}
+
+.checkout-footer button:hover{
+
+    background:#15803d;
+
+}
+
+/* ==========================================
+MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+.checkout-card{
+
+margin:10px;
+
+padding:15px;
+
+}
+
+.checkout-item img{
+
+width:70px;
+
+height:70px;
+
+}
+
+.checkout-footer{
+
+padding:15px;
+
+}
+
+}

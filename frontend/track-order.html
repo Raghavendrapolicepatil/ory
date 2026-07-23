@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Track Order | Patil Groceries</title>
+
+    <!-- Remix Icons -->
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.3.0/fonts/remixicon.css" rel="stylesheet">
+
+    <!-- Leaflet CSS -->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet" href="assets/css/track-order.css">
+
+</head>
+
+<body>
+
+    <!-- ===========================
+    HEADER
+    ============================ -->
+
+    <header class="track-header">
+
+        <button class="back-btn" onclick="history.back()">
+
+            <i class="ri-arrow-left-line"></i>
+
+        </button>
+
+        <h2>
+
+            Track Order
+
+        </h2>
+
+    </header>
+
+    <!-- ===========================
+    ORDER SUMMARY
+    ============================ -->
+
+    <section class="order-summary">
+
+        <div class="summary-card">
+
+            <span class="order-label">
+
+                Order ID
+
+            </span>
+
+            <h3 id="order-id">
+
+                Loading...
+
+            </h3>
+
+            <span class="order-date" id="order-date">
+
+                --
+
+            </span>
+
+        </div>
+
+    </section>
+
+    <!-- ===========================
+    ORDER TIMELINE
+    ============================ -->
+
+    <section class="tracking-timeline">
+
+        <div class="timeline-item" id="status-pending">
+
+            <div class="timeline-icon">
+
+                <i class="ri-checkbox-circle-fill"></i>
+
+            </div>
+
+            <div class="timeline-content">
+
+                <h4>Order Placed</h4>
+
+                <p>Your order has been placed successfully.</p>
+
+            </div>
+
+        </div>
+
+
+
+        <div class="timeline-item" id="status-packed">
+
+            <div class="timeline-icon">
+
+                <i class="ri-shopping-bag-3-fill"></i>
+
+            </div>
+
+            <div class="timeline-content">
+
+                <h4>Packed</h4>
+
+                <p>Your groceries are packed.</p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item" id="status-out">
+
+            <div class="timeline-icon">
+
+                <i class="ri-bike-fill"></i>
+
+            </div>
+
+            <div class="timeline-content">
+
+                <h4>Out For Delivery</h4>
+
+                <p>Your order is on the way.</p>
+
+            </div>
+
+        </div>
+
+        <div class="timeline-item" id="status-delivered">
+
+            <div class="timeline-icon">
+
+                <i class="ri-home-smile-fill"></i>
+
+            </div>
+
+            <div class="timeline-content">
+
+                <h4>Delivered</h4>
+
+                <p>Order delivered successfully.</p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ===========================
+    LIVE MAP
+    ============================ -->
+
+    <section class="tracking-map" id="tracking-map">
+
+        <h3>
+
+            <i class="ri-map-pin-line"></i>
+
+            Live Tracking
+
+        </h3>
+
+        <div id="delivery-map"></div>
+
+    </section>
+
+    <!-- ===========================
+    DELIVERY DETAILS
+    ============================ -->
+
+    <section class="delivery-details">
+
+        <div class="detail-card">
+
+            <div class="detail-item">
+
+                <i class="ri-route-line"></i>
+
+                <div>
+
+                    <span>Distance</span>
+
+                    <strong id="distance">
+
+                        -- km
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+            <div class="detail-item">
+
+                <i class="ri-time-line"></i>
+
+                <div>
+
+                    <span>ETA</span>
+
+                    <strong id="eta">
+
+                        -- min
+
+                    </strong>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- ===========================
+    DELIVERY PARTNER
+    ============================ -->
+
+    <section class="partner-section">
+
+        <div class="partner-card">
+
+            <img
+
+                src="assets/images/delivery-boy.webp"
+
+                alt="Delivery Partner"
+
+                id="partner-image"
+
+            >
+
+            <div class="partner-info">
+
+                <h4 id="partner-name">
+
+                    Delivery Partner
+
+                </h4>
+
+                <p id="partner-phone">
+
+                    +91 **********
+
+                </p>
+
+            </div>
+
+            <a
+
+                href="#"
+
+                id="call-partner"
+
+                class="call-btn"
+
+            >
+
+                <i class="ri-phone-fill"></i>
+
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- ===========================
+    JAVASCRIPT
+    ============================ -->
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+    <script src="assets/js/track-order.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,872 @@
+/* ==========================================
+   PRODUCT GRID
+========================================== */
+
+.product-grid,
+.product-slider{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,minmax(0,1fr));
+
+    gap:14px;
+
+}
+
+/* ==========================================
+   PRODUCT CARD
+========================================== */
+
+.product-card{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    background:#fff;
+
+    border:1px solid #ececec;
+
+    border-radius:18px;
+
+    padding:12px;
+
+    overflow:hidden;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.06);
+
+}
+
+.product-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 14px 28px rgba(0,0,0,.08);
+
+}
+
+/* ==========================================
+   DISCOUNT BADGE
+========================================== */
+
+.discount{
+
+    position:absolute;
+
+    top:10px;
+
+    left:10px;
+
+    z-index:20;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    padding:4px 8px;
+
+    border-radius:20px;
+
+    font-size:10px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+   WISHLIST
+========================================== */
+
+.wishlist-btn{
+
+    position:absolute;
+
+    top:10px;
+
+    right:10px;
+
+    width:30px;
+
+    height:30px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    z-index:20;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+
+    transition:.25s;
+
+}
+
+.wishlist-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+.wishlist-btn i{
+
+    font-size:17px;
+
+    color:#888;
+
+}
+
+.wishlist-btn.active i{
+
+    color:#ff3b5c;
+
+}
+
+/* ==========================================
+   IMAGE BOX
+========================================== */
+
+.image-box{
+
+    position:relative;
+
+    width:100%;
+
+    height:145px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    margin-bottom:8px;
+
+}
+
+.image-box img{
+
+    width:100%;
+
+    height:120px;
+
+    object-fit:contain;
+
+    transition:.25s;
+
+}
+
+.product-card:hover .image-box img{
+
+    transform:scale(1.05);
+
+}
+
+/* ==========================================
+   FLOATING CART
+========================================== */
+
+.floating-cart-btn{
+
+    position:absolute;
+
+    right:8px;
+
+    bottom:8px;
+
+    z-index:30;
+
+}
+
+/* ==========================================
+   ADD BUTTON
+========================================== */
+
+.add-btn{
+
+    width:38px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#16a34a;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    box-shadow:0 5px 15px rgba(22,163,74,.28);
+
+    transition:.25s;
+
+}
+
+.add-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+.add-btn i{
+
+    font-size:22px;
+
+    color:#fff;
+
+}
+
+.add-btn span{
+
+    display:none;
+
+}
+
+/* ==========================================
+   QUANTITY CONTROL
+========================================== */
+
+.quantity-control{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    width:88px;
+
+    height:38px;
+
+    background:#16a34a;
+
+    border-radius:12px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 15px rgba(22,163,74,.28);
+
+}
+
+.quantity-control button{
+
+    width:28px;
+
+    height:38px;
+
+    border:none;
+
+    background:transparent;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+}
+
+.quantity-control button i{
+
+    font-size:16px;
+
+}
+
+.quantity-control span{
+
+    flex:1;
+
+    text-align:center;
+
+    color:#fff;
+
+    font-size:13px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+   DELIVERY TAG
+========================================== */
+
+.delivery-tag{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:4px;
+
+    width:max-content;
+
+    padding:4px 8px;
+
+    margin-bottom:6px;
+
+    border-radius:20px;
+
+    background:#eefbf2;
+
+    color:#16a34a;
+
+    font-size:11px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+   PRODUCT NAME
+========================================== */
+
+.product-card h4{
+
+    width:100%;
+
+    margin:4px 0;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    line-height:18px;
+
+    color:#222;
+
+    display:-webkit-box;
+
+    -webkit-box-orient:vertical;
+
+    -webkit-line-clamp:2;
+
+    overflow:hidden;
+
+    min-height:36px;
+
+}
+
+/* ==========================================
+   WEIGHT CHIP
+========================================== */
+
+.weight-chip{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:max-content;
+
+    padding:4px 10px;
+
+    margin:4px 0;
+
+    border-radius:20px;
+
+    background:#f3f4f6;
+
+    color:#666;
+
+    font-size:11px;
+
+}
+
+/* ==========================================
+   RATING
+========================================== */
+
+.rating-row{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    margin:4px 0;
+
+    font-size:12px;
+
+    color:#555;
+
+    font-weight:600;
+
+}
+
+.rating-row i{
+
+    color:#f59e0b;
+
+}
+
+.rating-row small{
+
+    color:#888;
+
+    font-weight:500;
+
+}
+
+/* ==========================================
+   PRICE
+========================================== */
+
+.price-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:6px;
+
+    margin-top:auto;
+
+}
+
+.price{
+
+    font-size:18px;
+
+    font-weight:700;
+
+    color:#111827;
+
+}
+
+.old-price{
+
+    font-size:13px;
+
+    color:#9ca3af;
+
+    text-decoration:line-through;
+
+}
+
+/* ==========================================
+   OUT OF STOCK
+========================================== */
+
+.out-stock-btn{
+
+    width:72px;
+
+    height:38px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#e5e7eb;
+
+    color:#666;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    cursor:not-allowed;
+
+}
+
+/* ==========================================
+   CARD ANIMATION
+========================================== */
+
+.product-card{
+
+    animation:cardFade .28s ease;
+
+}
+
+@keyframes cardFade{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ==========================================
+   HOVER EFFECTS
+========================================== */
+
+.product-card:hover .add-btn{
+
+    transform:scale(1.08);
+
+}
+
+.product-card:hover .wishlist-btn{
+
+    transform:scale(1.08);
+
+}
+
+.product-card:hover .image-box img{
+
+    transform:scale(1.05);
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width:480px){
+
+    .product-grid,
+    .product-slider{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:12px;
+
+    }
+
+    .product-card{
+
+        padding:10px;
+
+        border-radius:16px;
+
+    }
+
+    .image-box{
+
+        height:120px;
+
+    }
+
+    .image-box img{
+
+        height:100px;
+
+    }
+
+    .discount{
+
+        font-size:9px;
+
+        padding:3px 6px;
+
+    }
+
+    .wishlist-btn{
+
+        width:28px;
+
+        height:28px;
+
+    }
+
+    .wishlist-btn i{
+
+        font-size:15px;
+
+    }
+
+    .floating-cart-btn{
+
+        right:6px;
+
+        bottom:6px;
+
+    }
+
+    .add-btn{
+
+        width:34px;
+
+        height:34px;
+
+    }
+
+    .add-btn i{
+
+        font-size:20px;
+
+    }
+
+    .quantity-control{
+
+        width:80px;
+
+        height:34px;
+
+    }
+
+    .quantity-control button{
+
+        height:34px;
+
+    }
+
+    .price{
+
+        font-size:16px;
+
+    }
+
+    .old-price{
+
+        font-size:11px;
+
+    }
+
+    .product-card h4{
+
+        font-size:12px;
+
+        min-height:34px;
+
+    }
+
+    .weight-chip{
+
+        font-size:10px;
+
+    }
+
+    .delivery-tag{
+
+        font-size:10px;
+
+    }
+
+    .rating-row{
+
+        font-size:11px;
+
+    }
+
+}
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (min-width:768px){
+
+    .product-grid,
+    .product-slider{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
+}
+
+/* ==========================================
+   DESKTOP
+========================================== */
+
+@media (min-width:1200px){
+
+    .product-grid,
+    .product-slider{
+
+        grid-template-columns:repeat(4,1fr);
+
+    }
+
+}
+/* ==========================================
+   PREMIUM POLISH
+========================================== */
+
+.product-card{
+
+    will-change:transform;
+
+    backface-visibility:hidden;
+
+}
+
+.product-card:hover{
+
+    border-color:#d9f2df;
+
+}
+
+/* ==========================================
+   WISHLIST ACTIVE
+========================================== */
+
+.wishlist-btn.active{
+
+    background:#fff0f3;
+
+}
+
+.wishlist-btn.active i{
+
+    color:#ff3b5c;
+
+}
+
+/* ==========================================
+   ADD BUTTON ACTIVE
+========================================== */
+
+.add-btn:active{
+
+    transform:scale(.95);
+
+}
+
+.quantity-control button:active{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+/* ==========================================
+   OUT OF STOCK
+========================================== */
+
+.product-card.out{
+
+    opacity:.75;
+
+}
+
+.product-card.out img{
+
+    filter:grayscale(100%);
+
+}
+
+/* ==========================================
+   SMOOTH TRANSITIONS
+========================================== */
+
+.product-card,
+.image-box img,
+.add-btn,
+.quantity-control,
+.wishlist-btn{
+
+    transition:.25s ease;
+
+}
+
+/* ==========================================
+   FOCUS
+========================================== */
+
+button:focus{
+
+    outline:none;
+
+}
+
+
+
+/* ==========================================
+   DARK MODE
+========================================== */
+
+body.dark .product-card{
+
+    background:#1f2937;
+
+    border-color:#374151;
+
+}
+
+body.dark .product-card h4{
+
+    color:#fff;
+
+}
+
+body.dark .weight-chip{
+
+    background:#374151;
+
+    color:#d1d5db;
+
+}
+
+body.dark .price{
+
+    color:#fff;
+
+}
+
+body.dark .old-price{
+
+    color:#9ca3af;
+
+}
+
+body.dark .wishlist-btn{
+
+    background:#374151;
+
+}
+
+body.dark .delivery-tag{
+
+    background:#14532d;
+
+    color:#86efac;
+
+}
+
+/* ==========================================
+   IMAGE LOADING
+========================================== */
+
+.image-box img{
+
+    user-select:none;
+
+    -webkit-user-drag:none;
+
+}
+
+/* ==========================================
+   FINAL
+========================================== */

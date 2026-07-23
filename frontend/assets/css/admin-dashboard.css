@@ -1,0 +1,226 @@
+/* ==========================================
+   Dashboard
+========================================== */
+
+.dashboard-cards{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
+    gap:20px;
+
+    margin-bottom:30px;
+
+}
+
+.card{
+
+    background:#fff;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+    text-align:center;
+
+}
+
+.card:hover{
+
+    transform:translateY(-5px);
+
+}
+
+.card i{
+
+    font-size:45px;
+
+    color:#16a34a;
+
+    margin-bottom:15px;
+
+}
+
+.card h3{
+
+    font-size:32px;
+
+    color:#222;
+
+    margin-bottom:8px;
+
+}
+
+.card p{
+
+    color:#777;
+
+    font-size:15px;
+
+}
+
+/* Dashboard Sections */
+
+.dashboard-section{
+
+    background:#fff;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.dashboard-section h3{
+
+    margin-bottom:15px;
+
+    color:#222;
+
+    font-size:20px;
+
+}
+
+#recent-orders,
+#low-stock{
+
+    color:#666;
+
+    line-height:1.8;
+
+}
+
+/* Table */
+
+.dashboard-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.dashboard-table th{
+
+    background:#15803d;
+
+    color:#fff;
+
+    padding:12px;
+
+    text-align:left;
+
+}
+
+.dashboard-table td{
+
+    padding:12px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+/* Status */
+
+.status{
+
+    padding:5px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    color:#fff;
+
+    display:inline-block;
+
+}
+
+.pending{
+
+    background:#f59e0b;
+
+}
+
+.packed{
+
+    background:#3b82f6;
+
+}
+
+.shipped{
+
+    background:#8b5cf6;
+
+}
+
+.delivered{
+
+    background:#16a34a;
+
+}
+
+.cancelled{
+
+    background:#dc2626;
+
+}
+
+/* Responsive */
+
+@media(max-width:768px){
+
+.dashboard-cards{
+
+grid-template-columns:1fr;
+
+}
+
+.card{
+
+padding:20px;
+
+}
+
+.card h3{
+
+font-size:26px;
+
+}
+
+.dashboard-section{
+
+padding:15px;
+
+}
+
+}
+
+.dashboard-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:12px 0;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.dashboard-item:last-child{
+
+    border-bottom:none;
+
+}

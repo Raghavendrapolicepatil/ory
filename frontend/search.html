@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Search Products</title>
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+rel="stylesheet">
+
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/search.css">
+
+</head>
+
+<body>
+
+<div class="search-page">
+
+    <!-- ==========================
+         HEADER
+    ========================== -->
+
+    <header class="search-header">
+
+        <button
+            class="back-btn"
+            onclick="history.back()">
+
+            <i class="ri-arrow-left-line"></i>
+
+        </button>
+
+        <div class="search-box">
+
+            <i class="ri-search-line"></i>
+
+            <input
+
+                id="search-input"
+
+                type="text"
+
+                placeholder="Search groceries..."
+
+                autocomplete="off"
+
+                autofocus>
+
+            <button
+
+                id="clear-btn"
+
+                class="clear-btn">
+
+                <i class="ri-close-circle-fill"></i>
+
+            </button>
+
+            <button
+
+                id="mic-btn"
+
+                class="mic-btn">
+
+                <i class="ri-mic-fill"></i>
+
+            </button>
+
+        </div>
+
+    </header>
+
+    <!-- ==========================
+         RECENT SEARCH
+    ========================== -->
+
+    <section
+        id="recent-searches"
+        class="recent-searches">
+
+        <h3>
+
+            Recent Searches
+
+        </h3>
+
+        <div
+            id="recent-list">
+
+        </div>
+
+    </section>
+
+    <!-- ==========================
+         SEARCH RESULTS
+    ========================== -->
+
+    <section
+        id="search-results"
+        class="search-results">
+
+    </section>
+
+    <!-- ==========================
+         NO RESULT
+    ========================== -->
+
+    <div
+        id="no-results"
+        class="no-results"
+        style="display:none;">
+
+        <i class="ri-search-eye-line"></i>
+
+        <h2>
+
+            No Products Found
+
+        </h2>
+
+        <p>
+
+            Try searching with another keyword.
+
+        </p>
+
+    </div>
+
+</div>
+
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/wishlist.js"></script>
+<script src="assets/js/search.js"></script>
+
+</body>
+</html>

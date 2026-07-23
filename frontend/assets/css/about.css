@@ -1,0 +1,283 @@
+/* ==========================================
+   ABOUT PAGE
+========================================== */
+
+body{
+
+    margin:0;
+
+    padding:0;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+    background:#f5f5f5;
+
+}
+
+.app{
+
+    max-width:700px;
+
+    margin:auto;
+
+    min-height:100vh;
+
+    background:#f5f5f5;
+
+}
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.about-header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:18px;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    box-shadow:0 3px 10px rgba(0,0,0,.12);
+
+}
+
+.about-header a{
+
+    width:40px;
+
+    height:40px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:20px;
+
+    border-radius:50%;
+
+}
+
+.about-header a:hover{
+
+    background:rgba(255,255,255,.15);
+
+}
+
+.about-header h2{
+
+    margin:0;
+
+    flex:1;
+
+    text-align:center;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+/* ==========================================
+   LOGO
+========================================== */
+
+.about-logo{
+
+    padding:35px 20px;
+
+    text-align:center;
+
+}
+
+.about-logo img{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:contain;
+
+    margin-bottom:15px;
+
+}
+
+.about-logo h1{
+
+    margin:0;
+
+    font-size:28px;
+
+    color:#222;
+
+}
+
+.about-logo p{
+
+    margin-top:8px;
+
+    color:#666;
+
+    font-size:15px;
+
+}
+
+/* ==========================================
+   CARDS
+========================================== */
+
+.about-card{
+
+    background:#fff;
+
+    margin:15px;
+
+    padding:20px;
+
+    border-radius:18px;
+
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+
+}
+
+.about-card h3{
+
+    margin-top:0;
+
+    margin-bottom:15px;
+
+    color:#16a34a;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    font-size:20px;
+
+}
+
+.about-card p{
+
+    margin:8px 0;
+
+    color:#555;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+.about-card ul{
+
+    margin:0;
+
+    padding-left:22px;
+
+}
+
+.about-card li{
+
+    margin-bottom:10px;
+
+    color:#555;
+
+    line-height:1.6;
+
+}
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.about-footer{
+
+    text-align:center;
+
+    padding:35px 20px;
+
+    color:#777;
+
+    font-size:14px;
+
+}
+
+.about-footer p{
+
+    margin:0;
+
+    font-weight:bold;
+
+    color:#16a34a;
+
+}
+
+.about-footer small{
+
+    display:block;
+
+    margin-top:8px;
+
+}
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:768px){
+
+    .about-header{
+
+        padding:15px;
+
+    }
+
+    .about-logo{
+
+        padding:30px 15px;
+
+    }
+
+    .about-logo img{
+
+        width:75px;
+
+        height:75px;
+
+    }
+
+    .about-logo h1{
+
+        font-size:24px;
+
+    }
+
+    .about-card{
+
+        margin:12px;
+
+        padding:18px;
+
+    }
+
+}

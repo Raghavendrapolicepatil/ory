@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Dashboard | Snackible Admin</title>
+
+<link rel="stylesheet" href="../assets/css/admin-layout.css">
+<link rel="stylesheet" href="../assets/css/admin-dashboard.css">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            Snackible
+
+        </div>
+
+        <ul class="menu">
+
+            <li>
+
+                <a class="active" href="dashboard.html">
+
+                    <i class="ri-dashboard-line"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="products.html">
+
+                    <i class="ri-shopping-bag-line"></i>
+
+                    Products
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="categories.html">
+
+                    <i class="ri-layout-grid-line"></i>
+
+                    Categories
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="orders.html">
+
+                    <i class="ri-file-list-3-line"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="users.html">
+
+                    <i class="ri-user-line"></i>
+
+                    Users
+
+                </a>
+
+            </li>
+
+                            <a href="banners.html">
+                    <i class="ri-image-line"></i>
+                    Banners
+                </a>
+            </li>
+
+            <li>
+
+                <a href="settings.html">
+
+                    <i class="ri-settings-3-line"></i>
+
+                    Settings
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Main Content -->
+
+    <main class="content">
+
+        <div class="topbar">
+
+            <h2>Dashboard</h2>
+
+            <span>Welcome Admin 👋</span>
+
+        </div>
+
+        <!-- Cards -->
+
+        <div class="dashboard-cards">
+
+            <div class="card">
+
+                <i class="ri-shopping-bag-3-line"></i>
+
+                <h3 id="products-count">0</h3>
+
+                <p>Total Products</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="ri-file-list-3-line"></i>
+
+                <h3 id="orders-count">0</h3>
+
+                <p>Total Orders</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="ri-user-3-line"></i>
+
+                <h3 id="users-count">0</h3>
+
+                <p>Total Users</p>
+
+            </div>
+
+            <div class="card">
+
+                <i class="ri-money-rupee-circle-line"></i>
+
+                <h3 id="revenue">₹0</h3>
+
+                <p>Total Revenue</p>
+
+            </div>
+
+        </div>
+
+
+        
+        <!-- Recent Orders -->
+
+        <div class="dashboard-section">
+
+            <h3>Recent Orders</h3>
+
+            <div id="recent-orders">
+
+                No Orders Yet
+
+            </div>
+
+        </div>
+
+        <!-- Low Stock -->
+
+        <div class="dashboard-section">
+
+            <h3>Low Stock Products</h3>
+
+            <div id="low-stock">
+
+                No Low Stock Products
+
+            </div>
+
+        </div>
+    
+        <!-- Top Selling Products -->
+
+<div class="dashboard-section">
+
+    <h3>Top Selling Products</h3>
+
+    <div id="top-products">
+
+        Loading...
+
+    </div>
+
+</div>
+
+<!-- Latest Users -->
+
+<div class="dashboard-section">
+
+    <h3>Latest Users</h3>
+
+    <div id="latest-users">
+
+        Loading...
+
+    </div>
+
+</div>
+
+    </main>
+
+</div>
+
+
+<script src="../assets/js/admin-dashboard.js"></script>
+
+</body>
+
+</html>

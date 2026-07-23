@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Saved Addresses | Snackible</title>
+
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/address.css">
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- Header -->
+
+    <header class="address-header">
+
+        <a href="profile.html" class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+        <h2>Saved Addresses</h2>
+
+        <span></span>
+
+    </header>
+
+    <!-- Address List -->
+
+    <div id="address-list">
+
+    </div>
+
+    <!-- Add Address -->
+
+    <button id="add-address-btn" class="add-address-btn">
+
+        <i class="fa-solid fa-plus"></i>
+
+        Add New Address
+
+    </button>
+
+</div>
+
+<!-- ==========================
+     Address Popup
+========================== -->
+
+<div class="address-popup" id="address-popup">
+
+    <div class="popup-content">
+
+        <div class="popup-header">
+
+            <h2>Add New Address</h2>
+
+            <button id="close-popup">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <form id="address-form">
+
+            <div class="address-type">
+
+                <button
+                    type="button"
+                    class="type-btn active">
+
+                    🏠 Home
+
+                </button>
+
+                <button
+                    type="button"
+                    class="type-btn">
+
+                    🏢 Work
+
+                </button>
+
+            </div>
+
+            <input
+                type="text"
+                id="full-name"
+                placeholder="Full Name"
+                required>
+
+            <input
+                type="tel"
+                id="mobile"
+                placeholder="Mobile Number"
+                required>
+
+            <input
+                type="text"
+                id="house"
+                placeholder="House No / Flat"
+                required>
+
+            <input
+                type="text"
+                id="street"
+                placeholder="Area / Street"
+                required>
+
+            <input
+                type="text"
+                id="city"
+                value="Afzalpur"
+                required>
+
+            <input
+                type="text"
+                id="pincode"
+                placeholder="Pincode"
+                required>
+
+            <button
+                type="submit"
+                class="save-address">
+
+                Save Address
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script src="assets/js/address.js"></script>
+<script src="assets/js/theme.js"></script>
+
+</body>
+
+</html>

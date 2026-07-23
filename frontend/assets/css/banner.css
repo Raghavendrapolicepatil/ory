@@ -1,0 +1,164 @@
+/* ==========================================
+   PREMIUM HERO BANNER
+========================================== */
+
+.hero{
+
+    padding:14px 16px 8px;
+
+}
+
+.slider{
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    background:#fff;
+
+}
+
+.slides{
+
+    display:flex;
+
+    transition:transform .5s ease;
+
+}
+
+.slide{
+
+    min-width:100%;
+
+}
+
+.slide img{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:22px;
+
+    aspect-ratio:16/7;
+
+    object-fit:cover;
+
+}
+
+.dots{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:8px;
+
+    margin-top:10px;
+
+}
+
+.dot{
+
+    width:8px;
+
+    height:8px;
+
+    border-radius:50%;
+
+    background:#d9d9d9;
+
+    transition:.3s;
+
+}
+
+.dot.active{
+
+    width:28px;
+
+    border-radius:20px;
+
+    background:#111;
+
+}
+
+@media(max-width:768px){
+
+    .slide img{
+
+        aspect-ratio:16/8;
+
+    }
+
+}
+/* ==========================
+   Mobile
+========================== */
+
+@media(max-width:767px){
+
+    .hero{
+
+        padding:12px;
+
+    }
+
+    .slide img{
+
+        aspect-ratio:16/8;
+
+        object-fit:contain;
+
+        background:#fff;
+
+    }
+
+    .slider-btn{
+
+        display:none;
+
+    }
+
+}
+
+/* ==========================
+   Tablet
+========================== */
+
+@media(min-width:768px) and (max-width:991px){
+
+    .slide img{
+
+        aspect-ratio:16/7;
+
+    }
+
+}
+
+/* ==========================
+   Laptop
+========================== */
+
+@media(min-width:992px) and (max-width:1199px){
+
+    .hero{
+
+        padding:20px;
+
+    }
+
+}
+
+/* ==========================
+   Desktop
+========================== */
+
+@media(min-width:1200px){
+
+    .hero{
+
+        padding:24px;
+
+    }
+
+}

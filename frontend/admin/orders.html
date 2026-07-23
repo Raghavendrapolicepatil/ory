@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Orders | Snackible Admin</title>
+
+<link rel="stylesheet" href="../assets/css/admin-layout.css">
+<link rel="stylesheet" href="../assets/css/admin-orders.css">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            Snackible
+
+        </div>
+
+        <ul class="menu">
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <i class="ri-dashboard-line"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="products.html">
+
+                    <i class="ri-shopping-bag-line"></i>
+
+                    Products
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="categories.html">
+
+                    <i class="ri-layout-grid-line"></i>
+
+                    Categories
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a class="active" href="orders.html">
+
+                    <i class="ri-file-list-3-line"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="users.html">
+
+                    <i class="ri-user-3-line"></i>
+
+                    Users
+
+                </a>
+
+            </li>
+                <a href="banners.html">
+                    <i class="ri-image-line"></i>
+                    Banners
+                </a>
+            </li>
+            <li>
+
+                <a href="settings.html">
+
+                    <i class="ri-settings-3-line"></i>
+
+                    Settings
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Content -->
+
+    <main class="content">
+
+        <div class="topbar">
+
+            <h2>
+
+                <i class="ri-file-list-3-line"></i>
+
+                Orders
+
+            </h2>
+
+        </div>
+
+        <div class="orders-toolbar">
+
+    <input
+        type="text"
+        id="searchOrder"
+        placeholder="🔍 Search Customer">
+
+    <select id="statusFilter">
+
+        <option value="">All Status</option>
+        <option value="Pending">Pending</option>
+        <option value="Packed">Packed</option>
+        <<option value="Out for Delivery">Out for Delivery</option>
+        <option value="Delivered">Delivered</option>
+        <option value="Cancelled">Cancelled</option>
+
+    </select>
+
+</div>
+
+        <!-- Order Table -->
+
+        <section class="orders-section">
+
+
+            
+            <table class="orders-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Order ID</th>
+
+                        <th>Customer</th>
+
+                        <th>Total</th>
+
+                        <th>Payment</th>
+
+                        <th>Status</th>
+
+                        <th>Date</th>
+
+                        <th>Action</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody id="ordersTable">
+
+                    <tr>
+
+                        <td colspan="7">
+
+                            Loading Orders...
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </section>
+
+<!-- Order Details Modal -->
+
+<div id="orderModal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeModal()">&times;</span>
+
+        <h2>Order Details</h2>
+
+        <div id="orderDetails"></div>
+
+    </div>
+
+</div>
+
+    </main>
+
+</div>
+
+<script src="../assets/js/admin-orders.js"></script>
+
+</body>
+
+</html>

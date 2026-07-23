@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>My Orders | Patil Groceries</title>
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Google Font -->
+
+    <link rel="preconnect"
+        href="https://fonts.googleapis.com">
+
+    <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+
+    <link rel="stylesheet"
+        href="assets/css/orders.css">
+
+</head>
+
+<body>
+
+    <!-- ========================= -->
+    <!-- Header -->
+    <!-- ========================= -->
+
+    <header class="orders-header">
+
+        <button
+            class="back-btn"
+            onclick="history.back()">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </button>
+
+        <div class="header-title">
+
+            <h2>My Orders</h2>
+
+            <p>Track all your grocery orders</p>
+
+        </div>
+
+    </header>
+
+    <!-- ========================= -->
+    <!-- Loading -->
+    <!-- ========================= -->
+
+    <section
+        id="loading-screen"
+        class="loading-screen">
+
+        <div class="loader"></div>
+
+        <h3>Loading Orders...</h3>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- Orders -->
+    <!-- ========================= -->
+
+    <main
+        id="orders-container"
+        class="orders-container">
+
+    </main>
+
+    <!-- ========================= -->
+    <!-- Empty -->
+    <!-- ========================= -->
+
+    <section
+        id="empty-orders"
+        class="empty-orders hidden">
+
+        <img
+            src="assets/images/empty-order.webp"
+            alt="Empty">
+
+        <h2>No Orders Yet</h2>
+
+        <p>
+
+            Looks like you haven't placed
+            any order yet.
+
+        </p>
+
+        <a
+            href="index.html"
+            class="shop-btn">
+
+            <i class="fa-solid fa-basket-shopping"></i>
+
+            Continue Shopping
+
+        </a>
+
+    </section>
+
+    <!-- ========================= -->
+    <!-- Error -->
+    <!-- ========================= -->
+
+    <section
+        id="error-box"
+        class="error-box hidden">
+
+        <i class="fa-solid fa-circle-exclamation"></i>
+
+        <h2>Unable to load orders</h2>
+
+        <p>
+
+            Please check your internet
+            connection.
+
+        </p>
+
+        <button
+            onclick="location.reload()">
+
+            Try Again
+
+        </button>
+
+    </section>
+
+    <!-- JS -->
+
+    <script src="assets/js/orders.js"></script>
+
+</body>
+
+</html>

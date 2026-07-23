@@ -1,0 +1,66 @@
+/* ==========================
+   THEME VARIABLES
+========================== */
+
+:root{
+
+    --bg:#ffffff;
+    --card:#ffffff;
+    --text:#111827;
+    --border:#ececec;
+    --primary:#16a34a;
+    --shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+body.dark{
+
+    --bg:#121212;
+    --card:#1b1b1b;
+    --text:#ffffff;
+    --border:#2d2d2d;
+
+}
+
+/* Global */
+
+body{
+
+    background:var(--bg);
+    color:var(--text);
+
+}
+
+.app{
+
+    background:var(--bg);
+
+}
+
+.header,
+.search-box,
+.product-card,
+.category-card,
+.footer,
+.bottom-nav{
+
+    background:var(--card);
+
+    border-color:var(--border);
+
+}
+
+body.dark .search-wrapper{
+
+    background:rgba(18,18,18,.92);
+
+}
+
+body.dark .search-box{
+
+    background:#1b1b1b;
+
+    border-color:#2e2e2e;
+
+}
+

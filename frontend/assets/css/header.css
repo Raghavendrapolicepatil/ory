@@ -1,0 +1,582 @@
+/* ==========================================
+   PATIL GROCERIES PREMIUM HEADER
+========================================== */
+
+/* ==========================================
+   PATIL GROCERIES
+   PREMIUM HEADER V2
+========================================== */
+
+/* ==========================
+   VARIABLES
+========================== */
+
+:root{
+
+    --primary:#16a34a;
+
+    --primary-light:#22c55e;
+
+    --text:#111827;
+
+    --text-light:#6b7280;
+
+    --bg:#f6f7fb;
+
+    --white:#ffffff;
+
+    --border:#ececec;
+
+    --shadow-sm:
+        0 4px 12px rgba(0,0,0,.05);
+
+    --shadow:
+        0 12px 30px rgba(0,0,0,.08);
+
+    --radius:22px;
+
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.header{
+
+    width:100%;
+
+    background:#fff;
+
+    position:relative;
+
+    z-index:100;
+
+}
+
+.header-inner{
+
+    padding:14px 16px 12px;
+
+    max-width:480px;
+
+    margin:auto;
+
+}
+
+.header-top{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+}
+
+/* ==========================================
+   LOCATION
+========================================== */
+
+.location-box{
+
+    flex:1;
+
+}
+
+.delivery-time{
+
+    display:inline-block;
+
+    font-size:11px;
+
+    color:#16a34a;
+
+    font-weight:700;
+
+    margin-bottom:4px;
+
+}
+
+.location-box h3{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:5px;
+
+    font-size:16px;
+
+    font-weight:700;
+
+    color:#111827;
+
+}
+
+.location-box h3 span{
+
+    max-width:150px;
+
+    white-space:nowrap;
+
+    overflow:hidden;
+
+    text-overflow:ellipsis;
+
+}
+
+.location-box h3 i{
+
+    color:#16a34a;
+
+    font-size:16px;
+
+}
+
+/* ==========================================
+   PROFILE
+========================================== */
+
+.profile-btn{
+
+    width:44px;
+
+    height:44px;
+
+    border-radius:50%;
+
+    background:#f7f7f7;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    text-decoration:none;
+
+    border:1px solid #ececec;
+
+    transition:.25s;
+
+}
+
+.profile-btn i{
+
+    font-size:22px;
+
+    color:#222;
+
+}
+
+.profile-btn:hover{
+
+    background:#16a34a;
+
+    border-color:#16a34a;
+
+}
+
+.profile-btn:hover i{
+
+    color:#fff;
+
+}
+
+
+
+/* ==========================================
+   PREMIUM SEARCH
+========================================== */
+
+.search-wrapper{
+
+    position:relative;
+
+    width:100%;
+
+    background:#fff;
+
+    padding:0 16px 16px;
+
+    z-index:90;
+
+}
+
+.search-box{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    width:100%;
+
+    height:56px;
+
+    padding:0 16px;
+
+    background:#f8f8f8;
+
+    border:1px solid #ececec;
+
+    border-radius:18px;
+
+    transition:
+        all .30s ease;
+
+}
+
+.search-box:hover{
+
+    border-color:#d8d8d8;
+
+}
+
+.search-box:focus-within{
+
+    background:#fff;
+
+    border-color:#16a34a;
+
+    box-shadow:
+        0 0 0 4px rgba(22,163,74,.10);
+
+}
+
+.search-icon{
+
+    font-size:22px;
+
+    color:#888;
+
+}
+
+.search-box input{
+
+    flex:1;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:15px;
+
+    color:#222;
+
+}
+
+.search-box input::placeholder{
+
+    color:#9ca3af;
+
+}
+
+#mic-btn{
+
+    width:40px;
+
+    height:40px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+#mic-btn:hover{
+
+    transform:scale(1.06);
+
+}
+
+#mic-btn i{
+
+    font-size:20px;
+
+}
+
+
+/* ==========================================
+   STICKY SEARCH
+========================================== */
+
+.search-wrapper{
+
+    transition:
+
+        transform .35s ease,
+
+        top .35s ease,
+
+        box-shadow .35s ease,
+
+        background .35s ease;
+
+}
+
+.search-wrapper.sticky-search{
+
+    position:fixed;
+
+    top:0;
+
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:100%;
+
+    max-width:480px;
+
+    padding:10px 16px;
+
+    background:rgba(255,255,255,.95);
+
+    backdrop-filter:blur(18px);
+
+    -webkit-backdrop-filter:blur(18px);
+
+    box-shadow:
+
+        0 8px 22px rgba(0,0,0,.08);
+
+    z-index:999;
+
+    animation:searchSlide .30s ease;
+
+}
+
+/* Search Animation */
+
+@keyframes searchSlide{
+
+    from{
+
+        transform:
+
+            translateX(-50%)
+
+            translateY(-15px);
+
+        opacity:0;
+
+    }
+
+    to{
+
+        transform:
+
+            translateX(-50%)
+
+            translateY(0);
+
+        opacity:1;
+
+    }
+
+}
+
+
+/* ==========================================
+   PAGE OFFSET
+========================================== */
+
+body.search-fixed .hero{
+
+    margin-top:82px;
+
+    transition:margin-top .30s ease;
+
+}
+
+body.search-fixed .search-wrapper{
+
+    animation:searchDrop .30s ease;
+
+}
+
+@keyframes searchDrop{
+
+    from{
+
+        opacity:0;
+
+        transform:
+            translateX(-50%)
+            translateY(-12px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:
+            translateX(-50%)
+            translateY(0);
+
+    }
+
+}
+
+
+/* ==========================================
+   PREMIUM HERO SLIDER
+========================================== */
+
+.hero{
+
+    padding:14px;
+
+    margin-top:0;
+
+}
+
+.slider{
+
+    position:relative;
+
+    overflow:hidden;
+
+    width:100%;
+
+    border-radius:18px;
+
+    background:#fff;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.slides{
+
+    display:flex;
+
+    transition:transform .6s ease;
+
+    will-change:transform;
+
+}
+
+.slides img{
+
+    flex:0 0 100%;
+
+    width:100%;
+
+    height:180px;
+
+    object-fit:cover;
+
+    user-select:none;
+
+    pointer-events:none;
+
+}
+
+/* Dots */
+
+.dots{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:8px;
+
+    margin-top:12px;
+
+}
+
+.dot{
+
+    width:10px;
+
+    height:10px;
+
+    border-radius:50%;
+
+    background:#d5d5d5;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.dot.active{
+
+    width:28px;
+
+    border-radius:30px;
+
+    background:#16a34a;
+
+}
+
+/* Mobile */
+
+@media(max-width:767px){
+
+    .slides img{
+
+        height:170px;
+
+    }
+
+}
+
+/* Tablet */
+
+@media(min-width:768px){
+
+    .slides img{
+
+        height:240px;
+
+    }
+
+}
+
+/* Laptop */
+
+@media(min-width:992px){
+
+    .slides img{
+
+        height:320px;
+
+    }
+
+}
+
+/* Desktop */
+
+@media(min-width:1200px){
+
+    .slides img{
+
+        height:380px;
+
+    }
+
+}

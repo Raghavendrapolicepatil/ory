@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Categories | Snackible Admin</title>
+
+<link rel="stylesheet" href="../assets/css/admin-layout.css">
+<link rel="stylesheet" href="../assets/css/admin-categories.css">
+
+<link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="admin">
+
+    <!-- Sidebar -->
+
+    <aside class="sidebar">
+
+        <div class="logo">
+
+            Snackible
+
+        </div>
+
+        <ul class="menu">
+
+            <li>
+
+                <a href="dashboard.html">
+
+                    <i class="ri-dashboard-line"></i>
+
+                    Dashboard
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="products.html">
+
+                    <i class="ri-shopping-bag-line"></i>
+
+                    Products
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a class="active" href="categories.html">
+
+                    <i class="ri-layout-grid-line"></i>
+
+                    Categories
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="orders.html">
+
+                    <i class="ri-file-list-3-line"></i>
+
+                    Orders
+
+                </a>
+
+            </li>
+
+            <li>
+
+                <a href="users.html">
+
+                    <i class="ri-user-3-line"></i>
+
+                    Users
+
+                </a>
+
+            </li>
+
+                             <a href="banners.html">
+                    <i class="ri-image-line"></i>
+                    Banners
+                </a>
+            </li>
+
+            <li>
+
+                <a href="settings.html">
+
+                    <i class="ri-settings-3-line"></i>
+
+                    Settings
+
+                </a>
+
+            </li>
+
+        </ul>
+
+    </aside>
+
+    <!-- Content -->
+
+    <main class="content">
+
+        <div class="topbar">
+
+            <h2>
+
+                <i class="ri-layout-grid-line"></i>
+
+                Categories
+
+            </h2>
+
+        </div>
+
+        <!-- Category Form -->
+
+        <section class="category-form">
+
+            <form id="categoryForm">
+
+                <input
+                    type="text"
+                    id="name"
+                    placeholder="Category Name"
+                    required>
+
+                <input
+                    type="text"
+                    id="slug"
+                    placeholder="Slug (example: dairy-breakfast)"
+                    required>
+
+                <input
+    type="text"
+    id="image"
+    placeholder="Category Image URL">
+
+                <button type="submit">
+
+                    <i class="ri-save-line"></i>
+
+                    Save Category
+
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- Category List -->
+
+        <section class="category-list">
+
+            <h2>All Categories</h2>
+
+            <div id="categoryList"></div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="../assets/js/admin-categories.js"></script>
+
+</body>
+
+</html>

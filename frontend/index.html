@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Patil Groceries - Your Daily Kirana Store</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+rel="stylesheet">
+<link rel="stylesheet" href="assets/css/todaysdeals.css">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/theme.css">
+<link rel="stylesheet" href="assets/css/header.css">
+<link rel="stylesheet" href="assets/css/banner.css">
+<link rel="stylesheet" href="assets/css/category.css">
+<link rel="stylesheet" href="assets/css/product-card.css">
+<link rel="stylesheet" href="assets/css/search.css">
+<link rel="stylesheet" href="assets/css/navigation.css">
+<link rel="stylesheet" href="assets/css/footer.css">
+<link rel="stylesheet" href="assets/css/responsive.css">
+<link rel="stylesheet" href="assets/css/loader.css">
+
+</head>
+
+<body>
+
+<!-- ==========================
+     Premium Loading Screen
+========================== -->
+
+<div id="loader" class="loader-screen">
+
+    <div class="loader-content">
+
+        <img
+            src="assets/images/icons/logo.png"
+            alt="Patil Groceries"
+            class="loader-logo">
+
+        <h2>Welcome to</h2>
+
+        <h1>Patil Groceries</h1>
+
+        <div class="loader-line">
+            <div class="loader-progress"></div>
+        </div>
+
+        <p>Preparing your groceries...</p>
+
+    </div>
+
+</div>
+
+<!-- App -->
+
+<div class="app" id="app" style="display:none;">
+
+
+<!-- ==========================
+     Premium Header
+========================== -->
+
+<header class="header">
+
+    <div class="header-inner">
+
+        <div class="header-top">
+
+            <div class="location-box">
+
+                <span
+                    class="delivery-time"
+                    id="delivery-time">
+
+                    ⚡ Fast Delivery
+
+                </span>
+
+                <h3>
+
+                    <i class="ri-map-pin-2-fill"></i>
+
+                    <span id="location-name">
+
+                        Afzalpur
+
+                    </span>
+
+                    <i class="ri-arrow-down-s-line"></i>
+
+                </h3>
+
+            </div>
+
+            <a href="profile.html" class="profile-btn">
+
+                <i class="ri-user-3-line"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+<!-- Search Bar -->
+
+<div class="search-wrapper">
+
+    <div class="search-box" onclick="window.location.href='search.html'">
+
+        <i class="ri-search-line search-icon"></i>
+
+        <input
+            type="text"
+            placeholder="Search atta, rice, milk..."
+            readonly>
+
+        <button type="button">
+
+            <i class="ri-mic-fill"></i>
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- Search Results -->
+<div id="search-results"></div>
+
+
+
+<div class="home-content">
+
+<!-- ==========================================
+     PREMIUM HERO BANNER
+========================================== -->
+
+<section class="hero">
+
+    <div class="slider">
+
+        <div class="slides" id="bannerSlides">
+
+        </div>
+
+    </div>
+
+    <div class="dots" id="bannerDots">
+
+    </div>
+
+</section>
+
+
+<!-- Categories -->
+
+<!-- Categories -->
+
+<section class="categories">
+
+    <div class="section-title">
+
+        <h2>Shop by Category</h2>
+
+        <a href="category-products.html">See All</a>
+
+    </div>
+
+    <div
+        class="category-grid"
+        id="category-grid">
+
+    </div>
+
+</section>
+
+<!-- =========================
+      TODAY'S DEALS
+========================= -->
+
+<section class="todays-deals">
+
+    <div class="deals-banner">
+
+        <div class="deals-left">
+
+            <span class="flash-badge">
+
+                ⚡ FLASH SALE
+
+            </span>
+
+            <h2>
+
+                🔥 Today's Deals
+
+            </h2>
+
+            <p>
+
+                Limited Time Offer • Save up to 50%
+
+            </p>
+
+        </div>
+
+        <div class="deals-right">
+
+            <div class="countdown">
+
+                <span id="hours">00</span>
+
+                <small>H</small>
+
+            </div>
+
+            <div class="countdown">
+
+                <span id="minutes">00</span>
+
+                <small>M</small>
+
+            </div>
+
+            <div class="countdown">
+
+                <span id="seconds">00</span>
+
+                <small>S</small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="section-title">
+
+        <h3>Best Offers For You</h3>
+
+        <a href="products.html">
+
+            See All
+
+        </a>
+
+    </div>
+
+    <div
+        class="product-slider"
+        id="todays-deals">
+
+    </div>
+
+</section>
+
+<!-- =========================
+      DAIRY & BREAKFAST
+========================= -->
+
+<section class="dairy-breakfast">
+
+    <div class="section-title">
+
+        <h2>🥛 Dairy & Breakfast</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="dairy-breakfast"></div>
+
+</section>
+
+<!-- =========================
+      ATTA, RICE & DAL
+========================= -->
+
+<section class="atta-rice-dal">
+
+    <div class="section-title">
+
+        <h2>🍚 Atta, Rice & Dal</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="atta-rice-dal"></div>
+
+</section>
+
+<!-- =========================
+      OIL & GHEE
+========================= -->
+
+<section class="oil-ghee">
+
+    <div class="section-title">
+
+        <h2>🛢️ Oil & Ghee</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="oil-ghee"></div>
+
+</section>
+
+<!-- =========================
+      TEA & COFFEE
+========================= -->
+
+<section class="tea-coffee">
+
+    <div class="section-title">
+
+        <h2>☕ Tea & Coffee</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="tea-coffee"></div>
+
+</section>
+
+<!-- =========================
+      BISCUITS & SNACKS
+========================= -->
+
+<section class="biscuits-snacks">
+
+    <div class="section-title">
+
+        <h2>🍪 Biscuits & Snacks</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="biscuits-snacks"></div>
+
+</section>
+
+<!-- =========================
+      SOFT DRINKS
+========================= -->
+
+<section class="soft-drinks">
+
+    <div class="section-title">
+
+        <h2>🥤 Soft Drinks</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="soft-drinks"></div>
+
+</section>
+
+<!-- =========================
+      CHOCOLATES
+========================= -->
+
+<section class="chocolates">
+
+    <div class="section-title">
+
+        <h2>🍫 Chocolates</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="chocolates"></div>
+
+</section>
+
+<!-- =========================
+      HOUSEHOLD ESSENTIALS
+========================= -->
+
+<section class="household">
+
+    <div class="section-title">
+
+        <h2>🧴 Household Essentials</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="household"></div>
+
+</section>
+
+<!-- =========================
+      CLEANING ESSENTIALS
+========================= -->
+
+<section class="cleaning">
+
+    <div class="section-title">
+
+        <h2>🧹 Cleaning Essentials</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="cleaning"></div>
+
+</section>
+
+<!-- =========================
+      PERSONAL CARE
+========================= -->
+
+<section class="personal-care">
+
+    <div class="section-title">
+
+        <h2>🧼 Personal Care</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="personal-care"></div>
+
+</section>
+
+<!-- =========================
+      BEST SELLERS
+========================= -->
+
+<section class="best-sellers">
+
+    <div class="section-title">
+
+        <h2>⭐ Best Sellers</h2>
+
+        <a href="#">See All</a>
+
+    </div>
+
+    <div class="product-slider" id="best-sellers"></div>
+
+</section>
+
+
+</div>
+
+
+<!-- =======================
+      FOOTER
+======================= -->
+
+<footer class="footer">
+
+    <div class="footer-logo">
+
+        <h2>Patil Groceries</h2>
+
+        <p>Your Daily Kirana Store</p>
+
+    </div>
+
+    <div class="footer-links">
+
+        <a href="#">Home</a>
+        <a href="#">Categories</a>
+        <a href="#">Offers</a>
+        <a href="#">Orders</a>
+        <a href="#">Contact</a>
+        <a href="#">About Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms & Conditions</a>
+
+    </div>
+
+    <div class="footer-contact">
+
+        <p>📍 Afzalpur, Karnataka</p>
+        <p>📞 +91 8277420655</p>
+        <p>✉ support@snackible.com</p>
+
+    </div>
+
+    <div class="footer-social">
+
+        <a href="#"><i class="ri-instagram-line"></i></a>
+
+        <a href="#"><i class="ri-whatsapp-line"></i></a>
+
+        <a href="#"><i class="ri-facebook-circle-line"></i></a>
+
+        <a href="#"><i class="ri-youtube-line"></i></a>
+
+    </div>
+
+    <p class="copyright">
+
+        © 2026 Snackible. All Rights Reserved.
+
+    </p>
+
+</footer>
+
+
+
+<!-- =======================
+      BOTTOM NAVIGATION
+======================= -->
+
+<nav class="bottom-nav">
+
+    <a href="#" class="active">
+        <i class="ri-home-5-line"></i>
+        <span>Home</span>
+    </a>
+
+    <a href="category-products.html">
+        <i class="ri-grid-fill"></i>
+        <span>Category</span>
+    </a>
+
+<a href="search.html">
+    <i class="ri-search-line"></i>
+    <span>Search</span>
+</a>
+
+    <a href="checkout.html">
+
+         <i class="ri-shopping-cart-2-line"></i>
+         <span>Cart</span>
+    </a>
+
+    <a href="profile.html">
+        <i class="ri-user-3-line"></i>
+        <span>Profile</span>
+    </a>
+
+</nav>
+            </div>
+
+
+
+    </div> <!-- App End -->
+
+    <!-- ==========================================
+     FLOATING CART
+========================================== -->
+
+<div id="floatingCartBar" class="floating-cart-bar" style="display:none;">
+    <div class="floating-cart-left">
+        <h4 id="floating-cart-count">0 Items</h4>
+        <small>View Cart</small>
+    </div>
+
+    <a href="checkout.html" class="floating-cart-btn-main">
+        <span id="floating-cart-total">₹0</span>
+        <i class="ri-arrow-right-line"></i>
+    </a>
+</div>
+
+    <!-- JavaScript -->
+       <script src="assets/js/location.js"></script>
+     <script src="assets/js/cart.js"></script>
+     <script src="assets/js/wishlist.js"></script>
+    <script src="assets/js/slider.js"></script>
+    <script src="assets/js/search.js"></script>
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/home-categories.js"></script>
+    <script src="assets/js/store-status.js"></script>
+    <script src="assets/js/header.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/todaysdeals.js"></script>
+    <script src="assets/js/todays-slider.js"></script>
+<!-- Loader -->
+<script src="assets/js/loader.js"></script>
+
+
+</body>
+
+</html>

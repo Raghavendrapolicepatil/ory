@@ -1,0 +1,446 @@
+/* ==========================================
+   Orders Page
+========================================== */
+
+.orders-section{
+
+    background:#fff;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+/* Table */
+
+.orders-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.orders-table thead{
+
+    background:#15803d;
+
+}
+
+.orders-table th{
+
+    color:#fff;
+
+    padding:15px;
+
+    text-align:left;
+
+    font-size:15px;
+
+}
+
+.orders-table td{
+
+    padding:15px;
+
+    border-bottom:1px solid #eee;
+
+    font-size:14px;
+
+    color:#555;
+
+    vertical-align:middle;
+
+}
+
+.orders-table tr:hover td{
+
+    color:#333;
+
+}
+/* Status */
+
+.status{
+
+    display:inline-block;
+
+    padding:6px 12px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    font-weight:bold;
+
+    color:#fff;
+
+}
+
+.pending{
+
+    background:#f59e0b;
+
+}
+
+.packed{
+
+    background:#3b82f6;
+
+}
+
+.shipped{
+
+    background:#8b5cf6;
+
+}
+
+.delivered{
+
+    background:#16a34a;
+
+}
+
+.cancelled{
+
+    background:#dc2626;
+
+}
+
+/* Select */
+
+.status-select{
+
+    padding:8px 10px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    outline:none;
+
+    cursor:pointer;
+
+}
+
+/* Buttons */
+
+.action-btn{
+
+    border:none;
+
+    padding:8px 14px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    color:#fff;
+
+    font-size:14px;
+
+    transition:.3s;
+
+}
+
+.view-btn{
+
+    background:#2563eb;
+
+}
+
+.view-btn:hover{
+
+    background:#1d4ed8;
+
+}
+
+.delete-btn{
+
+    background:#dc2626;
+
+}
+
+.delete-btn:hover{
+
+    background:#b91c1c;
+
+}
+
+/* Empty */
+
+.empty-orders{
+
+    text-align:center;
+
+    color:#777;
+
+    padding:40px 0;
+
+    font-size:18px;
+
+}
+
+/* ==========================================
+   Orders Toolbar
+========================================== */
+
+.orders-toolbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:15px;
+
+    margin:20px 0;
+
+    flex-wrap:wrap;
+
+}
+
+.orders-toolbar input{
+
+    flex:1;
+
+    min-width:250px;
+
+    padding:12px 15px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+.orders-toolbar input:focus{
+
+    border-color:#16a34a;
+
+}
+
+.orders-toolbar select{
+
+    padding:12px 15px;
+
+    border:1px solid #ddd;
+
+    border-radius:10px;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+}
+
+/* ==========================================
+   Orders Table
+========================================== */
+
+.orders-section{
+
+    background:#fff;
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.orders-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.orders-table th{
+
+    background:#16a34a;
+
+    color:#fff;
+
+    padding:15px;
+
+    text-align:left;
+
+}
+
+.orders-table td{
+
+    padding:15px;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.orders-table tr:hover{
+
+    background:#f8f8f8;
+
+}
+
+.orders-table select{
+
+    padding:8px;
+
+    border-radius:8px;
+
+}
+
+.orders-table button{
+
+    background:#2563eb;
+
+    color:#fff;
+
+    border:none;
+
+    padding:8px 12px;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+}
+
+.orders-table button:hover{
+
+    background:#1d4ed8;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+.orders-toolbar{
+
+flex-direction:column;
+
+align-items:stretch;
+
+}
+
+.orders-toolbar input{
+
+min-width:100%;
+
+}
+
+.orders-section{
+
+overflow-x:auto;
+
+}
+
+.orders-table{
+
+min-width:850px;
+
+}
+
+}
+
+/* Modal */
+
+.modal{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.5);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:999;
+
+}
+
+.modal-content{
+
+    width:90%;
+
+    max-width:600px;
+
+    background:#fff;
+
+    border-radius:12px;
+
+    padding:25px;
+
+    position:relative;
+
+    max-height:80vh;
+
+    overflow-y:auto;
+
+}
+
+.close{
+
+    position:absolute;
+
+    right:20px;
+
+    top:15px;
+
+    font-size:28px;
+
+    cursor:pointer;
+
+    color:red;
+
+}
+
+.order-product{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:10px 0;
+
+    border-bottom:1px solid #eee;
+
+}
+
+/* Responsive */
+
+@media(max-width:900px){
+
+.orders-section{
+
+overflow-x:auto;
+
+}
+
+.orders-table{
+
+min-width:900px;
+
+}
+
+}

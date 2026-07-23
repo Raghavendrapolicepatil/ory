@@ -1,0 +1,212 @@
+/* ==========================================
+   Snackible Order Success
+========================================== */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+
+    background:#f5f5f5;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    min-height:100vh;
+
+    padding:20px;
+
+}
+
+.success-container{
+
+    width:100%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+}
+
+.success-card{
+
+    width:100%;
+
+    max-width:420px;
+
+    background:#fff;
+
+    border-radius:20px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+    animation:fadeIn .5s ease;
+
+}
+
+@keyframes fadeIn{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+.success-icon{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    margin-bottom:20px;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    border-radius:50%;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    font-size:42px;
+
+}
+
+.success-card h2{
+
+    color:#222;
+
+    margin-bottom:12px;
+
+}
+
+.success-card p{
+
+    color:#666;
+
+    line-height:24px;
+
+    margin-bottom:22px;
+
+}
+
+.order-id{
+
+    background:#f4f4f4;
+
+    padding:14px;
+
+    border-radius:12px;
+
+    font-weight:600;
+
+    color:#333;
+
+    margin-bottom:25px;
+
+}
+
+#order-id{
+
+    color:#16a34a;
+
+}
+
+.success-buttons{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:12px;
+
+}
+
+.btn{
+
+    width:100%;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:15px;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.primary-btn{
+
+    background:#16a34a;
+
+    color:#fff;
+
+}
+
+.primary-btn:hover{
+
+    background:#15803d;
+
+}
+
+.secondary-btn{
+
+    background:#ececec;
+
+    color:#222;
+
+}
+
+.secondary-btn:hover{
+
+    background:#dddddd;
+
+}
+
+@media(max-width:480px){
+
+    .success-card{
+
+        padding:30px 20px;
+
+    }
+
+}

@@ -1,0 +1,276 @@
+/* ==========================================
+   WISHLIST PAGE
+========================================== */
+
+body{
+
+    background:#f5f5f5;
+
+}
+
+/* Header */
+
+.wishlist-header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:16px 20px;
+
+    background:#fff;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.wishlist-header h2{
+
+    font-size:22px;
+
+    font-weight:700;
+
+    color:#222;
+
+}
+
+.wishlist-btn{
+
+    position:absolute;
+
+    top:8px;
+
+    right:8px;
+
+    width:28px;
+
+    height:28px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.12);
+
+    z-index:5;
+
+    cursor:pointer;
+
+    transition:.25s;
+
+}
+
+.wishlist-btn i{
+
+    font-size:16px;
+
+    color:#888;
+
+}
+
+.wishlist-btn:hover{
+
+    transform:scale(1.08);
+
+}
+
+.wishlist-btn.active i{
+
+    color:#ff3b5c;
+
+}
+/* Wishlist */
+
+#wishlist-container{
+
+    padding:18px;
+
+}
+
+/* Product Card */
+
+.wishlist-card{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    background:#fff;
+
+    padding:15px;
+
+    border-radius:18px;
+
+    margin-bottom:15px;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+.wishlist-card img{
+
+    width:90px;
+
+    height:90px;
+
+    object-fit:contain;
+
+}
+
+.wishlist-info{
+
+    flex:1;
+
+}
+
+.wishlist-info h3{
+
+    font-size:18px;
+
+    color:#222;
+
+    margin-bottom:6px;
+
+}
+
+.wishlist-info p{
+
+    color:#666;
+
+    margin-bottom:8px;
+
+}
+
+.wishlist-price{
+
+    color:#16a34a;
+
+    font-size:20px;
+
+    font-weight:700;
+
+}
+
+/* Buttons */
+
+.wishlist-actions{
+
+    display:flex;
+
+    gap:10px;
+
+    margin-top:12px;
+
+}
+
+.cart-btn{
+
+    flex:1;
+
+    border:none;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+.remove-btn{
+
+    flex:1;
+
+    border:none;
+
+    background:#ef4444;
+
+    color:#fff;
+
+    padding:10px;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    font-weight:600;
+
+}
+
+/* Empty Wishlist */
+
+.empty-wishlist{
+
+    text-align:center;
+
+    padding:80px 20px;
+
+}
+
+.empty-wishlist i{
+
+    font-size:70px;
+
+    color:#ef4444;
+
+    margin-bottom:20px;
+
+}
+
+.empty-wishlist h2{
+
+    color:#222;
+
+    margin-bottom:10px;
+
+}
+
+.empty-wishlist p{
+
+    color:#777;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .wishlist-card{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+    .wishlist-actions{
+
+        width:100%;
+
+    }
+
+}

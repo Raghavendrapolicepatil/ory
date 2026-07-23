@@ -1,0 +1,260 @@
+
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root{
+    --primary:#16a34a;
+    --secondary:#facc15;
+    --background:#f8f8f8;
+    --white:#ffffff;
+    --text:#1f2937;
+    --border:#e5e7eb;
+    --shadow:0 8px 20px rgba(0,0,0,.08);
+    --radius:18px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f8f8f8;
+    color:#222;
+}
+
+.app{
+    max-width:480px;
+    margin:auto;
+    background:#fff;
+    min-height:100vh;
+}
+
+
+/* ==========================================
+   GLOBAL RESPONSIVE LAYOUT
+========================================== */
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+html,
+body{
+
+    width:100%;
+
+    overflow-x:hidden;
+
+}
+
+body{
+
+    background:#f5f5f5;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+}
+
+img{
+
+    max-width:100%;
+
+    display:block;
+
+}
+
+.app{
+
+    width:100%;
+
+    max-width:1400px;
+
+    margin:0 auto;
+
+    background:#fff;
+
+    min-height:100vh;
+
+    overflow-x:hidden;
+
+}
+
+/* dark mood */
+
+body.dark{
+
+    background:#121212;
+    color:#fff;
+
+}
+
+body.dark .app{
+
+    background:#121212;
+
+}
+
+
+
+body.dark header{
+    background:#1f1f1f;
+}
+
+body.dark .product-card{
+    background:#222;
+    color:#fff;
+}
+
+body.dark .category-card{
+    background:#222;
+}
+
+body.dark .setting-item{
+    background:#222;
+}
+
+body.dark .search-box{
+    background:#222;
+}
+
+body.dark input,
+body.dark select{
+    background:#333;
+    color:#fff;
+}
+
+
+/* ==========================================
+   FLOATING CART
+========================================== */
+
+.floating-cart-bar{
+
+    position:fixed;
+
+    left:16px;
+
+    right:16px;
+
+    bottom:75px;
+
+    height:60px;
+
+    background:#16a34a;
+
+    color:#fff;
+
+    border-radius:16px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    padding:0 16px;
+
+    z-index:9999;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+}
+
+.floating-cart-left h4{
+
+    margin:0;
+
+    font-size:16px;
+
+    color:#fff;
+
+}
+
+.floating-cart-left small{
+
+    color:#eaffea;
+
+}
+
+.floating-cart-btn-main{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:8px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    font-size:16px;
+
+}
+
+
+
+/* Mobile */
+
+@media(max-width:767px){
+
+    .app{
+
+        max-width:100%;
+
+    }
+
+}
+
+/* Tablet */
+
+@media(min-width:768px) and (max-width:991px){
+
+    .app{
+
+        max-width:760px;
+
+    }
+
+}
+
+/* Laptop */
+
+@media(min-width:992px) and (max-width:1199px){
+
+    .app{
+
+        max-width:1100px;
+
+    }
+
+}
+
+/* Desktop */
+
+@media(min-width:1200px){
+
+    .app{
+
+        max-width:1400px;
+
+    }
+
+}

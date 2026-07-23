@@ -1,0 +1,221 @@
+/* ==========================================
+   SETTINGS PAGE
+========================================== */
+
+body{
+
+    background:#f5f5f5;
+
+}
+
+/* Header */
+
+.settings-header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:1000;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    background:#fff;
+
+    padding:16px 20px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+
+}
+
+.settings-header h2{
+
+    font-size:22px;
+
+    color:#222;
+
+    font-weight:700;
+
+}
+
+.back-btn{
+
+    width:42px;
+
+    height:42px;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    border-radius:50%;
+
+    background:#f3f3f3;
+
+    color:#222;
+
+    text-decoration:none;
+
+    transition:.3s;
+
+}
+
+.back-btn:hover{
+
+    background:#16a34a;
+
+    color:#fff;
+
+}
+
+/* Settings List */
+
+.settings-list{
+
+    padding:18px;
+
+}
+
+/* Setting Item */
+
+.setting-item{
+
+    background:#fff;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    margin-bottom:16px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    box-shadow:0 5px 18px rgba(0,0,0,.08);
+
+}
+
+.setting-item h3{
+
+    font-size:18px;
+
+    color:#222;
+
+    margin-bottom:5px;
+
+}
+
+.setting-item p{
+
+    font-size:14px;
+
+    color:#777;
+
+}
+
+/* Toggle Switch */
+
+.switch{
+
+    position:relative;
+
+    width:55px;
+
+    height:30px;
+
+}
+
+.switch input{
+
+    display:none;
+
+}
+
+.slider{
+
+    position:absolute;
+
+    cursor:pointer;
+
+    inset:0;
+
+    background:#ccc;
+
+    border-radius:50px;
+
+    transition:.3s;
+
+}
+
+.slider::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:24px;
+
+    height:24px;
+
+    left:3px;
+
+    top:3px;
+
+    background:#fff;
+
+    border-radius:50%;
+
+    transition:.3s;
+
+}
+
+.switch input:checked + .slider{
+
+    background:#16a34a;
+
+}
+
+.switch input:checked + .slider::before{
+
+    transform:translateX(25px);
+
+}
+
+/* Language */
+
+#language{
+
+    border:1px solid #ddd;
+
+    padding:10px 14px;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+
+    cursor:pointer;
+
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+
+    .setting-item{
+
+        padding:15px;
+
+    }
+
+}
