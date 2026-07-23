@@ -21,7 +21,7 @@ router.get("/user/:userId", async (req, res) => {
 
     try {
 
-        const Order = require("../models/Order");
+        const Order = require("../models/order");
 
         const orders = await Order.find({
 
