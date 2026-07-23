@@ -1,4 +1,4 @@
-const Address = require("../models/Address");
+const Address = require("../models/address");
 
 // Get All Addresses
 
