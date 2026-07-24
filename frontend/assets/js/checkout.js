@@ -365,12 +365,11 @@ console.log("Going to place order...");
                 "Content-Type": "application/json"
 
             },
-console.log("Cart:", cart);
+
             body: JSON.stringify({
 
-                user: user.id,
+                user: user.user.id,
 
-                
                 products: cart.map(item => ({
     productId: Number(item.id.split("-")[0]), // 8
     variant: item.variant,                    // "10g"
