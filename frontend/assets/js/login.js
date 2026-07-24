@@ -4,7 +4,7 @@
 
 const loginForm = document.getElementById("loginForm");
 
-const email = document.getElementById("email");
+const login = document.getElementById("login");
 
 const password = document.getElementById("password");
 
@@ -56,7 +56,7 @@ loginForm.addEventListener("submit", async (e) => {
 
             body: JSON.stringify({
 
-                email: email.value,
+                email: login.value,
 
                 password: password.value
 
