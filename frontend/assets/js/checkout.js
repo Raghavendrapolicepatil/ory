@@ -356,7 +356,7 @@ if (payment === "UPI" || payment === "Card") {
 
     try {
 console.log("Going to place order...");
-        const response = await fetch("https://snackible-backend.onrender.com00/api/orders", {
+        const response = await fetch("https://snackible-backend.onrender.com/api/orders", {
 
             method: "POST",
 
@@ -368,7 +368,7 @@ console.log("Going to place order...");
 
             body: JSON.stringify({
 
-                user: user.user.id,
+                user: user.id,
 
                 products: cart.map(item => ({
     productId: Number(item.id.split("-")[0]), // 8

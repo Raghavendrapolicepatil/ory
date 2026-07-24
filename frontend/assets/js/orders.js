@@ -24,14 +24,13 @@ async function loadOrders() {
             localStorage.getItem("user")
         );
 
-        if (!userData || !userData.user) {
+       if (!userData) {
 
-            window.location.href = "login.html";
+    window.location.href = "login.html";
 
-            return;
+    return;
 
-        }
-
+}
         showLoading();
 
         const response = await fetch(API_URL);
@@ -49,7 +48,7 @@ async function loadOrders() {
         const userOrders = allOrders.filter(order =>
 
             order.user &&
-            order.user._id === userData.user.id
+order.user._id === userData.id
 
         );
 
