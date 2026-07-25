@@ -51,7 +51,6 @@ function saveCart(){
 // ======================================
 function addToCart(id, name, price, image, weight){
 
-console.log("Add To Cart ID:", id, typeof id);
 
     cart = getLatestCart();
 
