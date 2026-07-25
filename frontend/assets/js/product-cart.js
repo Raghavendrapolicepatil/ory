@@ -52,7 +52,11 @@ function refreshCartButton() {
 
     }
 
-    const qty = getProductQty(currentProduct.id);
+const cartId = currentVariant
+    ? currentProduct.id + "-" + currentVariant.name
+    : currentProduct.id;
+
+const qty = getProductQty(cartId);
 
     if (qty === 0) {
 
