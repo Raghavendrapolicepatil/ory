@@ -1389,9 +1389,15 @@ function addCurrentProduct(){
 // PLUS
 // ==========================================
 
+function getCurrentCartId() {
+    return currentVariant
+        ? currentProduct.id + "-" + currentVariant.name
+        : currentProduct.id;
+}
+
 function plusCurrentProduct(){
 
-    increaseQty(currentProduct.id);
+    increaseQty(getCurrentCartId());
 
     renderCart();
 
