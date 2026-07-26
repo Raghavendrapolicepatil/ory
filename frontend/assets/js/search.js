@@ -237,19 +237,25 @@ function searchRecent(text){
 // Clear
 // ======================================
 
-clearBtn.onclick=()=>{
+if (clearBtn) {
+    clearBtn.onclick = () => {
 
-    searchInput.value="";
+        if (searchInput) {
+            searchInput.value = "";
+            searchInput.focus();
+        }
 
-    resultsBox.innerHTML="";
+        if (resultsBox) {
+            resultsBox.innerHTML = "";
+        }
 
-    noResults.style.display="none";
+        if (noResults) {
+            noResults.style.display = "none";
+        }
 
-    loadRecent();
-
-    searchInput.focus();
-
-};
+        loadRecent();
+    };
+}
 
 // ======================================
 // Voice Search
