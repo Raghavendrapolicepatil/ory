@@ -1,66 +1,54 @@
-/* ==========================
-   THEME VARIABLES
-========================== */
-
-:root{
-
-    --bg:#ffffff;
-    --card:#ffffff;
-    --text:#111827;
-    --border:#ececec;
-    --primary:#16a34a;
-    --shadow:0 8px 20px rgba(0,0,0,.08);
-
-}
-
 body.dark{
-
-    --bg:#121212;
-    --card:#1b1b1b;
-    --text:#ffffff;
-    --border:#2d2d2d;
-
+    background:#111827;
+    color:#f9fafb;
 }
 
-/* Global */
-
-body{
-
-    background:var(--bg);
-    color:var(--text);
-
-}
-
-.app{
-
-    background:var(--bg);
-
-}
-
-.header,
-.search-box,
-.product-card,
-.category-card,
-.footer,
-.bottom-nav{
-
-    background:var(--card);
-
-    border-color:var(--border);
-
-}
-
-body.dark .search-wrapper{
-
-    background:rgba(18,18,18,.92);
-
+body.dark .header{
+    background:#1f2937;
 }
 
 body.dark .search-box{
-
-    background:#1b1b1b;
-
-    border-color:#2e2e2e;
-
+    background:#374151;
 }
 
+body.dark .search-box input{
+    color:#fff;
+}
+
+body.dark .category-card,
+body.dark .product-card{
+    background:#1f2937;
+    border-color:#374151;
+}
+
+body.dark .section-title h2,
+body.dark .section-title h3,
+body.dark .product-card h4{
+    color:#fff;
+}
+
+body.dark .weight-chip{
+    background:#374151;
+    color:#d1d5db;
+}
+
+body.dark .price{
+    color:#fff;
+}
+
+body.dark .old-price{
+    color:#9ca3af;
+}
+
+body.dark .wishlist-btn{
+    background:#374151;
+}
+
+body.dark .delivery-tag{
+    background:#14532d;
+    color:#86efac;
+}
+
+body.dark .footer{
+    background:#1f2937;
+}
