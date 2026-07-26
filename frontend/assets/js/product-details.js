@@ -1684,6 +1684,20 @@ ${
 
 }
 
+//new
+
+function plusRelatedProduct(id){
+    increaseQty(id);
+    renderRelatedProducts();
+    updateFloatingCart();
+}
+
+function minusRelatedProduct(id){
+    decreaseQty(id);
+    renderRelatedProducts();
+    updateFloatingCart();
+}
+
 // ==========================================
 // OPEN PRODUCT
 // ==========================================
@@ -1723,6 +1737,9 @@ function addRelatedProduct(id){
         product.image
 
     );
+
+    renderRelatedProducts();
+updateFloatingCart();
 
     showToast(
 
