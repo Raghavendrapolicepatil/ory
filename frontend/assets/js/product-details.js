@@ -1266,7 +1266,7 @@ function initCart(){
 // ==========================================
 // RENDER CART
 // ==========================================
-
+console.log("renderCart", currentVariant);
 function renderCart(){
 
     const addBtn =
@@ -1383,7 +1383,7 @@ function addCurrentProduct(){
     refreshFloatingCart();
     updateBottomPrice();
     showToast("Added to Cart");
-
+console.log("Added", JSON.parse(localStorage.getItem("cart")));
 }
 // ==========================================
 // PLUS
