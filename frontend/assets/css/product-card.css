@@ -208,14 +208,13 @@
 /* ==========================================
    FLOATING CART
 ========================================== */
-
 .floating-cart-btn{
 
     position:absolute;
 
-    right:8px;
+    right:10px;
 
-    bottom:8px;
+    bottom:10px;
 
     z-index:30;
 
@@ -224,6 +223,8 @@
     justify-content:flex-end;
 
     align-items:flex-end;
+
+    pointer-events:auto;
 
 }
 /* ==========================================
@@ -638,11 +639,11 @@
 
     .floating-cart-btn{
 
-        right:6px;
+    right:8px;
 
-        bottom:6px;
+    bottom:8px;
 
-    }
+}
 
     .add-btn{
 
@@ -778,15 +779,5 @@ button:focus-visible{
     outline-offset:2px;
 }
 
-/* ==========================================
-   IMAGE LOADING
-========================================== */
 
-.image-box img{
-
-    user-select:none;
-
-    -webkit-user-drag:none;
-
-}
 
