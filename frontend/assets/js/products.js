@@ -4,14 +4,14 @@
 
 let allProducts = [];
 
-// ======================================
-// Floating Cart
-// ======================================
+
 // ======================================
 // Floating Cart
 // ======================================
 
 function refreshFloatingCart(){
+
+
 
     const bar = document.getElementById("floatingCartBar");
     const count = document.getElementById("floating-cart-count");
