@@ -7,61 +7,46 @@ const dotsBox = document.getElementById("bannerDots");
 
 let currentIndex = 0;
 let totalSlides = 0;
-let autoSlide;
+let autoSlide = null;
 
 // =============================
 // Load Banners
 // =============================
 
 async function loadBanners() {
+  try {
+    const res = await fetch("https://snackible-backend.onrender.com/api/banners");
+    const banners = await res.json();
 
-    try {
+    const activeBanners = banners
+      .filter((banner) => banner.status)
+      .sort((a, b) => a.order - b.order);
 
-        const res = await fetch("https://snackible-backend.onrender.com/api/banners");
+    slides.innerHTML = "";
+    dotsBox.innerHTML = "";
 
-        const banners = await res.json();
+    activeBanners.forEach((banner, index) => {
+      slides.innerHTML += `
+        <div class="slide">
+          <a href="${banner.link || "#"}">
+            <img src="${banner.image}" alt="${banner.title}">
+          </a>
+        </div>
+      `;
 
-        slides.innerHTML = "";
-        dotsBox.innerHTML = "";
+      dotsBox.innerHTML += `
+        <span class="dot ${index === 0 ? "active" : ""}"></span>
+      `;
+    });
 
-        banners
-            .filter(banner => banner.status)
-            .sort((a, b) => a.order - b.order)
-            .forEach((banner, index) => {
+    totalSlides = activeBanners.length;
 
-                slides.innerHTML += `
-
-<div class="slide">
-
-<a href="${banner.link || "#"}">
-
-<img src="${banner.image}" alt="${banner.title}">
-</a>
-
-</div>
-
-`;
-
-                dotsBox.innerHTML += `
-
-<span class="dot ${index===0?"active":""}"></span>
-
-`;
-
-            });
-
-        totalSlides = banners.length;
-
-        initSlider();
-
+    if (totalSlides > 0) {
+      initSlider();
     }
-
-    catch (err) {
-
-        console.log(err);
-
-    }
-
+  } catch (err) {
+    console.error("Banner Load Error:", err);
+  }
 }
 
 // =============================
@@ -69,89 +54,85 @@ async function loadBanners() {
 // =============================
 
 function updateSlider() {
+  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-    slides.style.transform =
-        `translateX(-${currentIndex*100}%)`;
-
-    const dots =
-        document.querySelectorAll(".dot");
-
-    dots.forEach(dot=>dot.classList.remove("active"));
-
-    if(dots[currentIndex]){
-
-        dots[currentIndex].classList.add("active");
-
-    }
-
+  document.querySelectorAll(".dot").forEach((dot, index) => {
+    dot.classList.toggle("active", index === currentIndex);
+  });
 }
 
 // =============================
 // Next Slide
 // =============================
 
-function nextSlide(){
+function nextSlide() {
+  if (totalSlides <= 1) return;
 
-    currentIndex++;
+  currentIndex++;
 
-    if(currentIndex>=totalSlides){
+  if (currentIndex >= totalSlides) {
+    currentIndex = 0;
+  }
 
-        currentIndex=0;
-
-    }
-
-    updateSlider();
-
+  updateSlider();
 }
 
 // =============================
-// Start Slider
+// Start Auto Slider
 // =============================
 
-function startSlider(){
-
-    autoSlide=setInterval(nextSlide,3500);
-
+function startSlider() {
+  stopSlider();
+  if (totalSlides > 1) {
+    autoSlide = setInterval(nextSlide, 3500);
+  }
 }
 
-function stopSlider(){
-
+function stopSlider() {
+  if (autoSlide) {
     clearInterval(autoSlide);
-
+  }
 }
 
 // =============================
 // Initialize
 // =============================
 
-function initSlider(){
-
-    const dots=document.querySelectorAll(".dot");
-
-    dots.forEach((dot,index)=>{
-
-        dot.addEventListener("click",()=>{
-
-            currentIndex=index;
-
-            updateSlider();
-
-            stopSlider();
-
-            startSlider();
-
-        });
-
+function initSlider() {
+  document.querySelectorAll(".dot").forEach((dot, index) => {
+    dot.addEventListener("click", () => {
+      currentIndex = index;
+      updateSlider();
+      startSlider();
     });
+  });
 
-    slides.addEventListener("mouseenter",stopSlider);
+  slides.addEventListener("mouseenter", stopSlider);
+  slides.addEventListener("mouseleave", startSlider);
 
-    slides.addEventListener("mouseleave",startSlider);
+  // Mobile Touch Swipe
+  let startX = 0;
 
-    updateSlider();
+  slides.addEventListener("touchstart", (e) => {
+    startX = e.touches[0].clientX;
+  });
+
+  slides.addEventListener("touchend", (e) => {
+    const endX = e.changedTouches[0].clientX;
+
+    if (startX - endX > 50) {
+      nextSlide();
+    } else if (endX - startX > 50) {
+      currentIndex =
+        currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
+      updateSlider();
+    }
 
     startSlider();
+  });
 
+  updateSlider();
+  startSlider();
 }
 
 loadBanners();
