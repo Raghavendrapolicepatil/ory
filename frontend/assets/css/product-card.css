@@ -135,8 +135,7 @@
 
     box-shadow:0 3px 10px rgba(0,0,0,.15);
 
-    transition:.25s;
-
+    transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease;
 }
 
 .wishlist-btn:hover{
