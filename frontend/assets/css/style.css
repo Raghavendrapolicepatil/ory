@@ -1,3 +1,31 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+:root{
+    --primary:#16a34a;
+    --secondary:#facc15;
+    --background:#f8f8f8;
+    --white:#ffffff;
+    --text:#1f2937;
+    --border:#e5e7eb;
+    --shadow:0 8px 20px rgba(0,0,0,.08);
+    --radius:18px;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f8f8f8;
+    color:#222;
+}
+
+
+
 /* ==========================================
    GLOBAL SECTION TITLE
 ========================================== */
@@ -29,32 +57,6 @@
 }
 
 
-
-/* Google Font */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
-:root{
-    --primary:#16a34a;
-    --secondary:#facc15;
-    --background:#f8f8f8;
-    --white:#ffffff;
-    --text:#1f2937;
-    --border:#e5e7eb;
-    --shadow:0 8px 20px rgba(0,0,0,.08);
-    --radius:18px;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins',sans-serif;
-}
-
-body{
-    background:#f8f8f8;
-    color:#222;
-}
 
 
 
