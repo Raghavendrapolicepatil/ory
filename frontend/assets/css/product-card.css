@@ -289,6 +289,8 @@
 
     box-shadow:0 5px 15px rgba(22,163,74,.28);
 
+    transition:.25s;
+
 }
 
 .quantity-control button{
@@ -739,28 +741,19 @@
 
 }
 
-/* ==========================================
-   SMOOTH TRANSITIONS
-========================================== */
 
-.product-card,
-.image-box img,
-.add-btn,
-.quantity-control,
-.wishlist-btn{
-
-    transition:.25s ease;
-
-}
 
 /* ==========================================
    FOCUS
 ========================================== */
 
 button:focus{
-
     outline:none;
+}
 
+button:focus-visible{
+    outline:2px solid #16a34a;
+    outline-offset:2px;
 }
 
 /* ==========================================
