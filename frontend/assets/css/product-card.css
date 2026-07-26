@@ -157,7 +157,6 @@
     color:#ff3b5c;
 
 }
-
 /* ==========================================
    IMAGE BOX
 ========================================== */
@@ -168,7 +167,7 @@
 
     width:100%;
 
-    height:145px;
+    aspect-ratio:1/1;
 
     display:flex;
 
@@ -176,7 +175,9 @@
 
     align-items:center;
 
-    margin-bottom:8px;
+    margin-bottom:10px;
+
+    overflow:hidden;
 
 }
 
@@ -184,11 +185,15 @@
 
     width:100%;
 
-    height:120px;
+    height:100%;
 
     object-fit:contain;
 
     transition:.25s;
+
+    user-select:none;
+
+    -webkit-user-drag:none;
 
 }
 
@@ -212,8 +217,13 @@
 
     z-index:30;
 
-}
+    display:flex;
 
+    justify-content:flex-end;
+
+    align-items:flex-end;
+
+}
 /* ==========================================
    ADD BUTTON
 ========================================== */
