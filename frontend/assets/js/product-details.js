@@ -1421,13 +1421,13 @@ function plusCurrentProduct(){
 
 function minusCurrentProduct(){
 
-    decreaseQty(currentProduct.id);
+   decreaseQty(getCurrentCartId());
 
-    renderCart();
+renderCart();
 
-    updateBottomPrice();
+updateBottomPrice();
 
-    refreshFloatingCart();
+refreshFloatingCart();
 
 }
 
