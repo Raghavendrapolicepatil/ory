@@ -1,0 +1,131 @@
+/* ==========================================
+   FLOATING CART
+========================================== */
+
+.floating-cart-bar{
+
+    position:fixed;
+
+    left:12px;
+    right:12px;
+    bottom:78px;
+
+    height:62px;
+
+    display:none;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:0 18px;
+
+    background:#16a34a;
+
+    border-radius:18px;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.18);
+
+    z-index:9999;
+
+    animation:cartSlide .25s ease;
+
+}
+
+.floating-cart-left{
+
+    display:flex;
+    flex-direction:column;
+
+}
+
+.floating-cart-left h4{
+
+    margin:0;
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.floating-cart-left small{
+
+    margin-top:2px;
+
+    color:rgba(255,255,255,.85);
+
+    font-size:12px;
+
+}
+
+.floating-cart-btn-main{
+
+    display:flex;
+    align-items:center;
+    gap:8px;
+
+    color:#fff;
+
+    text-decoration:none;
+
+    font-size:18px;
+
+    font-weight:700;
+
+}
+
+.floating-cart-btn-main i{
+
+    font-size:22px;
+
+}
+
+@keyframes cartSlide{
+
+    from{
+
+        opacity:0;
+
+        transform:translateY(20px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .floating-cart-bar{
+
+        left:10px;
+        right:10px;
+
+        bottom:74px;
+
+        height:58px;
+
+        padding:0 16px;
+
+    }
+
+    .floating-cart-left h4{
+
+        font-size:17px;
+
+    }
+
+    .floating-cart-btn-main{
+
+        font-size:17px;
+
+    }
+
+}
