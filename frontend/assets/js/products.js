@@ -57,6 +57,8 @@ async function loadProducts(){
 
         initSearch();
 
+        refreshFloatingCart();
+
     }
 
     catch(err){
@@ -326,12 +328,13 @@ function renderCartButton(product){
 
         <button
             class="add-btn"
-            onclick="addProduct(
-                ${product.id},
-                '${product.name.replace(/'/g,"\\'")}',
-                ${product.price},
-                '${product.image}'
-            )">
+           onclick="addProduct(
+    ${product.id},
+    '${product.name.replace(/'/g,"\\'")}',
+    ${product.price},
+    '${product.image}',
+    '${product.weight || ""}'
+)">
 
             <i class="ri-add-line"></i>
 
