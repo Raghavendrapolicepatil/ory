@@ -1,0 +1,26 @@
+:root{
+
+--primary:#2ecc71;
+--secondary:#27ae60;
+
+--background:#f8f9fa;
+--white:#fff;
+
+--text:#222;
+--text-light:#666;
+
+--border:#ececec;
+
+--radius:14px;
+
+--shadow:0 4px 12px rgba(0,0,0,.08);
+
+--transition:.3s;
+
+--header-height:70px;
+
+--bottom-nav-height:70px;
+
+--container:1400px;
+
+}

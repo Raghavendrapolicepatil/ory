@@ -1,160 +1,148 @@
-/* ==========================================
-   RESPONSIVE V3 - MOBILE FIRST
-   Snackible / Patil Groceries
-========================================== */
+/* ===========================
+   Mobile
+=========================== */
 
-/* ========= Mobile (Default) ========= */
+@media (max-width:767px){
 
 .app{
-    width:100%;
-    max-width:100%;
-    margin:auto;
-    overflow-x:hidden;
+
+width:100%;
+
 }
 
-.header,
-.search-section,
-.section,
-.banner-slider{
-    padding:16px;
-}
+.section{
 
-.hero-banner{
-    width:100%;
-}
+padding:16px;
 
-.banner-slide img{
-    width:100%;
-    border-radius:16px;
 }
 
 .category-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:12px;
-}
 
-.category-card img{
-    width:60px;
-    height:60px;
-}
+grid-template-columns:repeat(4,1fr);
 
-.category-card p{
-    font-size:12px;
 }
 
 .product-slider{
-    display:flex;
-    overflow-x:auto;
-    gap:14px;
-    scroll-snap-type:x mandatory;
-    scrollbar-width:none;
+
+display:flex;
+
+overflow-x:auto;
+
+gap:14px;
+
+scrollbar-width:none;
+
 }
 
 .product-slider::-webkit-scrollbar{
-    display:none;
+
+display:none;
+
 }
 
 .product-card{
-    min-width:165px;
-    scroll-snap-align:start;
-}
 
-.product-card img{
-    height:130px;
-    object-fit:contain;
+min-width:165px;
+
 }
 
 .bottom-nav{
-    display:flex;
-}
 
-/* ========= Tablet ========= */
-
-@media (min-width:768px){
-
-    .app{
-        max-width:760px;
-    }
-
-    .header,
-    .search-section,
-    .section,
-    .banner-slider{
-        padding:20px;
-    }
-
-    .category-grid{
-        grid-template-columns:repeat(5,1fr);
-    }
-
-    .product-card{
-        min-width:190px;
-    }
-
-    .product-card img{
-        height:150px;
-    }
+display:flex;
 
 }
 
-/* ========= Laptop ========= */
+}
+
+/* ===========================
+   Tablet
+=========================== */
+
+@media (min-width:768px) and (max-width:1023px){
+
+.app{
+
+max-width:760px;
+
+}
+
+.category-grid{
+
+grid-template-columns:repeat(5,1fr);
+
+}
+
+.product-card{
+
+min-width:190px;
+
+}
+
+}
+
+/* ===========================
+   Laptop
+=========================== */
 
 @media (min-width:1024px){
 
-    .app{
-        max-width:1200px;
-    }
+.app{
 
-    .header,
-    .search-section,
-    .section,
-    .banner-slider{
-        padding:24px;
-    }
-
-    .category-grid{
-        grid-template-columns:repeat(6,1fr);
-    }
-
-    .product-slider{
-        display:grid;
-        grid-template-columns:
-        repeat(auto-fill,minmax(220px,1fr));
-        gap:20px;
-        overflow:visible;
-    }
-
-    .product-card{
-        width:100%;
-        min-width:unset;
-    }
-
-    .product-card img{
-        height:170px;
-    }
-
-    .bottom-nav{
-        display:none;
-    }
+max-width:1200px;
 
 }
 
-/* ========= Large Desktop ========= */
+.category-grid{
+
+grid-template-columns:repeat(6,1fr);
+
+}
+
+.product-slider{
+
+display:grid;
+
+grid-template-columns:
+repeat(auto-fill,minmax(220px,1fr));
+
+gap:20px;
+
+overflow:visible;
+
+}
+
+.product-card{
+
+width:100%;
+
+min-width:unset;
+
+}
+
+.bottom-nav{
+
+display:none;
+
+}
+
+}
+
+/* ===========================
+   Desktop
+=========================== */
 
 @media (min-width:1440px){
 
-    .app{
-        max-width:1400px;
-    }
+.app{
 
-    .category-grid{
-        grid-template-columns:repeat(8,1fr);
-    }
+max-width:1400px;
 
-    .product-slider{
-        grid-template-columns:
-        repeat(auto-fill,minmax(230px,1fr));
-    }
+}
+
+.category-grid{
+
+grid-template-columns:repeat(8,1fr);
+
+}
 
 }
