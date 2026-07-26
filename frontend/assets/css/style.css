@@ -1,8 +1,6 @@
-
-
-/* ==========================================
-   GLOBAL SECTION TITLE
-========================================== */
+/* ===================================================
+                    GLOBAL SECTION TITLE
+=================================================== */
 
 .section-title{
     display:flex;
@@ -31,51 +29,36 @@
 }
 
 
-
-
-
-/* ==========================================
-   GLOBAL RESPONSIVE LAYOUT
-========================================== */
-
+/* ===================================================
+                  GLOBAL PAGE LAYOUT
+=================================================== */
 
 html{
-
     scroll-behavior:smooth;
-
 }
 
 html,
 body{
-
     width:100%;
-
     overflow-x:hidden;
-
 }
 
-
+body{
+    background:#f8f8f8;
+    color:#222;
+    font-family:'Poppins',sans-serif;
+}
 
 img{
-
-    max-width:100%;
-
     display:block;
-
+    max-width:100%;
 }
 
 .app{
-
     width:100%;
-
     max-width:1400px;
-
     margin:0 auto;
-
     background:#fff;
-
     min-height:100vh;
-
     overflow-x:hidden;
-
 }
