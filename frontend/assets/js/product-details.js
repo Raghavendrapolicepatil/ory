@@ -1649,16 +1649,32 @@ function createRelatedCard(product){
 
             </div>
 
-            <button
+${
+    getProductQty(product.id) === 0
+    ?
+    `
+    <button
+        class="related-add"
+        onclick="event.stopPropagation();
+        addRelatedProduct(${product.id})">
+        ADD
+    </button>
+    `
+    :
+    `
+    <div class="quantity-control">
+        <button onclick="event.stopPropagation();minusRelatedProduct(${product.id})">
+            <i class="ri-subtract-line"></i>
+        </button>
 
-                class="related-add"
+        <span>${getProductQty(product.id)}</span>
 
-                onclick="event.stopPropagation();
-                addRelatedProduct(${product.id})">
-
-                ADD
-
-            </button>
+        <button onclick="event.stopPropagation();plusRelatedProduct(${product.id})">
+            <i class="ri-add-line"></i>
+        </button>
+    </div>
+    `
+}
 
         </div>
 
@@ -1716,7 +1732,6 @@ function addRelatedProduct(id){
 
 }
 
-//flowting cart
 
 
 
