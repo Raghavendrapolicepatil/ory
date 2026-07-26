@@ -261,30 +261,21 @@ if (clearBtn) {
 // Voice Search
 // ======================================
 
-if("webkitSpeechRecognition" in window){
+if ("webkitSpeechRecognition" in window && micBtn && searchInput) {
 
-    const recognition =
-    new webkitSpeechRecognition();
+    const recognition = new webkitSpeechRecognition();
 
-    recognition.lang="en-IN";
+    recognition.lang = "en-IN";
 
-    micBtn.onclick=()=>{
-
+    micBtn.onclick = () => {
         recognition.start();
-
     };
 
-    recognition.onresult=(e)=>{
+    recognition.onresult = (e) => {
 
-        searchInput.value=
+        searchInput.value = e.results[0][0].transcript;
 
-        e.results[0][0].transcript;
-
-        searchInput.dispatchEvent(
-
-            new Event("input")
-
-        );
+        searchInput.dispatchEvent(new Event("input"));
 
     };
 
