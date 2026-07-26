@@ -32,7 +32,7 @@ form.addEventListener("submit", async (e) => {
         });
 
         const data = await response.json();
-
+console.log(data);
         if (!response.ok) {
 
             loginMessage.textContent = data.message || "Login Failed";
