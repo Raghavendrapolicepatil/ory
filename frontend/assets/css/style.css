@@ -37,6 +37,15 @@ body{
    GLOBAL RESPONSIVE LAYOUT
 ========================================== */
 
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
 
 html{
 
@@ -53,7 +62,13 @@ body{
 
 }
 
+body{
 
+    background:#f5f5f5;
+
+    font-family:Arial, Helvetica, sans-serif;
+
+}
 
 img{
 
