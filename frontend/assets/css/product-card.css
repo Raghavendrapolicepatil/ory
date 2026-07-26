@@ -59,6 +59,8 @@
 
     backface-visibility:hidden;
 
+    animation:cardFade .28s ease;
+
 }
 
 .product-card:hover{
@@ -517,15 +519,7 @@
 
 }
 
-/* ==========================================
-   CARD ANIMATION
-========================================== */
 
-.product-card{
-
-    animation:cardFade .28s ease;
-
-}
 
 @keyframes cardFade{
 
