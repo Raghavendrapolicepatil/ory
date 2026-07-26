@@ -39,36 +39,36 @@ async function loadProducts(){
 // ======================================
 // Search
 // ======================================
+if (searchInput) {
+    searchInput.addEventListener("input", () => {
 
-searchInput.addEventListener("input",()=>{
+        const keyword = searchInput.value.trim().toLowerCase();
 
-    const keyword =
-    searchInput.value.trim().toLowerCase();
+        if (keyword === "") {
 
-    if(keyword===""){
+            resultsBox.innerHTML = "";
 
-        resultsBox.innerHTML="";
+            if (noResults) noResults.style.display = "none";
 
-        noResults.style.display="none";
+            loadRecent();
 
-        loadRecent();
+            return;
+        }
 
-        return;
+        if (recentBox) recentBox.style.display = "none";
 
-    }
+        const filtered = products.filter(product => {
 
-    recentBox.style.display="none";
+            const name = (product.name || "").toLowerCase();
 
-const filtered = products.filter(product => {
+            return name.includes(keyword);
 
-    const name = (product.name || "").toLowerCase();
+        });
 
-    return name.includes(keyword);
+        renderResults(filtered);
 
-});
-    renderResults(filtered);
-
-});
+    });
+}
 
 // ======================================
 // Render Results
