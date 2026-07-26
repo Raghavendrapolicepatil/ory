@@ -181,36 +181,25 @@ function saveRecent(){
 // Load Recent
 // ======================================
 
-function loadRecent(){
+function loadRecent() {
 
-    recentBox.style.display="block";
+    if (!recentBox || !recentList) return;
 
-    recentList.innerHTML="";
+    recentBox.style.display = "block";
+
+    recentList.innerHTML = "";
 
     const recent =
+        JSON.parse(localStorage.getItem("recentSearch")) || [];
 
-    JSON.parse(
+    recent.forEach(item => {
 
-        localStorage.getItem("recentSearch")
-
-    ) || [];
-
-    recent.forEach(item=>{
-
-        recentList.innerHTML +=
-
-        `
-
+        recentList.innerHTML += `
 <div
-
 class="recent-item"
-
 onclick="searchRecent('${item}')">
-
 ${item}
-
 </div>
-
 `;
 
     });
