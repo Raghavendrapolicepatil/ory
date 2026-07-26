@@ -1,148 +1,197 @@
-/* ===========================
-   Mobile
-=========================== */
+/* ==========================================
+   RESPONSIVE CSS
+   Snackible UI V2
+========================================== */
+
+
+/* ==========================================
+   LARGE DESKTOP
+========================================== */
+
+@media (min-width:1400px){
+
+.app{
+    max-width:1400px;
+    margin:auto;
+}
+
+}
+
+
+/* ==========================================
+   DESKTOP
+========================================== */
+
+@media (min-width:1200px){
+
+.header-inner,
+.search-wrapper,
+.hero,
+.categories,
+.footer{
+    max-width:1400px;
+    margin:auto;
+}
+
+.category-grid{
+    grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+    gap:20px;
+}
+
+.product-grid,
+.product-slider{
+    grid-template-columns:repeat(4,1fr);
+}
+
+.slide img{
+    aspect-ratio:16/6;
+}
+
+}
+
+
+/* ==========================================
+   LAPTOP
+========================================== */
+
+@media (min-width:992px) and (max-width:1199px){
+
+.product-grid,
+.product-slider{
+    grid-template-columns:repeat(3,1fr);
+}
+
+.category-grid{
+    grid-template-columns:repeat(6,1fr);
+}
+
+}
+
+
+/* ==========================================
+   TABLET
+========================================== */
+
+@media (min-width:768px) and (max-width:991px){
+
+.product-grid,
+.product-slider{
+    grid-template-columns:repeat(3,1fr);
+}
+
+.category-grid{
+    grid-template-columns:repeat(5,1fr);
+}
+
+.slide img{
+    aspect-ratio:16/7;
+}
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
 
 @media (max-width:767px){
 
-.app{
-
-width:100%;
-
+.header-inner{
+    padding:14px;
 }
 
-.section{
+.search-wrapper{
+    padding:0 14px 14px;
+}
 
-padding:16px;
+.hero{
+    padding:12px;
+}
 
+.slide img{
+    aspect-ratio:16/8;
+}
+
+.categories{
+    padding:16px;
 }
 
 .category-grid{
-
-grid-template-columns:repeat(4,1fr);
-
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
 }
 
+.category-card{
+    padding:12px 8px;
+}
+
+.category-card img{
+    width:58px;
+    height:58px;
+}
+
+.category-card span{
+    font-size:12px;
+}
+
+.product-grid,
 .product-slider{
-
-display:flex;
-
-overflow-x:auto;
-
-gap:14px;
-
-scrollbar-width:none;
-
-}
-
-.product-slider::-webkit-scrollbar{
-
-display:none;
-
+    grid-template-columns:repeat(2,1fr);
+    gap:12px;
 }
 
 .product-card{
+    padding:10px;
+}
 
-min-width:165px;
+.image-box{
+    height:120px;
+}
 
+.image-box img{
+    height:100px;
 }
 
 .bottom-nav{
+    height:70px;
+}
 
-display:flex;
-
+.footer{
+    padding-bottom:90px;
 }
 
 }
 
-/* ===========================
-   Tablet
-=========================== */
 
-@media (min-width:768px) and (max-width:1023px){
+/* ==========================================
+   SMALL MOBILE
+========================================== */
 
-.app{
+@media (max-width:480px){
 
-max-width:760px;
-
+.category-card{
+    border-radius:14px;
 }
 
-.category-grid{
-
-grid-template-columns:repeat(5,1fr);
-
+.category-card img{
+    width:48px;
+    height:48px;
 }
 
-.product-card{
-
-min-width:190px;
-
+.category-card span{
+    font-size:11px;
 }
 
+.product-card h4{
+    font-size:12px;
 }
 
-/* ===========================
-   Laptop
-=========================== */
-
-@media (min-width:1024px){
-
-.app{
-
-max-width:1200px;
-
+.price{
+    font-size:16px;
 }
 
-.category-grid{
-
-grid-template-columns:repeat(6,1fr);
-
-}
-
-.product-slider{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fill,minmax(220px,1fr));
-
-gap:20px;
-
-overflow:visible;
-
-}
-
-.product-card{
-
-width:100%;
-
-min-width:unset;
-
-}
-
-.bottom-nav{
-
-display:none;
-
-}
-
-}
-
-/* ===========================
-   Desktop
-=========================== */
-
-@media (min-width:1440px){
-
-.app{
-
-max-width:1400px;
-
-}
-
-.category-grid{
-
-grid-template-columns:repeat(8,1fr);
-
+.old-price{
+    font-size:11px;
 }
 
 }
