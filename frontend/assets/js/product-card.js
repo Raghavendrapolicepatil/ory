@@ -2,13 +2,15 @@
 // Snackible Product Card
 // ==========================================
 
-function createProductCard(product) {
+function createProductCard(product){
 
     return `
 
     <div class="product-card">
 
-        <span class="discount">${product.discount || "0% OFF"}</span>
+        <span class="discount">
+            ${product.discount || "0% OFF"}
+        </span>
 
         <button
             class="wishlist-btn"
@@ -18,19 +20,57 @@ function createProductCard(product) {
                 price:${product.price},
                 image:${JSON.stringify(product.image)},
                 weight:${JSON.stringify(product.weight)}
-            }, this)'>
+            },this)'>
 
-            <i class="${isWishlisted(product.id) ? 'ri-heart-fill' : 'ri-heart-line'}"
-               style="${isWishlisted(product.id) ? 'color:red;' : ''}">
-            </i>
+            <i class="${
+                isWishlisted(product.id)
+                ? "ri-heart-fill"
+                : "ri-heart-line"
+            }"
+            style="${
+                isWishlisted(product.id)
+                ? "color:#ff3b5c;"
+                : ""
+            }"></i>
 
         </button>
 
-        <img
-            src="${product.image || 'assets/images/no-image.png'}"
-            alt="${product.name}"
-            onclick="window.location='product-details.html?id=${product.id}'"
-            style="cursor:pointer;">
+        <!-- Image -->
+
+        <div class="image-box">
+
+            <img
+                loading="lazy"
+                src="${product.image || "assets/images/no-image.png"}"
+                alt="${product.name}"
+                onclick="window.location='product-details.html?id=${product.id}'"
+                style="cursor:pointer;">
+
+            <div
+                class="floating-cart-btn"
+                id="cart-${product.id}">
+
+                ${
+                    product.stock <= 0
+                    ? `<button class="out-stock-btn" disabled>
+                        Out of Stock
+                    </button>`
+                    : renderCartButton(product)
+                }
+
+            </div>
+
+        </div>
+
+        <!-- Delivery -->
+
+        <div class="delivery-tag">
+
+            ⚡ 15 mins
+
+        </div>
+
+        <!-- Product Name -->
 
         <h4
             onclick="window.location='product-details.html?id=${product.id}'"
@@ -40,34 +80,63 @@ function createProductCard(product) {
 
         </h4>
 
-        <p>${product.weight || ""}</p>
+        <!-- Weight -->
+
+        <div class="weight-chip">
+
+            ${product.weight || ""}
+
+        </div>
+
+        <!-- Rating -->
+
+        <div class="rating-row">
+
+            <i class="ri-star-fill"></i>
+
+            <span>4.6</span>
+
+            <small>(120)</small>
+
+        </div>
+
+        <!-- Price -->
 
         <div class="price-box">
 
-            <span class="price">₹${product.price}</span>
+            <span class="price">
 
-            <span class="old-price">₹${product.mrp}</span>
+                ₹${product.price}
+
+            </span>
+
+            <span class="old-price">
+
+                ₹${product.mrp || product.price}
+
+            </span>
 
         </div>
+
+        <!-- Stock -->
 
         <div class="stock-status">
 
             ${
                 product.stock <= 0
-                ? `<span class="out-stock">🔴 Out of Stock</span>`
+                ? `<span class="out-stock">
+                        🔴 Out of Stock
+                   </span>`
+
                 : product.stock <= 5
-                ? `<span class="low-stock">🟡 Only ${product.stock} left</span>`
-                : `<span class="in-stock">🟢 In Stock</span>`
-            }
 
-        </div>
+                ? `<span class="low-stock">
+                        🟡 Only ${product.stock} left
+                   </span>`
 
-        <div id="cart-${product.id}">
-
-            ${
-                product.stock <= 0
-                ? `<button class="out-stock-btn" disabled>Out of Stock</button>`
-                : renderCartButton(product)
+                : `<span class="in-stock">
+                        🟢 In Stock
+                   </span>`
             }
 
         </div>
@@ -75,4 +144,5 @@ function createProductCard(product) {
     </div>
 
     `;
+
 }
