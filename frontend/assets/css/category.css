@@ -1,249 +1,89 @@
 /* ==========================================
-   CATEGORY
+   CATEGORY SECTION
 ========================================== */
 
 .categories{
-
     padding:20px 16px;
-
 }
 
-.section-title{
+/* ==========================================
+   SECTION TITLE
+========================================== */
 
+.categories .section-title{
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
-
     margin-bottom:18px;
-
 }
 
-.section-title h2{
-
+.categories .section-title h2{
     font-size:26px;
-
     font-weight:700;
-
+    color:#111827;
 }
 
-.section-title a{
-
+.categories .section-title a{
     color:#16a34a;
-
     text-decoration:none;
-
     font-weight:600;
-
+    transition:.3s;
 }
 
-/* Category Grid */
+.categories .section-title a:hover{
+    opacity:.8;
+}
+
+/* ==========================================
+   CATEGORY GRID
+========================================== */
 
 .category-grid{
-
     display:grid;
-
     grid-template-columns:repeat(5,minmax(0,1fr));
-
     gap:16px;
-
 }
 
-/* Category Card */
+/* ==========================================
+   CATEGORY CARD
+========================================== */
 
 .category-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 
     background:#fff;
-
     border-radius:18px;
-
     padding:16px 12px;
 
     text-align:center;
-
     text-decoration:none;
-
     color:#222;
-
-    transition:.3s;
 
     box-shadow:0 5px 15px rgba(0,0,0,.05);
 
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
 }
 
 .category-card:hover{
-
     transform:translateY(-4px);
-
     box-shadow:0 10px 25px rgba(0,0,0,.12);
-
 }
 
 .category-card img{
-
     width:70px;
-
     height:70px;
-
     object-fit:contain;
-
-    margin:0 auto 10px;
-
+    margin-bottom:10px;
 }
 
 .category-card span{
-
-    display:block;
-
     font-size:14px;
-
     font-weight:600;
-
     line-height:20px;
-
-}
-
-/* ==========================
-   Desktop
-========================== */
-
-@media (min-width:1200px){
-
-    .categories{
-
-        padding:30px;
-
-    }
-
-    .category-grid{
-
-        grid-template-columns:repeat(8,1fr);
-
-        gap:20px;
-
-    }
-
-    .category-card img{
-
-        width:85px;
-
-        height:85px;
-
-    }
-
-}
-
-/* ==========================
-   Laptop
-========================== */
-
-@media (min-width:992px) and (max-width:1199px){
-
-    .category-grid{
-
-        grid-template-columns:repeat(6,1fr);
-
-    }
-
-}
-
-/* ==========================
-   Tablet
-========================== */
-
-@media (min-width:768px) and (max-width:991px){
-
-    .category-grid{
-
-        grid-template-columns:repeat(5,1fr);
-
-    }
-
-}
-
-/* ==========================
-   Mobile
-========================== */
-
-@media (max-width:767px){
-
-    .categories{
-
-        padding:16px;
-
-    }
-
-    .category-grid{
-
-        grid-template-columns:repeat(4,1fr);
-
-        gap:12px;
-
-    }
-
-    .category-card{
-
-        padding:12px 8px;
-
-    }
-
-    .category-card img{
-
-        width:58px;
-
-        height:58px;
-
-    }
-
-    .category-card span{
-
-        font-size:12px;
-
-    }
-
-}
-
-/* ==========================
-   Small Mobile
-========================== */
-
-@media (max-width:480px){
-
-    .category-grid{
-
-        grid-template-columns:repeat(4,1fr);
-
-        gap:10px;
-
-    }
-
-    .category-card{
-
-        border-radius:14px;
-
-        padding:10px 6px;
-
-    }
-
-    .category-card img{
-
-        width:48px;
-
-        height:48px;
-
-    }
-
-    .category-card span{
-
-        font-size:11px;
-
-    }
-
-    .section-title h2{
-
-        font-size:22px;
-
-    }
-
+    word-break:break-word;
 }
