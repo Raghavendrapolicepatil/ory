@@ -2,15 +2,29 @@
    PRODUCT GRID
 ========================================== */
 
-.product-grid,
-.product-slider{
-
+/* Product Grid */
+.product-grid{
     display:grid;
-
     grid-template-columns:repeat(2,minmax(0,1fr));
-
     gap:14px;
+}
 
+/* Horizontal Product Slider */
+.product-slider{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    scroll-behavior:smooth;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+}
+
+.product-slider::-webkit-scrollbar{
+    display:none;
+}
+
+.product-slider .product-card{
+    flex:0 0 180px;
 }
 
 /* ==========================================
@@ -685,7 +699,7 @@
 /* ==========================================
    TABLET
 ========================================== */
-
+/*
 @media (min-width:768px){
 
     .product-grid,
@@ -700,7 +714,7 @@
 /* ==========================================
    DESKTOP
 ========================================== */
-
+/*
 @media (min-width:1200px){
 
     .product-grid,
@@ -711,6 +725,7 @@
     }
 
 }
+*/
 /* ==========================================
    PREMIUM POLISH
 ========================================== */
@@ -806,7 +821,7 @@ button:focus{
 /* ==========================================
    DARK MODE
 ========================================== */
-
+/*
 body.dark .product-card{
 
     background:#1f2937;
@@ -854,7 +869,7 @@ body.dark .delivery-tag{
     color:#86efac;
 
 }
-
+*/
 /* ==========================================
    IMAGE LOADING
 ========================================== */
