@@ -1,8 +1,6 @@
 const CACHE_NAME = "snackible-v2";
 
 const urlsToCache = [
-  "/",
-  "/index.html",
   "/offline.html",
   "/assets/css/style.css",
   "/assets/css/offline.css",
