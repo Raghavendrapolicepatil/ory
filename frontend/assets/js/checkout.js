@@ -371,7 +371,7 @@ console.log("Going to place order...");
                 user: user.id,
 
                 products: cart.map(item => ({
-    productId: Number(item.id.split("-")[0]), // 8
+    productId: Number(String(item.id).split("-")[0]), // 8
     variant: item.variant,                    // "10g"
     weight: item.weight,                      // "10g"
     name: item.name,
