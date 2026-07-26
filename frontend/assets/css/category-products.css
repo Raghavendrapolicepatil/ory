@@ -480,13 +480,17 @@ FLOATING CART
 
     position:fixed;
 
-    left:50%;
+    left:12px;
 
-    transform:translateX(-50%);
+    right:12px;
 
     bottom:72px;
 
-    width:min(95%,460px);
+    width:auto;
+
+    max-width:460px;
+
+    margin:auto;
 
     height:62px;
 
@@ -506,7 +510,7 @@ FLOATING CART
 
     box-shadow:0 12px 35px rgba(0,0,0,.22);
 
-    z-index:1000;
+    z-index:9999;
 
 }
 
