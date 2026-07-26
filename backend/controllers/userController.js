@@ -62,8 +62,8 @@ const loginUser = async (req, res) => {
         }
 
 
-console.log("User role from DB:", user.role);
 
+        
         const match = await bcrypt.compare(password, user.password);
 
         if (!match) {
