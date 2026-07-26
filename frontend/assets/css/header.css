@@ -1,11 +1,3 @@
-/* ==========================================
-   PATIL GROCERIES PREMIUM HEADER
-========================================== */
-
-/* ==========================================
-   PATIL GROCERIES
-   PREMIUM HEADER V2
-========================================== */
 
 /* ==========================
    VARIABLES
@@ -442,7 +434,7 @@ body.search-fixed .search-wrapper{
 /* ==========================================
    PREMIUM HERO SLIDER
 ========================================== */
-
+/*
 .hero{
 
     padding:14px;
@@ -494,7 +486,7 @@ body.search-fixed .search-wrapper{
 }
 
 /* Dots */
-
+/*
 .dots{
 
     display:flex;
@@ -532,6 +524,7 @@ body.search-fixed .search-wrapper{
     background:#16a34a;
 
 }
+/*
 
 /* Mobile */
 
