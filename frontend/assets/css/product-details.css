@@ -2405,3 +2405,40 @@ SCROLLBAR
     background:#9CA3AF;
 
 }
+
+/* ===== Mobile Bottom Actions Fix ===== */
+
+.bottom-actions{
+    display:flex;
+    width:100%;
+    gap:10px;
+}
+
+#quantity-box{
+    flex:1;
+    min-width:0;
+    justify-content:space-between;
+}
+
+.buy-btn{
+    flex:1;
+    min-width:0;
+    justify-content:center;
+    padding:0;
+}
+
+@media (max-width:480px){
+
+    .bottom-actions{
+        gap:8px;
+    }
+
+    #quantity-box{
+        flex:0 0 44%;
+    }
+
+    .buy-btn{
+        flex:0 0 56%;
+        font-size:15px;
+    }
+}
