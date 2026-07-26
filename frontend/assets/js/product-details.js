@@ -176,21 +176,24 @@ function renderVariants() {
             </div>
         `;
 
-        card.onclick = () => {
+card.onclick = () => {
 
-            currentVariant = variant;
+    currentVariant = variant;
 
-            document
-                .querySelectorAll(".variant-card")
-                .forEach(card =>
-                    card.classList.remove("active")
-                );
+    document
+        .querySelectorAll(".variant-card")
+        .forEach(card =>
+            card.classList.remove("active")
+        );
 
-            card.classList.add("active");
+    card.classList.add("active");
 
-            applyVariant();
+    applyVariant();
 
-        };
+    renderCart();          // 👈 Ye line add karo
+    updateBottomPrice();   // optional
+
+};
 
         list.appendChild(card);
 
