@@ -58,6 +58,11 @@ const cartId = currentVariant
 
 const qty = getProductQty(cartId);
 
+
+console.log("cartId =", cartId);
+console.log("qty =", qty);
+console.log(JSON.parse(localStorage.getItem("cart")));
+
     if (qty === 0) {
 
         cartBox.innerHTML = `
