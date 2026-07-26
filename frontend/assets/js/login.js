@@ -66,16 +66,22 @@ loginForm.addEventListener("submit", async (e) => {
 
         const data = await response.json();
 
-        if (response.ok) {
+if (response.ok) {
 
     alert("Login Successful ✅");
 
-    //localStorage.setItem("user", JSON.stringify(data));
+    localStorage.setItem("token", data.token);
+    localStorage.setItem("user", JSON.stringify(data.user));
 
-            localStorage.setItem("token", data.token);
-localStorage.setItem("user", JSON.stringify(data.user));
+    if (data.user.role === "admin") {
 
-    window.location.href = "index.html";
+        window.location.href = "admin/dashboard.html";
+
+    } else {
+
+        window.location.href = "index.html";
+
+    }
 
 }
 
