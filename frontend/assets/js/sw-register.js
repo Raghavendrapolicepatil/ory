@@ -1,16 +1,10 @@
 if ("serviceWorker" in navigator) {
-
-    window.addEventListener("load", () => {
-
-        navigator.serviceWorker
-            .register("/service-worker.js")
-            .then((registration) => {
-                console.log("✅ Service Worker Registered");
-            })
-            .catch((error) => {
-                console.log("❌ Service Worker Failed", error);
-            });
-
-    });
-
+  window.addEventListener("load", async () => {
+    try {
+      const reg = await navigator.serviceWorker.register("./service-worker.js");
+      console.log("✅ Registered", reg);
+    } catch (err) {
+      console.error("❌ Registration Failed", err);
+    }
+  });
 }
