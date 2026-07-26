@@ -46,14 +46,19 @@ body{
 }
 
 .section-title a{
+    display:flex;
+    align-items:center;
+    gap:6px;
     color:#16a34a;
     text-decoration:none;
     font-size:15px;
     font-weight:600;
+    transition:.25s ease;
 }
 
 .section-title a:hover{
     color:#15803d;
+    transform:translateX(3px);
 }
 
 
