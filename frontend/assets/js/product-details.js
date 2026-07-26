@@ -1304,9 +1304,8 @@ function renderCart(){
 
     }
 
-    const qty =
-    getProductQty(currentProduct.id);
-
+   const qty =
+getProductQty(getCurrentCartId());
     // No Item
 
     if(qty===0){
@@ -1383,7 +1382,7 @@ function addCurrentProduct(){
     refreshFloatingCart();
     updateBottomPrice();
     showToast("Added to Cart");
-console.log("Added", JSON.parse(localStorage.getItem("cart")));
+
 }
 // ==========================================
 // PLUS
