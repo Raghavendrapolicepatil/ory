@@ -1,4 +1,43 @@
 
+/* ==========================================
+   SECTION TITLE (GLOBAL)
+========================================== */
+
+.section-title{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:18px;
+}
+
+.section-title h2,
+.section-title h3{
+    font-size:24px;
+    font-weight:700;
+    color:#111827;
+    margin:0;
+}
+
+.section-title a{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    color:#16a34a;
+    text-decoration:none;
+    font-size:15px;
+    font-weight:600;
+    transition:all .25s ease;
+}
+
+.section-title a:hover{
+    color:#15803d;
+    transform:translateX(3px);
+}
+
+.section-title a i{
+    font-size:13px;
+}
+
 /* Google Font */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
@@ -95,7 +134,7 @@ img{
 }
 
 /* dark mood */
-
+/*
 body.dark{
 
     background:#121212;
@@ -138,11 +177,13 @@ body.dark select{
     color:#fff;
 }
 
+*/
+
 
 /* ==========================================
    FLOATING CART
 ========================================== */
-
+/*
 .floating-cart-bar{
 
     position:fixed;
@@ -258,3 +299,4 @@ body.dark select{
     }
 
 }
+/*
