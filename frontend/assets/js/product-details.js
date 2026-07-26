@@ -1389,6 +1389,14 @@ function addCurrentProduct(){
 // ==========================================
 
 function getCurrentCartId() {
+
+    return currentVariant
+        ? currentProduct.id + "-" + currentVariant.name
+        : currentProduct.id;
+
+}
+
+function getCurrentCartId() {
     return currentVariant
         ? currentProduct.id + "-" + currentVariant.name
         : currentProduct.id;
