@@ -551,17 +551,9 @@
 
 }
 
-.product-card:hover .wishlist-btn{
 
-    transform:scale(1.08);
 
-}
 
-.product-card:hover .image-box img{
-
-    transform:scale(1.05);
-
-}
 
 /* ==========================================
    MOBILE
@@ -696,36 +688,7 @@
 
 }
 
-/* ==========================================
-   TABLET
-========================================== */
-/*
-@media (min-width:768px){
 
-    .product-grid,
-    .product-slider{
-
-        grid-template-columns:repeat(3,1fr);
-
-    }
-
-}
-
-/* ==========================================
-   DESKTOP
-========================================== */
-/*
-@media (min-width:1200px){
-
-    .product-grid,
-    .product-slider{
-
-        grid-template-columns:repeat(4,1fr);
-
-    }
-
-}
-*/
 /* ==========================================
    PREMIUM POLISH
 ========================================== */
@@ -816,60 +779,6 @@ button:focus{
 
 }
 
-
-
-/* ==========================================
-   DARK MODE
-========================================== */
-/*
-body.dark .product-card{
-
-    background:#1f2937;
-
-    border-color:#374151;
-
-}
-
-body.dark .product-card h4{
-
-    color:#fff;
-
-}
-
-body.dark .weight-chip{
-
-    background:#374151;
-
-    color:#d1d5db;
-
-}
-
-body.dark .price{
-
-    color:#fff;
-
-}
-
-body.dark .old-price{
-
-    color:#9ca3af;
-
-}
-
-body.dark .wishlist-btn{
-
-    background:#374151;
-
-}
-
-body.dark .delivery-tag{
-
-    background:#14532d;
-
-    color:#86efac;
-
-}
-*/
 /* ==========================================
    IMAGE LOADING
 ========================================== */
