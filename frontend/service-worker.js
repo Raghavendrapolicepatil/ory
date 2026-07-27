@@ -1,4 +1,4 @@
-const CACHE_NAME = "snackible-v4";
+const CACHE_NAME = "snackible-v6";
 
 const urlsToCache = [
   "/offline.html",
