@@ -5,9 +5,9 @@ const urlsToCache = [
   "/assets/css/style.css",
   "/assets/css/offline.css",
   "/assets/js/offline.js",
-  "/assets/images/offline.png"
+  "/assets/icons/icon-192.png",
+  "/assets/icons/icon-512.png"
 ];
-
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(urlsToCache))
