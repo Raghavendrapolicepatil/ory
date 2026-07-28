@@ -594,27 +594,24 @@ async function showImagePreview(fileObject) {
 
     const imageURL = URL.createObjectURL(fileObject.file);
 
-    const img = document.getElementById("previewImage");
-
-img.onload = () => URL.revokeObjectURL(imageURL);
-
     DOM.previewBox.innerHTML = `
-
         <div class="preview-paper">
-
             <img
                 id="previewImage"
                 class="preview-image"
                 src="${imageURL}"
                 alt="Preview">
-
         </div>
-
     `;
 
-}
+    const img = document.getElementById("previewImage");
 
-updateNavigation(fileObject);
+    img.onload = () => {
+        URL.revokeObjectURL(imageURL);
+    };
+
+    updateNavigation(fileObject);
+}
 
 /*====================================================
             SHOW PDF PREVIEW
