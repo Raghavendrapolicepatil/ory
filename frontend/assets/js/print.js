@@ -1,26 +1,37 @@
 // ==========================================
-// PRINT PAGE
+// PDF.js Worker
+// ==========================================
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+    "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.js";
+
+// ==========================================
+// Elements
 // ==========================================
 
 const fileInput = document.getElementById("fileInput");
+const fileName = document.getElementById("fileName");
+const pageCount = document.getElementById("pageCount");
+const fileInfo = document.getElementById("fileInfo");
+const previewContainer = document.getElementById("previewContainer");
 
-const qtyText = document.querySelector(".qty span");
+const qtyText = document.getElementById("copyCount");
+const minusBtn = document.getElementById("minusBtn");
+const plusBtn = document.getElementById("plusBtn");
 
-const minusBtn = document.querySelector(".qty button:first-child");
-
-const plusBtn = document.querySelector(".qty button:last-child");
-
-const totalPrice = document.querySelector(".total-card h2");
-
-const addBtn = document.querySelector(".order-btn");
+const totalPrice = document.getElementById("totalPrice");
+const addToCartBtn = document.getElementById("addToCartBtn");
 
 const typeRadios = document.querySelectorAll("input[name='type']");
-
 const sideRadios = document.querySelectorAll("input[name='side']");
 
-let copies = 1;
+// ==========================================
+// Variables
+// ==========================================
 
-// Base Prices
+let copies = 1;
+let pages = 0;
+
 const BW_PRICE = 5;
 const COLOR_PRICE = 15;
 
@@ -28,49 +39,86 @@ const COLOR_PRICE = 15;
 // File Upload
 // ==========================================
 
-fileInput.addEventListener("change", () => {
+fileInput.addEventListener("change", async () => {
 
-    if (fileInput.files.length > 0) {
+    const file = fileInput.files[0];
 
-        document.querySelector(".upload-box p").textContent =
-            fileInput.files[0].name;
+    if (!file) return;
 
-    } else {
+    fileInfo.style.display = "block";
 
-        document.querySelector(".upload-box p").textContent =
-            "Supported: PDF, JPG, PNG";
+    fileName.textContent = file.name;
+
+    previewContainer.innerHTML = "";
+
+    // PDF
+    if (file.type === "application/pdf") {
+
+        const buffer = await file.arrayBuffer();
+
+        const pdf = await pdfjsLib.getDocument({
+            data: buffer
+        }).promise;
+
+        pages = pdf.numPages;
 
     }
+
+    // Image
+    else {
+
+        pages = 1;
+
+        const img = document.createElement("img");
+
+        img.src = URL.createObjectURL(file);
+
+        img.style.width = "100%";
+        img.style.maxWidth = "250px";
+        img.style.borderRadius = "12px";
+        img.style.marginTop = "15px";
+
+        previewContainer.appendChild(img);
+
+    }
+
+    pageCount.textContent = `Pages : ${pages}`;
+
+    updatePrice();
 
 });
 
 // ==========================================
-// Calculate Price
+// Price Calculation
 // ==========================================
 
 function updatePrice() {
 
-    let price =
-        document.querySelector("input[name='type']:checked").nextSibling.textContent.trim() ===
-        "Colour"
-            ? COLOR_PRICE
-            : BW_PRICE;
+    const colour =
+        document.querySelector("input[name='type']:checked").value === "colour";
 
-    if (
-        document.querySelector("input[name='side']:checked")
-            .nextSibling.textContent.trim() === "Double Side"
-    ) {
-        price += 2;
+    const doubleSide =
+        document.querySelector("input[name='side']:checked").value === "double";
+
+    let rate = colour ? COLOR_PRICE : BW_PRICE;
+
+    let total = pages * copies * rate;
+
+    if (doubleSide) {
+
+        total = Math.ceil(total * 0.9);
+
     }
 
-    totalPrice.textContent = `₹${price * copies}`;
+    totalPrice.textContent = `₹${total}`;
+
 }
 
 // ==========================================
 // Quantity
 // ==========================================
 
-plusBtn.onclick = () => {
+plusBtn.addEventListener("click", () => {
 
     copies++;
 
@@ -78,21 +126,19 @@ plusBtn.onclick = () => {
 
     updatePrice();
 
-};
+});
 
-minusBtn.onclick = () => {
+minusBtn.addEventListener("click", () => {
 
-    if (copies > 1) {
+    if (copies <= 1) return;
 
-        copies--;
+    copies--;
 
-        qtyText.textContent = copies;
+    qtyText.textContent = copies;
 
-        updatePrice();
+    updatePrice();
 
-    }
-
-};
+});
 
 // ==========================================
 // Radio Change
@@ -111,24 +157,35 @@ sideRadios.forEach(radio => {
 });
 
 // ==========================================
-// Add to Cart
+// Add To Cart
 // ==========================================
 
-addBtn.onclick = () => {
+addToCartBtn.addEventListener("click", () => {
 
     if (!fileInput.files.length) {
 
-        alert("Please upload your document.");
+        alert("Please upload a document first.");
 
         return;
 
     }
 
     alert(
-        `Document Added!\n\nCopies : ${copies}\nTotal : ${totalPrice.textContent}`
+`Added Successfully
+
+📄 ${fileName.textContent}
+
+Pages : ${pages}
+
+Copies : ${copies}
+
+Total : ${totalPrice.textContent}`
     );
 
-};
+});
 
-// Initial Price
+// ==========================================
+// Initial
+// ==========================================
+
 updatePrice();

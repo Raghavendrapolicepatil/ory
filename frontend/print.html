@@ -3,167 +3,197 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Print Documents | OryMart</title>
+    <title>Print Documents | OryMart</title>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/css/print.css">
+    <link rel="stylesheet" href="assets/css/print.css">
 
 </head>
 
 <body>
 
-<header class="topbar">
+    <!-- =========================
+         HEADER
+    ========================== -->
 
-    <button onclick="history.back()">
-        <i class="ri-arrow-left-line"></i>
-    </button>
+    <header class="topbar">
 
-    <h2>Print Documents</h2>
+        <button type="button" class="back-btn" onclick="history.back()">
+            <i class="ri-arrow-left-line"></i>
+        </button>
 
-</header>
+        <h2>Print Documents</h2>
 
-<main class="container">
+    </header>
 
-    <!-- Upload -->
+    <!-- =========================
+         MAIN
+    ========================== -->
 
-    <section class="card">
+    <main class="container">
 
-        <div class="upload-box">
+        <!-- Upload -->
 
-            <i class="ri-upload-cloud-2-line"></i>
+        <section class="card">
 
-            <h3>Upload PDF / Image</h3>
+            <div class="upload-box">
 
-            <p>Supported: PDF, JPG, PNG</p>
+                <i class="ri-upload-cloud-2-line"></i>
 
-            <input type="file"
-                   id="fileInput"
-                   accept=".pdf,.jpg,.jpeg,.png">
+                <h3>Upload PDF / Image</h3>
 
-        </div>
+                <p>Supported: PDF, JPG, PNG</p>
 
-    </section>
+                <input
+                    type="file"
+                    id="fileInput"
+                    accept=".pdf,.jpg,.jpeg,.png">
 
-    <!-- Paper -->
+            </div>
 
-    <section class="card">
+            <div class="file-info" id="fileInfo">
 
-        <h3>Paper Size</h3>
+                <p id="fileName">No file selected</p>
 
-        <div class="option active">
-            A4 Sheet
-        </div>
+                <p id="pageCount">Pages : 0</p>
 
-    </section>
+            </div>
 
-    <!-- Print Type -->
+            <div id="previewContainer" class="preview-container"></div>
 
-    <section class="card">
+        </section>
 
-        <h3>Print Type</h3>
+        <!-- Paper Size -->
 
-        <label class="radio">
+        <section class="card">
 
-            <input type="radio"
-                   name="type"
-                   checked>
+            <h3>Paper Size</h3>
 
-            Black & White
+            <div class="option active">
+                A4 Sheet
+            </div>
 
-        </label>
+        </section>
 
-        <label class="radio">
+        <!-- Print Type -->
 
-            <input type="radio"
-                   name="type">
+        <section class="card">
 
-            Colour
+            <h3>Print Type</h3>
 
-        </label>
+            <label class="radio">
+                <input
+                    type="radio"
+                    name="type"
+                    value="bw"
+                    checked>
+                Black & White
+            </label>
 
-    </section>
+            <label class="radio">
+                <input
+                    type="radio"
+                    name="type"
+                    value="colour">
+                Colour
+            </label>
 
-    <!-- Side -->
+        </section>
 
-    <section class="card">
+        <!-- Print Side -->
 
-        <h3>Print Side</h3>
+        <section class="card">
 
-        <label class="radio">
+            <h3>Print Side</h3>
 
-            <input type="radio"
-                   name="side"
-                   checked>
+            <label class="radio">
+                <input
+                    type="radio"
+                    name="side"
+                    value="single"
+                    checked>
+                Single Side
+            </label>
 
-            Single Side
+            <label class="radio">
+                <input
+                    type="radio"
+                    name="side"
+                    value="double">
+                Double Side
+            </label>
 
-        </label>
+        </section>
 
-        <label class="radio">
+        <!-- Copies -->
 
-            <input type="radio"
-                   name="side">
+        <section class="card">
 
-            Double Side
+            <h3>Copies</h3>
 
-        </label>
+            <div class="qty">
 
-    </section>
+                <button type="button" id="minusBtn">−</button>
 
-    <!-- Copies -->
+                <span id="copyCount">1</span>
 
-    <section class="card">
+                <button type="button" id="plusBtn">+</button>
 
-        <h3>Copies</h3>
+            </div>
 
-        <div class="qty">
+        </section>
 
-            <button>-</button>
+        <!-- Total -->
 
-            <span>1</span>
+        <section class="card total-card">
 
-            <button>+</button>
+            <div>
 
-        </div>
+                <h3>Total</h3>
 
-    </section>
+                <p>Estimated Price</p>
 
-    <!-- Price -->
+            </div>
 
-    <section class="card total-card">
+            <h2 id="totalPrice">₹0</h2>
 
-        <div>
+        </section>
 
-            <h3>Total</h3>
+    </main>
 
-            <p>Estimated Price</p>
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
-        </div>
+    <footer class="bottom">
 
-        <h2>₹5</h2>
+        <button class="order-btn" id="addToCartBtn">
 
-    </section>
+            <i class="ri-shopping-cart-line"></i>
 
-</main>
+            Add to Cart
 
-<footer class="bottom">
+        </button>
 
-    <button class="order-btn">
+    </footer>
 
-        <i class="ri-shopping-cart-line"></i>
+    <!-- PDF.js -->
 
-        Add to Cart
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.min.js"></script>
 
-    </button>
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.js";
+    </script>
 
-</footer>
+    <!-- Print JS -->
 
-<script src="assets/js/print.js"></script>
+    <script src="assets/js/print.js"></script>
 
 </body>
 

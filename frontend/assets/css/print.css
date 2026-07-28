@@ -32,7 +32,7 @@ body{
     border-bottom:1px solid #ececec;
 }
 
-.topbar button{
+.back-btn{
     width:42px;
     height:42px;
     border:none;
@@ -41,7 +41,7 @@ body{
     cursor:pointer;
 }
 
-.topbar button i{
+.back-btn i{
     font-size:22px;
 }
 
@@ -103,6 +103,45 @@ body{
 
 .upload-box input{
     width:100%;
+    cursor:pointer;
+}
+
+/* ==========================================
+   FILE INFO
+========================================== */
+
+.file-info{
+    display:none;
+    margin-top:16px;
+    padding:14px;
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+}
+
+.file-info p{
+    margin:6px 0;
+    font-size:15px;
+}
+
+/* ==========================================
+   PREVIEW
+========================================== */
+
+.preview-container{
+    margin-top:16px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.preview-container img,
+.preview-container canvas{
+    width:100%;
+    max-width:250px;
+    border-radius:12px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 4px 10px rgba(0,0,0,.08);
 }
 
 /* ==========================================
@@ -126,6 +165,11 @@ body{
     gap:10px;
     padding:10px 0;
     font-size:15px;
+    cursor:pointer;
+}
+
+.radio input{
+    accent-color:#16a34a;
 }
 
 /* ==========================================
@@ -147,10 +191,18 @@ body{
     background:#16a34a;
     color:#fff;
     font-size:22px;
+    font-weight:bold;
     cursor:pointer;
+    transition:.2s;
+}
+
+.qty button:hover{
+    transform:scale(1.05);
 }
 
 .qty span{
+    min-width:35px;
+    text-align:center;
     font-size:22px;
     font-weight:700;
 }
@@ -176,7 +228,7 @@ body{
 }
 
 /* ==========================================
-   BOTTOM BUTTON
+   BOTTOM
 ========================================== */
 
 .bottom{
@@ -199,6 +251,11 @@ body{
     font-size:17px;
     font-weight:700;
     cursor:pointer;
+    transition:.2s;
+}
+
+.order-btn:hover{
+    opacity:.95;
 }
 
 .order-btn i{
@@ -222,6 +279,10 @@ body{
 
     .topbar h2{
         font-size:18px;
+    }
+
+    .upload-box{
+        padding:24px 16px;
     }
 
 }
