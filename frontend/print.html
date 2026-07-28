@@ -1,199 +1,424 @@
-<!DOCTYPE html>
-<html lang="en">
+<!-- ==========================
+     HEADER
+========================== -->
 
-<head>
+<header class="topbar">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <button class="back-btn" onclick="history.back()">
 
-    <title>Print Documents | OryMart</title>
+        <i class="ri-arrow-left-line"></i>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+    </button>
 
-    <link rel="stylesheet" href="assets/css/print.css">
-
-</head>
-
-<body>
-
-    <!-- =========================
-         HEADER
-    ========================== -->
-
-    <header class="topbar">
-
-        <button type="button" class="back-btn" onclick="history.back()">
-            <i class="ri-arrow-left-line"></i>
-        </button>
+    <div class="header-content">
 
         <h2>Print Documents</h2>
 
-    </header>
+        <p>Upload PDF or Images for A4 Printing</p>
 
-    <!-- =========================
-         MAIN
+    </div>
+
+</header>
+
+<!-- ==========================
+     MAIN START
+========================== -->
+
+<main class="container">
+
+    <!-- Upload Documents -->
+
+    <section class="card">
+
+        <h3>
+
+            <i class="ri-upload-cloud-2-line"></i>
+
+            Upload Documents
+
+        </h3>
+
+        <div class="upload-box">
+
+            <i class="ri-file-upload-line upload-icon"></i>
+
+            <h4>Choose PDF or Images</h4>
+
+            <p>Supported Files</p>
+
+            <span>PDF • JPG • JPEG • PNG</span>
+
+            <input
+                type="file"
+                id="fileInput"
+                accept=".pdf,.jpg,.jpeg,.png"
+                multiple>
+
+        </div>
+
+    </section>
+        <!-- ==========================
+         Uploaded Files
     ========================== -->
 
-    <main class="container">
+    <section class="card">
 
-        <!-- Upload -->
+        <div class="section-header">
 
-        <section class="card">
+            <h3>
 
-            <div class="upload-box">
+                <i class="ri-folder-open-line"></i>
 
-                <i class="ri-upload-cloud-2-line"></i>
+                Uploaded Documents
 
-                <h3>Upload PDF / Image</h3>
+            </h3>
 
-                <p>Supported: PDF, JPG, PNG</p>
+            <span id="fileCount">0 Files</span>
 
-                <input
-                    type="file"
-                    id="fileInput"
-                    accept=".pdf,.jpg,.jpeg,.png">
+        </div>
+
+        <div id="fileList" class="file-list">
+
+            <div class="empty-state">
+
+                <i class="ri-file-list-3-line"></i>
+
+                <h4>No Documents Uploaded</h4>
+
+                <p>Upload PDF or Images to continue.</p>
 
             </div>
 
-            <div class="file-info" id="fileInfo">
+        </div>
 
-                <p id="fileName">No file selected</p>
+    </section>
 
-                <p id="pageCount">Pages : 0</p>
+    <!-- ==========================
+         Document Preview
+    ========================== -->
+
+    <section class="card">
+
+        <div class="section-header">
+
+            <h3>
+
+                <i class="ri-eye-line"></i>
+
+                Preview
+
+            </h3>
+
+        </div>
+
+        <div id="previewContainer" class="preview-container">
+
+            <div class="empty-state">
+
+                <i class="ri-image-line"></i>
+
+                <h4>No Preview Available</h4>
+
+                <p>Your document preview will appear here.</p>
 
             </div>
 
-            <div id="previewContainer" class="preview-container"></div>
+        </div>
 
-        </section>
+    </section>
+        <!-- ==========================
+         Print Settings
+    ========================== -->
+
+    <section class="card">
+
+        <h3>
+
+            <i class="ri-printer-line"></i>
+
+            Print Settings
+
+        </h3>
 
         <!-- Paper Size -->
 
-        <section class="card">
+        <div class="setting-group">
 
-            <h3>Paper Size</h3>
+            <label class="setting-title">
 
-            <div class="option active">
-                A4 Sheet
+                Paper Size
+
+            </label>
+
+            <div class="option-grid">
+
+                <label class="option-card active">
+
+                    <input
+                        type="radio"
+                        name="paperSize"
+                        value="A4"
+                        checked>
+
+                    <i class="ri-file-paper-2-line"></i>
+
+                    <span>A4</span>
+
+                </label>
+
             </div>
 
-        </section>
-
-        <!-- Print Type -->
-
-        <section class="card">
-
-            <h3>Print Type</h3>
-
-            <label class="radio">
-                <input
-                    type="radio"
-                    name="type"
-                    value="bw"
-                    checked>
-                Black & White
-            </label>
-
-            <label class="radio">
-                <input
-                    type="radio"
-                    name="type"
-                    value="colour">
-                Colour
-            </label>
-
-        </section>
+        </div>
 
         <!-- Print Side -->
 
-        <section class="card">
+        <div class="setting-group">
 
-            <h3>Print Side</h3>
+            <label class="setting-title">
 
-            <label class="radio">
-                <input
-                    type="radio"
-                    name="side"
-                    value="single"
-                    checked>
-                Single Side
+                Print Side
+
             </label>
 
-            <label class="radio">
-                <input
-                    type="radio"
-                    name="side"
-                    value="double">
-                Double Side
+            <div class="option-grid">
+
+                <label class="option-card">
+
+                    <input
+                        type="radio"
+                        name="printSide"
+                        value="single"
+                        checked>
+
+                    <i class="ri-file-copy-line"></i>
+
+                    <span>Single Side</span>
+
+                </label>
+
+                <label class="option-card">
+
+                    <input
+                        type="radio"
+                        name="printSide"
+                        value="double">
+
+                    <i class="ri-file-copy-2-line"></i>
+
+                    <span>Front & Back</span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- Print Type -->
+
+        <div class="setting-group">
+
+            <label class="setting-title">
+
+                Print Type
+
             </label>
 
-        </section>
+            <div class="option-grid">
+
+                <label class="option-card">
+
+                    <input
+                        type="radio"
+                        name="printType"
+                        value="bw"
+                        checked>
+
+                    <i class="ri-contrast-2-line"></i>
+
+                    <span>Black & White</span>
+
+                </label>
+
+                <label class="option-card">
+
+                    <input
+                        type="radio"
+                        name="printType"
+                        value="colour">
+
+                    <i class="ri-palette-line"></i>
+
+                    <span>Colour</span>
+
+                </label>
+
+            </div>
+
+        </div>
 
         <!-- Copies -->
 
-        <section class="card">
+        <div class="setting-group">
 
-            <h3>Copies</h3>
+            <label class="setting-title">
 
-            <div class="qty">
+                Copies
 
-                <button type="button" id="minusBtn">−</button>
+            </label>
 
-                <span id="copyCount">1</span>
+            <div class="copies-box">
 
-                <button type="button" id="plusBtn">+</button>
+                <button
+                    type="button"
+                    id="minusBtn">
+
+                    <i class="ri-subtract-line"></i>
+
+                </button>
+
+                <span id="copyCount">
+
+                    1
+
+                </span>
+
+                <button
+                    type="button"
+                    id="plusBtn">
+
+                    <i class="ri-add-line"></i>
+
+                </button>
 
             </div>
 
-        </section>
+        </div>
 
-        <!-- Total -->
-
-        <section class="card total-card">
-
-            <div>
-
-                <h3>Total</h3>
-
-                <p>Estimated Price</p>
-
-            </div>
-
-            <h2 id="totalPrice">₹0</h2>
-
-        </section>
-
-    </main>
-
-    <!-- =========================
-         FOOTER
+    </section>
+        <!-- ==========================
+         Order Summary
     ========================== -->
 
-    <footer class="bottom">
+    <section class="card">
 
-        <button class="order-btn" id="addToCartBtn">
+        <div class="section-header">
 
-            <i class="ri-shopping-cart-line"></i>
+            <h3>
+
+                <i class="ri-file-list-3-line"></i>
+
+                Order Summary
+
+            </h3>
+
+        </div>
+
+        <div class="summary-box">
+
+            <div class="summary-row">
+
+                <span>Documents</span>
+
+                <span id="summaryFiles">0 Files</span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Total Pages</span>
+
+                <span id="summaryPages">0</span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Paper Size</span>
+
+                <span id="summaryPaper">A4</span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Print Side</span>
+
+                <span id="summarySide">Single Side</span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Print Type</span>
+
+                <span id="summaryType">Black & White</span>
+
+            </div>
+
+            <div class="summary-row">
+
+                <span>Copies</span>
+
+                <span id="summaryCopies">1</span>
+
+            </div>
+
+            <hr>
+
+            <div class="summary-total">
+
+                <h3>Total Amount</h3>
+
+                <h2 id="totalPrice">₹0</h2>
+
+            </div>
+
+        </div>
+
+    </section>
+        <!-- ==========================
+         Bottom Checkout
+    ========================== -->
+
+    <div class="bottom-bar">
+
+        <div class="bottom-price">
+
+            <small>Total Amount</small>
+
+            <h2 id="bottomTotalPrice">₹0</h2>
+
+        </div>
+
+        <button
+            type="button"
+            id="addToCartBtn"
+            class="add-cart-btn">
+
+            <i class="ri-shopping-cart-2-line"></i>
 
             Add to Cart
 
         </button>
 
-    </footer>
+    </div>
 
-    <!-- PDF.js -->
+</main>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.min.js"></script>
+<!-- PDF.js -->
 
-    <script>
-        pdfjsLib.GlobalWorkerOptions.workerSrc =
-            "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.js";
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.min.js"></script>
 
-    <!-- Print JS -->
+<script>
 
-    <script src="assets/js/print.js"></script>
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+"https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.worker.min.js";
+
+</script>
+
+<!-- Print JS -->
+
+<script src="assets/js/print.js"></script>
 
 </body>
 
