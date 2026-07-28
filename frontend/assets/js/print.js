@@ -3,9 +3,24 @@
 ==================================*/
 
 const fileInput = document.getElementById("fileInput");
-const uploadedFilesList = document.getElementById("uploadedFilesList");
-const fileCount = document.getElementById("fileCount");
-const previewBox = document.getElementById("previewBox");
+
+const uploadedFilesList =
+document.getElementById("uploadedFilesList");
+
+const fileCount =
+document.getElementById("fileCount");
+
+const previewBox =
+document.getElementById("previewBox");
+
+const pageIndicator =
+document.getElementById("pageIndicator");
+
+const prevPage =
+document.getElementById("prevPage");
+
+const nextPage =
+document.getElementById("nextPage");
 
 
 /*==================================
@@ -13,99 +28,117 @@ const previewBox = document.getElementById("previewBox");
 ==================================*/
 
 let uploadedFiles = [];
-let selectedFileIndex = -1;
+
+let selectedFile = null;
+
+let currentPage = 1;
+
+let totalPages = 1;
 
 
 /*==================================
         Upload Files
 ==================================*/
 
-fileInput.addEventListener("change", (e) => {
+fileInput.addEventListener("change", uploadFiles);
+
+function uploadFiles(e){
 
     const files = [...e.target.files];
 
-    files.forEach(file => {
+    files.forEach(file=>{
 
         uploadedFiles.push({
-            file: file,
-            currentPage: 1
+
+            id:Date.now()+Math.random(),
+
+            file:file,
+
+            pages:1,
+
+            currentPage:1,
+
+            settings:{
+
+                paperSize:"A4",
+
+                printType:"bw",
+
+                printSide:"single",
+
+                copies:1
+
+            }
+
         });
 
     });
 
     renderUploadedFiles();
 
-});
+}
 
 
 /*==================================
         Render Uploaded Files
 ==================================*/
 
-function renderUploadedFiles() {
+function renderUploadedFiles(){
 
-    uploadedFilesList.innerHTML = "";
+    uploadedFilesList.innerHTML="";
 
-    fileCount.textContent = `${uploadedFiles.length} Files`;
+    fileCount.textContent=
+    `${uploadedFiles.length} Files`;
 
-    uploadedFiles.forEach((item, index) => {
+    uploadedFiles.forEach(item=>{
 
-        const isPdf = item.file.type === "application/pdf";
+        const isPDF =
+        item.file.type==="application/pdf";
 
-        const fileCard = document.createElement("div");
+        const div=document.createElement("div");
 
-        fileCard.className =
-            `uploaded-file ${index === selectedFileIndex ? "active" : ""}`;
+        div.className="uploaded-file";
 
-        fileCard.innerHTML = `
+        if(selectedFile?.id===item.id){
 
-            <div class="file-left">
+            div.classList.add("active");
 
-                <div class="file-icon">
+        }
 
-                    <i class="fa-regular ${
-                        isPdf
-                        ? "fa-file-pdf"
-                        : "fa-file-image"
-                    }"></i>
+        div.innerHTML=`
 
-                </div>
+        <div class="file-left">
 
-                <div class="file-info">
+            <div class="file-icon">
 
-                    <h4>${item.file.name}</h4>
+                <i class="fa-regular
+                ${isPDF
+                ?"fa-file-pdf"
+                :"fa-file-image"}">
 
-                    <p>${formatFileSize(item.file.size)}</p>
-
-                </div>
+                </i>
 
             </div>
 
-            <div class="file-right">
+            <div class="file-info">
 
-                <button
-                    class="file-action delete-btn"
-                    data-index="${index}">
+                <h4>${item.file.name}</h4>
 
-                    <i class="fa-solid fa-trash"></i>
-
-                </button>
+                <p>${formatSize(item.file.size)}</p>
 
             </div>
+
+        </div>
 
         `;
 
-        fileCard.addEventListener("click", () => {
+        div.addEventListener("click",()=>{
 
-            selectedFileIndex = index;
-
-            renderUploadedFiles();
-
-            loadPreview();
+            selectFile(item.id);
 
         });
 
-        uploadedFilesList.appendChild(fileCard);
+        uploadedFilesList.appendChild(div);
 
     });
 
@@ -113,109 +146,88 @@ function renderUploadedFiles() {
 
 
 /*==================================
-        Delete File
+        Select File
 ==================================*/
 
-uploadedFilesList.addEventListener("click", (e) => {
+function selectFile(id){
 
-    const btn = e.target.closest(".delete-btn");
+    selectedFile =
+    uploadedFiles.find(
+        file=>file.id===id
+    );
 
-    if(!btn) return;
-
-    e.stopPropagation();
-
-    const index = Number(btn.dataset.index);
-
-    uploadedFiles.splice(index,1);
-
-    if(selectedFileIndex >= uploadedFiles.length){
-
-        selectedFileIndex = uploadedFiles.length - 1;
-
-    }
+    currentPage =
+    selectedFile.currentPage;
 
     renderUploadedFiles();
 
     loadPreview();
 
-});
+    loadSettings();
+
+    updatePrice();
+
+}
 
 
 /*==================================
         File Size
 ==================================*/
 
-function formatFileSize(bytes){
+function formatSize(bytes){
 
-    if(bytes < 1024){
+    if(bytes<1024){
 
-        return bytes + " B";
-
-    }
-
-    if(bytes < 1024 * 1024){
-
-        return (bytes/1024).toFixed(1) + " KB";
+        return bytes+" B";
 
     }
 
-    return (bytes/(1024*1024)).toFixed(1) + " MB";
+    if(bytes<1024*1024){
 
-}
+        return(
+            bytes/1024
+        ).toFixed(1)+" KB";
 
+    }
 
-/*==================================
-        Preview Placeholder
-==================================*/
-
-function loadPreview(){
-
-    previewBox.innerHTML = `
-
-        <div class="empty-preview">
-
-            <i class="fa-regular fa-file-lines"></i>
-
-            <p>Preview Coming...</p>
-
-        </div>
-
-    `;
+    return(
+        bytes/1024/1024
+    ).toFixed(1)+" MB";
 
 }
 /*==================================
-        Preview Variables
+        Preview
 ==================================*/
 
-let currentPage = 1;
-let totalPages = 1;
+async function loadPreview(){
 
+    if(!selectedFile){
 
-/*==================================
-        Load Preview
-==================================*/
+        previewBox.innerHTML=`
 
-async function loadPreview() {
-
-    if (selectedFileIndex === -1) {
-
-        previewBox.innerHTML = `
             <div class="empty-preview">
+
                 <i class="fa-regular fa-file-lines"></i>
+
                 <p>Select a file to preview</p>
+
             </div>
+
         `;
 
+        pageIndicator.textContent="Page 0 / 0";
+
         return;
+
     }
 
-    const file = uploadedFiles[selectedFileIndex].file;
+    const file=selectedFile.file;
 
-    if (file.type === "application/pdf") {
+    if(file.type==="application/pdf"){
 
         showPdfPreview(file);
 
-    } else {
+    }else{
 
         showImagePreview(file);
 
@@ -228,21 +240,28 @@ async function loadPreview() {
         Image Preview
 ==================================*/
 
-function showImagePreview(file) {
+function showImagePreview(file){
 
-    totalPages = 1;
-    currentPage = 1;
+    currentPage=1;
 
-    pageIndicator.textContent = "Image";
+    totalPages=1;
 
-    const url = URL.createObjectURL(file);
+    pageIndicator.textContent="Page 1 / 1";
 
-    previewBox.innerHTML = `
-        <img
-            id="previewImage"
-            src="${url}"
-            alt="Preview"
-            class="preview-image">
+    const url=URL.createObjectURL(file);
+
+    previewBox.innerHTML=`
+
+        <div class="paper">
+
+            <img
+                id="previewImage"
+                class="preview-image"
+                src="${url}"
+                alt="Preview">
+
+        </div>
+
     `;
 
 }
@@ -252,17 +271,20 @@ function showImagePreview(file) {
         PDF Preview
 ==================================*/
 
-async function showPdfPreview(file) {
+async function showPdfPreview(file){
 
-    const buffer = await file.arrayBuffer();
+    const buffer=await file.arrayBuffer();
 
-    const pdf = await pdfjsLib.getDocument({
-        data: buffer
+    const pdf=await pdfjsLib
+    .getDocument({
+        data:buffer
     }).promise;
 
-    totalPages = pdf.numPages;
+    totalPages=pdf.numPages;
 
-    renderPdfPage(pdf, currentPage);
+    selectedFile.pages=totalPages;
+
+    renderPdfPage(pdf,currentPage);
 
 }
 
@@ -271,32 +293,47 @@ async function showPdfPreview(file) {
         Render PDF Page
 ==================================*/
 
-async function renderPdfPage(pdf, pageNo) {
+async function renderPdfPage(pdf,pageNumber){
 
-    const page = await pdf.getPage(pageNo);
+    const page=await pdf.getPage(pageNumber);
 
-    const viewport = page.getViewport({
-        scale: 1.5
+    const viewport=page.getViewport({
+
+        scale:1.5
+
     });
 
-    const canvas = document.createElement("canvas");
+    const canvas=document.createElement("canvas");
 
-    const ctx = canvas.getContext("2d");
+    const context=
+    canvas.getContext("2d");
 
-    canvas.width = viewport.width;
-    canvas.height = viewport.height;
+    canvas.width=viewport.width;
+
+    canvas.height=viewport.height;
 
     await page.render({
-        canvasContext: ctx,
-        viewport
+
+        canvasContext:context,
+
+        viewport:viewport
+
     }).promise;
 
-    previewBox.innerHTML = "";
+    previewBox.innerHTML=`
 
-    previewBox.appendChild(canvas);
+        <div class="paper">
 
-    pageIndicator.textContent =
-        `Page ${pageNo} / ${totalPages}`;
+        </div>
+
+    `;
+
+    previewBox
+    .querySelector(".paper")
+    .appendChild(canvas);
+
+    pageIndicator.textContent=
+    `Page ${pageNumber} / ${totalPages}`;
 
 }
 
@@ -305,25 +342,26 @@ async function renderPdfPage(pdf, pageNo) {
         Previous Page
 ==================================*/
 
-prevPage.addEventListener("click", async () => {
+prevPage.addEventListener("click",async()=>{
 
-    if (selectedFileIndex === -1) return;
+    if(!selectedFile) return;
 
-    const file = uploadedFiles[selectedFileIndex].file;
+    if(selectedFile.file.type!=="application/pdf") return;
 
-    if (file.type !== "application/pdf") return;
-
-    if (currentPage <= 1) return;
+    if(currentPage<=1) return;
 
     currentPage--;
 
-    const buffer = await file.arrayBuffer();
+    const pdf=await pdfjsLib
+    .getDocument({
 
-    const pdf = await pdfjsLib.getDocument({
-        data: buffer
+        data:await selectedFile
+        .file
+        .arrayBuffer()
+
     }).promise;
 
-    renderPdfPage(pdf, currentPage);
+    renderPdfPage(pdf,currentPage);
 
 });
 
@@ -332,25 +370,26 @@ prevPage.addEventListener("click", async () => {
         Next Page
 ==================================*/
 
-nextPage.addEventListener("click", async () => {
+nextPage.addEventListener("click",async()=>{
 
-    if (selectedFileIndex === -1) return;
+    if(!selectedFile) return;
 
-    const file = uploadedFiles[selectedFileIndex].file;
+    if(selectedFile.file.type!=="application/pdf") return;
 
-    if (file.type !== "application/pdf") return;
-
-    if (currentPage >= totalPages) return;
+    if(currentPage>=totalPages) return;
 
     currentPage++;
 
-    const buffer = await file.arrayBuffer();
+    const pdf=await pdfjsLib
+    .getDocument({
 
-    const pdf = await pdfjsLib.getDocument({
-        data: buffer
+        data:await selectedFile
+        .file
+        .arrayBuffer()
+
     }).promise;
 
-    renderPdfPage(pdf, currentPage);
+    renderPdfPage(pdf,currentPage);
 
 });
 /*==================================
@@ -361,30 +400,63 @@ const paperButtons = document.querySelectorAll("#paperSize .chip");
 const printTypeButtons = document.querySelectorAll("#printType .chip");
 const printSideButtons = document.querySelectorAll("#printSide .chip");
 
-const minusCopy = document.getElementById("minusCopy");
-const plusCopy = document.getElementById("plusCopy");
+const decreaseCopies = document.getElementById("decreaseCopies");
+const increaseCopies = document.getElementById("increaseCopies");
 const copiesCount = document.getElementById("copiesCount");
 
 
 /*==================================
-        Print Settings
+        Load Settings
 ==================================*/
 
-let paperSize = "A4";
-let printType = "bw";
-let printSide = "single";
-let copies = 1;
+function loadSettings(){
+
+    if(!selectedFile) return;
+
+    const settings = selectedFile.settings;
+
+    copiesCount.textContent = settings.copies;
+
+    setActiveChip(
+        paperButtons,
+        settings.paperSize,
+        "size"
+    );
+
+    setActiveChip(
+        printTypeButtons,
+        settings.printType,
+        "type"
+    );
+
+    setActiveChip(
+        printSideButtons,
+        settings.printSide,
+        "side"
+    );
+
+    updatePreviewColor();
+
+}
 
 
 /*==================================
         Active Chip
 ==================================*/
 
-function setActive(buttons, clickedButton){
+function setActiveChip(buttons,value,data){
 
-    buttons.forEach(btn=>btn.classList.remove("active"));
+    buttons.forEach(btn=>{
 
-    clickedButton.classList.add("active");
+        btn.classList.remove("active");
+
+        if(btn.dataset[data]===value){
+
+            btn.classList.add("active");
+
+        }
+
+    });
 
 }
 
@@ -397,9 +469,16 @@ paperButtons.forEach(button=>{
 
     button.addEventListener("click",()=>{
 
-        setActive(paperButtons,button);
+        if(!selectedFile) return;
 
-        paperSize = button.textContent.trim();
+        paperButtons.forEach(btn=>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        selectedFile.settings.paperSize =
+        button.dataset.size;
 
         updatePrice();
 
@@ -416,9 +495,16 @@ printTypeButtons.forEach(button=>{
 
     button.addEventListener("click",()=>{
 
-        setActive(printTypeButtons,button);
+        if(!selectedFile) return;
 
-        printType = button.textContent.trim().toLowerCase();
+        printTypeButtons.forEach(btn=>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        selectedFile.settings.printType =
+        button.dataset.type;
 
         updatePreviewColor();
 
@@ -437,9 +523,16 @@ printSideButtons.forEach(button=>{
 
     button.addEventListener("click",()=>{
 
-        setActive(printSideButtons,button);
+        if(!selectedFile) return;
 
-        printSide = button.textContent.trim();
+        printSideButtons.forEach(btn=>
+            btn.classList.remove("active")
+        );
+
+        button.classList.add("active");
+
+        selectedFile.settings.printSide =
+        button.dataset.side;
 
         updatePrice();
 
@@ -452,24 +545,30 @@ printSideButtons.forEach(button=>{
         Copies
 ==================================*/
 
-minusCopy.addEventListener("click",()=>{
+increaseCopies.addEventListener("click",()=>{
 
-    if(copies===1) return;
+    if(!selectedFile) return;
 
-    copies--;
+    selectedFile.settings.copies++;
 
-    copiesCount.textContent = copies;
+    copiesCount.textContent =
+    selectedFile.settings.copies;
 
     updatePrice();
 
 });
 
 
-plusCopy.addEventListener("click",()=>{
+decreaseCopies.addEventListener("click",()=>{
 
-    copies++;
+    if(!selectedFile) return;
 
-    copiesCount.textContent = copies;
+    if(selectedFile.settings.copies===1) return;
+
+    selectedFile.settings.copies--;
+
+    copiesCount.textContent =
+    selectedFile.settings.copies;
 
     updatePrice();
 
@@ -477,36 +576,61 @@ plusCopy.addEventListener("click",()=>{
 
 
 /*==================================
-        Preview B&W / Colour
+        Preview Colour
 ==================================*/
 
 function updatePreviewColor(){
 
-    const img = previewBox.querySelector("img");
-    const canvas = previewBox.querySelector("canvas");
+    if(!selectedFile) return;
+
+    const img =
+    previewBox.querySelector("img");
+
+    const canvas =
+    previewBox.querySelector("canvas");
 
     const isBW =
-        printType.includes("b");
+    selectedFile.settings.printType==="bw";
 
     if(img){
 
         img.style.filter =
-            isBW
-            ? "grayscale(100%)"
-            : "none";
+        isBW
+        ? "grayscale(100%)"
+        : "none";
 
     }
 
     if(canvas){
 
         canvas.style.filter =
-            isBW
-            ? "grayscale(100%)"
-            : "none";
+        isBW
+        ? "grayscale(100%)"
+        : "none";
 
     }
 
 }
+/*==================================
+        Price Configuration
+==================================*/
+
+const PRICE = {
+    A4: {
+        bw: 2,
+        colour: 10
+    },
+    A3: {
+        bw: 5,
+        colour: 20
+    },
+    A5: {
+        bw: 1,
+        colour: 5
+    }
+};
+
+
 /*==================================
         Bottom Elements
 ==================================*/
@@ -514,17 +638,6 @@ function updatePreviewColor(){
 const bottomPages = document.getElementById("bottomPages");
 const bottomSheets = document.getElementById("bottomSheets");
 const bottomPrice = document.getElementById("bottomPrice");
-const addToCartBtn = document.getElementById("addToCartBtn");
-
-
-/*==================================
-        Price Settings
-==================================*/
-
-const PRICE = {
-    bw: 3,
-    colour: 10
-};
 
 
 /*==================================
@@ -533,32 +646,46 @@ const PRICE = {
 
 function updatePrice(){
 
-    if(selectedFileIndex === -1){
+    let totalPages = 0;
+    let totalSheets = 0;
+    let totalPrice = 0;
 
-        bottomPages.textContent = "0 Pages";
-        bottomSheets.textContent = "0 Sheets";
-        bottomPrice.textContent = "₹0";
+    uploadedFiles.forEach(file=>{
 
-        return;
-    }
+        const settings = file.settings;
 
-    const item = uploadedFiles[selectedFileIndex];
+        const pages = file.pages || 1;
 
-    const pages = item.pages || 1;
+        const copies = settings.copies;
 
-    const totalPages = pages * copies;
+        const pricePerPage =
+            PRICE[settings.paperSize][settings.printType];
 
-    const totalSheets =
-        printSide.toLowerCase().includes("front")
-        ? Math.ceil(totalPages / 2)
-        : totalPages;
+        const pagesAfterCopies =
+            pages * copies;
 
-    const rate =
-        printType.includes("colour")
-        ? PRICE.colour
-        : PRICE.bw;
+        let sheets;
 
-    const totalPrice = totalPages * rate;
+        if(settings.printSide==="double"){
+
+            sheets = Math.ceil(pagesAfterCopies / 2);
+
+        }else{
+
+            sheets = pagesAfterCopies;
+
+        }
+
+        const filePrice =
+            pagesAfterCopies * pricePerPage;
+
+        totalPages += pagesAfterCopies;
+
+        totalSheets += sheets;
+
+        totalPrice += filePrice;
+
+    });
 
     bottomPages.textContent =
         `${totalPages} Pages`;
@@ -573,55 +700,49 @@ function updatePrice(){
 
 
 /*==================================
-        Add To Cart
+    Update File Details
 ==================================*/
 
-addToCartBtn.addEventListener("click",()=>{
+function updateFileInfo(){
 
-    if(selectedFileIndex === -1){
+    const cards =
+        document.querySelectorAll(".uploaded-file");
 
-        alert("Please select a file.");
+    cards.forEach((card,index)=>{
 
-        return;
+        const file = uploadedFiles[index];
 
-    }
+        if(!file) return;
 
-    const item = uploadedFiles[selectedFileIndex];
+        const p =
+            card.querySelector(".file-info p");
 
-    const cart = JSON.parse(
-        localStorage.getItem("printCart")
-    ) || [];
+        if(!p) return;
 
-    cart.push({
+        const pages =
+            file.pages || 1;
 
-        name:item.file.name,
+        const settings =
+            file.settings;
 
-        pages:item.pages || 1,
-
-        copies:copies,
-
-        paperSize:paperSize,
-
-        printType:printType,
-
-        printSide:printSide,
-
-        price:bottomPrice.textContent
+        p.textContent =
+            `${pages} Pages • ${settings.paperSize} • ${settings.printType.toUpperCase()} • ${settings.copies} Copy`;
 
     });
 
-    localStorage.setItem(
-        "printCart",
-        JSON.stringify(cart)
-    );
-
-    alert("Added to Cart Successfully");
-
-});
+}
 
 
 /*==================================
-        First Load
+        Auto Refresh
 ==================================*/
 
-updatePrice();
+const oldUpdatePrice = updatePrice;
+
+updatePrice = function(){
+
+    oldUpdatePrice();
+
+    updateFileInfo();
+
+};
