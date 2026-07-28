@@ -325,7 +325,7 @@ body{
     display:flex;
     flex-direction:column;
     gap:18px;
-    margin-bottom:120px;
+    margin-bottom:80px;
 }
 
 .option-card{
