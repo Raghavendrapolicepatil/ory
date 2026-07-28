@@ -28,6 +28,7 @@ const addToCartBtn = document.getElementById("addToCartBtn");
 let uploadedFiles = [];
 let totalPages = 0;
 let copies = 1;
+let isUploading = false;
 
 /* ==========================================
    PRICE
@@ -40,13 +41,63 @@ const PRICE = {
 
 };
 
+
+
+
+/* ==========================================
+   LOADING
+========================================== */
+
+function setUploadLoading(isLoading) {
+
+    if (!addToCartBtn) return;
+
+    if (isLoading) {
+
+        addToCartBtn.disabled = true;
+
+        addToCartBtn.innerHTML = `
+            <i class="ri-loader-4-line ri-spin"></i>
+            Uploading...
+        `;
+
+    } else {
+
+        addToCartBtn.disabled = false;
+
+        addToCartBtn.innerHTML = `
+            <i class="ri-shopping-cart-line"></i>
+            Add to Cart
+        `;
+
+    }
+
+}
+
+
 /* ==========================================
    UPLOAD FILES TO SERVER
 ========================================== */
 
 async function uploadPrintFiles(files) {
 
-    const formData = new FormData();
+    if (isUploading) {
+
+    alert("Please wait, upload is already in progress.");
+
+    return null;
+
+}
+
+isUploading = true;
+/* ==========================================
+   PREVENT DOUBLE UPLOAD
+========================================== */
+
+    try {
+        setUploadLoading(true);
+
+            const formData = new FormData();
 
     files.forEach(file => {
 
@@ -54,7 +105,6 @@ async function uploadPrintFiles(files) {
 
     });
 
-    try {
 
         const response = await fetch(
             "https://snackible-backend.onrender.com/api/print-upload",
@@ -76,11 +126,21 @@ async function uploadPrintFiles(files) {
 
         }
 
+        
+        setUploadLoading(false);
+
+
+        isUploading = false;
+
         return data.files;
 
     }
 
     catch (error) {
+
+        setUploadLoading(false);
+
+        isUploading = false;
 
         console.error(error);
 
@@ -240,16 +300,13 @@ function removeFile(index) {
    FILE ICON
 ========================================== */
 
-function getFileIcon(file) {
+function getFileIcon(item) {
 
-    if (file.type === "application/pdf") {
-
+    if (item.file.type === "application/pdf") {
         return "ri-file-pdf-line";
-
     }
 
     return "ri-image-line";
-
 }
 
 /* ==========================================
