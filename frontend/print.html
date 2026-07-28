@@ -31,9 +31,9 @@
 
     <section class="print-header">
 
-        <button class="back-btn">
-            <i class="fa-solid fa-arrow-left"></i>
-        </button>
+        <button type="button" class="back-btn">
+    <i class="fa-solid fa-arrow-left"></i>
+</button>
 
         <div class="header-content">
             <h1>Print Documents</h1>
@@ -72,7 +72,7 @@
 
     </section>
 
-</main>
+
 <!-- =========================
         Preview Section
 ========================== -->
@@ -84,17 +84,17 @@
 
         <div class="page-navigation">
 
-            <button id="prevPage" class="nav-btn">
-                <i class="fa-solid fa-angle-left"></i>
-            </button>
+            <button type="button" id="prevPage" class="nav-btn">
+    <i class="fa-solid fa-angle-left"></i>
+</button>
 
             <span id="pageIndicator">
                 Page 1 / 1
             </span>
 
-            <button id="nextPage" class="nav-btn">
-                <i class="fa-solid fa-angle-right"></i>
-            </button>
+            <button type="button" id="nextPage" class="nav-btn">
+    <i class="fa-solid fa-angle-right"></i>
+</button>
 
         </div>
     </div>
@@ -174,17 +174,9 @@
 
         <div class="option-chips" id="paperSize">
 
-            <button class="chip active" data-size="A4">
-                A4
-            </button>
-
-            <button class="chip" data-size="A3">
-                A3
-            </button>
-
-            <button class="chip" data-size="A5">
-                A5
-            </button>
+            <button type="button" class="chip active" data-size="A4">A4</button>
+<button type="button" class="chip" data-size="A3">A3</button>
+<button type="button" class="chip" data-size="A5">A5</button>
 
         </div>
 
@@ -300,6 +292,8 @@
     </button>
 
 </div>
+
+</main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.5.136/pdf.min.js"></script>
 <script src="assets/js/print.js"></script>
