@@ -672,3 +672,92 @@ input:focus{
     }
 
 }
+/* =========================
+   Sticky Bottom Cart
+========================= */
+
+.bottom-cart {
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #fff;
+    border-top: 1px solid #e5e7eb;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+}
+
+.cart-details {
+    display: flex;
+    flex-direction: column;
+}
+
+#bottomPages {
+    font-size: 16px;
+    font-weight: 700;
+    color: #111827;
+}
+
+#bottomSheets {
+    margin-top: 2px;
+    font-size: 13px;
+    color: #6b7280;
+}
+
+.price strong {
+    font-size: 22px;
+    font-weight: 700;
+    color: #16a34a;
+}
+
+.add-cart-btn {
+    flex: 1;
+    height: 50px;
+    border: none;
+    border-radius: 14px;
+    background: #16a34a;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: .3s;
+}
+
+.add-cart-btn:hover {
+    background: #15803d;
+}
+
+.add-cart-btn:active {
+    transform: scale(.98);
+}
+
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width:768px){
+
+    .bottom-cart{
+        padding:12px;
+    }
+
+    .price strong{
+        font-size:20px;
+    }
+
+    .add-cart-btn{
+        height:48px;
+        font-size:15px;
+    }
+
+}
