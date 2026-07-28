@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Print Orders | OryMart Admin</title>
+
+    <link rel="stylesheet" href="../assets/css/admin/print-orders.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="print-orders-page">
+
+        <!-- Header -->
+
+        <header class="page-header">
+
+            <div>
+
+                <h1>
+                    <i class="ri-printer-line"></i>
+                    Print Orders
+                </h1>
+
+                <p>Manage all customer print requests</p>
+
+            </div>
+
+            <button class="refresh-btn">
+
+                <i class="ri-refresh-line"></i>
+
+                Refresh
+
+            </button>
+
+        </header>
+
+        <!-- Filters -->
+
+        <section class="filter-bar">
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search Order ID / Customer / Phone">
+
+            <select id="statusFilter">
+
+                <option value="all">All Status</option>
+
+                <option value="Pending">Pending</option>
+
+                <option value="Printing">Printing</option>
+
+                <option value="Ready">Ready</option>
+
+                <option value="Delivered">Delivered</option>
+
+                <option value="Cancelled">Cancelled</option>
+
+            </select>
+
+        </section>
+
+        <!-- Orders Container -->
+
+        <section
+            id="printOrdersContainer"
+            class="print-orders-container">
+
+        </section>
+
+    </div>
+
+    <!-- Print Order Card -->
+
+<div class="print-order-card">
+
+    <!-- Top -->
+
+    <div class="order-top">
+
+        <div>
+
+            <h3>#PR1025</h3>
+
+            <span class="order-date">
+                29 Jul 2026 • 10:45 AM
+            </span>
+
+        </div>
+
+        <span class="status pending">
+
+            Pending
+
+        </span>
+
+    </div>
+
+    <!-- Customer -->
+
+    <div class="customer-info">
+
+        <p>
+
+            <i class="ri-user-3-line"></i>
+
+            <strong>Customer:</strong>
+
+            Raghavendra
+
+        </p>
+
+        <p>
+
+            <i class="ri-phone-line"></i>
+
+            <strong>Phone:</strong>
+
+            9876543210
+
+        </p>
+
+        <p>
+
+            <i class="ri-map-pin-line"></i>
+
+            <strong>Location:</strong>
+
+            Afzalpur
+
+        </p>
+
+    </div>
+
+    <!-- Print Details -->
+
+    <div class="print-details">
+
+        <div>
+
+            <span>Paper</span>
+
+            <strong>A4</strong>
+
+        </div>
+
+        <div>
+
+            <span>Type</span>
+
+            <strong>Colour</strong>
+
+        </div>
+
+        <div>
+
+            <span>Side</span>
+
+            <strong>Front &amp; Back</strong>
+
+        </div>
+
+        <div>
+
+            <span>Copies</span>
+
+            <strong>2</strong>
+
+        </div>
+
+        <div>
+
+            <span>Pages</span>
+
+            <strong>26</strong>
+
+        </div>
+
+        <div>
+
+            <span>Total</span>
+
+            <strong>₹260</strong>
+
+        </div>
+
+    </div>
+
+    <!-- Files -->
+
+    <div class="files-section">
+
+        <h4>
+
+            <i class="ri-folder-line"></i>
+
+            Files (2)
+
+        </h4>
+
+        <div class="file-item">
+
+            <span>
+
+                <i class="ri-file-pdf-line"></i>
+
+                Notes.pdf
+
+            </span>
+
+            <div class="file-actions">
+
+                <button class="preview-btn">
+
+                    <i class="ri-eye-line"></i>
+
+                </button>
+
+                <button class="download-btn">
+
+                    <i class="ri-download-line"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="file-item">
+
+            <span>
+
+                <i class="ri-image-line"></i>
+
+                Assignment.jpg
+
+            </span>
+
+            <div class="file-actions">
+
+                <button class="preview-btn">
+
+                    <i class="ri-eye-line"></i>
+
+                </button>
+
+                <button class="download-btn">
+
+                    <i class="ri-download-line"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bottom -->
+
+    <div class="order-actions">
+
+        <button class="printing-btn">
+
+            <i class="ri-printer-line"></i>
+
+            Printing
+
+        </button>
+
+        <button class="ready-btn">
+
+            <i class="ri-checkbox-circle-line"></i>
+
+            Ready
+
+        </button>
+
+        <button class="delivered-btn">
+
+            <i class="ri-truck-line"></i>
+
+            Delivered
+
+        </button>
+
+    </div>
+
+</div>
+<!-- ==========================================
+     PREVIEW MODAL
+========================================== -->
+
+<div
+    id="previewModal"
+    class="preview-modal">
+
+    <div class="preview-content">
+
+        <!-- Header -->
+
+        <div class="preview-header">
+
+            <h3 id="previewTitle">
+
+                File Preview
+
+            </h3>
+
+            <button
+                id="closePreview"
+                class="close-preview">
+
+                <i class="ri-close-line"></i>
+
+            </button>
+
+        </div>
+
+        <!-- Body -->
+
+        <div
+            id="previewBody"
+            class="preview-body">
+
+            <!-- PDF / Image will load here -->
+
+        </div>
+
+        <!-- Footer -->
+
+        <div class="preview-footer">
+
+            <a
+                id="downloadPreview"
+                class="download-preview"
+                target="_blank">
+
+                <i class="ri-download-line"></i>
+
+                Download
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+    <script src="../assets/js/admin/print-orders.js"></script>
+
+</body>
+
+</html>
