@@ -13,6 +13,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+const printUploadRoutes = require("./routes/printUploadRoutes");
 const productRoutes = require("./routes/productRoutes");
 const userRoutes = require("./routes/userRoutes");
 const categoryRoutes = require("./routes/categoryRoutes");
