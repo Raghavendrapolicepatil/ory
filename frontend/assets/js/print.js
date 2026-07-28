@@ -1,397 +1,219 @@
-/* ==========================================
-   DOM ELEMENTS
-========================================== */
+/*==================================
+        DOM Elements
+==================================*/
 
 const fileInput = document.getElementById("fileInput");
-const fileList = document.getElementById("fileList");
-const previewContainer = document.getElementById("previewContainer");
+const uploadedFilesList = document.getElementById("uploadedFilesList");
+const fileCount = document.getElementById("fileCount");
+const previewBox = document.getElementById("previewBox");
 
-const summaryFiles = document.getElementById("summaryFiles");
-const summaryPages = document.getElementById("summaryPages");
-const summaryPaper = document.getElementById("summaryPaper");
-const summarySide = document.getElementById("summarySide");
-const summaryType = document.getElementById("summaryType");
 
-const totalPrice = document.getElementById("totalPrice");
-const bottomTotalPrice = document.getElementById("bottomTotalPrice");
-
-const copyCount = document.getElementById("copyCount");
-const minusBtn = document.getElementById("minusBtn");
-const plusBtn = document.getElementById("plusBtn");
-
-const addToCartBtn = document.getElementById("addToCartBtn");
-
-/* ==========================================
-   DATA
-========================================== */
+/*==================================
+        Variables
+==================================*/
 
 let uploadedFiles = [];
-let totalPages = 0;
-let copies = 1;
-let isUploading = false;
-
-/* ==========================================
-   PRICE
-========================================== */
-
-const PRICE = {
-
-    bw: 3,
-    colour: 10
-
-};
+let selectedFileIndex = -1;
 
 
+/*==================================
+        Upload Files
+==================================*/
 
+fileInput.addEventListener("change", (e) => {
 
-/* ==========================================
-   LOADING
-========================================== */
-
-function setUploadLoading(isLoading) {
-
-    if (!addToCartBtn) return;
-
-    if (isLoading) {
-
-        addToCartBtn.disabled = true;
-
-        addToCartBtn.innerHTML = `
-            <i class="ri-loader-4-line ri-spin"></i>
-            Uploading...
-        `;
-
-    } else {
-
-        addToCartBtn.disabled = false;
-
-        addToCartBtn.innerHTML = `
-            <i class="ri-shopping-cart-line"></i>
-            Add to Cart
-        `;
-
-    }
-
-}
-
-
-/* ==========================================
-   UPLOAD FILES TO SERVER
-========================================== */
-
-async function uploadPrintFiles(files) {
-
-    if (isUploading) {
-
-    alert("Please wait, upload is already in progress.");
-
-    return null;
-
-}
-
-isUploading = true;
-/* ==========================================
-   PREVENT DOUBLE UPLOAD
-========================================== */
-
-    try {
-        setUploadLoading(true);
-
-            const formData = new FormData();
+    const files = [...e.target.files];
 
     files.forEach(file => {
 
-        formData.append("files", file);
+        uploadedFiles.push({
+            file: file,
+            currentPage: 1
+        });
 
     });
 
+    renderUploadedFiles();
 
-        const response = await fetch(
-            "https://snackible-backend.onrender.com/api/print-upload",
-            {
-
-                method: "POST",
-
-                body: formData
-
-            }
-
-        );
-
-        const data = await response.json();
-
-        if (!response.ok) {
-
-            throw new Error(data.message || "Upload failed.");
-
-        }
-
-        
-        setUploadLoading(false);
+});
 
 
-        isUploading = false;
+/*==================================
+        Render Uploaded Files
+==================================*/
 
-        return data.files;
+function renderUploadedFiles() {
 
-    }
+    uploadedFilesList.innerHTML = "";
 
-    catch (error) {
+    fileCount.textContent = `${uploadedFiles.length} Files`;
 
-        setUploadLoading(false);
+    uploadedFiles.forEach((item, index) => {
 
-        isUploading = false;
+        const isPdf = item.file.type === "application/pdf";
 
-        console.error(error);
+        const fileCard = document.createElement("div");
 
-        alert(error.message);
+        fileCard.className =
+            `uploaded-file ${index === selectedFileIndex ? "active" : ""}`;
 
-        return null;
+        fileCard.innerHTML = `
 
-    }
+            <div class="file-left">
+
+                <div class="file-icon">
+
+                    <i class="fa-regular ${
+                        isPdf
+                        ? "fa-file-pdf"
+                        : "fa-file-image"
+                    }"></i>
+
+                </div>
+
+                <div class="file-info">
+
+                    <h4>${item.file.name}</h4>
+
+                    <p>${formatFileSize(item.file.size)}</p>
+
+                </div>
+
+            </div>
+
+            <div class="file-right">
+
+                <button
+                    class="file-action delete-btn"
+                    data-index="${index}">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                </button>
+
+            </div>
+
+        `;
+
+        fileCard.addEventListener("click", () => {
+
+            selectedFileIndex = index;
+
+            renderUploadedFiles();
+
+            loadPreview();
+
+        });
+
+        uploadedFilesList.appendChild(fileCard);
+
+    });
 
 }
 
-/* ==========================================
-   FILE UPLOAD
-========================================== */
 
-fileInput.addEventListener("change", async (e) => {
+/*==================================
+        Delete File
+==================================*/
 
-    const files = Array.from(e.target.files);
+uploadedFilesList.addEventListener("click", (e) => {
 
-    if (files.length === 0) {
+    const btn = e.target.closest(".delete-btn");
 
-        return;
+    if(!btn) return;
 
-    }
+    e.stopPropagation();
 
-    const validFiles = files.filter(validateFile);
+    const index = Number(btn.dataset.index);
 
-    if (validFiles.length === 0) {
+    uploadedFiles.splice(index,1);
 
-        return;
+    if(selectedFileIndex >= uploadedFiles.length){
 
-    }
-
-    const uploaded = await uploadPrintFiles(validFiles);
-
-    if (!uploaded) {
-
-        return;
+        selectedFileIndex = uploadedFiles.length - 1;
 
     }
 
-    uploadedFiles.push(
-
-        ...validFiles.map((file, index) => ({
-
-            file,
-
-            server: uploaded[index]
-
-        }))
-
-    );
-
-    renderFileList();
+    renderUploadedFiles();
 
     loadPreview();
 
 });
 
-/* ==========================================
-   VALIDATION
-========================================== */
 
-function validateFile(file){
+/*==================================
+        File Size
+==================================*/
 
-    const allowed = [
+function formatFileSize(bytes){
 
-        "application/pdf",
-        "image/png",
-        "image/jpeg",
-        "image/jpg",
-        "image/webp"
-
-    ];
-
-    if(!allowed.includes(file.type)){
-
-        alert(file.name + " is not supported.");
-
-        return false;
-
-    }
-
-    return true;
-
-}
-/* ==========================================
-   FILE LIST
-========================================== */
-
-function renderFileList() {
-
-    if (uploadedFiles.length === 0) {
-
-        fileList.innerHTML = `
-            <div class="empty-state">
-                <i class="ri-folder-open-line"></i>
-                <h4>No files selected</h4>
-                <p>Upload PDF or Images to continue.</p>
-            </div>
-        `;
-
-        totalPages = 0;
-        updateSummary();
-        return;
-    }
-
-    fileList.innerHTML = "";
-
-    uploadedFiles.forEach((file, index) => {
-
-        const item = document.createElement("div");
-        item.className = "file-item";
-
-        item.innerHTML = `
-
-            <i class="${getFileIcon(file)}"></i>
-
-            <div class="file-details">
-
-                <h4>${file.file.name}</h4>
-
-<p>${formatFileSize(file.file.size)}</p>
-
-            </div>
-
-            <button class="remove-file" onclick="removeFile(${index})">
-
-                <i class="ri-delete-bin-line"></i>
-
-            </button>
-
-        `;
-
-        fileList.appendChild(item);
-
-    });
-
-    calculatePages();
-
-}
-
-/* ==========================================
-   REMOVE FILE
-========================================== */
-
-function removeFile(index) {
-
-    uploadedFiles.splice(index, 1);
-
-    renderFileList();
-    loadPreview();
-
-}
-
-/* ==========================================
-   FILE ICON
-========================================== */
-
-function getFileIcon(item) {
-
-    if (item.file.type === "application/pdf") {
-        return "ri-file-pdf-line";
-    }
-
-    return "ri-image-line";
-}
-
-/* ==========================================
-   FILE SIZE
-========================================== */
-
-function formatFileSize(bytes) {
-
-    if (bytes < 1024) {
+    if(bytes < 1024){
 
         return bytes + " B";
 
     }
 
-    if (bytes < 1024 * 1024) {
+    if(bytes < 1024 * 1024){
 
-        return (bytes / 1024).toFixed(1) + " KB";
-
-    }
-
-    return (bytes / (1024 * 1024)).toFixed(2) + " MB";
-
-}
-
-/* ==========================================
-   PAGE CALCULATION
-========================================== */
-
-async function calculatePages() {
-
-    totalPages = 0;
-
-    for (const item of uploadedFiles) {
-
-    const file = item.file;
-
-        if (file.type === "application/pdf") {
-
-            const buffer = await file.arrayBuffer();
-
-            const pdf = await pdfjsLib.getDocument({
-
-                data: buffer
-
-            }).promise;
-
-            totalPages += pdf.numPages;
-
-        } else {
-
-            // One image = One page
-            totalPages++;
-
-        }
+        return (bytes/1024).toFixed(1) + " KB";
 
     }
 
-    updateSummary();
+    return (bytes/(1024*1024)).toFixed(1) + " MB";
 
 }
-/* ==========================================
-   PREVIEW
-========================================== */
+
+
+/*==================================
+        Preview Placeholder
+==================================*/
+
+function loadPreview(){
+
+    previewBox.innerHTML = `
+
+        <div class="empty-preview">
+
+            <i class="fa-regular fa-file-lines"></i>
+
+            <p>Preview Coming...</p>
+
+        </div>
+
+    `;
+
+}
+/*==================================
+        Preview Variables
+==================================*/
+
+let currentPage = 1;
+let totalPages = 1;
+
+
+/*==================================
+        Load Preview
+==================================*/
 
 async function loadPreview() {
 
-    if (uploadedFiles.length === 0) {
+    if (selectedFileIndex === -1) {
 
-        previewContainer.innerHTML = `
-            <div class="preview-placeholder">
-                <i class="ri-file-search-line"></i>
-                <h4>No Preview</h4>
-                <p>Upload a PDF or Image</p>
+        previewBox.innerHTML = `
+            <div class="empty-preview">
+                <i class="fa-regular fa-file-lines"></i>
+                <p>Select a file to preview</p>
             </div>
         `;
 
         return;
-
     }
 
-    const file = uploadedFiles[0].file;
+    const file = uploadedFiles[selectedFileIndex].file;
 
     if (file.type === "application/pdf") {
 
-        await showPdfPreview(file);
+        showPdfPreview(file);
 
     } else {
 
@@ -401,26 +223,60 @@ async function loadPreview() {
 
 }
 
-/* ==========================================
-   PDF PREVIEW
-========================================== */
+
+/*==================================
+        Image Preview
+==================================*/
+
+function showImagePreview(file) {
+
+    totalPages = 1;
+    currentPage = 1;
+
+    pageIndicator.textContent = "Image";
+
+    const url = URL.createObjectURL(file);
+
+    previewBox.innerHTML = `
+        <img
+            id="previewImage"
+            src="${url}"
+            alt="Preview"
+            class="preview-image">
+    `;
+
+}
+
+
+/*==================================
+        PDF Preview
+==================================*/
 
 async function showPdfPreview(file) {
 
     const buffer = await file.arrayBuffer();
 
     const pdf = await pdfjsLib.getDocument({
-
         data: buffer
-
     }).promise;
 
-    const page = await pdf.getPage(1);
+    totalPages = pdf.numPages;
+
+    renderPdfPage(pdf, currentPage);
+
+}
+
+
+/*==================================
+        Render PDF Page
+==================================*/
+
+async function renderPdfPage(pdf, pageNo) {
+
+    const page = await pdf.getPage(pageNo);
 
     const viewport = page.getViewport({
-
-        scale: 1.2
-
+        scale: 1.5
     });
 
     const canvas = document.createElement("canvas");
@@ -431,341 +287,341 @@ async function showPdfPreview(file) {
     canvas.height = viewport.height;
 
     await page.render({
-
         canvasContext: ctx,
         viewport
-
     }).promise;
 
-    previewContainer.innerHTML = "";
-    previewContainer.appendChild(canvas);
+    previewBox.innerHTML = "";
+
+    previewBox.appendChild(canvas);
+
+    pageIndicator.textContent =
+        `Page ${pageNo} / ${totalPages}`;
 
 }
 
-/* ==========================================
-   IMAGE PREVIEW
-========================================== */
 
-function showImagePreview(file) {
+/*==================================
+        Previous Page
+==================================*/
 
-    const reader = new FileReader();
+prevPage.addEventListener("click", async () => {
 
-    reader.onload = function (e) {
+    if (selectedFileIndex === -1) return;
 
-        previewContainer.innerHTML = `
-            <img src="${e.target.result}" alt="Preview">
-        `;
+    const file = uploadedFiles[selectedFileIndex].file;
 
-    };
+    if (file.type !== "application/pdf") return;
 
-    reader.readAsDataURL(file);
+    if (currentPage <= 1) return;
 
-}
+    currentPage--;
 
-/* ==========================================
-   COPIES
-========================================== */
+    const buffer = await file.arrayBuffer();
 
-plusBtn.addEventListener("click", () => {
+    const pdf = await pdfjsLib.getDocument({
+        data: buffer
+    }).promise;
 
-    copies++;
-
-    copyCount.textContent = copies;
-
-    updateSummary();
+    renderPdfPage(pdf, currentPage);
 
 });
 
-minusBtn.addEventListener("click", () => {
 
-    if (copies > 1) {
+/*==================================
+        Next Page
+==================================*/
 
-        copies--;
+nextPage.addEventListener("click", async () => {
 
-        copyCount.textContent = copies;
+    if (selectedFileIndex === -1) return;
 
-        updateSummary();
+    const file = uploadedFiles[selectedFileIndex].file;
 
-    }
+    if (file.type !== "application/pdf") return;
+
+    if (currentPage >= totalPages) return;
+
+    currentPage++;
+
+    const buffer = await file.arrayBuffer();
+
+    const pdf = await pdfjsLib.getDocument({
+        data: buffer
+    }).promise;
+
+    renderPdfPage(pdf, currentPage);
 
 });
+/*==================================
+        DOM Elements
+==================================*/
 
-/* ==========================================
-   SUMMARY + PRICE
-========================================== */
+const paperButtons = document.querySelectorAll("#paperSize .chip");
+const printTypeButtons = document.querySelectorAll("#printType .chip");
+const printSideButtons = document.querySelectorAll("#printSide .chip");
 
-function updateSummary() {
+const minusCopy = document.getElementById("minusCopy");
+const plusCopy = document.getElementById("plusCopy");
+const copiesCount = document.getElementById("copiesCount");
 
-    summaryFiles.textContent = uploadedFiles.length;
-    summaryPages.textContent = totalPages;
-    summaryPaper.textContent = "A4";
 
-    const side =
-        document.querySelector('input[name="side"]:checked');
+/*==================================
+        Print Settings
+==================================*/
 
-    const type =
-        document.querySelector('input[name="printType"]:checked');
+let paperSize = "A4";
+let printType = "bw";
+let printSide = "single";
+let copies = 1;
 
-    const sideValue = side ? side.value : "Single Side";
-    const typeValue = type ? type.value : "bw";
 
-    summarySide.textContent = sideValue;
-    summaryType.textContent =
-        typeValue === "colour"
-            ? "Colour"
-            : "Black & White";
+/*==================================
+        Active Chip
+==================================*/
 
-    let pages = totalPages * copies;
+function setActive(buttons, clickedButton){
 
-    let rate =
-        typeValue === "colour"
-            ? PRICE.colour
-            : PRICE.bw;
+    buttons.forEach(btn=>btn.classList.remove("active"));
 
-    const amount = pages * rate;
-
-    totalPrice.textContent = `₹${amount}`;
-    bottomTotalPrice.textContent = `₹${amount}`;
+    clickedButton.classList.add("active");
 
 }
-/* ==========================================
-   OPTION CHANGE LISTENERS
-========================================== */
 
-document
-    .querySelectorAll('input[name="printType"], input[name="side"]')
-    .forEach(input => {
 
-        input.addEventListener("change", () => {
+/*==================================
+        Paper Size
+==================================*/
 
-            updateSummary();
+paperButtons.forEach(button=>{
 
-        });
+    button.addEventListener("click",()=>{
+
+        setActive(paperButtons,button);
+
+        paperSize = button.textContent.trim();
+
+        updatePrice();
 
     });
 
-/* ==========================================
-   SHEET CALCULATION
-========================================== */
+});
 
-function calculateSheets() {
 
-    const side =
-        document.querySelector('input[name="side"]:checked');
+/*==================================
+        Print Type
+==================================*/
 
-    const sideValue = side ? side.value : "Single Side";
+printTypeButtons.forEach(button=>{
 
-    if (sideValue === "Front & Back") {
+    button.addEventListener("click",()=>{
 
-        return Math.ceil(totalPages / 2) * copies;
+        setActive(printTypeButtons,button);
+
+        printType = button.textContent.trim().toLowerCase();
+
+        updatePreviewColor();
+
+        updatePrice();
+
+    });
+
+});
+
+
+/*==================================
+        Print Side
+==================================*/
+
+printSideButtons.forEach(button=>{
+
+    button.addEventListener("click",()=>{
+
+        setActive(printSideButtons,button);
+
+        printSide = button.textContent.trim();
+
+        updatePrice();
+
+    });
+
+});
+
+
+/*==================================
+        Copies
+==================================*/
+
+minusCopy.addEventListener("click",()=>{
+
+    if(copies===1) return;
+
+    copies--;
+
+    copiesCount.textContent = copies;
+
+    updatePrice();
+
+});
+
+
+plusCopy.addEventListener("click",()=>{
+
+    copies++;
+
+    copiesCount.textContent = copies;
+
+    updatePrice();
+
+});
+
+
+/*==================================
+        Preview B&W / Colour
+==================================*/
+
+function updatePreviewColor(){
+
+    const img = previewBox.querySelector("img");
+    const canvas = previewBox.querySelector("canvas");
+
+    const isBW =
+        printType.includes("b");
+
+    if(img){
+
+        img.style.filter =
+            isBW
+            ? "grayscale(100%)"
+            : "none";
 
     }
 
-    return totalPages * copies;
+    if(canvas){
+
+        canvas.style.filter =
+            isBW
+            ? "grayscale(100%)"
+            : "none";
+
+    }
 
 }
+/*==================================
+        Bottom Elements
+==================================*/
 
-/* ==========================================
-   PRICE CALCULATION
-========================================== */
+const bottomPages = document.getElementById("bottomPages");
+const bottomSheets = document.getElementById("bottomSheets");
+const bottomPrice = document.getElementById("bottomPrice");
+const addToCartBtn = document.getElementById("addToCartBtn");
 
-function calculateTotalPrice() {
 
-    const type =
-        document.querySelector('input[name="printType"]:checked');
+/*==================================
+        Price Settings
+==================================*/
 
-    const typeValue = type ? type.value : "bw";
-
-    const rate =
-        typeValue === "colour"
-            ? PRICE.colour
-            : PRICE.bw;
-
-    return calculateSheets() * rate;
-
-}
-
-/* ==========================================
-   UPDATE PRICE
-========================================== */
-
-function refreshPrice() {
-
-    const amount = calculateTotalPrice();
-
-    totalPrice.textContent = `₹${amount}`;
-    bottomTotalPrice.textContent = `₹${amount}`;
-
-}
-
-/* ==========================================
-   UPDATE SUMMARY
-========================================== */
-
-const oldUpdateSummary = updateSummary;
-
-updateSummary = function () {
-
-    oldUpdateSummary();
-
-    const sheets = calculateSheets();
-
-    summaryPages.textContent =
-        `${totalPages} Pages (${sheets} Sheets)`;
-
-    refreshPrice();
-
+const PRICE = {
+    bw: 3,
+    colour: 10
 };
 
-/* ==========================================
-   IMAGE PAIR PLACEHOLDER
-========================================== */
 
-/*
-Future Version
+/*==================================
+        Update Price
+==================================*/
 
-Example
+function updatePrice(){
 
-Image1 + Image2 = 1 Sheet
-Image3          = 1 Sheet
-Image4          = 1 Sheet
+    if(selectedFileIndex === -1){
 
-Total = 3 Sheets
+        bottomPages.textContent = "0 Pages";
+        bottomSheets.textContent = "0 Sheets";
+        bottomPrice.textContent = "₹0";
 
-A custom pairing UI will generate
-the sheet count instead of automatic
-Front & Back calculation.
+        return;
+    }
 
-Current version uses automatic calculation.
-*/
-/* ==========================================
-   ADD TO CART
-========================================== */
+    const item = uploadedFiles[selectedFileIndex];
 
-addToCartBtn.addEventListener("click", addToCart);
+    const pages = item.pages || 1;
 
-function addToCart() {
+    const totalPages = pages * copies;
 
-    if (uploadedFiles.length === 0) {
+    const totalSheets =
+        printSide.toLowerCase().includes("front")
+        ? Math.ceil(totalPages / 2)
+        : totalPages;
 
-        alert("Please upload at least one file.");
+    const rate =
+        printType.includes("colour")
+        ? PRICE.colour
+        : PRICE.bw;
+
+    const totalPrice = totalPages * rate;
+
+    bottomPages.textContent =
+        `${totalPages} Pages`;
+
+    bottomSheets.textContent =
+        `${totalSheets} Sheets`;
+
+    bottomPrice.textContent =
+        `₹${totalPrice}`;
+
+}
+
+
+/*==================================
+        Add To Cart
+==================================*/
+
+addToCartBtn.addEventListener("click",()=>{
+
+    if(selectedFileIndex === -1){
+
+        alert("Please select a file.");
+
         return;
 
     }
 
-    const printType =
-        document.querySelector('input[name="printType"]:checked')?.value || "bw";
+    const item = uploadedFiles[selectedFileIndex];
 
-    const side =
-        document.querySelector('input[name="side"]:checked')?.value || "Single Side";
+    const cart = JSON.parse(
+        localStorage.getItem("printCart")
+    ) || [];
 
-    const order = {
+    cart.push({
 
-        id: Date.now(),
+        name:item.file.name,
 
-        files: uploadedFiles.map(item => ({
+        pages:item.pages || 1,
 
-    name: item.file.name,
-    size: item.file.size,
-    type: item.file.type,
+        copies:copies,
 
-    url: item.server.url,
-    fileName: item.server.fileName
+        paperSize:paperSize,
 
-})),
+        printType:printType,
 
-        totalFiles: uploadedFiles.length,
+        printSide:printSide,
 
-        totalPages: totalPages,
+        price:bottomPrice.textContent
 
-        totalSheets: calculateSheets(),
-
-        copies: copies,
-
-        paper: "A4",
-
-        printType: printType,
-
-        side: side,
-
-        totalPrice: calculateTotalPrice(),
-
-        createdAt: new Date().toISOString()
-
-    };
-
-    const cart =
-        JSON.parse(localStorage.getItem("printCart")) || [];
-
-    cart.push(order);
+    });
 
     localStorage.setItem(
         "printCart",
         JSON.stringify(cart)
     );
 
-    alert("✅ Print order added to cart.");
-
-}
-
-/* ==========================================
-   INITIALIZE
-========================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    renderFileList();
-
-    loadPreview();
-
-    copyCount.textContent = copies;
-
-    updateSummary();
+    alert("Added to Cart Successfully");
 
 });
 
-/* ==========================================
-   OPTIONAL RESET
-========================================== */
 
-function resetPrintForm() {
+/*==================================
+        First Load
+==================================*/
 
-    uploadedFiles = [];
-    totalPages = 0;
-    copies = 1;
-
-    fileInput.value = "";
-
-    copyCount.textContent = copies;
-
-    renderFileList();
-
-    loadPreview();
-
-    updateSummary();
-
-}
-
-/* ==========================================
-   FUTURE FEATURES
-========================================== */
-
-/*
-
-Upcoming Features
-
-✔ Drag & Drop Upload
-✔ Multiple PDF Preview
-✔ Page Selection
-✔ Custom Image Pairing
-✔ Print Orientation
-✔ Paper Size (A3/A4/A5)
-✔ Lamination
-✔ Spiral Binding
-✔ Document Naming
-✔ Quantity per File
-✔ Delivery Date
-✔ Coupon Code
-✔ Print Instructions
-
-*/
+updatePrice();
