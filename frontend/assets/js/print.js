@@ -41,30 +41,101 @@ const PRICE = {
 };
 
 /* ==========================================
+   UPLOAD FILES TO SERVER
+========================================== */
+
+async function uploadPrintFiles(files) {
+
+    const formData = new FormData();
+
+    files.forEach(file => {
+
+        formData.append("files", file);
+
+    });
+
+    try {
+
+        const response = await fetch(
+            "https://snackible-backend.onrender.com/api/print-upload",
+            {
+
+                method: "POST",
+
+                body: formData
+
+            }
+
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            throw new Error(data.message || "Upload failed.");
+
+        }
+
+        return data.files;
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(error.message);
+
+        return null;
+
+    }
+
+}
+
+/* ==========================================
    FILE UPLOAD
 ========================================== */
 
-fileInput.addEventListener("change", (e)=>{
+fileInput.addEventListener("change", async (e) => {
 
     const files = Array.from(e.target.files);
 
-    if(files.length===0){
+    if (files.length === 0) {
 
         return;
 
     }
 
-    files.forEach(file=>{
+    const validFiles = files.filter(validateFile);
 
-        if(validateFile(file)){
+    if (validFiles.length === 0) {
 
-            uploadedFiles.push(file);
+        return;
 
-        }
+    }
 
-    });
+    const uploaded = await uploadPrintFiles(validFiles);
+
+    if (!uploaded) {
+
+        return;
+
+    }
+
+    uploadedFiles.push(
+
+        ...validFiles.map((file, index) => ({
+
+            file,
+
+            server: uploaded[index]
+
+        }))
+
+    );
 
     renderFileList();
+
     loadPreview();
 
 });
@@ -130,9 +201,9 @@ function renderFileList() {
 
             <div class="file-details">
 
-                <h4>${file.name}</h4>
+                <h4>${file.file.name}</h4>
 
-                <p>${formatFileSize(file.size)}</p>
+<p>${formatFileSize(file.file.size)}</p>
 
             </div>
 
@@ -211,7 +282,9 @@ async function calculatePages() {
 
     totalPages = 0;
 
-    for (const file of uploadedFiles) {
+    for (const item of uploadedFiles) {
+
+    const file = item.file;
 
         if (file.type === "application/pdf") {
 
@@ -257,7 +330,7 @@ async function loadPreview() {
 
     }
 
-    const file = uploadedFiles[0];
+    const file = uploadedFiles[0].file;
 
     if (file.type === "application/pdf") {
 
@@ -533,13 +606,16 @@ function addToCart() {
 
         id: Date.now(),
 
-        files: uploadedFiles.map(file => ({
+        files: uploadedFiles.map(item => ({
 
-            name: file.name,
-            size: file.size,
-            type: file.type
+    name: item.file.name,
+    size: item.file.size,
+    type: item.file.type,
 
-        })),
+    url: item.server.url,
+    fileName: item.server.fileName
+
+})),
 
         totalFiles: uploadedFiles.length,
 
