@@ -746,3 +746,138 @@ updatePrice = function(){
     updateFileInfo();
 
 };
+
+/*==================================
+        Add To Cart
+==================================*/
+
+const addToCartBtn =
+document.getElementById("addToCartBtn");
+
+addToCartBtn.addEventListener("click",addToCart);
+
+function addToCart(){
+
+    if(uploadedFiles.length===0){
+
+        alert("Please upload at least one file.");
+
+        return;
+
+    }
+
+    const cart =
+    JSON.parse(
+        localStorage.getItem("printCart")
+    ) || [];
+
+    uploadedFiles.forEach(item=>{
+
+        cart.push({
+
+            id:item.id,
+
+            fileName:item.file.name,
+
+            fileType:item.file.type,
+
+            fileSize:item.file.size,
+
+            pages:item.pages,
+
+            settings:{...item.settings},
+
+            addedAt:new Date().toISOString()
+
+        });
+
+    });
+
+    localStorage.setItem(
+        "printCart",
+        JSON.stringify(cart)
+    );
+
+    alert("Files added to cart successfully.");
+
+}
+
+
+/*==================================
+        Delete File
+==================================*/
+
+function deleteFile(id){
+
+    uploadedFiles =
+    uploadedFiles.filter(file=>file.id!==id);
+
+    if(selectedFile?.id===id){
+
+        selectedFile=null;
+
+        previewBox.innerHTML=`
+
+        <div class="empty-preview">
+
+            <i class="fa-regular fa-file-lines"></i>
+
+            <p>Select a file to preview</p>
+
+        </div>
+
+        `;
+
+        pageIndicator.textContent="Page 0 / 0";
+
+    }
+
+    renderUploadedFiles();
+
+    updatePrice();
+
+}
+
+
+/*==================================
+        Auto Select First File
+==================================*/
+
+function autoSelectFirstFile(){
+
+    if(uploadedFiles.length===0) return;
+
+    if(selectedFile) return;
+
+    selectFile(uploadedFiles[0].id);
+
+}
+
+
+/*==================================
+        Render Override
+==================================*/
+
+const oldRenderUploadedFiles =
+renderUploadedFiles;
+
+renderUploadedFiles=function(){
+
+    oldRenderUploadedFiles();
+
+    autoSelectFirstFile();
+
+};
+
+
+/*==================================
+        Initialization
+==================================*/
+
+function init(){
+
+    updatePrice();
+
+}
+
+init();
