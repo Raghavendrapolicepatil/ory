@@ -24,6 +24,7 @@ const settingsRoutes = require("./routes/settingsRoutes");
 const bannerRoutes = require("./routes/bannerRoutes");
 const path = require("path");
 const uploadRoutes = require("./routes/uploadRoutes");
+const printOrdersRoute = require("./routes/printOrdersRoutes");
 
 // API Routes
 app.use("/api/products", productRoutes);
@@ -35,6 +36,8 @@ app.use("/api/orders", orderRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/banners", bannerRoutes);
 app.use("/api/upload", uploadRoutes);
+app.use("/api/print-upload", printUploadRoutes);
+app.use("/api/print-orders", printOrdersRoute);
 
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
