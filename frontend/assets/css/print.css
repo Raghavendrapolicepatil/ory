@@ -571,6 +571,36 @@ background .25s,
 border-color .25s;
 
 }
+
+.preview-image{
+    max-width:100%;
+    max-height:100%;
+    object-fit:contain;
+}
+
+.file-info{
+    min-width:0;
+    flex:1;
+}
+
+.file-info h4{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.delete-file{
+    flex-shrink:0;
+}
+
+.file-left{
+    flex:1;
+    min-width:0;
+}
+.nav-btn:disabled:hover{
+    background:#fff;
+    color:inherit;
+}
 /*==================================
     Responsive
 ==================================*/
