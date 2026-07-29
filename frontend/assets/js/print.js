@@ -1476,6 +1476,8 @@ function buildOrderSummary() {
 
             fileType: file.file.type,
 
+            thumbnail: file.thumbnail,
+
             paperSize: file.settings.paperSize,
 
             printType: file.settings.printType,

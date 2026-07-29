@@ -185,7 +185,7 @@ function loadCheckout() {
 
     });
 
-    printCart.forEach((cartItem) => {
+printCart.forEach((cartItem, cartIndex) => {
 
     const order = cartItem.order;
 
@@ -194,22 +194,34 @@ function loadCheckout() {
     order.items.forEach((file) => {
 
         itemsBox.innerHTML += `
-            <div class="checkout-item">
 
-                <div class="checkout-info">
+        <div class="checkout-item">
 
-                    <h4>🖨️ ${file.fileName}</h4>
+            <img src="${file.thumbnail}" alt="${file.fileName}">
 
-                    <p>${file.paperSize} • ${file.printType === "bw" ? "B&W" : "Colour"}</p>
+            <div class="checkout-info">
 
-                    <p>${file.pages} Pages • ${file.copies} Copies</p>
+                <h4>${file.fileName}</h4>
 
-                </div>
+                <p>${file.paperSize} • ${file.printType === "bw" ? "B&W" : "Colour"}</p>
 
-                <strong>₹${file.price}</strong>
+                <p>${file.pages} Pages • ${file.copies} Copies</p>
+
+                <button class="remove-btn"
+                    onclick="removePrintItem(${cartIndex})">
+
+                    Remove
+
+                </button>
 
             </div>
+
+            <strong>₹${file.price}</strong>
+
+        </div>
+
         `;
+
     });
 
     total += Number(order.totalPrice);
