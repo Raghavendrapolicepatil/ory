@@ -308,15 +308,16 @@ function decreaseQtyCheckout(index) {
 // Remove Product
 // ==========================================
 
-function removeItemCheckout(index) {
+function removePrintItem(index) {
 
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const printCart =
+        JSON.parse(localStorage.getItem("printCart")) || [];
 
-    cart.splice(index, 1);
+    printCart.splice(index, 1);
 
     localStorage.setItem(
-        "cart",
-        JSON.stringify(cart)
+        "printCart",
+        JSON.stringify(printCart)
     );
 
     loadCheckout();
