@@ -102,10 +102,10 @@ function loadAddress() {
 function loadCheckout() {
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
-
+    const printCart = JSON.parse(localStorage.getItem("printCart")) || [];
     itemsBox.innerHTML = "";
 
-    if (cart.length === 0) {
+    if (cart.length === 0 && printCart.length === 0) {
 
         itemsBox.innerHTML = `
             <p>Your Shopping Bag is Empty.</p>
