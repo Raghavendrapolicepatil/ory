@@ -388,7 +388,6 @@ async function preparePDF(fileObject) {
 /*====================================================
                 PREPARE IMAGE
 ====================================================*/
-
 async function prepareImage(fileObject) {
 
     fileObject.pages = 1;
@@ -404,7 +403,6 @@ async function prepareImage(fileObject) {
     });
 
 }
-
 /*====================================================
                 SAVE IMAGE
 ====================================================*/
