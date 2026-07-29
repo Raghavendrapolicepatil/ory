@@ -185,33 +185,34 @@ function loadCheckout() {
 
     });
 
-    printCart.forEach((order, index) => {
+    printCart.forEach((cartItem) => {
 
-    itemsBox.innerHTML += `
-        <div class="checkout-item">
+    const order = cartItem.order;
 
-            <div class="checkout-info">
+    if (!order) return;
 
-                <h4>🖨️ Print Order</h4>
+    order.items.forEach((file) => {
 
-                <p>Files : ${order.files.length}</p>
+        itemsBox.innerHTML += `
+            <div class="checkout-item">
 
-                <p>Paper : ${order.paperSize}</p>
+                <div class="checkout-info">
 
-                <p>Print : ${order.printType}</p>
+                    <h4>🖨️ ${file.fileName}</h4>
 
-                <p>Side : ${order.printSide}</p>
+                    <p>${file.paperSize} • ${file.printType === "bw" ? "B&W" : "Colour"}</p>
 
-                <p>Copies : ${order.copies}</p>
+                    <p>${file.pages} Pages • ${file.copies} Copies</p>
+
+                </div>
+
+                <strong>₹${file.price}</strong>
 
             </div>
+        `;
+    });
 
-            <strong>₹${order.totalPrice}</strong>
-
-        </div>
-    `;
-
-    total += order.totalPrice;
+    total += Number(order.totalPrice);
 
 });
 
