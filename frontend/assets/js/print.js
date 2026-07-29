@@ -55,6 +55,38 @@ const DOM = {
 
 
 
+/* ==========================================
+            IndexedDB
+========================================== */
+
+let db;
+
+const request = indexedDB.open("PatilPrintDB", 1);
+
+request.onupgradeneeded = function (event) {
+
+    db = event.target.result;
+
+    if (!db.objectStoreNames.contains("files")) {
+        db.createObjectStore("files", { keyPath: "id" });
+    }
+
+};
+
+request.onsuccess = function (event) {
+
+    db = event.target.result;
+
+    loadSavedFiles();
+
+};
+
+request.onerror = function () {
+
+    console.log("IndexedDB Error");
+
+};
+
 /*====================================================
                     APPLICATION STATE
 ====================================================*/
@@ -292,7 +324,7 @@ async function handleFileUpload(e) {
         }
 
         App.files.push(fileObject);
-
+        saveFile(fileObject);
     }
 
     renderUploadedFiles();
@@ -367,6 +399,55 @@ async function prepareImage(fileObject) {
 }
 
 
+
+/*====================================================
+                SAVE IMAGE
+====================================================*/
+function saveFile(fileObject) {
+
+    const tx = db.transaction("files", "readwrite");
+
+    const store = tx.objectStore("files");
+
+    store.put({
+        id: fileObject.id,
+        data: fileObject
+    });
+
+}
+
+function loadSavedFiles() {
+
+    const tx = db.transaction("files", "readonly");
+
+    const store = tx.objectStore("files");
+
+    const request = store.getAll();
+
+    request.onsuccess = function () {
+
+        const result = request.result;
+
+        if (result.length === 0) return;
+
+        App.files = result.map(item => item.data);
+
+        renderUploadedFiles();
+
+        if (App.files.length > 0) {
+            selectFile(App.files[0].id);
+        }
+
+    };
+
+}
+function clearSavedFiles() {
+
+    const tx = db.transaction("files", "readwrite");
+
+    tx.objectStore("files").clear();
+
+}
 
 /*====================================================
             RENDER UPLOADED FILES
