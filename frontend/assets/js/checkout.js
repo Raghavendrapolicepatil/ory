@@ -207,6 +207,16 @@ printCart.forEach((cartItem, cartIndex) => {
 
                 <p>${file.pages} Pages • ${file.copies} Copies</p>
 
+
+                <button class="edit-btn"
+    onclick="editPrintItem(${cartIndex})">
+
+    <i class="fa-solid fa-pen"></i>
+
+    Edit
+
+</button>
+
                 <button class="remove-btn"
                     onclick="removePrintItem(${cartIndex})">
 
@@ -324,6 +334,17 @@ function removePrintItem(index) {
 
 }
 
+
+function editPrintItem(index) {
+
+    localStorage.setItem(
+        "editingPrintIndex",
+        index
+    );
+
+    window.location.href = "print.html";
+
+}
 // ==========================================
 // Place Order
 // ==========================================
