@@ -103,6 +103,7 @@ function loadCheckout() {
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
     const printCart = JSON.parse(localStorage.getItem("printCart")) || [];
+
     itemsBox.innerHTML = "";
 
     if (cart.length === 0 && printCart.length === 0) {
@@ -183,6 +184,36 @@ function loadCheckout() {
         `;
 
     });
+
+    printCart.forEach((order, index) => {
+
+    itemsBox.innerHTML += `
+        <div class="checkout-item">
+
+            <div class="checkout-info">
+
+                <h4>🖨️ Print Order</h4>
+
+                <p>Files : ${order.files.length}</p>
+
+                <p>Paper : ${order.paperSize}</p>
+
+                <p>Print : ${order.printType}</p>
+
+                <p>Side : ${order.printSide}</p>
+
+                <p>Copies : ${order.copies}</p>
+
+            </div>
+
+            <strong>₹${order.totalPrice}</strong>
+
+        </div>
+    `;
+
+    total += order.totalPrice;
+
+});
 
     const deliveryCharge = DELIVERY(total);
 
