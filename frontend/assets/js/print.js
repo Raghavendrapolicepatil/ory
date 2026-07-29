@@ -393,12 +393,17 @@ async function prepareImage(fileObject) {
 
     fileObject.pages = 1;
 
-    fileObject.thumbnail =
-        URL.createObjectURL(fileObject.file);
+    fileObject.thumbnail = await new Promise((resolve) => {
+
+        const reader = new FileReader();
+
+        reader.onload = (e) => resolve(e.target.result);
+
+        reader.readAsDataURL(fileObject.file);
+
+    });
 
 }
-
-
 
 /*====================================================
                 SAVE IMAGE
