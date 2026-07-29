@@ -1518,7 +1518,7 @@ function addToCart() {
 
     );
 
-    alert("Added to cart successfully.");
+   window.location.href = "checkout.html";
 
 }
 
