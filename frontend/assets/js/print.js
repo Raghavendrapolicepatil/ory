@@ -416,6 +416,17 @@ function saveFile(fileObject) {
 
 }
 
+
+function deleteSavedFile(id) {
+
+    const tx = db.transaction("files", "readwrite");
+
+    const store = tx.objectStore("files");
+
+    store.delete(id);
+
+}
+
 function loadSavedFiles() {
 
     const tx = db.transaction("files", "readonly");
@@ -557,6 +568,7 @@ function deleteFile(id) {
     }
 
     App.files.splice(index, 1);
+    deleteSavedFile(id);
 
     if (App.selectedFileId === id) {
 
