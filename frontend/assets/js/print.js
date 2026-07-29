@@ -61,7 +61,7 @@ const DOM = {
 
 let db;
 
-const request = indexedDB.open("PatilPrintDB", 1);
+const request = indexedDB.open("PatilPrintDB", 2);
 
 request.onupgradeneeded = function (event) {
 
