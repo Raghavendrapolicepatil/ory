@@ -2,7 +2,8 @@
 // Patil Groceries Orders
 // ==========================================
 
-const API_URL = "https://snackible-backend.onrender.com/api/orders";
+const GROCERY_API = "https://snackible-backend.onrender.com/api/orders";
+const PRINT_API = "https://snackible-backend.onrender.com/api/print-orders";
 
 const ordersContainer = document.getElementById("orders-container");
 
@@ -15,53 +16,57 @@ const errorBox = document.getElementById("error-box");
 // ==========================================
 // Load Orders
 // ==========================================
-
 async function loadOrders() {
 
     try {
 
-        const userData = JSON.parse(
-            localStorage.getItem("user")
-        );
+        const userData =
+            JSON.parse(localStorage.getItem("user"));
 
-       if (!userData) {
-
-    window.location.href = "login.html";
-
-    return;
-
-}
-        showLoading();
-
-        const response = await fetch(API_URL);
-
-        if (!response.ok) {
-
-            throw new Error("Unable to fetch orders.");
-
+        if (!userData) {
+            window.location.href = "login.html";
+            return;
         }
 
-        const allOrders = await response.json();
+        showLoading();
 
-        console.log("All Orders :", allOrders);
+        const [groceryRes, printRes] = await Promise.all([
+            fetch(GROCERY_API),
+            fetch(PRINT_API)
+        ]);
 
-        const userOrders = allOrders.filter(order =>
+        const groceryOrders = await groceryRes.json();
+        const printOrders = await printRes.json();
 
+        const grocery = groceryOrders.filter(order =>
             order.user &&
-order.user._id === userData.id
-
+            order.user._id === userData.id
         );
 
-        console.log("User Orders :", userOrders);
+        const print = printOrders
+            .filter(order =>
+                order.user &&
+                order.user.id === userData.id
+            )
+            .map(order => ({
+
+                ...order,
+
+                isPrint: true,
+
+                products: order.items,
+
+                totalAmount: order.totalPrice
+
+            }));
+
+        const userOrders = [...grocery, ...print];
 
         hideLoading();
 
         if (userOrders.length === 0) {
-
             showEmpty();
-
             return;
-
         }
 
         hideEmpty();
@@ -69,10 +74,9 @@ order.user._id === userData.id
         renderOrders(userOrders);
 
     }
+    catch (err) {
 
-    catch (error) {
-
-        console.error(error);
+        console.log(err);
 
         showError();
 
