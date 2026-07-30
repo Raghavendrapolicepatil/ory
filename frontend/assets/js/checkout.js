@@ -450,6 +450,8 @@ if (printCart.length > 0) {
         alert("Print Order Failed!");
         console.error(responseText);
         return;
+alert(await printResponse.text());
+
     }
 }
         // -----------------------------
