@@ -443,7 +443,10 @@ placeOrderBtn.addEventListener("click", async () => {
 
     console.log("Print Status:", printResponse.status);
 
-    console.log(await printResponse.text());
+   const printData = await printResponse.json();
+
+console.log("Print Status:", printResponse.status);
+console.log("Print Data:", printData);
 
 }
         // -----------------------------
