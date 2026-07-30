@@ -526,7 +526,7 @@ console.log("Going to place order...");
 
         alert("Order Placed Successfully");
 
-        window.location.replace("order-success.html");
+      //  window.location.replace("order-success.html");
 
     }
 
