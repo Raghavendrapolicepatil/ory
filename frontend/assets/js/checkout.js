@@ -531,7 +531,7 @@ placeOrderBtn.addEventListener("click", async () => {
 
         console.error(err);
 
-        alert("Server Error");
+       alert(JSON.stringify(err));
 
     }
 
