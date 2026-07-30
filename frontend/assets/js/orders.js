@@ -38,10 +38,17 @@ async function loadOrders() {
         const groceryOrders = await groceryRes.json();
         const printOrders = await printRes.json();
 
+        console.log("Logged User:", userData);
+console.log("Print Orders:", printOrders);
+
         const grocery = groceryOrders.filter(order =>
             order.user &&
             order.user._id === userData.id
         );
+
+printOrders.forEach(order => {
+    console.log("Saved User:", order.user);
+});
 
         const print = printOrders
             .filter(order =>
