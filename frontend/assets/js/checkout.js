@@ -450,20 +450,19 @@ status: "Pending"
             })
         }
     );
-
-const responseText = await printResponse.text();
-
-console.log("Print Status:", printResponse.status);
-console.log("Print Response:", responseText);
-
-alert(
-    "Status: " + printResponse.status +
-    "\n\n" + responseText
-);
-
 if (!printResponse.ok) {
+    const error = await printResponse.json();
+
+    alert(error.message || "Print order failed.");
+
     return;
 }
+
+const data = await printResponse.json();
+
+console.log(data);
+
+alert("✅ Print order placed successfully!");
 }
         // -----------------------------
         // Grocery Order
