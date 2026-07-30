@@ -441,18 +441,19 @@ if (printCart.length > 0) {
         }
     );
 
-    const responseText = await printResponse.text();
+const responseText = await printResponse.text();
 
-    console.log("Print Status:", printResponse.status);
-    console.log("Print Response:", responseText);
+console.log("Print Status:", printResponse.status);
+console.log("Print Response:", responseText);
 
-    if (!printResponse.ok) {
-        alert("Print Order Failed!");
-        console.error(responseText);
-        return;
-alert(await printResponse.text());
+alert(
+    "Status: " + printResponse.status +
+    "\n\n" + responseText
+);
 
-    }
+if (!printResponse.ok) {
+    return;
+}
 }
         // -----------------------------
         // Grocery Order
