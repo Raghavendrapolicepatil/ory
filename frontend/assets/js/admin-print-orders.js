@@ -200,7 +200,11 @@ async function viewOrder(id){
 
 <div class="print-file">
 
-<img src="${file.thumbnail}" alt="">
+<img
+    src="https://snackible-backend.onrender.com${file.fileUrl}"
+    alt="${file.fileName}"
+    style="width:120px;height:auto;border-radius:8px;object-fit:contain;"
+>
 
 <div class="file-info">
 
