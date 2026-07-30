@@ -1,734 +1,325 @@
-/* ==========================================
-   RESET
-========================================== */
+/* ===========================
+   Print Orders
+=========================== */
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-body{
-    font-family:Inter,sans-serif;
-    background:#f5f7fb;
-    color:#222;
-}
-
-/* ==========================================
-   PAGE
-========================================== */
-
-.print-orders-page{
-
-    max-width:1400px;
-
-    margin:auto;
-
-    padding:24px;
-}
-
-/* ==========================================
-   HEADER
-========================================== */
-
-.page-header{
+.orders-toolbar{
 
     display:flex;
-
     justify-content:space-between;
-
     align-items:center;
+    gap:15px;
+    margin:20px 0;
+    flex-wrap:wrap;
 
-    gap:20px;
-
-    margin-bottom:24px;
 }
 
-.page-header h1{
+.orders-toolbar input,
+.orders-toolbar select{
 
-    display:flex;
+    padding:10px 14px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    font-size:15px;
+    outline:none;
+    background:#fff;
 
-    align-items:center;
-
-    gap:10px;
-
-    font-size:30px;
 }
 
-.page-header p{
+.orders-toolbar input{
 
-    color:#777;
+    flex:1;
+    min-width:250px;
 
-    margin-top:6px;
 }
 
-.refresh-btn{
+.orders-section{
 
-    border:none;
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+    box-shadow:0 5px 20px rgba(0,0,0,.08);
 
-    background:#2563eb;
+}
 
+.orders-table{
+
+    width:100%;
+    border-collapse:collapse;
+
+}
+
+.orders-table thead{
+
+    background:#0f172a;
     color:#fff;
 
-    padding:12px 18px;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    font-size:15px;
-
-    transition:.25s;
 }
 
-.refresh-btn:hover{
+.orders-table th{
+
+    padding:15px;
+    text-align:left;
+    font-size:14px;
+    font-weight:600;
+
+}
+
+.orders-table td{
+
+    padding:15px;
+    border-bottom:1px solid #eee;
+    font-size:14px;
+    vertical-align:middle;
+
+}
+
+.orders-table tbody tr:hover{
+
+    background:#f8fafc;
+
+}
+
+.orders-table button{
+
+    padding:8px 14px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    background:#2563eb;
+    color:#fff;
+    font-size:13px;
+    transition:.3s;
+
+}
+
+.orders-table button:hover{
 
     background:#1d4ed8;
+
 }
 
-/* ==========================================
-   FILTER BAR
-========================================== */
+.orders-table select{
 
-.filter-bar{
+    padding:8px 10px;
+    border:1px solid #ddd;
+    border-radius:6px;
+    outline:none;
+    background:#fff;
+
+}
+
+/* ===========================
+   Modal
+=========================== */
+
+.modal{
+
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:999;
+
+}
+
+.modal-content{
+
+    width:90%;
+    max-width:750px;
+    background:#fff;
+    border-radius:14px;
+    padding:25px;
+    max-height:85vh;
+    overflow:auto;
+    position:relative;
+
+}
+
+.close{
+
+    position:absolute;
+    top:15px;
+    right:20px;
+    font-size:28px;
+    cursor:pointer;
+    color:#555;
+
+}
+
+.close:hover{
+
+    color:red;
+
+}
+
+/* ===========================
+   Print Files
+=========================== */
+
+.print-file{
 
     display:flex;
+    gap:15px;
+    align-items:center;
+    border:1px solid #eee;
+    border-radius:10px;
+    padding:12px;
+    margin-top:12px;
 
-    gap:16px;
-
-    margin-bottom:28px;
-
-    flex-wrap:wrap;
 }
 
-.filter-bar input{
+.print-file img{
+
+    width:70px;
+    height:70px;
+    object-fit:cover;
+    border-radius:8px;
+    border:1px solid #ddd;
+
+}
+
+.file-info{
 
     flex:1;
 
-    min-width:280px;
+}
 
-    padding:13px 16px;
+.file-info h4{
 
-    border:1px solid #ddd;
-
-    border-radius:10px;
-
-    outline:none;
-
+    margin-bottom:6px;
     font-size:15px;
+
 }
 
-.filter-bar select{
+.file-info p{
 
-    padding:13px 16px;
-
-    border-radius:10px;
-
-    border:1px solid #ddd;
-
-    background:white;
-
-    cursor:pointer;
-}
-
-/* ==========================================
-   CARD GRID
-========================================== */
-
-.print-orders-container{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fill,minmax(420px,1fr));
-
-    gap:22px;
-}
-
-/* ==========================================
-   CARD
-========================================== */
-
-.print-order-card{
-
-    background:white;
-
-    border-radius:18px;
-
-    padding:22px;
-
-    box-shadow:0 8px 28px rgba(0,0,0,.06);
-
-    transition:.25s;
-}
-
-.print-order-card:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:0 14px 36px rgba(0,0,0,.12);
-}
-
-/* ==========================================
-   TOP
-========================================== */
-
-.order-top{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:flex-start;
-
-    margin-bottom:18px;
-}
-
-.order-top h3{
-
-    font-size:22px;
-}
-
-.order-date{
-
-    color:#888;
-
+    margin:3px 0;
+    color:#555;
     font-size:13px;
+
 }
 
-/* ==========================================
-   STATUS
-========================================== */
+.file-price{
+
+    font-weight:700;
+    color:#16a34a;
+
+}
+
+/* ===========================
+   Summary
+=========================== */
+
+.order-summary{
+
+    margin-top:20px;
+    padding-top:15px;
+    border-top:2px dashed #ddd;
+
+}
+
+.order-summary p{
+
+    margin:8px 0;
+    font-size:15px;
+
+}
+
+.order-summary strong{
+
+    color:#111827;
+
+}
+
+/* ===========================
+   Status Badge
+=========================== */
 
 .status{
 
-    padding:7px 14px;
-
-    border-radius:999px;
-
-    font-size:13px;
-
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:30px;
+    font-size:12px;
     font-weight:600;
+
 }
 
-.pending{
+.status.pending{
 
     background:#fff7d6;
+    color:#b7791f;
 
-    color:#9a6700;
 }
 
-.printing{
+.status.printing{
 
     background:#dbeafe;
-
     color:#1d4ed8;
+
 }
 
-.ready{
+.status.ready{
 
     background:#dcfce7;
-
     color:#15803d;
+
 }
 
-.delivered{
+.status.completed{
 
-    background:#e9fbe9;
-
+    background:#dcfce7;
     color:#166534;
+
 }
 
-.cancelled{
+.status.cancelled{
 
     background:#fee2e2;
-
     color:#dc2626;
+
 }
 
-/* ==========================================
-   CUSTOMER
-========================================== */
-
-.customer-info{
-
-    margin-bottom:20px;
-
-    display:grid;
-
-    gap:10px;
-}
-
-.customer-info p{
-
-    display:flex;
-
-    gap:10px;
-
-    align-items:center;
-
-    color:#444;
-}
-
-.customer-info i{
-
-    color:#2563eb;
-}
-
-/* ==========================================
-   PRINT DETAILS
-========================================== */
-
-.print-details{
-
-    display:grid;
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:14px;
-
-    margin-bottom:22px;
-}
-
-.print-details div{
-
-    background:#f8fafc;
-
-    padding:12px;
-
-    border-radius:12px;
-
-    text-align:center;
-}
-
-.print-details span{
-
-    display:block;
-
-    color:#777;
-
-    font-size:12px;
-
-    margin-bottom:4px;
-}
-
-.print-details strong{
-
-    font-size:15px;
-}
-/* ==========================================
-   FILES SECTION
-========================================== */
-
-.files-section{
-
-    margin-top:24px;
-}
-
-.files-section h4{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    margin-bottom:14px;
-
-    font-size:17px;
-}
-
-.file-item{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:15px;
-
-    padding:12px 14px;
-
-    margin-bottom:10px;
-
-    background:#f8fafc;
-
-    border-radius:12px;
-
-    border:1px solid #edf2f7;
-}
-
-.file-item span{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    font-size:15px;
-
-    word-break:break-word;
-}
-
-.file-actions{
-
-    display:flex;
-
-    gap:10px;
-}
-
-.preview-btn,
-.download-btn{
-
-    width:38px;
-
-    height:38px;
-
-    border:none;
-
-    border-radius:10px;
-
-    cursor:pointer;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    font-size:18px;
-
-    transition:.25s;
-}
-
-.preview-btn{
-
-    background:#2563eb;
-
-    color:white;
-}
-
-.preview-btn:hover{
-
-    background:#1d4ed8;
-}
-
-.download-btn{
-
-    background:#16a34a;
-
-    color:white;
-}
-
-.download-btn:hover{
-
-    background:#15803d;
-}
-
-/* ==========================================
-   ACTION BUTTONS
-========================================== */
-
-.order-actions{
-
-    display:flex;
-
-    gap:12px;
-
-    margin-top:24px;
-
-    flex-wrap:wrap;
-}
-
-.order-actions button{
-
-    flex:1;
-
-    min-width:120px;
-
-    border:none;
-
-    border-radius:10px;
-
-    padding:12px;
-
-    cursor:pointer;
-
-    font-size:14px;
-
-    font-weight:600;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:8px;
-
-    transition:.25s;
-}
-
-.printing-btn{
-
-    background:#2563eb;
-
-    color:white;
-}
-
-.printing-btn:hover{
-
-    background:#1d4ed8;
-}
-
-.ready-btn{
-
-    background:#16a34a;
-
-    color:white;
-}
-
-.ready-btn:hover{
-
-    background:#15803d;
-}
-
-.delivered-btn{
-
-    background:#7c3aed;
-
-    color:white;
-}
-
-.delivered-btn:hover{
-
-    background:#6d28d9;
-}
-
-/* ==========================================
-   PREVIEW MODAL
-========================================== */
-
-.preview-modal{
-
-    position:fixed;
-
-    inset:0;
-
-    background:rgba(0,0,0,.6);
-
-    display:none;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:20px;
-
-    z-index:9999;
-}
-
-.preview-modal.active{
-
-    display:flex;
-}
-
-.preview-content{
-
-    width:100%;
-
-    max-width:950px;
-
-    max-height:90vh;
-
-    background:white;
-
-    border-radius:18px;
-
-    overflow:hidden;
-
-    display:flex;
-
-    flex-direction:column;
-
-    animation:popup .25s ease;
-}
-
-@keyframes popup{
-
-    from{
-
-        opacity:0;
-
-        transform:scale(.95);
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:scale(1);
-    }
-}
-
-.preview-header{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    padding:18px 24px;
-
-    border-bottom:1px solid #eee;
-}
-
-.close-preview{
-
-    width:42px;
-
-    height:42px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:#f3f4f6;
-
-    cursor:pointer;
-
-    font-size:20px;
-}
-
-.preview-body{
-
-    flex:1;
-
-    overflow:auto;
-
-    padding:20px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:#fafafa;
-}
-
-.preview-body iframe{
-
-    width:100%;
-
-    height:70vh;
-
-    border:none;
-
-    border-radius:12px;
-}
-
-.preview-body img{
-
-    max-width:100%;
-
-    max-height:70vh;
-
-    border-radius:12px;
-}
-
-.preview-footer{
-
-    border-top:1px solid #eee;
-
-    padding:18px 24px;
-
-    text-align:right;
-}
-
-.download-preview{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    background:#16a34a;
-
-    color:white;
-
-    text-decoration:none;
-
-    padding:12px 18px;
-
-    border-radius:10px;
-
-    transition:.25s;
-}
-
-.download-preview:hover{
-
-    background:#15803d;
-}
-
-/* ==========================================
-   RESPONSIVE
-========================================== */
+/* ===========================
+   Responsive
+=========================== */
 
 @media(max-width:768px){
 
-    .page-header{
+.orders-toolbar{
 
-        flex-direction:column;
+    flex-direction:column;
+    align-items:stretch;
 
-        align-items:flex-start;
-    }
+}
 
-    .print-orders-container{
+.orders-table{
 
-        grid-template-columns:1fr;
-    }
+    display:block;
+    overflow-x:auto;
 
-    .print-details{
+}
 
-        grid-template-columns:repeat(2,1fr);
-    }
+.modal-content{
 
-    .order-actions{
+    width:95%;
 
-        flex-direction:column;
-    }
+}
 
-    .file-item{
+.print-file{
 
-        flex-direction:column;
+    flex-direction:column;
+    align-items:flex-start;
 
-        align-items:flex-start;
-    }
+}
 
-    .file-actions{
+.print-file img{
 
-        width:100%;
+    width:100%;
+    height:180px;
 
-        justify-content:flex-end;
-    }
+}
 
-    .preview-content{
-
-        max-height:95vh;
-    }
-
-    .preview-body iframe{
-
-        height:60vh;
-    }
 }
