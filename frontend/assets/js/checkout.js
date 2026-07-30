@@ -400,8 +400,11 @@ placeOrderBtn.addEventListener("click", async () => {
         // -----------------------------
         // Print Order
         // -----------------------------
+// -----------------------------
+// Print Order
+// -----------------------------
 
-    if (printCart.length > 0) {
+if (printCart.length > 0) {
 
     const printOrder = printCart[0].order;
 
@@ -441,13 +444,16 @@ placeOrderBtn.addEventListener("click", async () => {
         }
     );
 
+    const printData = await printResponse.json();
+
     console.log("Print Status:", printResponse.status);
+    console.log("Print Data:", printData);
 
-   const printData = await printResponse.json();
-
-console.log("Print Status:", printResponse.status);
-console.log("Print Data:", printData);
-
+    if (!printResponse.ok) {
+        alert("Print Order Failed!");
+        console.error(printData);
+        return;
+    }
 }
         // -----------------------------
         // Grocery Order
