@@ -20,15 +20,14 @@ router.post("/", async (req, res) => {
 
     catch (error) {
 
-        console.error(error);
+    console.error("PRINT ORDER ERROR:", error);
 
-        res.status(500).json({
+    res.status(500).json({
+        message: error.message,
+        stack: error.stack
+    });
 
-            message: "Unable to create print order."
-
-        });
-
-    }
+}
 
 });
 
