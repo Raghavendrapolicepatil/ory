@@ -186,7 +186,7 @@ function renderOrders(orders) {
 
                 <img
     src="${order.isPrint
-        ? "assets/images/file.png"
+        ? "assets/images/offline.png"
         : product.image}"
     alt="${product.name || product.fileName}">
 
