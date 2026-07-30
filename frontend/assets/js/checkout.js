@@ -348,176 +348,175 @@ function editPrintItem(index) {
 // ==========================================
 // Place Order
 // ==========================================
-
 placeOrderBtn.addEventListener("click", async () => {
 
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
-    const printCart = JSON.parse(localStorage.getItem("printCart")) || [];
-
-    if (cart.length === 0 && printCart.length === 0) {
-
-        alert("Your Shopping Bag is Empty.");
-        return;
-
-    }
-
-    const addresses =
-        JSON.parse(localStorage.getItem("addresses")) || [];
-
-    const userLocation = JSON.parse(
-    localStorage.getItem("userLocation")
-);
-
-    if (addresses.length === 0) {
-
-        alert("Please add a delivery address.");
-
-        window.location.href = "address.html";
-
-        return;
-
-    }
-
-
-    
-
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user) {
-
-        alert("Please login first.");
-
-        window.location.href = "login.html";
-
-        return;
-
-    }
-
-const paymentOption = document.querySelector(
-    'input[name="payment"]:checked'
-);
-
-if (!paymentOption) {
-    alert("Please select a payment method.");
-    return;
-}
-
-const payment = paymentOption.value;
-console.log("Selected Payment:", payment);
-// Temporary disable online payments
-if (payment === "UPI" || payment === "Card") {
-    alert("🚧 Online Payment Coming Soon!");
-    return;
-}
-    
-
-    const total = cart.reduce((sum, item) => {
-
-        return sum + (item.price * item.qty);
-
-    }, 0);
-
-    const deliveryCharge = DELIVERY(total);
-
-    const finalTotal = total + deliveryCharge + PLATFORM;
-
-
-if (printCart.length > 0) {
-
-    const printOrder = printCart[0].order;
-
-    await fetch("https://snackible-backend.onrender.com/api/print-orders", {
-
-        method: "POST",
-
-        headers: {
-
-            "Content-Type": "application/json"
-
-        },
-
-        body: JSON.stringify({
-
-            user: {
-
-                id: user.id,
-
-                name: user.name,
-
-                email: user.email,
-
-                phone: user.phone || ""
-
-            },
-
-            address: addresses[0],
-
-            paymentMethod: payment,
-
-            items: printOrder.items,
-
-            totalFiles: printOrder.totalFiles,
-
-            totalPages: printOrder.totalPages,
-
-            totalSheets: printOrder.totalSheets,
-
-            totalPrice: printOrder.totalPrice,
-
-            status: "Pending"
-
-        })
-
-    });
-
-}
-
     try {
-console.log("Going to place order...");
-        const response = await fetch("https://snackible-backend.onrender.com/api/orders", {
 
-            method: "POST",
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const printCart = JSON.parse(localStorage.getItem("printCart")) || [];
 
-            headers: {
-
-                "Content-Type": "application/json"
-
-            },
-
-            body: JSON.stringify({
-
-                user: user.id,
-
-                products: cart.map(item => ({
-    productId: Number(String(item.id).split("-")[0]), // 8
-    variant: item.variant,                    // "10g"
-    weight: item.weight,                      // "10g"
-    name: item.name,
-    image: item.image,
-    quantity: item.qty,
-    price: item.price
-})),
-
-                totalAmount: finalTotal,
-
-                address: addressBox.innerText,
-
-                location: userLocation,
-
-                paymentMethod: payment
-
-            })
-
-        });
-
-        const data = await response.json();
-        console.log("Status:", response.status);;
-
-        if (!response.ok) {
-
-            alert(data.message || "Order Failed");
-
+        if (cart.length === 0 && printCart.length === 0) {
+            alert("Your Shopping Bag is Empty.");
             return;
+        }
+
+        const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
+
+        if (addresses.length === 0) {
+            alert("Please add a delivery address.");
+            window.location.href = "address.html";
+            return;
+        }
+
+        const userLocation =
+            JSON.parse(localStorage.getItem("userLocation"));
+
+        const user =
+            JSON.parse(localStorage.getItem("user"));
+
+        if (!user) {
+            alert("Please login first.");
+            window.location.href = "login.html";
+            return;
+        }
+
+        const paymentOption =
+            document.querySelector('input[name="payment"]:checked');
+
+        if (!paymentOption) {
+            alert("Please select a payment method.");
+            return;
+        }
+
+        const payment = paymentOption.value;
+
+        console.log("Selected Payment:", payment);
+
+        if (payment === "UPI" || payment === "Card") {
+            alert("🚧 Online Payment Coming Soon!");
+            return;
+        }
+
+        // -----------------------------
+        // Print Order
+        // -----------------------------
+
+        if (printCart.length > 0) {
+
+            const printOrder = printCart[0].order;
+
+            await fetch(
+                "https://snackible-backend.onrender.com/api/print-orders",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+
+                        user: {
+                            id: user.id,
+                            name: user.name,
+                            email: user.email,
+                            phone: user.phone || ""
+                        },
+
+                        address: addresses[0],
+
+                        paymentMethod: payment,
+
+                        items: printOrder.items,
+
+                        totalFiles: printOrder.totalFiles,
+
+                        totalPages: printOrder.totalPages,
+
+                        totalSheets: printOrder.totalSheets,
+
+                        totalPrice: printOrder.totalPrice,
+
+                        status: "Pending"
+
+                    })
+                }
+            );
+
+        }
+
+        // -----------------------------
+        // Grocery Order
+        // -----------------------------
+
+        if (cart.length > 0) {
+
+            const total = cart.reduce((sum, item) => {
+                return sum + item.price * item.qty;
+            }, 0);
+
+            const deliveryCharge = DELIVERY(total);
+
+            const finalTotal =
+                total + deliveryCharge + PLATFORM;
+
+            console.log("Going to place order...");
+
+            const response = await fetch(
+                "https://snackible-backend.onrender.com/api/orders",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+
+                        user: user.id,
+
+                        products: cart.map(item => ({
+
+                            productId: Number(
+                                String(item.id).split("-")[0]
+                            ),
+
+                            variant: item.variant,
+
+                            weight: item.weight,
+
+                            name: item.name,
+
+                            image: item.image,
+
+                            quantity: item.qty,
+
+                            price: item.price
+
+                        })),
+
+                        totalAmount: finalTotal,
+
+                        address: addressBox.innerText,
+
+                        location: userLocation,
+
+                        paymentMethod: payment
+
+                    })
+
+                }
+            );
+
+            const data = await response.json();
+
+            console.log("Status:", response.status);
+
+            if (!response.ok) {
+
+                alert(data.message || "Order Failed");
+
+                return;
+
+            }
 
         }
 
@@ -526,13 +525,11 @@ console.log("Going to place order...");
 
         alert("Order Placed Successfully");
 
-      window.location.href = "order-success.html";
+        window.location.href = "order-success.html";
 
-    }
+    } catch (err) {
 
-    catch (err) {
-
-        console.log(err);
+        console.error(err);
 
         alert("Server Error");
 
@@ -540,10 +537,6 @@ console.log("Going to place order...");
 
 });
 
-// ==========================================
-// Start
-// ==========================================
-
-loadAddress();
-
+//=======================
+loadAddress(); 
 loadCheckout();
