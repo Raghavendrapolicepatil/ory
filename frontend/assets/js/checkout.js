@@ -429,6 +429,7 @@ items: printOrder.items.map(item => ({
     id: item.id,
     fileName: item.fileName,
     fileType: item.fileType,
+    fileUrl: item.fileUrl,   
     paperSize: item.paperSize,
     printType: item.printType,
     side: item.side,
