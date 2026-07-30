@@ -349,17 +349,16 @@ function editPrintItem(index) {
 // Place Order
 // ==========================================
 
-placeOrderBtn.addEventListener("click", async () => {
+const cart = JSON.parse(localStorage.getItem("cart")) || [];
+const printCart = JSON.parse(localStorage.getItem("printCart")) || [];
 
-    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+if (cart.length === 0 && printCart.length === 0) {
 
-    if (cart.length === 0) {
+    alert("Your Shopping Bag is Empty.");
 
-        alert("Your Shopping Bag is Empty.");
+    return;
 
-        return;
-
-    }
+}
 
     const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
 
