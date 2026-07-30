@@ -401,7 +401,7 @@ placeOrderBtn.addEventListener("click", async () => {
         // Print Order
         // -----------------------------
 
-if (printCart.length > 0) {
+    if (printCart.length > 0) {
 
     const printOrder = printCart[0].order;
 
@@ -444,8 +444,6 @@ if (printCart.length > 0) {
     console.log("Print Status:", printResponse.status);
 
     console.log(await printResponse.text());
-
-}
 
 }
         // -----------------------------
