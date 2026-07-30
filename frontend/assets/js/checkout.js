@@ -421,22 +421,31 @@ if (printCart.length > 0) {
                     phone: user.phone || ""
                 },
 
-                address: addresses[0],
+address: addresses[0],
 
-                paymentMethod: payment,
+paymentMethod: payment,
 
-                items: printOrder.items,
+items: printOrder.items.map(item => ({
+    id: item.id,
+    fileName: item.fileName,
+    fileType: item.fileType,
+    paperSize: item.paperSize,
+    printType: item.printType,
+    side: item.side,
+    pages: item.pages,
+    copies: item.copies,
+    price: item.price
+})),
 
-                totalFiles: printOrder.totalFiles,
+totalFiles: printOrder.totalFiles,
 
-                totalPages: printOrder.totalPages,
+totalPages: printOrder.totalPages,
 
-                totalSheets: printOrder.totalSheets,
+totalSheets: printOrder.totalSheets,
 
-                totalPrice: printOrder.totalPrice,
+totalPrice: printOrder.totalPrice,
 
-                status: "Pending"
-
+status: "Pending"
             })
         }
     );
