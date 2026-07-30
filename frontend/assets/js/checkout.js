@@ -352,8 +352,9 @@ function editPrintItem(index) {
 placeOrderBtn.addEventListener("click", async () => {
 
     const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const printCart = JSON.parse(localStorage.getItem("printCart")) || [];
 
-    if (cart.length === 0) {
+    if (cart.length === 0 && printCart.length === 0) {
 
         alert("Your Shopping Bag is Empty.");
 
@@ -361,6 +362,8 @@ placeOrderBtn.addEventListener("click", async () => {
 
     }
 
+    // baaki code...
+});
     const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
 
     const userLocation = JSON.parse(
