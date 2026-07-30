@@ -1590,7 +1590,7 @@ function refreshOrder() {
 
 DOM.addToCartBtn.addEventListener("click", addToCart);
 
-function addToCart() {
+async function addToCart() {
 
     if (App.files.length === 0) {
 
@@ -1600,7 +1600,33 @@ function addToCart() {
 
     }
 
+    const formData = new FormData();
+
+App.files.forEach(file => {
+    formData.append("files", file.file);
+});
+
+const uploadResponse = await fetch(
+    "https://snackible-backend.onrender.com/api/print-upload",
+    {
+        method: "POST",
+        body: formData
+    }
+);
+
+const uploadData = await uploadResponse.json();
+
+if (!uploadData.success) {
+    alert("File upload failed.");
+    return;
+}
+
     const payload = getCartPayload();
+
+    payload.order.items = payload.order.items.map((item, index) => ({
+    ...item,
+    fileUrl: uploadData.files[index].url
+}));
 
     let cart = JSON.parse(
         localStorage.getItem("printCart")
