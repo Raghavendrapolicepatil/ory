@@ -529,13 +529,9 @@ placeOrderBtn.addEventListener("click", async () => {
 
     } catch (err) {
 
-    console.error("Error:", err);
+    console.error(err);
 
-    alert(
-        "Message: " + err.message +
-        "\n\nName: " + err.name +
-        "\n\nStack:\n" + err.stack
-    );
+    alert(err.message);
 
 }
 
