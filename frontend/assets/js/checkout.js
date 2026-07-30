@@ -421,7 +421,6 @@ if (payment === "UPI" || payment === "Card") {
 
     const finalTotal = total + deliveryCharge + PLATFORM;
 
-    const printCart = JSON.parse(localStorage.getItem("printCart")) || [];
 
 if (printCart.length > 0) {
 
