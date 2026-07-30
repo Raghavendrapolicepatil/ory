@@ -349,18 +349,20 @@ function editPrintItem(index) {
 // Place Order
 // ==========================================
 
-const cart = JSON.parse(localStorage.getItem("cart")) || [];
-const printCart = JSON.parse(localStorage.getItem("printCart")) || [];
+placeOrderBtn.addEventListener("click", async () => {
 
-if (cart.length === 0 && printCart.length === 0) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const printCart = JSON.parse(localStorage.getItem("printCart")) || [];
 
-    alert("Your Shopping Bag is Empty.");
+    if (cart.length === 0 && printCart.length === 0) {
 
-    return;
+        alert("Your Shopping Bag is Empty.");
+        return;
 
-}
+    }
 
-    const addresses = JSON.parse(localStorage.getItem("addresses")) || [];
+    const addresses =
+        JSON.parse(localStorage.getItem("addresses")) || [];
 
     const userLocation = JSON.parse(
     localStorage.getItem("userLocation")
@@ -537,7 +539,7 @@ console.log("Going to place order...");
 
     }
 
-
+});
 
 // ==========================================
 // Start
