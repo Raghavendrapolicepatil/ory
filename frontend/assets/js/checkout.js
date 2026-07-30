@@ -397,10 +397,7 @@ placeOrderBtn.addEventListener("click", async () => {
             return;
         }
 
-        // -----------------------------
-        // Print Order
-        // -----------------------------
-// -----------------------------
+       // -----------------------------
 // Print Order
 // -----------------------------
 
@@ -444,14 +441,14 @@ if (printCart.length > 0) {
         }
     );
 
-    const printData = await printResponse.json();
+    const responseText = await printResponse.text();
 
     console.log("Print Status:", printResponse.status);
-    console.log("Print Data:", printData);
+    console.log("Print Response:", responseText);
 
     if (!printResponse.ok) {
         alert("Print Order Failed!");
-        console.error(printData);
+        console.error(responseText);
         return;
     }
 }
