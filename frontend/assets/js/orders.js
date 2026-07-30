@@ -185,8 +185,10 @@ function renderOrders(orders) {
             <div class="order-product">
 
                 <img
-                    src="${product.image}"
-                    alt="${product.name}">
+    src="${order.isPrint
+        ? "assets/images/file.png"
+        : product.image}"
+    alt="${product.name || product.fileName}">
 
                 <div class="order-info">
 
@@ -250,7 +252,7 @@ function renderOrders(orders) {
 
                 <span>
 
-                    ₹${order.totalAmount}
+                   ₹${order.isPrint ? order.totalPrice : order.totalAmount}
 
                 </span>
 
@@ -270,7 +272,9 @@ function renderOrders(orders) {
 
                 <br>
 
-                ${order.address}
+                ${typeof order.address === "object"
+    ? `${order.address.house}, ${order.address.street}, ${order.address.city} - ${order.address.pincode}`
+    : order.address}
 
             </div>
 
