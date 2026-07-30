@@ -12,6 +12,8 @@ const printItemSchema = new mongoose.Schema({
 
     fileType: String,
 
+    fileUrl: String,
+
     thumbnail: String,
 
     paperSize: String,
