@@ -1,534 +1,331 @@
-/* ==========================================
-   API
-========================================== */
+const API = "https://snackible-backend.onrender.com/api/print-orders";
 
-const API = "https://snackible-backend.onrender.com/api";
-
-/* ==========================================
-   DOM
-========================================== */
-
-const container = document.getElementById("printOrdersContainer");
-
-const searchInput = document.getElementById("searchInput");
-
+const ordersTable = document.getElementById("printOrdersTable");
+const searchInput = document.getElementById("searchPrintOrder");
 const statusFilter = document.getElementById("statusFilter");
 
-const refreshBtn = document.querySelector(".refresh-btn");
+let allOrders = [];
 
-/* ==========================================
-   DATA
-========================================== */
-
-let orders = [];
-
-let filteredOrders = [];
-
-/* ==========================================
-   LOAD
-========================================== */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    loadOrders();
-
-});
-
-/* ==========================================
-   FETCH ORDERS
-========================================== */
+// ==========================================
+// Load Print Orders
+// ==========================================
 
 async function loadOrders() {
 
     try {
 
-        container.innerHTML = `
-            <div class="loading">
-                Loading Print Orders...
-            </div>
-        `;
+        const res = await fetch(API);
 
-        const response = await fetch(`${API}/print-orders`);
+        const orders = await res.json();
 
-        if (!response.ok) {
+        allOrders = orders;
 
-            throw new Error("Unable to load print orders.");
-
-        }
-
-        orders = await response.json();
-
-        filteredOrders = [...orders];
-
-        renderOrders();
-
-    }
-
-    catch (error) {
-
-        console.error(error);
-
-        container.innerHTML = `
-            <div class="error">
-                Failed to load print orders.
-            </div>
-        `;
-
-    }
-
-}
-
-/* ==========================================
-   RENDER
-========================================== */
-
-function renderOrders() {
-
-    if (filteredOrders.length === 0) {
-
-        container.innerHTML = `
-            <div class="empty">
-                No Print Orders Found
-            </div>
-        `;
-
-        return;
-
-    }
-
-    container.innerHTML = filteredOrders
-        .map(createOrderCard)
-        .join("");
-
-}
-
-/* ==========================================
-   CARD
-========================================== */
-
-function createOrderCard(order) {
-
-    return `
-
-<div class="print-order-card">
-
-    <div class="order-top">
-
-        <div>
-
-            <h3>#${order.orderId}</h3>
-
-            <span class="order-date">
-
-                ${formatDate(order.createdAt)}
-
-            </span>
-
-        </div>
-
-        <span class="status ${order.status.toLowerCase()}">
-
-            ${order.status}
-
-        </span>
-
-    </div>
-
-    <div class="customer-info">
-
-        <p>
-
-            <i class="ri-user-3-line"></i>
-
-            <strong>${order.customer.name}</strong>
-
-        </p>
-
-        <p>
-
-            <i class="ri-phone-line"></i>
-
-            ${order.customer.phone}
-
-        </p>
-
-        <p>
-
-            <i class="ri-map-pin-line"></i>
-
-            ${order.customer.address}
-
-        </p>
-
-    </div>
-
-    <div class="print-details">
-
-        <div>
-
-            <span>Paper</span>
-
-            <strong>${order.paper}</strong>
-
-        </div>
-
-        <div>
-
-            <span>Print</span>
-
-            <strong>${order.printType}</strong>
-
-        </div>
-
-        <div>
-
-            <span>Side</span>
-
-            <strong>${order.side}</strong>
-
-        </div>
-
-        <div>
-
-            <span>Copies</span>
-
-            <strong>${order.copies}</strong>
-
-        </div>
-
-        <div>
-
-            <span>Sheets</span>
-
-            <strong>${order.totalSheets}</strong>
-
-        </div>
-
-        <div>
-
-            <span>Total</span>
-
-            <strong>₹${order.totalPrice}</strong>
-
-        </div>
-
-    </div>
-
-    <div class="files-section">
-
-        <h4>
-
-            <i class="ri-folder-line"></i>
-
-            Files (${order.files.length})
-
-        </h4>
-
-        ${renderFiles(order.files)}
-
-    </div>
-
-    <div class="order-actions">
-
-        <button
-            class="printing-btn">
-
-            Printing
-
-        </button>
-
-        <button
-            class="ready-btn">
-
-            Ready
-
-        </button>
-
-        <button
-            class="delivered-btn">
-
-            Delivered
-
-        </button>
-
-    </div>
-
-</div>
-
-`;
-
-}
-
-/* ==========================================
-   FILES
-========================================== */
-
-function renderFiles(files) {
-
-    return files.map(file => `
-
-<div class="file-item">
-
-<span>
-
-<i class="${file.type === "application/pdf"
-? "ri-file-pdf-line"
-: "ri-image-line"}"></i>
-
-${file.name}
-
-</span>
-
-<div class="file-actions">
-
-<button
-class="preview-btn">
-
-<i class="ri-eye-line"></i>
-
-</button>
-
-<button
-class="download-btn">
-
-<i class="ri-download-line"></i>
-
-</button>
-
-</div>
-
-</div>
-
-`).join("");
-
-}
-
-/* ==========================================
-   DATE
-========================================== */
-
-function formatDate(date){
-
-    return new Date(date)
-        .toLocaleString();
-
-}
-
-/* ==========================================
-   PREVIEW MODAL
-========================================== */
-
-const previewModal = document.getElementById("previewModal");
-
-const previewBody = document.getElementById("previewBody");
-
-const previewTitle = document.getElementById("previewTitle");
-
-const downloadPreview = document.getElementById("downloadPreview");
-
-const closePreview = document.getElementById("closePreview");
-
-/* ==========================================
-   FILE BUTTON EVENTS
-========================================== */
-
-document.addEventListener("click", async (e) => {
-
-    const previewBtn = e.target.closest(".preview-btn");
-
-    const downloadBtn = e.target.closest(".download-btn");
-
-    const statusBtn = e.target.closest(".printing-btn,.ready-btn,.delivered-btn");
-
-    if (previewBtn) {
-
-        const url = previewBtn.dataset.url;
-
-        const name = previewBtn.dataset.name;
-
-        const type = previewBtn.dataset.type;
-
-        openPreview(url, name, type);
-
-    }
-
-    if (downloadBtn) {
-
-        window.open(downloadBtn.dataset.url, "_blank");
-
-    }
-
-    if (statusBtn) {
-
-        const orderId = statusBtn.dataset.id;
-
-        let status = "Pending";
-
-        if (statusBtn.classList.contains("printing-btn"))
-            status = "Printing";
-
-        if (statusBtn.classList.contains("ready-btn"))
-            status = "Ready";
-
-        if (statusBtn.classList.contains("delivered-btn"))
-            status = "Delivered";
-
-        await updateStatus(orderId, status);
-
-    }
-
-});
-
-/* ==========================================
-   OPEN PREVIEW
-========================================== */
-
-function openPreview(url, name, type) {
-
-    previewTitle.textContent = name;
-
-    downloadPreview.href = url;
-
-    if (type === "application/pdf") {
-
-        previewBody.innerHTML = `
-            <iframe src="${url}"></iframe>
-        `;
-
-    }
-
-    else {
-
-        previewBody.innerHTML = `
-            <img src="${url}" alt="${name}">
-        `;
-
-    }
-
-    previewModal.classList.add("active");
-
-}
-
-/* ==========================================
-   CLOSE
-========================================== */
-
-closePreview.addEventListener("click", () => {
-
-    previewModal.classList.remove("active");
-
-    previewBody.innerHTML = "";
-
-});
-
-previewModal.addEventListener("click", e => {
-
-    if (e.target === previewModal) {
-
-        previewModal.classList.remove("active");
-
-        previewBody.innerHTML = "";
-
-    }
-
-});
-
-/* ==========================================
-   SEARCH
-========================================== */
-
-searchInput.addEventListener("input", filterOrders);
-
-statusFilter.addEventListener("change", filterOrders);
-
-function filterOrders() {
-
-    const search = searchInput.value.toLowerCase();
-
-    const status = statusFilter.value;
-
-    filteredOrders = orders.filter(order => {
-
-        const matchSearch =
-
-            order.orderId.toLowerCase().includes(search)
-
-            ||
-
-            order.customer.name.toLowerCase().includes(search)
-
-            ||
-
-            order.customer.phone.includes(search);
-
-        const matchStatus =
-
-            status === "all"
-
-            ||
-
-            order.status === status;
-
-        return matchSearch && matchStatus;
-
-    });
-
-    renderOrders();
-
-}
-
-/* ==========================================
-   REFRESH
-========================================== */
-
-refreshBtn.addEventListener("click", loadOrders);
-
-/* ==========================================
-   UPDATE STATUS
-========================================== */
-
-async function updateStatus(orderId, status) {
-
-    try {
-
-        const response = await fetch(
-
-            `${API}/print-orders/${orderId}`,
-
-            {
-
-                method: "PATCH",
-
-                headers: {
-
-                    "Content-Type": "application/json"
-
-                },
-
-                body: JSON.stringify({
-
-                    status
-
-                })
-
-            }
-
-        );
-
-        if (!response.ok) {
-
-            throw new Error();
-
-        }
-
-        loadOrders();
+        displayOrders(allOrders);
 
     }
 
     catch (err) {
 
-        alert("Unable to update status.");
+        console.log(err);
 
     }
 
 }
+
+// ==========================================
+// Display Orders
+// ==========================================
+
+function displayOrders(orders) {
+
+    ordersTable.innerHTML = "";
+
+    if (orders.length === 0) {
+
+        ordersTable.innerHTML = `
+
+<tr>
+
+<td colspan="9">
+
+No Print Orders Found
+
+</td>
+
+</tr>
+
+`;
+
+        return;
+
+    }
+
+    orders.forEach(order => {
+
+        ordersTable.innerHTML += `
+
+<tr>
+
+<td>#${order._id.slice(-6)}</td>
+
+<td>${order.user?.name || "Guest"}</td>
+
+<td>${order.totalFiles || 0}</td>
+
+<td>${order.totalPages || 0}</td>
+
+<td>₹${order.totalPrice || 0}</td>
+
+<td>${order.paymentMethod || "-"}</td>
+
+<td>
+
+<select onchange="updateStatus('${order._id}',this.value)">
+
+<option value="Pending" ${order.status==="Pending"?"selected":""}>Pending</option>
+
+<option value="Printing" ${order.status==="Printing"?"selected":""}>Printing</option>
+
+<option value="Ready" ${order.status==="Ready"?"selected":""}>Ready</option>
+
+<option value="Completed" ${order.status==="Completed"?"selected":""}>Completed</option>
+
+<option value="Cancelled" ${order.status==="Cancelled"?"selected":""}>Cancelled</option>
+
+</select>
+
+</td>
+
+<td>${new Date(order.createdAt).toLocaleDateString()}</td>
+
+<td>
+
+<button onclick="viewOrder('${order._id}')">
+
+View
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+    });
+
+}
+
+// ==========================================
+// Update Status
+// ==========================================
+
+async function updateStatus(id,status){
+
+    try{
+
+        const res = await fetch(`${API}/${id}`,{
+
+            method:"PUT",
+
+            headers:{
+
+                "Content-Type":"application/json"
+
+            },
+
+            body:JSON.stringify({
+
+                status
+
+            })
+
+        });
+
+        const data = await res.json();
+
+        alert(data.message);
+
+        loadOrders();
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+    }
+
+}
+
+// ==========================================
+// View Order
+// ==========================================
+
+async function viewOrder(id){
+
+    try{
+
+        const res = await fetch(`${API}/${id}`);
+
+        const order = await res.json();
+
+        const details = document.getElementById("printOrderDetails");
+
+        let html = `
+
+<p><b>Customer :</b> ${order.user?.name || "Guest"}</p>
+
+<p><b>Email :</b> ${order.user?.email || "-"}</p>
+
+<p><b>Phone :</b> ${order.phone || "-"}</p>
+
+<p><b>Payment :</b> ${order.paymentMethod || "-"}</p>
+
+<p><b>Status :</b> ${order.status}</p>
+
+<p><b>Total :</b> ₹${order.totalPrice || 0}</p>
+
+<hr>
+
+<h3>Files</h3>
+
+`;
+
+        if(order.items){
+
+            order.items.forEach(file=>{
+
+                html += `
+
+<div class="print-file">
+
+<img src="${file.thumbnail}" alt="">
+
+<div class="file-info">
+
+<h4>${file.fileName}</h4>
+
+<p>Paper : ${file.paperSize}</p>
+
+<p>Print : ${file.printType}</p>
+
+<p>Pages : ${file.pages}</p>
+
+<p>Copies : ${file.copies}</p>
+
+</div>
+
+<div class="file-price">
+
+₹${file.price}
+
+</div>
+
+</div>
+
+`;
+
+            });
+
+        }
+
+        html += `
+
+<div class="order-summary">
+
+<p><strong>Total Files :</strong> ${order.totalFiles || 0}</p>
+
+<p><strong>Total Pages :</strong> ${order.totalPages || 0}</p>
+
+<p><strong>Total Sheets :</strong> ${order.totalSheets || 0}</p>
+
+<p><strong>Grand Total :</strong> ₹${order.totalPrice || 0}</p>
+
+</div>
+
+`;
+
+        details.innerHTML = html;
+
+        document.getElementById("printOrderModal").style.display="flex";
+
+    }
+
+    catch(err){
+
+        console.log(err);
+
+    }
+
+}
+
+// ==========================================
+// Search
+// ==========================================
+
+searchInput.addEventListener("input",()=>{
+
+    const keyword = searchInput.value.toLowerCase();
+
+    const filtered = allOrders.filter(order=>
+
+        (order.user?.name || "").toLowerCase().includes(keyword)
+
+    );
+
+    displayOrders(filtered);
+
+});
+
+// ==========================================
+// Filter
+// ==========================================
+
+statusFilter.addEventListener("change",()=>{
+
+    if(statusFilter.value===""){
+
+        displayOrders(allOrders);
+
+        return;
+
+    }
+
+    const filtered = allOrders.filter(order=>
+
+        order.status===statusFilter.value
+
+    );
+
+    displayOrders(filtered);
+
+});
+
+// ==========================================
+// Close Modal
+// ==========================================
+
+function closeModal(){
+
+    document.getElementById("printOrderModal").style.display="none";
+
+}
+
+window.onclick=function(e){
+
+    const modal=document.getElementById("printOrderModal");
+
+    if(e.target===modal){
+
+        modal.style.display="none";
+
+    }
+
+}
+
+// ==========================================
+// Start
+// ==========================================
+
+loadOrders();
