@@ -401,48 +401,39 @@ placeOrderBtn.addEventListener("click", async () => {
         // Print Order
         // -----------------------------
 
-        if (printCart.length > 0) {
+       if (
+    printCart.length > 0 &&
+    printCart[0] &&
+    printCart[0].order &&
+    Array.isArray(printCart[0].order.items)
+) {
 
-            const printOrder = printCart[0].order;
+    const printOrder = printCart[0].order;
 
-            await fetch(
-                "https://snackible-backend.onrender.com/api/print-orders",
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
+    await fetch("https://snackible-backend.onrender.com/api/print-orders", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone || ""
+            },
+            address: addresses[0],
+            paymentMethod: payment,
+            items: printOrder.items,
+            totalFiles: printOrder.totalFiles,
+            totalPages: printOrder.totalPages,
+            totalSheets: printOrder.totalSheets,
+            totalPrice: printOrder.totalPrice,
+            status: "Pending"
+        })
+    });
 
-                        user: {
-                            id: user.id,
-                            name: user.name,
-                            email: user.email,
-                            phone: user.phone || ""
-                        },
-
-                        address: addresses[0],
-
-                        paymentMethod: payment,
-
-                        items: printOrder.items,
-
-                        totalFiles: printOrder.totalFiles,
-
-                        totalPages: printOrder.totalPages,
-
-                        totalSheets: printOrder.totalSheets,
-
-                        totalPrice: printOrder.totalPrice,
-
-                        status: "Pending"
-
-                    })
-                }
-            );
-
-        }
-
+}
         // -----------------------------
         // Grocery Order
         // -----------------------------
