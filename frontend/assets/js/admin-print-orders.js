@@ -126,7 +126,7 @@ async function updateStatus(id,status){
 
         const res = await fetch(`${API}/${id}`,{
 
-            method:"PUT",
+           method: "PATCH",
 
             headers:{
 
@@ -218,11 +218,16 @@ async function viewOrder(id){
 
 <p>Copies : ${file.copies}</p>
 
-</div>
+<br>
 
-<div class="file-price">
-
-₹${file.price}
+<a
+    href="https://snackible-backend.onrender.com${file.fileUrl}"
+    target="_blank"
+    download="${file.fileName}"
+    style="display:inline-block;padding:6px 12px;background:#28a745;color:#fff;text-decoration:none;border-radius:6px;"
+>
+📥 Download File
+</a>
 
 </div>
 
