@@ -41,7 +41,7 @@ async function loadProducts() {
 
             <div class="admin-card">
 
-                <img src="${product.image}" alt="${product.name}">
+                <img src="${product.image || product.thumbnail}" alt="${product.name || product.fileName}">
 
                 <h3>${product.name}</h3>
 

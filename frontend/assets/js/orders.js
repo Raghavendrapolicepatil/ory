@@ -183,11 +183,11 @@ function renderOrders(orders) {
 
                 <div class="order-info">
 
-                    <h4>${product.name}</h4>
+                    <h4>${product.name || product.fileName}</h4>
 
                     <p>
 
-                        Qty : ${product.quantity}
+                        ${order.isPrint ? `Copies : ${product.copies}` : `Qty : ${product.quantity}`}
 
                     </p>
 
@@ -195,7 +195,7 @@ function renderOrders(orders) {
 
                 <strong>
 
-                    ₹${product.price * product.quantity}
+                    ₹${order.isPrint ? product.price : product.price * product.quantity}
 
                 </strong>
 
