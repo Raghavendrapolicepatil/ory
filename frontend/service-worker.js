@@ -1,4 +1,4 @@
-const CACHE_NAME = "snackible-v9";
+const CACHE_NAME = "orymart-v1";
 
 const urlsToCache = [
   "/offline.html",
