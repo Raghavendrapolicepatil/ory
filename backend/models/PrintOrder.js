@@ -144,19 +144,11 @@ const printOrderSchema = new mongoose.Schema({
    Auto Order ID
 ========================================== */
 
-printOrderSchema.pre("save", function(next){
+printOrderSchema.pre("save", function () {
 
-    if(!this.orderId){
-
-        this.orderId =
-
-            "PR" +
-
-            Date.now();
-
+    if (!this.orderId) {
+        this.orderId = "PR" + Date.now();
     }
-
-    next();
 
 });
 
