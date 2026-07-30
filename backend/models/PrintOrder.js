@@ -1,92 +1,133 @@
 const mongoose = require("mongoose");
 
-const printFileSchema = new mongoose.Schema({
+/* ==========================================
+   Print File
+========================================== */
 
-    name: {
-        type: String,
-        required: true
-    },
+const printItemSchema = new mongoose.Schema({
 
-    fileName: {
-        type: String,
-        required: true
-    },
+    id: String,
 
-    url: {
-        type: String,
-        required: true
-    },
+    fileName: String,
 
-    type: {
-        type: String,
-        required: true
-    },
+    fileType: String,
 
-    size: {
-        type: Number,
-        required: true
-    }
+    thumbnail: String,
+
+    paperSize: String,
+
+    printType: String,
+
+    side: String,
+
+    pages: Number,
+
+    copies: Number,
+
+    price: Number
 
 }, { _id: false });
+
+/* ==========================================
+   Print Order
+========================================== */
 
 const printOrderSchema = new mongoose.Schema({
 
     orderId: {
+
         type: String,
+
         unique: true
+
     },
 
-    customer: {
+    user: {
+
+        id: String,
 
         name: String,
 
-        phone: String,
-
         email: String,
 
-        address: String
+        phone: String
 
     },
 
-    files: [printFileSchema],
+    address: {
 
-    paper: {
+        name: String,
+
+        mobile: String,
+
+        house: String,
+
+        street: String,
+
+        city: String,
+
+        pincode: String
+
+    },
+
+    paymentMethod: {
+
         type: String,
-        default: "A4"
+
+        default: "COD"
+
     },
 
-    printType: {
-        type: String,
-        enum: ["bw", "colour"],
-        default: "bw"
-    },
+    items: [printItemSchema],
 
-    side: {
-        type: String,
-        default: "Single Side"
-    },
+    totalFiles: {
 
-    copies: {
         type: Number,
-        default: 1
+
+        default: 0
+
     },
 
-    totalPages: Number,
+    totalPages: {
 
-    totalSheets: Number,
+        type: Number,
 
-    totalPrice: Number,
+        default: 0
+
+    },
+
+    totalSheets: {
+
+        type: Number,
+
+        default: 0
+
+    },
+
+    totalPrice: {
+
+        type: Number,
+
+        default: 0
+
+    },
 
     status: {
 
         type: String,
 
         enum: [
+
             "Pending",
+
             "Printing",
+
             "Ready",
+
             "Delivered",
+
             "Cancelled"
+
         ],
 
         default: "Pending"
@@ -99,12 +140,18 @@ const printOrderSchema = new mongoose.Schema({
 
 });
 
+/* ==========================================
+   Auto Order ID
+========================================== */
+
 printOrderSchema.pre("save", function(next){
 
     if(!this.orderId){
 
         this.orderId =
+
             "PR" +
+
             Date.now();
 
     }
@@ -113,8 +160,7 @@ printOrderSchema.pre("save", function(next){
 
 });
 
-module.exports =
-    mongoose.model(
-        "PrintOrder",
-        printOrderSchema
-    );
+module.exports = mongoose.model(
+    "PrintOrder",
+    printOrderSchema
+);
