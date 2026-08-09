@@ -228,7 +228,8 @@ let activeFilter = "all";
 function applyProductFilter() {
 
     let products = allProducts.filter(product =>
-        product.category === categorySlug
+        String(product.category).toLowerCase().trim() ===
+String(categorySlug).toLowerCase().trim()
     );
 
     switch (activeFilter) {
