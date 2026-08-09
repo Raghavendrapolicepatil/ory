@@ -188,6 +188,37 @@ function changeCategory(slug){
     });
 
 }
+
+// ======================================
+// Filter Current Category
+// ======================================
+
+function filterProducts() {
+
+    const title = formatCategory(categorySlug);
+
+    if (categoryTitle)
+        categoryTitle.textContent = title;
+
+    if (categoryHeading)
+        categoryHeading.textContent = title;
+
+    activeFilter = "all";
+
+    document
+        .querySelectorAll(".filter-chip")
+        .forEach(btn => {
+            btn.classList.remove("active");
+
+            if (btn.dataset.filter === "all") {
+                btn.classList.add("active");
+            }
+        });
+
+    applyProductFilter();
+
+}
+
 // ======================================
 // Product Filters
 // ======================================
