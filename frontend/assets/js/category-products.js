@@ -388,6 +388,35 @@ String(categorySlug).toLowerCase().trim()
 
 
 // ======================================
+// Render Products
+// ======================================
+
+function renderProducts(products) {
+
+    if (!productContainer) return;
+
+    productContainer.innerHTML = "";
+
+    if (!products || products.length === 0) {
+
+        if (emptyState) {
+            emptyState.style.display = "block";
+        }
+
+        return;
+    }
+
+    if (emptyState) {
+        emptyState.style.display = "none";
+    }
+
+    productContainer.innerHTML = products
+        .map(product => createProductCard(product))
+        .join("");
+
+}
+
+// ======================================
 // Product Card
 // ======================================
 
