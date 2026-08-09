@@ -190,26 +190,114 @@ function changeCategory(slug){
 }
 
 // ======================================
-// Filter Products
+// Product Filters
 // ======================================
 
-function filterProducts(){
+let activeFilter = "all";
 
-    filteredProducts = allProducts.filter(product=>{
+function applyProductFilter() {
 
-        return product.category===categorySlug;
+    let products = allProducts.filter(product =>
+        product.category === categorySlug
+    );
 
-    });
+    switch (activeFilter) {
 
-    filteredProducts.sort((a,b)=>{
+        case "popular":
 
-        if(a.stock<=0 && b.stock>0) return 1;
+            products = products.filter(product =>
+                product.popular === true ||
+                product.isPopular === true
+            );
 
-        if(a.stock>0 && b.stock<=0) return -1;
+            break;
+
+        case "low":
+
+            products.sort((a, b) =>
+                Number(a.price) - Number(b.price)
+            );
+
+            break;
+
+        case "high":
+
+            products.sort((a, b) =>
+                Number(b.price) - Number(a.price)
+            );
+
+            break;
+
+        case "offers":
+
+            products = products.filter(product =>
+                product.discount &&
+                product.discount !== "0% OFF"
+            );
+
+            break;
+
+        case "new":
+
+            products = products.filter(product =>
+                product.isNew === true ||
+                product.new === true
+            );
+
+            break;
+
+        case "bestseller":
+
+            products = products.filter(product =>
+                product.bestSeller === true ||
+                product.bestseller === true
+            );
+
+            break;
+
+        case "fast":
+
+            products = products.filter(product =>
+                product.fastDelivery === true ||
+                product.deliveryTime === "15 mins"
+            );
+
+            break;
+
+        default:
+            // All
+            break;
+    }
+
+    // Out of stock products last
+    products.sort((a, b) => {
+
+        if (a.stock <= 0 && b.stock > 0) return 1;
+
+        if (a.stock > 0 && b.stock <= 0) return -1;
 
         return 0;
 
     });
+
+    filteredProducts = products;
+
+    if (productCount) {
+
+        productCount.textContent =
+            products.length + " Products";
+
+    }
+
+    renderProducts(products);
+
+}
+
+// ======================================
+// Filter Products
+// ======================================
+
+function filterProducts(){
 
     const title = formatCategory(categorySlug);
 
@@ -219,11 +307,7 @@ function filterProducts(){
     if(categoryHeading)
         categoryHeading.textContent = title;
 
-    if(productCount)
-        productCount.textContent =
-        filteredProducts.length + " Products";
-
-    renderProducts(filteredProducts);
+    applyProductFilter();
 
 }
 
@@ -632,5 +716,30 @@ window.addEventListener("cartUpdated", () => {
     }
 
     updateFloatingCart();
+
+});
+
+// ======================================
+// Filter Buttons
+// ======================================
+
+document.querySelectorAll(".filter-chip").forEach(button => {
+
+    button.addEventListener("click", () => {
+
+        document
+            .querySelectorAll(".filter-chip")
+            .forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+        button.classList.add("active");
+
+        activeFilter =
+            button.dataset.filter || "all";
+
+        applyProductFilter();
+
+    });
 
 });
