@@ -14,7 +14,7 @@ const getSettings = async (req, res) => {
 
             settings = await Settings.create({
 
-                storeName: "Patil Groceries",
+                storeName: "Ory Mart",
 
                 storePhone: "",
 

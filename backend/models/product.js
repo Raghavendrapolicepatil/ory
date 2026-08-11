@@ -89,7 +89,7 @@ const productSchema = new mongoose.Schema({
     // Seller
     seller: {
     type: String,
-    default: "Patil Groceries"
+    default: "Ory Mart"
 },
 
     // Homepage Sections

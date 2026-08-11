@@ -6,7 +6,7 @@ const settingsSchema = new mongoose.Schema({
 
         type: String,
 
-        default: "Patil Groceries"
+        default: "Ory Mart"
 
     },
 

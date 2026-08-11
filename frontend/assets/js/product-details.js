@@ -278,7 +278,7 @@ function renderBasicInfo(){
 
         currentProduct.brand ||
 
-        "Snackible"
+        "Ory Mart"
 
     );
 
@@ -392,7 +392,7 @@ function renderBasicInfo(){
 
         currentProduct.seller ||
 
-        "Snackible Grocery"
+        "Ory Mart"
 
     );
 
