@@ -173,7 +173,47 @@ async function viewOrder(id) {
 
 <p><b>Email :</b> ${order.user?.email || "-"}</p>
 
-<p><b>Address :</b> ${order.address}</p>
+<p>
+    <b>Address :</b><br>
+    ${order.address || "-"}
+</p>
+
+${
+    order.location?.latitude && order.location?.longitude
+    ? `
+        <div style="margin-top:15px;">
+
+            <h3>📍 Customer Location</h3>
+
+            <p>
+                Latitude : ${order.location.latitude}<br>
+                Longitude : ${order.location.longitude}
+            </p>
+
+            <a
+                href="https://www.google.com/maps?q=${order.location.latitude},${order.location.longitude}"
+                target="_blank"
+                style="
+                    display:inline-block;
+                    padding:10px 15px;
+                    background:#0d6efd;
+                    color:white;
+                    text-decoration:none;
+                    border-radius:6px;
+                "
+            >
+                📍 Open Customer Location
+            </a>
+
+        </div>
+    `
+    : `
+        <div style="margin-top:15px;">
+            <h3>📍 Customer Location</h3>
+            <p>Location not available.</p>
+        </div>
+    `
+}
 
 <p><b>Payment :</b> ${order.paymentMethod}</p>
 
