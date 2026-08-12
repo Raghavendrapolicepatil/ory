@@ -192,7 +192,8 @@ async function viewOrder(id){
 </p>
 
 ${
-    order.location?.latitude && order.location?.longitude
+    order.location?.latitude != null &&
+order.location?.longitude != null
     ? `
         <div style="margin-top:15px;">
 
@@ -205,7 +206,7 @@ ${
             </p>
 
             <a
-                href="https://www.google.com/maps?q=${order.location.latitude},${order.location.longitude}"
+               href="https://www.google.com/maps?q=${order.location.latitude},${order.location.longitude}"
                 target="_blank"
                 style="
                     display:inline-block;
