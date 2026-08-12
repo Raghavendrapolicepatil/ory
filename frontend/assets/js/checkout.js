@@ -423,8 +423,9 @@ if (printCart.length > 0) {
 
 address: addresses[0],
 
-paymentMethod: payment,
+location: userLocation,
 
+paymentMethod: payment,
 items: printOrder.items.map(item => ({
     id: item.id,
     fileName: item.fileName,
