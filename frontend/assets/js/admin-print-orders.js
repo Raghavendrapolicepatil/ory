@@ -180,6 +180,8 @@ async function viewOrder(id){
 
 <p><b>Phone :</b> ${order.user?.phone || "-"}</p>
 
+
+
 <p>
     <b>Delivery Address :</b><br>
     ${order.address?.name || ""}<br>
@@ -209,7 +211,7 @@ ${
                     display:inline-block;
                     padding:10px 16px;
                     background:#0d6efd;
-                    color:#fff;
+                    color:white;
                     text-decoration:none;
                     border-radius:8px;
                 "
@@ -225,7 +227,6 @@ ${
         </p>
     `
 }
-
 <p><b>Payment :</b> ${order.paymentMethod || "-"}</p>
 
 <p><b>Status :</b> ${order.status}</p>
