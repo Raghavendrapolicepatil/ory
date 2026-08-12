@@ -43,6 +43,11 @@ async function loadCategories() {
                 <p><strong>Slug :</strong> ${category.slug}</p>
 
                 <p>
+    <strong>Position :</strong>
+    ${category.sortOrder || 1}
+</p>
+
+                <p>
                     <strong>Status :</strong>
                     ${category.status ? "Active" : "Inactive"}
                 </p>
@@ -89,17 +94,21 @@ form.addEventListener("submit", async (e) => {
 
     e.preventDefault();
 
-    const category = {
+   const category = {
 
-        name: document.getElementById("name").value,
+    name: document.getElementById("name").value,
 
-        slug: document.getElementById("slug").value,
+    slug: document.getElementById("slug").value,
 
-        image: document.getElementById("image").value,
+    image: document.getElementById("image").value,
 
-        status: true
+    sortOrder: Number(
+        document.getElementById("sortOrder").value
+    ),
 
-    };
+    status: true
+
+};
 
     try {
 
@@ -176,6 +185,9 @@ async function editCategory(id) {
     document.getElementById("slug").value = category.slug;
 
     document.getElementById("image").value = category.image;
+
+    document.getElementById("sortOrder").value =
+    category.sortOrder || 1;
 
 }
 
