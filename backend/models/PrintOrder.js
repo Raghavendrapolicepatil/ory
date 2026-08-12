@@ -72,6 +72,12 @@ const printOrderSchema = new mongoose.Schema({
 
     },
 
+    location: {
+    city: String,
+    latitude: Number,
+    longitude: Number
+},
+
     paymentMethod: {
 
         type: String,
