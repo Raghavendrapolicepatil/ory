@@ -405,6 +405,8 @@ if (printCart.length > 0) {
 
     const printOrder = printCart[0].order;
 
+    console.log("PRINT USER LOCATION:", userLocation);
+
     const printResponse = await fetch(
         "https://snackible-backend.onrender.com/api/print-orders",
         {
@@ -426,6 +428,7 @@ address: addresses[0],
 location: userLocation,
 
 paymentMethod: payment,
+
 items: printOrder.items.map(item => ({
     id: item.id,
     fileName: item.fileName,
