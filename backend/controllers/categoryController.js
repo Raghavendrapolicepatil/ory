@@ -8,7 +8,7 @@ const getCategories = async (req, res) => {
 
     try {
 
-        const categories = await Category.find().sort({ createdAt: -1 });
+        const categories = await Category.find().sort({ sortOrder: 1 });
 
         res.json(categories);
 

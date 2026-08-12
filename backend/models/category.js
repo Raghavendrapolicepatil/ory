@@ -32,11 +32,19 @@ const categorySchema = new mongoose.Schema({
 
     status:{
 
-        type:Boolean,
+    type:Boolean,
 
-        default:true
+    default:true
 
-    }
+},
+
+sortOrder:{
+
+    type:Number,
+
+    default:999
+
+}
 
 },{timestamps:true});
 
