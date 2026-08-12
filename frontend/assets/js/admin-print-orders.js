@@ -191,19 +191,17 @@ async function viewOrder(id){
     ${order.address?.pincode || ""}
 </p>
 
-${
-    order.location?.latitude != null &&
-    order.location?.longitude != null
-    ? `
 
+${
+    order.location?.latitude && order.location?.longitude
+    ? `
         <div style="margin-top:15px;">
 
             <h3>📍 Customer Location</h3>
 
             <p>
-                <b>City:</b> ${order.location.city || "-"}<br>
-                <b>Latitude:</b> ${order.location.latitude}<br>
-                <b>Longitude:</b> ${order.location.longitude}
+                Latitude : ${order.location.latitude}<br>
+                Longitude : ${order.location.longitude}
             </p>
 
             <a
@@ -211,23 +209,23 @@ ${
                 target="_blank"
                 style="
                     display:inline-block;
-                    padding:10px 16px;
+                    padding:10px 15px;
                     background:#0d6efd;
                     color:white;
                     text-decoration:none;
-                    border-radius:8px;
+                    border-radius:6px;
                 "
             >
                 📍 Open Customer Location
             </a>
 
         </div>
-
     `
     : `
-        <p style="margin-top:15px;">
-            <b>📍 Customer Location:</b> Not available
-        </p>
+        <div style="margin-top:15px;">
+            <h3>📍 Customer Location</h3>
+            <p>Location not available.</p>
+        </div>
     `
 }
 <p><b>Payment :</b> ${order.paymentMethod || "-"}</p>
