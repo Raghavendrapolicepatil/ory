@@ -254,6 +254,30 @@ function renderTodaysDeals(){
 // Render Products
 // ======================================
 
+function renderProducts(){
+
+    document
+        .querySelectorAll(".product-slider")
+        .forEach(box => {
+            box.innerHTML = "";
+        });
+
+    allProducts.forEach(product => {
+
+        const container =
+            document.getElementById(product.category);
+
+        if(!container) return;
+
+        container.insertAdjacentHTML(
+            "beforeend",
+            createProductCard(product)
+        );
+
+    });
+
+}
+
 // ======================================
 // Cart Button
 // ======================================
