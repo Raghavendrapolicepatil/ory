@@ -254,34 +254,79 @@ function renderTodaysDeals(){
 // Render Products
 // ======================================
 
-function renderProducts(){
+// ======================================
+// Cart Button
+// ======================================
 
-    // Pehle sab category containers clear
-    document
-    .querySelectorAll(".product-slider")
-    .forEach(box=>{
+function renderCartButton(product){
 
-        box.innerHTML="";
+    const qty = getProductQty(product.id);
 
-    });
+    if(qty === 0){
 
-    // Products render
-    allProducts.forEach(product=>{
+        return `
 
-        const container =
-        document.getElementById(product.category);
+        <button
+            type="button"
+            class="add-btn"
+            aria-label="Add ${product.name} to cart"
+            onclick="addProduct(
+                ${product.id},
+                '${product.name.replace(/'/g,"\\'")}',
+                ${product.price},
+                '${product.image}',
+                '${product.weight || ""}'
+            )">
 
-        if(!container) return;
+            <i
+                class="ri-add-line"
+                aria-hidden="true">
+            </i>
 
-        container.insertAdjacentHTML(
+        </button>
 
-            "beforeend",
+        `;
 
-            createProductCard(product)
+    }
 
-        );
+    return `
 
-    });
+    <div
+        class="quantity-control"
+        aria-label="${product.name} quantity controls">
+
+        <button
+            type="button"
+            aria-label="Decrease ${product.name} quantity"
+            onclick="minusProduct(${product.id})">
+
+            <i
+                class="ri-subtract-line"
+                aria-hidden="true">
+            </i>
+
+        </button>
+
+        <span
+            aria-label="${qty} items">
+            ${qty}
+        </span>
+
+        <button
+            type="button"
+            aria-label="Increase ${product.name} quantity"
+            onclick="plusProduct(${product.id})">
+
+            <i
+                class="ri-add-line"
+                aria-hidden="true">
+            </i>
+
+        </button>
+
+    </div>
+
+    `;
 
 }
 
@@ -299,16 +344,35 @@ function createProductCard(product){
             ${product.discount || "0% OFF"}
         </span>
 
-        <button
-            class="wishlist-btn"
-            onclick='toggleWishlist({
-                id:${product.id},
-                name:${JSON.stringify(product.name)},
-                price:${product.price},
-                image:${JSON.stringify(product.image)},
-                weight:${JSON.stringify(product.weight)}
-            },this)'>
+       <button
+    type="button"
+    class="wishlist-btn"
+    aria-label="${
+        isWishlisted(product.id)
+        ? "Remove " + product.name + " from wishlist"
+        : "Add " + product.name + " to wishlist"
+    }"
+    onclick='toggleWishlist({
+        id:${product.id},
+        name:${JSON.stringify(product.name)},
+        price:${product.price},
+        image:${JSON.stringify(product.image)},
+        weight:${JSON.stringify(product.weight)}
+    },this)'>
 
+    <i class="${
+        isWishlisted(product.id)
+        ? "ri-heart-fill"
+        : "ri-heart-line"
+    }"
+    aria-hidden="true"
+    style="${
+        isWishlisted(product.id)
+        ? "color:#ff3b5c"
+        : ""
+    }"></i>
+
+</button>
             <i class="${
                 isWishlisted(product.id)
                 ? "ri-heart-fill"
@@ -337,9 +401,13 @@ function createProductCard(product){
                 ${
                     product.stock<=0
                     ?
-                    `<button class="out-stock-btn" disabled>
-                        Out
-                    </button>`
+                    `<button
+    type="button"
+    class="out-stock-btn"
+    disabled
+    aria-label="${product.name} is out of stock">
+    Out of Stock
+</button>`
                     :
                     renderCartButton(product)
                 }
