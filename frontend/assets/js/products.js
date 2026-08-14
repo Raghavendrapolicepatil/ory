@@ -42,36 +42,110 @@ function refreshFloatingCart(){
 // Load Products
 // ======================================
 
-async function loadProducts(){
+async function loadProducts() {
 
-    try{
+    const CACHE_KEY = "snackible_products_cache";
+    const CACHE_TIME = 30 * 60 * 1000; // 30 minutes
 
-        const response =
-        await fetch("https://snackible-backend.onrender.com/api/products");
+    // ==============================
+    // 1. Show cached products instantly
+    // ==============================
 
-        allProducts =
-        await response.json();
+    try {
+
+        const cached = localStorage.getItem(CACHE_KEY);
+
+        if (cached) {
+
+            const data = JSON.parse(cached);
+
+            if (
+                data.products &&
+                Array.isArray(data.products)
+            ) {
+
+                allProducts = data.products;
+
+                renderProducts();
+                renderTodaysDeals();
+                initSearch();
+                refreshFloatingCart();
+
+                console.log("⚡ Products loaded from cache");
+
+            }
+
+        }
+
+    } catch (err) {
+
+        console.log("Cache Error:", err);
+
+    }
+
+
+    // ==============================
+    // 2. Get fresh products from API
+    // ==============================
+
+    try {
+
+        console.log("🔄 Updating products...");
+
+        const response = await fetch(
+            "https://snackible-backend.onrender.com/api/products"
+        );
+
+        if (!response.ok) {
+            throw new Error(
+                `Products API Error: ${response.status}`
+            );
+        }
+
+        const products = await response.json();
+
+        allProducts = products;
+
+
+        // ==============================
+        // 3. Save fresh products
+        // ==============================
+
+        localStorage.setItem(
+            CACHE_KEY,
+            JSON.stringify({
+                products: products,
+                savedAt: Date.now()
+            })
+        );
+
+
+        // ==============================
+        // 4. Render fresh products
+        // ==============================
 
         renderProducts();
 
         renderTodaysDeals();
 
-        animateCards();
-
         initSearch();
 
         refreshFloatingCart();
 
-    }
+        console.log(
+            `✅ Fresh products loaded: ${products.length}`
+        );
 
-    catch(err){
+    } catch (err) {
 
-        console.error("Products Load Error:",err);
+        console.error(
+            "Products API Error:",
+            err
+        );
 
     }
 
 }
-
 // ======================================
 // Search Init
 // ======================================
@@ -99,7 +173,7 @@ function initSearch(){
 
             renderTodaysDeals();
 
-            animateCards();
+           // animateCards();
 
             return;
 
