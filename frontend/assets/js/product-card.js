@@ -30,18 +30,6 @@ function createProductCard(product){
                 weight:${JSON.stringify(product.weight)}
             },this)'>
 
-            <i class="${
-                isWishlisted(product.id)
-                ? "ri-heart-fill"
-                : "ri-heart-line"
-            }"
-            aria-hidden="true"
-            style="${
-                isWishlisted(product.id)
-                ? "color:#ff3b5c;"
-                : ""
-            }"></i>
-
         </button>
 
         <!-- Image -->
