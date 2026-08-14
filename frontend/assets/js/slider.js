@@ -1,5 +1,5 @@
 // ==========================================
-// Dynamic Banner Slider
+// Dynamic Banner Slider - Fast Version
 // ==========================================
 
 const slides = document.getElementById("bannerSlides");
@@ -14,39 +14,96 @@ let autoSlide = null;
 // =============================
 
 async function loadBanners() {
-  try {
-    const res = await fetch("https://snackible-backend.onrender.com/api/banners");
-    const banners = await res.json();
 
-    const activeBanners = banners
-      .filter((banner) => banner.status)
-      .sort((a, b) => a.order - b.order);
+    try {
 
-    slides.innerHTML = "";
-    dotsBox.innerHTML = "";
+        const res = await fetch(
+            "https://snackible-backend.onrender.com/api/banners"
+        );
 
-    activeBanners.forEach((banner, index) => {
-      slides.innerHTML += `
-        <div class="slide">
-          <a href="${banner.link || "#"}">
-            <img src="${banner.image}" alt="${banner.title}">
-          </a>
-        </div>
-      `;
+        if (!res.ok) {
+            throw new Error("Failed to load banners");
+        }
 
-      dotsBox.innerHTML += `
-        <span class="dot ${index === 0 ? "active" : ""}"></span>
-      `;
-    });
+        const banners = await res.json();
 
-    totalSlides = activeBanners.length;
+        const activeBanners = banners
+            .filter(banner => banner.status)
+            .sort((a, b) => a.order - b.order);
 
-    if (totalSlides > 0) {
-      initSlider();
+        // Reset
+        slides.innerHTML = "";
+        dotsBox.innerHTML = "";
+
+        totalSlides = activeBanners.length;
+
+        if (totalSlides === 0) {
+            return;
+        }
+
+        // =============================
+        // Create Banner HTML
+        // =============================
+
+        const slidesHTML = activeBanners.map((banner, index) => {
+
+            const loading =
+                index === 0 ? "eager" : "lazy";
+
+            const priority =
+                index === 0 ? "high" : "auto";
+
+            return `
+                <div class="slide">
+
+                    <a href="${banner.link || "#"}">
+
+                        <img
+                            src="${banner.image}"
+                            alt="${banner.title || "Ory Mart Banner"}"
+                            width="1200"
+                            height="525"
+                            loading="${loading}"
+                            fetchpriority="${priority}"
+                            decoding="async"
+                        >
+
+                    </a>
+
+                </div>
+            `;
+
+        }).join("");
+
+        slides.innerHTML = slidesHTML;
+
+        // =============================
+        // Create Dots
+        // =============================
+
+        dotsBox.innerHTML = activeBanners.map((banner, index) => {
+
+            return `
+                <span
+                    class="dot ${index === 0 ? "active" : ""}"
+                    data-index="${index}">
+                </span>
+            `;
+
+        }).join("");
+
+        // =============================
+        // Initialize Slider
+        // =============================
+
+        initSlider();
+
+    } catch (err) {
+
+        console.error("Banner Load Error:", err);
+
     }
-  } catch (err) {
-    console.error("Banner Load Error:", err);
-  }
+
 }
 
 // =============================
@@ -54,11 +111,24 @@ async function loadBanners() {
 // =============================
 
 function updateSlider() {
-  slides.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-  document.querySelectorAll(".dot").forEach((dot, index) => {
-    dot.classList.toggle("active", index === currentIndex);
-  });
+    if (!slides) return;
+
+    slides.style.transform =
+        `translateX(-${currentIndex * 100}%)`;
+
+    const dots =
+        dotsBox.querySelectorAll(".dot");
+
+    dots.forEach((dot, index) => {
+
+        dot.classList.toggle(
+            "active",
+            index === currentIndex
+        );
+
+    });
+
 }
 
 // =============================
@@ -66,15 +136,35 @@ function updateSlider() {
 // =============================
 
 function nextSlide() {
-  if (totalSlides <= 1) return;
 
-  currentIndex++;
+    if (totalSlides <= 1) return;
 
-  if (currentIndex >= totalSlides) {
-    currentIndex = 0;
-  }
+    currentIndex++;
 
-  updateSlider();
+    if (currentIndex >= totalSlides) {
+        currentIndex = 0;
+    }
+
+    updateSlider();
+
+}
+
+// =============================
+// Previous Slide
+// =============================
+
+function previousSlide() {
+
+    if (totalSlides <= 1) return;
+
+    currentIndex--;
+
+    if (currentIndex < 0) {
+        currentIndex = totalSlides - 1;
+    }
+
+    updateSlider();
+
 }
 
 // =============================
@@ -82,57 +172,138 @@ function nextSlide() {
 // =============================
 
 function startSlider() {
-  stopSlider();
-  if (totalSlides > 1) {
-    autoSlide = setInterval(nextSlide, 3500);
-  }
-}
 
-function stopSlider() {
-  if (autoSlide) {
-    clearInterval(autoSlide);
-  }
+    stopSlider();
+
+    if (totalSlides > 1) {
+
+        autoSlide = setInterval(
+            nextSlide,
+            3500
+        );
+
+    }
+
 }
 
 // =============================
-// Initialize
+// Stop Auto Slider
+// =============================
+
+function stopSlider() {
+
+    if (autoSlide) {
+
+        clearInterval(autoSlide);
+
+        autoSlide = null;
+
+    }
+
+}
+
+// =============================
+// Initialize Slider
 // =============================
 
 function initSlider() {
-  document.querySelectorAll(".dot").forEach((dot, index) => {
-    dot.addEventListener("click", () => {
-      currentIndex = index;
-      updateSlider();
-      startSlider();
+
+    // Reset index
+    currentIndex = 0;
+
+    // =============================
+    // Dot Click
+    // =============================
+
+    const dots =
+        dotsBox.querySelectorAll(".dot");
+
+    dots.forEach(dot => {
+
+        dot.addEventListener("click", () => {
+
+            currentIndex =
+                Number(dot.dataset.index);
+
+            updateSlider();
+
+            startSlider();
+
+        });
+
     });
-  });
 
-  slides.addEventListener("mouseenter", stopSlider);
-  slides.addEventListener("mouseleave", startSlider);
+    // =============================
+    // Desktop Hover
+    // =============================
 
-  // Mobile Touch Swipe
-  let startX = 0;
+    slides.addEventListener(
+        "mouseenter",
+        stopSlider
+    );
 
-  slides.addEventListener("touchstart", (e) => {
-    startX = e.touches[0].clientX;
-  });
+    slides.addEventListener(
+        "mouseleave",
+        startSlider
+    );
 
-  slides.addEventListener("touchend", (e) => {
-    const endX = e.changedTouches[0].clientX;
+    // =============================
+    // Mobile Swipe
+    // =============================
 
-    if (startX - endX > 50) {
-      nextSlide();
-    } else if (endX - startX > 50) {
-      currentIndex =
-        currentIndex === 0 ? totalSlides - 1 : currentIndex - 1;
-      updateSlider();
-    }
+    let startX = 0;
+
+    slides.addEventListener(
+        "touchstart",
+        (e) => {
+
+            startX =
+                e.touches[0].clientX;
+
+            stopSlider();
+
+        },
+        { passive: true }
+    );
+
+    slides.addEventListener(
+        "touchend",
+        (e) => {
+
+            const endX =
+                e.changedTouches[0].clientX;
+
+            const difference =
+                startX - endX;
+
+            if (difference > 50) {
+
+                nextSlide();
+
+            } else if (difference < -50) {
+
+                previousSlide();
+
+            }
+
+            startSlider();
+
+        },
+        { passive: true }
+    );
+
+    // =============================
+    // Initial Position
+    // =============================
+
+    updateSlider();
 
     startSlider();
-  });
 
-  updateSlider();
-  startSlider();
 }
+
+// =============================
+// Start
+// =============================
 
 loadBanners();
