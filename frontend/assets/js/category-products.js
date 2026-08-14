@@ -527,12 +527,14 @@ function renderCartButton(product){
 
     const qty = getProductQty(product.id);
 
-    if(qty===0){
+    if(qty === 0){
 
         return `
 
         <button
+            type="button"
             class="add-btn"
+            aria-label="Add ${product.name} to cart"
             onclick="addProduct(
                 ${product.id},
                 '${product.name.replace(/'/g,"\\'")}',
@@ -540,7 +542,7 @@ function renderCartButton(product){
                 '${product.image}'
             )">
 
-            <i class="ri-add-line"></i>
+            <i class="ri-add-line" aria-hidden="true"></i>
 
         </button>
 
@@ -553,18 +555,24 @@ function renderCartButton(product){
     <div class="quantity-control">
 
         <button
+            type="button"
+            aria-label="Decrease ${product.name} quantity"
             onclick="minusProduct(${product.id})">
 
-            <i class="ri-subtract-line"></i>
+            <i class="ri-subtract-line" aria-hidden="true"></i>
 
         </button>
 
-        <span>${qty}</span>
+        <span aria-label="Quantity ${qty}">
+            ${qty}
+        </span>
 
         <button
+            type="button"
+            aria-label="Increase ${product.name} quantity"
             onclick="plusProduct(${product.id})">
 
-            <i class="ri-add-line"></i>
+            <i class="ri-add-line" aria-hidden="true"></i>
 
         </button>
 
