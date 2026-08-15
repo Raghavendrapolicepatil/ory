@@ -1,5 +1,5 @@
 const Category = require("../models/category");
-
+const Product = require("../models/product");
 // ======================================
 // Get All Categories
 // ======================================
@@ -62,6 +62,22 @@ const updateCategory = async (req, res) => {
 
     try {
 
+        // Pehle old category find karo
+        const oldCategory = await Category.findById(req.params.id);
+
+        if (!oldCategory) {
+
+            return res.status(404).json({
+                message: "Category not found"
+            });
+
+        }
+
+        const oldName = oldCategory.name;
+
+        const newName = req.body.name;
+
+        // Category update
         const category = await Category.findByIdAndUpdate(
 
             req.params.id,
@@ -72,6 +88,26 @@ const updateCategory = async (req, res) => {
 
         );
 
+        // ======================================
+        // Update Products Category Name
+        // ======================================
+
+        if (newName && oldName !== newName) {
+
+            await Product.updateMany(
+
+                { category: oldName },
+
+                {
+                    $set: {
+                        category: newName
+                    }
+                }
+
+            );
+
+        }
+
         res.json({
 
             message: "Category Updated Successfully",
@@ -81,6 +117,8 @@ const updateCategory = async (req, res) => {
         });
 
     } catch (error) {
+
+        console.error("Category Update Error:", error);
 
         res.status(500).json({
 
