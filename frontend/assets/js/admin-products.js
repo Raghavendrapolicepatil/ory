@@ -650,3 +650,71 @@ function loadVariants(variants = []) {
 
 }
 
+// ==========================================
+// Extra Product Details
+// ==========================================
+
+function getExtraDetails(){
+
+    const details = [];
+
+    for(let i = 1; i <= 4; i++){
+
+        const label =
+            document.getElementById(`detailLabel${i}`)?.value.trim();
+
+        const value =
+            document.getElementById(`detailValue${i}`)?.value.trim();
+
+        if(label && value){
+
+            details.push({
+                label: label,
+                value: value
+            });
+
+        }
+
+    }
+
+    return details;
+
+}
+
+
+function loadExtraDetails(details = []){
+
+    for(let i = 1; i <= 4; i++){
+
+        const labelInput =
+            document.getElementById(`detailLabel${i}`);
+
+        const valueInput =
+            document.getElementById(`detailValue${i}`);
+
+        if(labelInput) labelInput.value = "";
+        if(valueInput) valueInput.value = "";
+
+    }
+
+    details.slice(0,4).forEach((detail, index) => {
+
+        const number = index + 1;
+
+        const labelInput =
+            document.getElementById(`detailLabel${number}`);
+
+        const valueInput =
+            document.getElementById(`detailValue${number}`);
+
+        if(labelInput){
+            labelInput.value = detail.label || "";
+        }
+
+        if(valueInput){
+            valueInput.value = detail.value || "";
+        }
+
+    });
+
+}
