@@ -56,6 +56,11 @@ const productSchema = new mongoose.Schema({
 
     stock: Number,
 
+    shelfLifeDays: {
+    type: Number,
+    default: null
+},
+
     sku: {
         type: String,
         default: ""

@@ -145,6 +145,13 @@ function renderProducts(products){
 
             <span>Stock</span>
             <strong>${product.stock}</strong>
+
+            <span>Shelf Life</span>
+<strong>
+    ${product.shelfLifeDays
+        ? product.shelfLifeDays + " Days"
+        : "-"}
+</strong>
         </div>
 
         <div class="stock ${stockClass}">
@@ -298,6 +305,7 @@ function editProduct(id){
     document.getElementById("discount").value = product.discount || "";
     document.getElementById("brand").value = product.brand || "";
     document.getElementById("stock").value = product.stock || "";
+    document.getElementById("shelfLifeDays").value =product.shelfLifeDays || "";
     document.getElementById("image").value = product.image || "";
     document.getElementById("gallery1").value = product.gallery?.[0] || "";
 document.getElementById("gallery2").value = product.gallery?.[1] || "";
@@ -359,6 +367,10 @@ form.addEventListener("submit", async (e)=>{
         brand:document.getElementById("brand").value.trim(),
 
         stock:Number(document.getElementById("stock").value),
+
+        shelfLifeDays:Number(
+    document.getElementById("shelfLifeDays").value
+) || null,
 
 image: document.getElementById("image").value.trim(),
 
