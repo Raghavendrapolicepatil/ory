@@ -306,6 +306,7 @@ function editProduct(id){
     document.getElementById("brand").value = product.brand || "";
     document.getElementById("stock").value = product.stock || "";
     document.getElementById("shelfLifeDays").value =product.shelfLifeDays || "";
+    loadExtraDetails(product.extraDetails || []);
     document.getElementById("image").value = product.image || "";
     document.getElementById("gallery1").value = product.gallery?.[0] || "";
 document.getElementById("gallery2").value = product.gallery?.[1] || "";
@@ -371,6 +372,8 @@ form.addEventListener("submit", async (e)=>{
         shelfLifeDays:Number(
     document.getElementById("shelfLifeDays").value
 ) || null,
+
+extraDetails: getExtraDetails(),
 
 image: document.getElementById("image").value.trim(),
 
