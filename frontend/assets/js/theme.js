@@ -1,11 +1,45 @@
 // ==========================================
-// Snackible Theme Loader
+// Ory Mart Theme Loader
 // ==========================================
 
-const darkModeEnabled = localStorage.getItem("darkMode");
+document.addEventListener("DOMContentLoaded", () => {
 
-if (darkModeEnabled === "truee") {
+    const darkModeToggle = document.getElementById("dark-mode");
 
-    document.body.classList.add("dark");
+    // Load saved theme
+    const darkModeEnabled = localStorage.getItem("darkMode");
 
-}
+    if (darkModeEnabled === "true") {
+
+        document.body.classList.add("dark");
+
+        if (darkModeToggle) {
+            darkModeToggle.checked = true;
+        }
+
+    }
+
+    // Dark mode toggle
+    if (darkModeToggle) {
+
+        darkModeToggle.addEventListener("change", () => {
+
+            if (darkModeToggle.checked) {
+
+                document.body.classList.add("dark");
+
+                localStorage.setItem("darkMode", "true");
+
+            } else {
+
+                document.body.classList.remove("dark");
+
+                localStorage.setItem("darkMode", "false");
+
+            }
+
+        });
+
+    }
+
+});
