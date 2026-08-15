@@ -119,6 +119,10 @@ function renderProduct(){
 
     renderStock();
 
+    renderProductHighlights();
+
+}
+
 }
 //==========================================
 // renderVariants
@@ -533,6 +537,87 @@ function renderStock(){
     stock.innerHTML=
 
     "🟢 In Stock";
+
+}
+
+// ==========================================
+// PRODUCT HIGHLIGHTS
+// ==========================================
+
+function renderProductHighlights(){
+
+    const section = document.getElementById("product-highlights");
+    const list = document.getElementById("highlights-list");
+
+    if(!section || !list || !currentProduct) return;
+
+    list.innerHTML = "";
+
+    const details = [];
+
+    // Shelf Life
+    if(currentProduct.shelfLifeDays){
+
+        details.push({
+            label: "Shelf Life",
+            value: currentProduct.shelfLifeDays + " Days"
+        });
+
+    }
+
+    // Extra Details
+    if(
+        Array.isArray(currentProduct.extraDetails)
+    ){
+
+        currentProduct.extraDetails.forEach(detail => {
+
+            if(detail.label && detail.value){
+
+                details.push({
+                    label: detail.label,
+                    value: detail.value
+                });
+
+            }
+
+        });
+
+    }
+
+    // Nothing available
+    if(details.length === 0){
+
+        section.style.display = "none";
+
+        return;
+
+    }
+
+    // Maximum 4 cards
+    details.slice(0,4).forEach(detail => {
+
+        const card = document.createElement("div");
+
+        card.className = "highlight-card";
+
+        card.innerHTML = `
+
+            <span>
+                ${detail.label}
+            </span>
+
+            <strong>
+                ${detail.value}
+            </strong>
+
+        `;
+
+        list.appendChild(card);
+
+    });
+
+    section.style.display = "flex";
 
 }
 
