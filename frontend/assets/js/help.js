@@ -75,7 +75,7 @@ const whatsappBtn =
 if (whatsappBtn) {
 
     whatsappBtn.href =
-        "https://wa.me/91 8073307807";
+        "https://wa.me/91 8073072838";
 
     whatsappBtn.target = "_blank";
 
