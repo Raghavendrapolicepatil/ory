@@ -61,6 +61,18 @@ const productSchema = new mongoose.Schema({
     default: null
 },
 
+
+// Extra Product Details
+extraDetails: {
+    type: [
+        {
+            label: String,
+            value: String
+        }
+    ],
+    default: []
+},
+
     sku: {
         type: String,
         default: ""
