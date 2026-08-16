@@ -375,7 +375,20 @@ form.addEventListener("submit", async (e)=>{
 
 extraDetails: getExtraDetails(),
 
-image: document.getElementById("image").value.trim(),
+image: (() => {
+
+    const value =
+        document.getElementById("image").value.trim();
+
+    if (!value) return "";
+
+    if (value.startsWith("assets/")) {
+        return value;
+    }
+
+    return `assets/images/products/${value}`;
+
+})(),
 
 gallery: [
     document.getElementById("gallery1").value.trim(),
