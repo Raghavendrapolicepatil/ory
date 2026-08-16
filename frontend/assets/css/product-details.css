@@ -1500,7 +1500,195 @@ RIPPLE EFFECT
 PART 5
 ACCORDION + SELLER + RELATED PRODUCTS
 ========================================== */
+/* ==========================================
+   PRODUCT HIGHLIGHTS
+========================================== */
 
+.product-highlights{
+
+    display:flex;
+
+    align-items:stretch;
+
+    gap:10px;
+
+    margin:14px 16px;
+
+    padding:0;
+
+    overflow:hidden;
+
+}
+
+.highlights-list{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:10px;
+
+    flex:1;
+
+    min-width:0;
+
+}
+
+.highlight-card{
+
+    min-height:82px;
+
+    padding:13px 14px;
+
+    background:#fff;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:16px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
+
+    transition:.25s ease;
+
+}
+
+.highlight-card:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 7px 18px rgba(0,0,0,.08);
+
+}
+
+.highlight-card span{
+
+    color:#6B7280;
+
+    font-size:12px;
+
+    font-weight:500;
+
+    margin-bottom:5px;
+
+}
+
+.highlight-card strong{
+
+    color:#111827;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    line-height:1.35;
+
+    word-break:break-word;
+
+}
+
+
+/* ==========================================
+   VIEW DETAILS BUTTON
+========================================== */
+
+.view-details-btn{
+
+    flex:0 0 72px;
+
+    border:1px solid #E5E7EB;
+
+    border-radius:16px;
+
+    background:#fff;
+
+    color:#0C831F;
+
+    font-size:12px;
+
+    font-weight:700;
+
+    line-height:1.35;
+
+    cursor:pointer;
+
+    transition:.25s ease;
+
+}
+
+.view-details-btn:hover{
+
+    background:#ECFDF5;
+
+    border-color:#BBF7D0;
+
+}
+
+.view-details-btn:active{
+
+    transform:scale(.97);
+
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media(max-width:480px){
+
+    .product-highlights{
+
+        margin:12px 14px;
+
+        gap:8px;
+
+    }
+
+    .highlights-list{
+
+        gap:8px;
+
+    }
+
+    .highlight-card{
+
+        min-height:76px;
+
+        padding:11px;
+
+        border-radius:14px;
+
+    }
+
+    .highlight-card span{
+
+        font-size:11px;
+
+    }
+
+    .highlight-card strong{
+
+        font-size:13px;
+
+    }
+
+    .view-details-btn{
+
+        flex:0 0 64px;
+
+        border-radius:14px;
+
+        font-size:11px;
+
+    }
+
+}
 /* ==========================
 ACCORDION
 ========================== */
