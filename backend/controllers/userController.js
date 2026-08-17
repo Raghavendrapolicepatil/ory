@@ -3,6 +3,171 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 // ===============================
+// Send OTP using 2Factor
+// ===============================
+
+const sendOTP = async (req, res) => {
+
+    try {
+
+        const { phone } = req.body;
+
+        if (!phone) {
+            return res.status(400).json({
+                message: "Phone number is required"
+            });
+        }
+
+        // Generate 4 digit OTP
+        const otp = Math.floor(1000 + Math.random() * 9000).toString();
+
+        // OTP valid for 5 minutes
+        const otpExpiresAt = new Date(Date.now() + 5 * 60 * 1000);
+
+        // Find user
+        const user = await User.findOne({ phone });
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        // Save OTP
+        user.otp = otp;
+        user.otpExpiresAt = otpExpiresAt;
+
+        await user.save();
+
+        // Phone number
+        let phoneNumber = phone;
+
+        if (!phoneNumber.startsWith("+")) {
+            phoneNumber = "+91" + phoneNumber;
+        }
+
+        /*
+        2Factor Custom OTP API
+
+        Template:
+        OTP1
+
+        Sender:
+        SULTNE
+        */
+
+        const url =
+            `https://2factor.in/API/V1/${process.env.TWOFACTOR_API_KEY}/SMS/` +
+            `${encodeURIComponent(phoneNumber)}/${otp}/OTP1`;
+
+        const response = await fetch(url, {
+            method: "GET"
+        });
+
+        const data = await response.text();
+
+        console.log("2Factor Response:", data);
+
+        if (!response.ok) {
+
+            user.otp = null;
+            user.otpExpiresAt = null;
+
+            await user.save();
+
+            return res.status(500).json({
+                message: "Failed to send OTP"
+            });
+        }
+
+        res.json({
+            message: "OTP sent successfully"
+        });
+
+    } catch (error) {
+
+        console.error("Send OTP Error:", error);
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
+
+
+// ===============================
+// Verify OTP
+// ===============================
+
+const verifyOTP = async (req, res) => {
+
+    try {
+
+        const { phone, otp } = req.body;
+
+        if (!phone || !otp) {
+            return res.status(400).json({
+                message: "Phone and OTP are required"
+            });
+        }
+
+        const user = await User.findOne({ phone });
+
+        if (!user) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        // Check OTP
+        if (user.otp !== otp) {
+            return res.status(400).json({
+                message: "Invalid OTP"
+            });
+        }
+
+        // Check expiry
+        if (!user.otpExpiresAt || user.otpExpiresAt < new Date()) {
+
+            user.otp = null;
+            user.otpExpiresAt = null;
+
+            await user.save();
+
+            return res.status(400).json({
+                message: "OTP expired"
+            });
+        }
+
+        // Verify phone
+        user.phoneVerified = true;
+
+        // Clear OTP
+        user.otp = null;
+        user.otpExpiresAt = null;
+
+        await user.save();
+
+        res.json({
+            message: "Phone number verified successfully"
+        });
+
+    } catch (error) {
+
+        console.error("Verify OTP Error:", error);
+
+        res.status(500).json({
+            message: error.message
+        });
+
+    }
+
+};
+
+
+// ===============================
 // Register
 // ===============================
 
@@ -17,6 +182,14 @@ const registerUser = async (req, res) => {
         if (exists) {
             return res.status(400).json({
                 message: "Email already registered"
+            });
+        }
+
+        const phoneExists = await User.findOne({ phone });
+
+        if (phoneExists) {
+            return res.status(400).json({
+                message: "Phone already registered"
             });
         }
 
@@ -43,6 +216,7 @@ const registerUser = async (req, res) => {
 
 };
 
+
 // ===============================
 // Login
 // ===============================
@@ -61,9 +235,6 @@ const loginUser = async (req, res) => {
             });
         }
 
-
-
-        
         const match = await bcrypt.compare(password, user.password);
 
         if (!match) {
@@ -72,11 +243,12 @@ const loginUser = async (req, res) => {
             });
         }
 
-const token = jwt.sign(
-    { id: user._id },
-    process.env.JWT_SECRET,
-    { expiresIn: "7d" }
-);
+        const token = jwt.sign(
+            { id: user._id },
+            process.env.JWT_SECRET,
+            { expiresIn: "7d" }
+        );
+
         res.json({
             message: "Login Successful",
             token,
@@ -85,6 +257,7 @@ const token = jwt.sign(
                 name: user.name,
                 email: user.email,
                 phone: user.phone,
+                phoneVerified: user.phoneVerified,
                 role: user.role
             }
         });
@@ -99,11 +272,16 @@ const token = jwt.sign(
 
 };
 
+
+// ===============================
+// Get Users
+// ===============================
+
 const getUsers = async (req, res) => {
 
     try {
 
-        const users = await User.find().select("-password");
+        const users = await User.find().select("-password -otp");
 
         res.json(users);
 
@@ -117,8 +295,11 @@ const getUsers = async (req, res) => {
 
 };
 
+
 module.exports = {
     registerUser,
     loginUser,
-    getUsers
+    getUsers,
+    sendOTP,
+    verifyOTP
 };
