@@ -271,26 +271,40 @@ const registerUser = async (req, res) => {
 // ===============================
 // Login
 // ===============================
-
 const loginUser = async (req, res) => {
 
     try {
 
-        const { email, password } = req.body;
+        const { phone, password } = req.body;
 
-        const user = await User.findOne({ email });
-
-        if (!user) {
+        if (!phone || !password) {
             return res.status(400).json({
-                message: "Invalid Email"
+                message: "Phone number and password are required"
             });
         }
 
-        const match = await bcrypt.compare(password, user.password);
+        const user = await User.findOne({ phone });
+
+        if (!user) {
+            return res.status(400).json({
+                message: "Invalid Phone Number"
+            });
+        }
+
+        const match = await bcrypt.compare(
+            password,
+            user.password
+        );
 
         if (!match) {
             return res.status(400).json({
                 message: "Invalid Password"
+            });
+        }
+
+        if (!user.phoneVerified) {
+            return res.status(400).json({
+                message: "Please verify your phone number first"
             });
         }
 
@@ -314,6 +328,8 @@ const loginUser = async (req, res) => {
         });
 
     } catch (error) {
+
+        console.error("Login Error:", error);
 
         res.status(500).json({
             message: error.message
