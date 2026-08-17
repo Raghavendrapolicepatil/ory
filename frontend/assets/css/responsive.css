@@ -46,13 +46,6 @@
         flex:0 0 220px;
     }
 
-    .slide img{
-        aspect-ratio:16/6;
-    }
-
-}
-
-
 /* ==========================================
    LAPTOP
 ========================================== */
@@ -92,9 +85,6 @@
         grid-template-columns:repeat(5,1fr);
     }
 
-    .slide img{
-        aspect-ratio:16/7;
-    }
 
 }
 
@@ -117,9 +107,7 @@
         padding:12px;
     }
 
-    .slide img{
-        aspect-ratio:16/8;
-    }
+
 
     .categories{
         padding:16px;

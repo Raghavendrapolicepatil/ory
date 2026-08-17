@@ -11,7 +11,10 @@
 
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/login.css">
-<link href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css" rel="stylesheet">
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+rel="stylesheet">
 
 </head>
 
@@ -23,7 +26,9 @@
 
 <div class="login-logo">
 
-<img src="assets/images/logo/logo.png" alt="Patilgroceries">
+<img
+src="assets/images/logo/logo.png"
+alt="OryMart">
 
 <h1>Create Account</h1>
 
@@ -32,6 +37,8 @@
 </div>
 
 <form id="registerForm">
+
+<!-- Name -->
 
 <div class="input-box">
 
@@ -45,6 +52,9 @@ required>
 
 </div>
 
+
+<!-- Phone -->
+
 <div class="input-box">
 
 <i class="ri-phone-line"></i>
@@ -54,20 +64,28 @@ type="tel"
 id="phone"
 placeholder="Phone Number"
 maxlength="10"
+inputmode="numeric"
 required>
 
 </div>
 
+
+<!-- Email Optional -->
+
 <div class="input-box">
 
-    <i class="ri-mail-line"></i>
+<i class="ri-mail-line"></i>
 
-    <input
-        type="email"
-        id="email"
-        placeholder="Email Address (Optional)">
+<input
+type="email"
+id="email"
+placeholder="Email Address (Optional)">
 
 </div>
+
+
+<!-- Password -->
+
 <div class="input-box">
 
 <i class="ri-lock-line"></i>
@@ -88,6 +106,9 @@ id="togglePassword">
 
 </div>
 
+
+<!-- Confirm Password -->
+
 <div class="input-box">
 
 <i class="ri-lock-password-line"></i>
@@ -100,15 +121,52 @@ required>
 
 </div>
 
+
+<!-- Send OTP -->
+
 <button
 type="submit"
-class="login-btn">
+class="login-btn"
+id="sendOtpBtn">
 
-Create Account
+Send OTP
 
 </button>
 
+
+<!-- OTP Section -->
+
+<div
+id="otpSection"
+style="display: none;">
+
+<div class="input-box">
+
+<i class="ri-shield-keyhole-line"></i>
+
+<input
+type="text"
+id="otp"
+placeholder="Enter OTP"
+maxlength="4"
+inputmode="numeric">
+
+</div>
+
+
+<button
+type="button"
+class="login-btn"
+id="verifyOtpBtn">
+
+Verify OTP
+
+</button>
+
+</div>
+
 </form>
+
 
 <div class="login-links">
 
@@ -130,8 +188,10 @@ Login
 
 </div>
 
+
 <script src="assets/js/register.js"></script>
 <script src="assets/js/theme.js"></script>
+
 </body>
 
 </html>
