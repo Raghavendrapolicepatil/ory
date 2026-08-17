@@ -62,7 +62,7 @@ const updateCategory = async (req, res) => {
 
     try {
 
-        // Pehle old category find karo
+        // Old category find karo
         const oldCategory = await Category.findById(req.params.id);
 
         if (!oldCategory) {
@@ -73,9 +73,10 @@ const updateCategory = async (req, res) => {
 
         }
 
-        const oldName = oldCategory.name;
+        const oldSlug = oldCategory.slug;
 
         const newName = req.body.name;
+        const newSlug = req.body.slug;
 
         // Category update
         const category = await Category.findByIdAndUpdate(
@@ -84,23 +85,25 @@ const updateCategory = async (req, res) => {
 
             req.body,
 
-            { new: true }
+            { new: true, runValidators: true }
 
         );
 
         // ======================================
-        // Update Products Category Name
+        // Update Products Category
         // ======================================
 
-        if (newName && oldName !== newName) {
+        if (newSlug && oldSlug !== newSlug) {
 
             await Product.updateMany(
 
-                { category: oldName },
+                {
+                    category: oldSlug
+                },
 
                 {
                     $set: {
-                        category: newName
+                        category: newSlug
                     }
                 }
 
@@ -118,7 +121,7 @@ const updateCategory = async (req, res) => {
 
     } catch (error) {
 
-        console.error("Category Update Error:", error);
+        console.error(error);
 
         res.status(500).json({
 
