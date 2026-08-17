@@ -22,7 +22,7 @@ const verifyOtpBtn = document.getElementById("verifyOtpBtn");
 // Backend URL
 // ==========================================
 
-const API_URL = "https://snackible-backend.onrender.com/api/users";
+
 
 
 // ==========================================
