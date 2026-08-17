@@ -8,63 +8,95 @@ const jwt = require("jsonwebtoken");
 // Send OTP using 2Factor
 // ===============================
 
+// ===============================
+// Send OTP for Registration
+// ===============================
+
 const sendOTP = async (req, res) => {
 
     try {
 
-        const { phone } = req.body;
+        const {
+            name,
+            phone,
+            email,
+            password
+        } = req.body;
 
-        if (!phone) {
+        // Required fields
+        if (!name || !phone || !password) {
             return res.status(400).json({
-                message: "Phone number is required"
+                message: "Name, phone and password are required"
             });
+        }
+
+        // Check phone already registered
+        const phoneExists = await User.findOne({ phone });
+
+        if (phoneExists) {
+            return res.status(400).json({
+                message: "Phone already registered"
+            });
+        }
+
+        // Check email only if provided
+        if (email) {
+
+            const emailExists = await User.findOne({ email });
+
+            if (emailExists) {
+                return res.status(400).json({
+                    message: "Email already registered"
+                });
+            }
+
         }
 
         // Generate 4 digit OTP
-        const otp = Math.floor(1000 + Math.random() * 9000).toString();
+        const otp =
+            Math.floor(1000 + Math.random() * 9000).toString();
 
         // OTP valid for 5 minutes
-        const otpExpiresAt = new Date(Date.now() + 5 * 60 * 1000);
+        const otpExpiresAt =
+            new Date(Date.now() + 5 * 60 * 1000);
 
-        // Find user
-        const user = await User.findOne({ phone });
+        // Hash password before temporary storage
+        const hashedPassword =
+            await bcrypt.hash(password, 10);
 
-        if (!user) {
-            return res.status(404).json({
-                message: "User not found"
-            });
-        }
+        // Remove old pending registration
+        await PendingRegistration.deleteOne({ phone });
 
-        // Save OTP
-        user.otp = otp;
-        user.otpExpiresAt = otpExpiresAt;
+        // Create pending registration
+        await PendingRegistration.create({
 
-        await user.save();
+            name,
 
-        // Phone number
+            phone,
+
+            email: email || undefined,
+
+            password: hashedPassword,
+
+            otp,
+
+            otpExpiresAt
+
+        });
+
+        // Add +91 if required
         let phoneNumber = phone;
 
         if (!phoneNumber.startsWith("+")) {
             phoneNumber = "+91" + phoneNumber;
         }
 
-        /*
-        2Factor Custom OTP API
-
-        Template:
-        OTP1
-
-        Sender:
-        SULTNE
-        */
-
+        // 2Factor OTP API
         const url =
             `https://2factor.in/API/V1/${process.env.TWOFACTOR_API_KEY}/SMS/` +
             `${encodeURIComponent(phoneNumber)}/${otp}/OTP1`;
 
-        const response = await fetch(url, {
-            method: "GET"
-        });
+        const response = await fetch(url);
 
         const data = await response.text();
 
@@ -72,14 +104,12 @@ const sendOTP = async (req, res) => {
 
         if (!response.ok) {
 
-            user.otp = null;
-            user.otpExpiresAt = null;
-
-            await user.save();
+            await PendingRegistration.deleteOne({ phone });
 
             return res.status(500).json({
                 message: "Failed to send OTP"
             });
+
         }
 
         res.json({
@@ -97,7 +127,6 @@ const sendOTP = async (req, res) => {
     }
 
 };
-
 
 // ===============================
 // Verify OTP
