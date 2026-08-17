@@ -127,9 +127,8 @@ const sendOTP = async (req, res) => {
     }
 
 };
-
 // ===============================
-// Verify OTP
+// Verify OTP & Complete Registration
 // ===============================
 
 const verifyOTP = async (req, res) => {
@@ -144,45 +143,67 @@ const verifyOTP = async (req, res) => {
             });
         }
 
-        const user = await User.findOne({ phone });
+        // Find pending registration
+        const pendingUser = await PendingRegistration.findOne({ phone });
 
-        if (!user) {
+        if (!pendingUser) {
             return res.status(404).json({
-                message: "User not found"
+                message: "Registration session not found. Please request a new OTP."
             });
         }
 
         // Check OTP
-        if (user.otp !== otp) {
+        if (pendingUser.otp !== otp) {
             return res.status(400).json({
                 message: "Invalid OTP"
             });
         }
 
-        // Check expiry
-        if (!user.otpExpiresAt || user.otpExpiresAt < new Date()) {
+        // Check OTP expiry
+        if (
+            !pendingUser.otpExpiresAt ||
+            pendingUser.otpExpiresAt < new Date()
+        ) {
 
-            user.otp = null;
-            user.otpExpiresAt = null;
-
-            await user.save();
+            await PendingRegistration.deleteOne({
+                phone
+            });
 
             return res.status(400).json({
-                message: "OTP expired"
+                message: "OTP expired. Please request a new OTP."
             });
         }
 
-        // Verify phone
-        user.phoneVerified = true;
+        // Create actual user after OTP verification
+        const user = await User.create({
 
-        // Clear OTP
-        user.otp = null;
-        user.otpExpiresAt = null;
+            name: pendingUser.name,
 
-        await user.save();
+            phone: pendingUser.phone,
 
-        res.json({
-            message: "Phone number verified successfully"
+            email: pendingUser.email || undefined,
+
+            password: pendingUser.password,
+
+            phoneVerified: true
+
+        });
+
+        // Delete temporary registration
+        await PendingRegistration.deleteOne({
+            phone
+        });
+
+        res.status(201).json({
+            message: "Registration Successful",
+            user: {
+                id: user._id,
+                name: user.name,
+                email: user.email,
+                phone: user.phone,
+                phoneVerified: user.phoneVerified,
+                role: user.role
+            }
         });
 
     } catch (error) {
@@ -196,7 +217,6 @@ const verifyOTP = async (req, res) => {
     }
 
 };
-
 
 // ===============================
 // Register
