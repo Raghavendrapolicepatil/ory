@@ -2,362 +2,333 @@
    HELP & SUPPORT
 ========================================== */
 
-body{
+body {
+    margin: 0;
+    padding: 0;
 
-    margin:0;
+    font-family: Arial, Helvetica, sans-serif;
 
-    padding:0;
-
-    font-family:Arial, Helvetica, sans-serif;
-
-    background:#f5f5f5;
-
+    background: #f5f5f5;
 }
 
-.app{
+.app {
+    max-width: 700px;
+    margin: auto;
 
-    max-width:700px;
+    min-height: 100vh;
 
-    margin:auto;
-
-    min-height:100vh;
-
-    background:#f5f5f5;
-
+    background: #f5f5f5;
 }
 
 /* ==========================================
    HEADER
 ========================================== */
 
-.help-header{
+.help-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-    position:sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    top:0;
+    padding: 18px;
 
-    z-index:1000;
+    background: #16a34a;
+    color: #fff;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:18px;
-
-    background:#16a34a;
-
-    color:#fff;
-
-    box-shadow:0 3px 10px rgba(0,0,0,.12);
-
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .12);
 }
 
-.help-header a{
+.help-header a {
+    width: 40px;
+    height: 40px;
 
-    width:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    height:40px;
+    color: #fff;
+    text-decoration: none;
 
-    display:flex;
+    font-size: 20px;
 
-    align-items:center;
-
-    justify-content:center;
-
-    color:#fff;
-
-    text-decoration:none;
-
-    font-size:20px;
-
-    border-radius:50%;
-
+    border-radius: 50%;
 }
 
-.help-header a:hover{
-
-    background:rgba(255,255,255,.15);
-
+.help-header a:hover {
+    background: rgba(255, 255, 255, .15);
 }
 
-.help-header h2{
+.help-header h1 {
+    margin: 0;
 
-    margin:0;
+    flex: 1;
 
-    flex:1;
+    text-align: center;
 
-    text-align:center;
-
-    font-size:22px;
-
-    font-weight:700;
-
+    font-size: 22px;
+    font-weight: 700;
 }
 
 /* ==========================================
    CARD
 ========================================== */
 
-.help-card{
+.help-card {
+    background: #fff;
 
-    background:#fff;
+    margin: 15px;
+    padding: 20px;
 
-    margin:15px;
+    border-radius: 18px;
 
-    padding:20px;
-
-    border-radius:18px;
-
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
 }
 
-.help-card h3{
+.help-card h2 {
+    margin: 0 0 15px;
 
-    margin:0 0 15px;
+    color: #16a34a;
 
-    color:#16a34a;
+    display: flex;
+    align-items: center;
 
-    display:flex;
+    gap: 10px;
 
-    align-items:center;
-
-    gap:10px;
-
-    font-size:20px;
-
+    font-size: 20px;
+    font-weight: 700;
 }
 
-.help-card p{
+.help-card h2 i {
+    font-size: 19px;
+}
 
-    margin:8px 0;
+.help-card p {
+    margin: 8px 0;
 
-    color:#555;
+    color: #555;
 
-    line-height:1.7;
-
+    line-height: 1.7;
 }
 
 /* ==========================================
    CONTACT
 ========================================== */
 
-.contact-item{
+.contact-item {
+    display: flex;
+    align-items: center;
 
-    display:flex;
+    gap: 12px;
 
-    align-items:center;
+    padding: 10px 0;
 
-    gap:12px;
+    color: #333;
 
-    padding:10px 0;
+    font-size: 15px;
 
-    color:#333;
-
-    font-size:15px;
-
+    text-decoration: none;
 }
 
-.contact-item i{
+.contact-item:hover {
+    color: #16a34a;
+}
 
-    color:#16a34a;
+.contact-item i {
+    color: #16a34a;
 
-    width:20px;
+    width: 20px;
 
+    flex-shrink: 0;
 }
 
 /* ==========================================
    WHATSAPP
 ========================================== */
 
-.whatsapp-btn{
+.whatsapp-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    display:block;
+    gap: 8px;
 
-    text-align:center;
+    text-align: center;
 
-    margin-top:15px;
+    margin-top: 15px;
 
-    padding:14px;
+    padding: 14px;
 
-    background:#25D366;
+    background: #25D366;
 
-    color:#fff;
+    color: #fff;
 
-    text-decoration:none;
+    text-decoration: none;
 
-    border-radius:12px;
+    border-radius: 12px;
 
-    font-weight:600;
+    font-weight: 600;
 
-    transition:.3s;
-
+    transition: .3s;
 }
 
-.whatsapp-btn:hover{
-
-    background:#1da851;
-
+.whatsapp-btn:hover {
+    background: #1da851;
 }
 
 /* ==========================================
    FAQ
 ========================================== */
 
-.faq{
+.faq {
+    padding: 15px 0;
 
-    padding:15px 0;
-
-    border-bottom:1px solid #eee;
-
+    border-bottom: 1px solid #eee;
 }
 
-.faq:last-child{
-
-    border-bottom:none;
-
+.faq:last-child {
+    border-bottom: none;
 }
 
-.faq h4{
+.faq h3 {
+    margin: 0;
 
-    margin:0;
+    color: #222;
 
-    color:#222;
+    font-size: 16px;
 
-    font-size:16px;
-
+    font-weight: 600;
 }
 
-.faq p{
+.faq p {
+    margin-top: 8px;
 
-    margin-top:8px;
+    color: #666;
 
-    color:#666;
-
-    font-size:14px;
-
+    font-size: 14px;
 }
 
 /* ==========================================
    FORM
 ========================================== */
 
-#helpForm{
+#helpForm {
+    display: flex;
 
-    display:flex;
+    flex-direction: column;
 
-    flex-direction:column;
-
-    gap:15px;
-
+    gap: 15px;
 }
 
 #helpForm input,
+#helpForm textarea {
+    width: 100%;
 
-#helpForm textarea{
+    padding: 14px;
 
-    width:100%;
+    border: 1px solid #ddd;
 
-    padding:14px;
+    border-radius: 12px;
 
-    border:1px solid #ddd;
+    outline: none;
 
-    border-radius:12px;
+    font-size: 15px;
 
-    outline:none;
+    font-family: inherit;
 
-    font-size:15px;
+    box-sizing: border-box;
 
-    box-sizing:border-box;
-
+    transition: .2s;
 }
 
-#helpForm textarea{
+#helpForm input:focus,
+#helpForm textarea:focus {
+    border-color: #16a34a;
 
-    resize:none;
-
+    box-shadow: 0 0 0 3px rgba(22, 163, 74, .08);
 }
 
-#helpForm button{
+#helpForm textarea {
+    resize: vertical;
 
-    padding:14px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#16a34a;
-
-    color:#fff;
-
-    font-size:16px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    transition:.3s;
-
+    min-height: 110px;
 }
 
-#helpForm button:hover{
+#helpForm button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    background:#15803d;
+    gap: 8px;
 
+    padding: 14px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #16a34a;
+
+    color: #fff;
+
+    font-size: 16px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .3s;
+}
+
+#helpForm button:hover {
+    background: #15803d;
 }
 
 /* ==========================================
    FOOTER
 ========================================== */
 
-.help-footer{
+.help-footer {
+    text-align: center;
 
-    text-align:center;
+    padding: 30px 20px;
 
-    padding:30px 20px;
-
-    color:#777;
-
+    color: #777;
 }
 
-.help-footer p{
+.help-footer p {
+    margin: 0;
 
-    margin:0;
+    font-weight: bold;
 
-    font-weight:bold;
-
-    color:#16a34a;
-
+    color: #16a34a;
 }
 
-.help-footer small{
+.help-footer small {
+    display: block;
 
-    display:block;
-
-    margin-top:8px;
-
+    margin-top: 8px;
 }
 
 /* ==========================================
    MOBILE
 ========================================== */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
 
-    .help-header{
-
-        padding:15px;
-
+    .help-header {
+        padding: 15px;
     }
 
-    .help-card{
+    .help-header h1 {
+        font-size: 20px;
+    }
 
-        margin:12px;
-
-        padding:18px;
-
+    .help-card {
+        margin: 12px;
+        padding: 18px;
     }
 
 }
