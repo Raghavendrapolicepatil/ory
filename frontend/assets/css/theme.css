@@ -64,3 +64,7 @@ body.dark .delivery-tag{
 body.dark .footer{
     background:#1f2937;
 }
+
+.seo-main-title {
+    display: none !important;
+}
