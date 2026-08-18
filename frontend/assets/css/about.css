@@ -2,282 +2,279 @@
    ABOUT PAGE
 ========================================== */
 
-body{
-
-    margin:0;
-
-    padding:0;
-
-    font-family:Arial, Helvetica, sans-serif;
-
-    background:#f5f5f5;
-
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f5f5;
+    color: #222;
 }
 
-.app{
-
-    max-width:700px;
-
-    margin:auto;
-
-    min-height:100vh;
-
-    background:#f5f5f5;
-
+.app {
+    max-width: 700px;
+    margin: auto;
+    min-height: 100vh;
+    background: #f5f5f5;
 }
 
 /* ==========================================
    HEADER
 ========================================== */
 
-.about-header{
+.about-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-    position:sticky;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-    top:0;
+    padding: 18px;
 
-    z-index:1000;
+    background: #16a34a;
+    color: #fff;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    padding:18px;
-
-    background:#16a34a;
-
-    color:#fff;
-
-    box-shadow:0 3px 10px rgba(0,0,0,.12);
-
+    box-shadow: 0 3px 10px rgba(0, 0, 0, .12);
 }
 
-.about-header a{
+.about-header a {
+    width: 40px;
+    height: 40px;
 
-    width:40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    height:40px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
 
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    color:#fff;
-
-    text-decoration:none;
-
-    font-size:20px;
-
-    border-radius:50%;
-
+    border-radius: 50%;
 }
 
-.about-header a:hover{
-
-    background:rgba(255,255,255,.15);
-
+.about-header a:hover {
+    background: rgba(255, 255, 255, .15);
 }
 
-.about-header h2{
+.about-header h2 {
+    margin: 0;
+    flex: 1;
+    text-align: center;
 
-    margin:0;
-
-    flex:1;
-
-    text-align:center;
-
-    font-size:22px;
-
-    font-weight:700;
-
+    font-size: 22px;
+    font-weight: 700;
 }
 
 /* ==========================================
-   LOGO
+   LOGO / BRAND
 ========================================== */
 
-.about-logo{
-
-    padding:35px 20px;
-
-    text-align:center;
-
+.about-logo {
+    padding: 35px 20px;
+    text-align: center;
 }
 
-.about-logo img{
+.about-logo img {
+    width: 90px;
+    height: 90px;
 
-    width:90px;
-
-    height:90px;
-
-    object-fit:contain;
-
-    margin-bottom:15px;
-
+    object-fit: contain;
+    margin-bottom: 15px;
 }
 
-.about-logo h1{
+.about-logo h1 {
+    margin: 0;
 
-    margin:0;
-
-    font-size:28px;
-
-    color:#222;
-
+    font-size: 28px;
+    font-weight: 700;
+    color: #222;
 }
 
-.about-logo p{
+.about-logo p {
+    margin-top: 8px;
 
-    margin-top:8px;
-
-    color:#666;
-
-    font-size:15px;
-
+    color: #666;
+    font-size: 15px;
 }
 
 /* ==========================================
-   CARDS
+   ABOUT CARDS
 ========================================== */
 
-.about-card{
+.about-card {
+    background: #fff;
 
-    background:#fff;
+    margin: 15px;
+    padding: 20px;
 
-    margin:15px;
+    border-radius: 18px;
 
-    padding:20px;
-
-    border-radius:18px;
-
-    box-shadow:0 4px 12px rgba(0,0,0,.08);
-
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
 }
 
-.about-card h3{
+/* Supports both h2 and h3 */
 
-    margin-top:0;
+.about-card h2,
+.about-card h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
 
-    margin-bottom:15px;
+    color: #16a34a;
 
-    color:#16a34a;
+    display: flex;
+    align-items: center;
 
-    display:flex;
+    gap: 10px;
 
-    align-items:center;
-
-    gap:10px;
-
-    font-size:20px;
-
+    font-size: 20px;
+    font-weight: 700;
 }
 
-.about-card p{
-
-    margin:8px 0;
-
-    color:#555;
-
-    line-height:1.8;
-
-    font-size:15px;
-
+.about-card h2 i,
+.about-card h3 i {
+    font-size: 19px;
 }
 
-.about-card ul{
+.about-card p {
+    margin: 8px 0;
 
-    margin:0;
+    color: #555;
 
-    padding-left:22px;
-
+    line-height: 1.8;
+    font-size: 15px;
 }
 
-.about-card li{
+.about-card strong {
+    color: #222;
+    font-weight: 700;
+}
 
-    margin-bottom:10px;
+.about-card ul {
+    margin: 0;
+    padding-left: 22px;
+}
 
-    color:#555;
+.about-card li {
+    margin-bottom: 10px;
 
-    line-height:1.6;
+    color: #555;
 
+    line-height: 1.6;
+}
+
+/* ==========================================
+   FOUNDERS
+========================================== */
+
+.founder {
+    padding: 14px 16px;
+
+    margin-top: 10px;
+
+    background: #f8faf8;
+
+    border-left: 4px solid #16a34a;
+
+    border-radius: 10px;
+}
+
+.founder h3 {
+    margin: 0 0 4px 0;
+
+    display: block;
+
+    color: #222;
+
+    font-size: 17px;
+}
+
+.founder p {
+    margin: 0;
+
+    color: #16a34a;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ==========================================
+   CONTACT LINKS
+========================================== */
+
+.about-card a {
+    color: #16a34a;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.about-card a:hover {
+    text-decoration: underline;
 }
 
 /* ==========================================
    FOOTER
 ========================================== */
 
-.about-footer{
+.about-footer {
+    text-align: center;
 
-    text-align:center;
+    padding: 35px 20px;
 
-    padding:35px 20px;
+    color: #777;
 
-    color:#777;
-
-    font-size:14px;
-
+    font-size: 14px;
 }
 
-.about-footer p{
+.about-footer p {
+    margin: 0;
 
-    margin:0;
+    font-weight: bold;
 
-    font-weight:bold;
-
-    color:#16a34a;
-
+    color: #16a34a;
 }
 
-.about-footer small{
+.about-footer small {
+    display: block;
 
-    display:block;
-
-    margin-top:8px;
-
+    margin-top: 8px;
 }
 
 /* ==========================================
    MOBILE
 ========================================== */
 
-@media(max-width:768px){
+@media (max-width: 768px) {
 
-    .about-header{
-
-        padding:15px;
-
+    .about-header {
+        padding: 15px;
     }
 
-    .about-logo{
-
-        padding:30px 15px;
-
+    .about-header h2 {
+        font-size: 20px;
     }
 
-    .about-logo img{
-
-        width:75px;
-
-        height:75px;
-
+    .about-logo {
+        padding: 30px 15px;
     }
 
-    .about-logo h1{
-
-        font-size:24px;
-
+    .about-logo img {
+        width: 75px;
+        height: 75px;
     }
 
-    .about-card{
+    .about-logo h1 {
+        font-size: 24px;
+    }
 
-        margin:12px;
+    .about-card {
+        margin: 12px;
+        padding: 18px;
+    }
 
-        padding:18px;
-
+    .about-card h2,
+    .about-card h3 {
+        font-size: 19px;
     }
 
 }
