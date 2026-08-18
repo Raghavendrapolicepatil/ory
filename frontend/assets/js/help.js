@@ -4,24 +4,30 @@
 
 const helpForm = document.getElementById("helpForm");
 
+const WHATSAPP_NUMBER = "918073072838";
+
+
 // ==========================================
 // Submit Form
 // ==========================================
 
 if (helpForm) {
 
-    helpForm.addEventListener("submit", (e) => {
+    helpForm.addEventListener("submit", function (e) {
 
         e.preventDefault();
 
         const name =
-            helpForm.querySelector('input[type="text"]').value.trim();
+            document.getElementById("helpName").value.trim();
 
         const mobile =
-            helpForm.querySelector('input[type="tel"]').value.trim();
+            document.getElementById("helpPhone").value.trim();
 
         const message =
-            helpForm.querySelector("textarea").value.trim();
+            document.getElementById("helpMessage").value.trim();
+
+
+        // Check fields
 
         if (!name || !mobile || !message) {
 
@@ -31,33 +37,37 @@ if (helpForm) {
 
         }
 
-        // Save Locally (Temporary)
-        const supportMessages =
-            JSON.parse(localStorage.getItem("supportMessages")) || [];
 
-        supportMessages.push({
+        // ==========================================
+        // Create WhatsApp Message
+        // ==========================================
 
-            id: Date.now(),
+        const whatsappMessage =
+`Hello Orymart Support,
 
-            name,
+Name: ${name}
+Mobile: ${mobile}
 
-            mobile,
+Message:
+${message}`;
 
-            message,
 
-            date: new Date().toLocaleString()
+        // ==========================================
+        // Open WhatsApp
+        // ==========================================
 
-        });
+        const whatsappURL =
+            `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(whatsappMessage)}`;
 
-        localStorage.setItem(
 
-            "supportMessages",
-
-            JSON.stringify(supportMessages)
-
+        window.open(
+            whatsappURL,
+            "_blank",
+            "noopener,noreferrer"
         );
 
-        alert("✅ Your message has been sent successfully.");
+
+        // Clear form
 
         helpForm.reset();
 
@@ -65,8 +75,9 @@ if (helpForm) {
 
 }
 
+
 // ==========================================
-// WhatsApp Support
+// Direct WhatsApp Support
 // ==========================================
 
 const whatsappBtn =
@@ -75,8 +86,11 @@ const whatsappBtn =
 if (whatsappBtn) {
 
     whatsappBtn.href =
-        "https://wa.me/91 8073072838";
+        "https://wa.me/918073072838";
 
     whatsappBtn.target = "_blank";
+
+    whatsappBtn.rel =
+        "noopener noreferrer";
 
 }
