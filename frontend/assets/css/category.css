@@ -6,6 +6,7 @@
     padding:20px 16px;
 }
 
+
 /* ==========================================
    SECTION TITLE
 ========================================== */
@@ -22,6 +23,8 @@
     font-weight:700;
     color:#111827;
 }
+
+
 /* ==========================================
    CATEGORY GRID
 ========================================== */
@@ -30,6 +33,88 @@
     display:grid;
     grid-template-columns:repeat(5,minmax(0,1fr));
     gap:16px;
+}
+
+
+/* ==========================================
+   CATEGORY CARD
+========================================== */
+
+.category-card{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+
+    background:#fff;
+    border-radius:18px;
+    padding:16px 12px;
+
+    text-align:center;
+    text-decoration:none;
+
+    color:#222;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+}
+
+
+/* ==========================================
+   REMOVE LINK BLUE COLOR
+========================================== */
+
+.category-card,
+.category-card:visited,
+.category-card:hover,
+.category-card:active{
+    color:#222;
+    text-decoration:none;
+}
+
+
+/* ==========================================
+   CATEGORY IMAGE
+========================================== */
+
+.category-card img{
+    width:70px;
+    height:70px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+
+/* ==========================================
+   CATEGORY NAME
+========================================== */
+
+.category-card span{
+    font-size:14px;
+    font-weight:600;
+    line-height:20px;
+
+    color:#222;
+
+    text-decoration:none;
+
+    word-break:normal;
+    overflow-wrap:normal;
+}
+
+
+/* ==========================================
+   HOVER
+========================================== */
+
+.category-card:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,.12);
 }
 
 
@@ -61,7 +146,8 @@
         font-weight:600;
         line-height:20px;
 
-        /* word ko beech se todne se rokega */
+        color:#222;
+
         word-break:normal;
         overflow-wrap:normal;
     }
