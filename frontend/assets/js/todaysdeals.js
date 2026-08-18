@@ -1,5 +1,5 @@
 // ==========================================
-// Snackible Today's Deals Countdown
+// Orymart Today's Deals Countdown
 // ==========================================
 
 const hourBox = document.getElementById("hours");

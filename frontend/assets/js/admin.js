@@ -1,5 +1,5 @@
 // ==========================================
-// Snackible Admin Panel
+// Orymart Admin Panel
 // ==========================================
 
 const API = "https://snackible-backend.onrender.com/api/products";

@@ -1,5 +1,5 @@
 // ======================================
-// Snackible Products V2
+// Orymart Products V2
 // ======================================
 
 let allProducts = [];

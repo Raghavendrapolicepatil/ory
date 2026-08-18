@@ -1,5 +1,5 @@
 // ==========================================
-// Snackible Admin Categories
+// Orymart Admin Categories
 // ==========================================
 
 const API = "https://snackible-backend.onrender.com/api/categories";

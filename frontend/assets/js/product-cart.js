@@ -1,5 +1,5 @@
 // ==========================================
-// Snackible Product Cart
+// Orymart Product Cart
 // ==========================================
 let currentVariant = null;
 // Cart Container

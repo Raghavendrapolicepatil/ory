@@ -1,5 +1,5 @@
 // ======================================
-// Snackible Premium Search
+// Orymart Premium Search
 // ======================================
 
 const searchInput = document.getElementById("search-input");

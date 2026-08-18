@@ -1,5 +1,5 @@
 // ==========================================
-// Snackible Banner Management
+// Orymart Banner Management
 // ==========================================
 
 const API = "https://snackible-backend.onrender.com/api/banners";

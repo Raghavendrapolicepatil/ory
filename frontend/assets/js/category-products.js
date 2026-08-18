@@ -1,5 +1,5 @@
 // ======================================
-// Snackible Category V3
+// Orymart Category V3
 // ======================================
 
 const API = "https://snackible-backend.onrender.com/api";

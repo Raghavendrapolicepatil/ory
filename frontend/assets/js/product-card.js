@@ -1,5 +1,5 @@
 // ==========================================
-// Snackible Product Card
+// Orymart Product Card
 // ==========================================
 
 function createProductCard(product){
