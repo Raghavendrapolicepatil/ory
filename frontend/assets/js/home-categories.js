@@ -14,26 +14,25 @@ async function loadHomeCategories() {
 
         grid.innerHTML = "";
 
-        categories
-            .filter(category => category.status)
-            .slice(0, 4)
-            .forEach(category => {
+        categories.forEach(category => {
 
-                grid.innerHTML += `
+            if (!category.status) return;
 
-                <a href="category-products.html?category=${category.slug}" class="category-card">
+            grid.innerHTML += `
 
-                    <img
-                        src="${category.image}"
-                        alt="${category.name}">
+            <a href="category-products.html?category=${category.slug}" class="category-card">
 
-                    <span>${category.name}</span>
+                <img
+                    src="${category.image}"
+                    alt="${category.name}">
 
-                </a>
+                <span>${category.name}</span>
 
-                `;
+            </a>
 
-            });
+            `;
+
+        });
 
     } catch (error) {
 
