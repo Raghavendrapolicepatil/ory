@@ -18,7 +18,7 @@ const STORE_LOCATION = {
 
     lng: 76.3641882,
 
-    name: "Ory Mart"
+    name: "Orymart"
 
 };
 

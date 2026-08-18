@@ -106,7 +106,7 @@ extraDetails: {
     // Seller
     seller: {
     type: String,
-    default: "Ory Mart"
+    default: "Orymart"
 },
 
     // Homepage Sections

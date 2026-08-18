@@ -1,5 +1,5 @@
 // ==========================================
-// Ory Mart Theme Loader
+// Orymart Theme Loader
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {

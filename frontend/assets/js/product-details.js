@@ -281,7 +281,7 @@ function renderBasicInfo(){
 
         currentProduct.brand ||
 
-        "Ory Mart"
+        "Orymart"
 
     );
 
@@ -395,7 +395,7 @@ function renderBasicInfo(){
 
         currentProduct.seller ||
 
-        "Ory Mart"
+        "Orymart"
 
     );
 

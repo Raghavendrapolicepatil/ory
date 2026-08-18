@@ -1,5 +1,5 @@
 // ==========================================
-// OryMart Register + OTP
+// Orymart Register + OTP
 // ==========================================
 
 const registerForm = document.getElementById("registerForm");

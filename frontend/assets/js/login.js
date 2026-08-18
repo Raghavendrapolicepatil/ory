@@ -1,5 +1,5 @@
 // ==========================================
-// OryMart Login
+// Orymart Login
 // ==========================================
 
 const loginForm = document.getElementById("loginForm");

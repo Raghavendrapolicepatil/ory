@@ -60,7 +60,7 @@ async function loadBanners() {
 
                         <img
                             src="${banner.image}"
-                            alt="${banner.title || "Ory Mart Banner"}"
+                            alt="${banner.title || "Orymart Banner"}"
                             width="1200"
                             height="525"
                             loading="${loading}"
