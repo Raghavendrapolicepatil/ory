@@ -6,7 +6,9 @@ async function loadHomeCategories() {
 
     try {
 
-        const response = await fetch("https://snackible-backend.onrender.com/api/categories");
+        const response = await fetch(
+            "https://snackible-backend.onrender.com/api/categories"
+        );
 
         const categories = await response.json();
 
@@ -14,25 +16,28 @@ async function loadHomeCategories() {
 
         grid.innerHTML = "";
 
-        categories.forEach(category => {
+        categories
+            .filter(category => category.status)
+            .slice(0, 4)
+            .forEach(category => {
 
-            if (!category.status) return;
+                grid.innerHTML += `
 
-            grid.innerHTML += `
+                <a
+                    href="category-products.html?category=${category.slug}"
+                    class="category-card">
 
-            <a href="category-products.html?category=${category.slug}" class="category-card">
+                    <img
+                        src="${category.image}"
+                        alt="${category.name}">
 
-                <img
-                    src="${category.image}"
-                    alt="${category.name}">
+                    <span>${category.name}</span>
 
-                <span>${category.name}</span>
+                </a>
 
-            </a>
+                `;
 
-            `;
-
-        });
+            });
 
     } catch (error) {
 
