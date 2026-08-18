@@ -1,5 +1,5 @@
 // ==========================================
-// Patil Groceries Orders
+// Orymart Orders
 // ==========================================
 
 const GROCERY_API = "https://snackible-backend.onrender.com/api/orders";

@@ -1,5 +1,5 @@
 // ==========================================
-// Patil Groceries - Forgot Password
+// Orymart - Forgot Password
 // ==========================================
 
 const forgotForm = document.getElementById("forgotForm");

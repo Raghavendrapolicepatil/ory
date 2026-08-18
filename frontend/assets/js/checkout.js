@@ -1,5 +1,5 @@
 // ==========================================
-// Patil Groceries Checkout
+// Orymart Checkout
 // ==========================================
 function showToast(message) {
 

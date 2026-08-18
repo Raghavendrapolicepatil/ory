@@ -439,7 +439,7 @@ function addMarkers(customer) {
         STORE_LOCATION.lng
     ])
     .addTo(map)
-    .bindPopup("<b>🏪 Patil Groceries</b>");
+    .bindPopup("<b>🏪 Orymart</b>");
 
     customerMarker = L.marker([
         Number(customer.latitude),

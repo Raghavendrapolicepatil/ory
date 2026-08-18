@@ -1,5 +1,5 @@
 // ==========================================
-// Patil Groceries Help & Support
+// Orymart Help & Support
 // ==========================================
 
 const helpForm = document.getElementById("helpForm");

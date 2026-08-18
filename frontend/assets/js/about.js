@@ -1,5 +1,5 @@
 // ==========================================
-// Patil Groceries - About Page
+//  Orymart - About Page
 // ==========================================
 
 document.addEventListener("DOMContentLoaded", () => {

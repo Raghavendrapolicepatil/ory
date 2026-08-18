@@ -1,5 +1,5 @@
 // ==========================================
-// Patil Groceries Admin Settings
+// Orymart Admin Settings
 // ==========================================
 
 const API = "https://snackible-backend.onrender.com/api/settings";

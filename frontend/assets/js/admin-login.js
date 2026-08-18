@@ -1,5 +1,5 @@
 // ==========================================
-// Patil Groceries Admin Login
+// Orymart Admin Login
 // ==========================================
 
 const form = document.getElementById("adminLoginForm");
