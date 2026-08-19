@@ -1,5 +1,5 @@
 // ==========================================
-// Dynamic Banner Slider - Fast Version
+// Dynamic Banner Slider - Optimized
 // ==========================================
 
 const slides = document.getElementById("bannerSlides");
@@ -9,64 +9,83 @@ let currentIndex = 0;
 let totalSlides = 0;
 let autoSlide = null;
 
-// =============================
+
+// ==========================================
 // Load Banners
-// =============================
+// ==========================================
 
 async function loadBanners() {
 
+    if (!slides || !dotsBox) return;
+
     try {
 
-        const res = await fetch(
-            "https://snackible-backend.onrender.com/api/banners"
+        const controller = new AbortController();
+
+        // Don't allow a slow API to block the homepage
+        const timeout = setTimeout(() => {
+            controller.abort();
+        }, 5000);
+
+
+        const response = await fetch(
+            "https://snackible-backend.onrender.com/api/banners",
+            {
+                signal: controller.signal,
+                cache: "no-store"
+            }
         );
 
-        if (!res.ok) {
+        clearTimeout(timeout);
+
+
+        if (!response.ok) {
             throw new Error("Failed to load banners");
         }
 
-        const banners = await res.json();
+
+        const banners = await response.json();
+
 
         const activeBanners = banners
             .filter(banner => banner.status)
             .sort((a, b) => a.order - b.order);
 
-        // Reset
+
         slides.innerHTML = "";
         dotsBox.innerHTML = "";
 
         totalSlides = activeBanners.length;
 
-        if (totalSlides === 0) {
+
+        if (!totalSlides) {
             return;
         }
 
-        // =============================
+
+        // ==========================================
         // Create Banner HTML
-        // =============================
+        // ==========================================
 
-        const slidesHTML = activeBanners.map((banner, index) => {
+        slides.innerHTML = activeBanners.map((banner, index) => {
 
-            const loading =
-                index === 0 ? "eager" : "lazy";
-
-            const priority =
-                index === 0 ? "high" : "auto";
+            const isFirst = index === 0;
 
             return `
                 <div class="slide">
 
-                    <a href="${banner.link || "#"}">
+                    <a
+                        href="${banner.link || "#"}">
 
                         <img
                             src="${banner.image}"
                             alt="${banner.title || "Orymart Banner"}"
                             width="1200"
                             height="525"
-                            loading="${loading}"
-                            fetchpriority="${priority}"
-                            decoding="async"
-                        >
+                            ${isFirst
+                                ? 'loading="eager" fetchpriority="high"'
+                                : 'loading="lazy"'}
+                            decoding="async">
 
                     </a>
 
@@ -75,11 +94,10 @@ async function loadBanners() {
 
         }).join("");
 
-        slides.innerHTML = slidesHTML;
 
-        // =============================
+        // ==========================================
         // Create Dots
-        // =============================
+        // ==========================================
 
         dotsBox.innerHTML = activeBanners.map((banner, index) => {
 
@@ -92,23 +110,27 @@ async function loadBanners() {
 
         }).join("");
 
-        // =============================
-        // Initialize Slider
-        // =============================
 
         initSlider();
 
-    } catch (err) {
 
-        console.error("Banner Load Error:", err);
+    } catch (error) {
+
+        console.warn(
+            "Banner API unavailable:",
+            error.message
+        );
+
+        // Keep homepage usable even if API is slow/down
 
     }
 
 }
 
-// =============================
+
+// ==========================================
 // Update Slider
-// =============================
+// ==========================================
 
 function updateSlider() {
 
@@ -117,8 +139,10 @@ function updateSlider() {
     slides.style.transform =
         `translateX(-${currentIndex * 100}%)`;
 
+
     const dots =
         dotsBox.querySelectorAll(".dot");
+
 
     dots.forEach((dot, index) => {
 
@@ -131,9 +155,10 @@ function updateSlider() {
 
 }
 
-// =============================
+
+// ==========================================
 // Next Slide
-// =============================
+// ==========================================
 
 function nextSlide() {
 
@@ -149,9 +174,10 @@ function nextSlide() {
 
 }
 
-// =============================
+
+// ==========================================
 // Previous Slide
-// =============================
+// ==========================================
 
 function previousSlide() {
 
@@ -167,9 +193,10 @@ function previousSlide() {
 
 }
 
-// =============================
+
+// ==========================================
 // Start Auto Slider
-// =============================
+// ==========================================
 
 function startSlider() {
 
@@ -186,9 +213,10 @@ function startSlider() {
 
 }
 
-// =============================
+
+// ==========================================
 // Stop Auto Slider
-// =============================
+// ==========================================
 
 function stopSlider() {
 
@@ -202,21 +230,21 @@ function stopSlider() {
 
 }
 
-// =============================
+
+// ==========================================
 // Initialize Slider
-// =============================
+// ==========================================
 
 function initSlider() {
 
-    // Reset index
     currentIndex = 0;
 
-    // =============================
+
     // Dot Click
-    // =============================
 
     const dots =
         dotsBox.querySelectorAll(".dot");
+
 
     dots.forEach(dot => {
 
@@ -233,9 +261,8 @@ function initSlider() {
 
     });
 
-    // =============================
+
     // Desktop Hover
-    // =============================
 
     slides.addEventListener(
         "mouseenter",
@@ -247,11 +274,11 @@ function initSlider() {
         startSlider
     );
 
-    // =============================
+
     // Mobile Swipe
-    // =============================
 
     let startX = 0;
+
 
     slides.addEventListener(
         "touchstart",
@@ -266,6 +293,7 @@ function initSlider() {
         { passive: true }
     );
 
+
     slides.addEventListener(
         "touchend",
         (e) => {
@@ -275,6 +303,7 @@ function initSlider() {
 
             const difference =
                 startX - endX;
+
 
             if (difference > 50) {
 
@@ -286,15 +315,13 @@ function initSlider() {
 
             }
 
+
             startSlider();
 
         },
         { passive: true }
     );
 
-    // =============================
-    // Initial Position
-    // =============================
 
     updateSlider();
 
@@ -302,8 +329,9 @@ function initSlider() {
 
 }
 
-// =============================
+
+// ==========================================
 // Start
-// =============================
+// ==========================================
 
 loadBanners();
