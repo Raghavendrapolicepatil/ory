@@ -8,3 +8,4 @@ backend/.env
 android.keystore
 *.apk
 *.aab
+app/build/
