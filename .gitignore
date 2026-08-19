@@ -4,3 +4,7 @@ frontend/node_modules/
 
 .env
 backend/.env
+
+android.keystore
+*.apk
+*.aab
