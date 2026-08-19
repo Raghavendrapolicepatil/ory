@@ -106,7 +106,7 @@
 },
 {
 "id":8,
-"name":"Boost",
+"name":"boost",
 "category":"dairy-breakfast",
 "price":220,
 "mrp":240,
@@ -114,7 +114,7 @@
 "discount":"8% OFF",
 "rating":4.7,
 "reviews":180,
-"brand":"Boost",
+"brand":"boost",
 "stock":15,
 "description":"Health drink powder.",
 "image":"assets/images/products/boost.webp"
