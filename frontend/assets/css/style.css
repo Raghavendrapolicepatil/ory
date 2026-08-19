@@ -18,20 +18,15 @@
 }
 
 .section-title a{
-
-    color:#166534;
-
+    color:#15803d;
     text-decoration:none;
-
     font-size:15px;
-
-    font-weight:600;
-
+    font-weight:700;
 }
+
 .section-title a:hover{
     color:#15803d;
 }
-
 
 /* ===================================================
                   GLOBAL PAGE LAYOUT
