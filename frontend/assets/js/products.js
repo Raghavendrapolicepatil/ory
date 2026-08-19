@@ -483,61 +483,6 @@ function createProductCard(product){
 
 }
 
-// ======================================
-// Cart Button
-// ======================================
-
-function renderCartButton(product){
-
-    const qty = getProductQty(product.id);
-
-    if(qty===0){
-
-        return `
-
-        <button
-            class="add-btn"
-           onclick="addProduct(
-    ${product.id},
-    '${product.name.replace(/'/g,"\\'")}',
-    ${product.price},
-    '${product.image}',
-    '${product.weight || ""}'
-)">
-
-            <i class="ri-add-line"></i>
-
-        </button>
-
-        `;
-
-    }
-
-    return `
-
-    <div class="quantity-control">
-
-        <button
-            onclick="minusProduct(${product.id})">
-
-            <i class="ri-subtract-line"></i>
-
-        </button>
-
-        <span>${qty}</span>
-
-        <button
-            onclick="plusProduct(${product.id})">
-
-            <i class="ri-add-line"></i>
-
-        </button>
-
-    </div>
-
-    `;
-
-}
 
 // ======================================
 // Add Product
