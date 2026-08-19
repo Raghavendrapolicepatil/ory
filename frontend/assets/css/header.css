@@ -84,7 +84,7 @@
     margin-bottom:4px;
 }
 
-.location-box h3{
+.location-box .location-heading{
 
     display:flex;
 
@@ -100,7 +100,7 @@
 
 }
 
-.location-box h3 span{
+.location-box .location-heading span{
 
     max-width:150px;
 
@@ -112,14 +112,13 @@
 
 }
 
-.location-box h3 i{
+.location-box .location-heading i{
 
     color:#16a34a;
 
     font-size:16px;
 
 }
-
 /* ==========================================
    PROFILE
 ========================================== */
