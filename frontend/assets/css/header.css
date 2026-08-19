@@ -77,17 +77,11 @@
 }
 
 .delivery-time{
-
     display:inline-block;
-
     font-size:11px;
-
-    color:#16a34a;
-
+    color:#166534;
     font-weight:700;
-
     margin-bottom:4px;
-
 }
 
 .location-box h3{
