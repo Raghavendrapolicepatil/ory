@@ -22,7 +22,7 @@
     align-items:center;
     justify-content:center;
 
-    color:#166534;
+    color:#14532d !important;
     background:#ffffff;
 
     text-decoration:none;
@@ -34,7 +34,7 @@
 }
 
 .section-title a:hover{
-    color:#14532d;
+    color:#14532d !important;
     background:#f0fdf4;
 }
 /* ===================================================
