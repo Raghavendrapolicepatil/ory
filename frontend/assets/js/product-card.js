@@ -71,14 +71,11 @@ function createProductCard(product){
 
         </div>
 
-        <!-- Product Name -->
+<!-- Product Name -->
 
-        <h4
-            onclick="window.location='product-details.html?id=${product.id}'"
-            style="cursor:pointer;">
-
-            ${product.name}
-
+<div class="product-name" onclick="openProduct(${product.id})">
+    ${product.name}
+</div>
         </h4>
 
         <!-- Weight -->

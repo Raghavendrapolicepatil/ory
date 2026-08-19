@@ -1705,11 +1705,9 @@ function createRelatedCard(product){
 
         <div class="related-info">
 
-            <h4>
-
-                ${product.name}
-
-            </h4>
+            <div class="product-name">
+        ${product.name}
+    </div>
 
             <p>
 
