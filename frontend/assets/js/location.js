@@ -2,11 +2,39 @@ const locationText = document.getElementById("location-name");
 
 const savedLocation = JSON.parse(localStorage.getItem("userLocation"));
 
+
+// ==========================================
+// SHOW SAVED LOCATION
+// ==========================================
+
 if (savedLocation) {
 
     locationText.textContent = savedLocation.city;
 
-} else if (navigator.geolocation) {
+} else {
+
+    // Do NOT ask location permission on page load
+    locationText.textContent = "Select Location";
+
+}
+
+
+// ==========================================
+// GET USER LOCATION
+// ==========================================
+
+async function getUserLocation() {
+
+    if (!navigator.geolocation) {
+
+        locationText.textContent = "Not Supported";
+
+        return;
+
+    }
+
+    locationText.textContent = "Getting Location...";
+
 
     navigator.geolocation.getCurrentPosition(
 
@@ -23,6 +51,7 @@ if (savedLocation) {
 
                 const data = await response.json();
 
+
                 const city =
                     data.address.city ||
                     data.address.city_district ||
@@ -34,7 +63,9 @@ if (savedLocation) {
                     data.address.state ||
                     "Unknown";
 
+
                 locationText.textContent = city;
+
 
                 const userLocation = {
 
@@ -46,6 +77,7 @@ if (savedLocation) {
 
                 };
 
+
                 localStorage.setItem(
                     "userLocation",
                     JSON.stringify(userLocation)
@@ -55,6 +87,7 @@ if (savedLocation) {
                     "userCity",
                     city
                 );
+
 
             } catch (error) {
 
@@ -74,8 +107,11 @@ if (savedLocation) {
 
     );
 
-} else {
-
-    locationText.textContent = "Not Supported";
-
 }
+
+
+// ==========================================
+// ASK LOCATION ONLY AFTER USER CLICK
+// ==========================================
+
+locationText.addEventListener("click", getUserLocation);
