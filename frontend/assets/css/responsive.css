@@ -186,9 +186,9 @@
         flex:0 0 160px;
     }
 
-    .product-card h4{
-        font-size:12px;
-    }
+    .product-name{
+    font-size:12px;
+}
 
     .price{
         font-size:16px;

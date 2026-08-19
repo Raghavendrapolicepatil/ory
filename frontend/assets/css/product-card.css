@@ -380,7 +380,7 @@
    PRODUCT NAME
 ========================================== */
 
-.product-card h4{
+.product-name{
 
     width:100%;
 
@@ -688,7 +688,7 @@
 
     }
 
-    .product-card h4{
+    .product-name{
 
         font-size:12px;
 

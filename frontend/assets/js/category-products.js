@@ -483,10 +483,9 @@ function createProductCard(product){
             ⚡ 15 mins
         </div>
 
-        <h4 onclick="openProduct(${product.id})">
-            ${product.name}
-        </h4>
-
+        <div class="product-name" onclick="openProduct(${product.id})">
+    ${product.name}
+</div>
         <div class="weight-chip">
             ${product.weight || ""}
         </div>
