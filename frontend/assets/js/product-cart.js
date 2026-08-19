@@ -201,12 +201,16 @@ if (currentProduct.stock <= 0) {
 // Auto Refresh
 // ==========================================
 
-window.addEventListener("load", () => {
+document.addEventListener("DOMContentLoaded", () => {
 
     setTimeout(() => {
 
-        refreshCartButton();
+        document.getElementById("loader")
+            .classList.add("hide");
 
-    }, 100);
+        document.getElementById("app")
+            .style.display = "block";
+
+    }, 1200);
 
 });
