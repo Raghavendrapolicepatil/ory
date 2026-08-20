@@ -397,6 +397,8 @@ function increaseQtyCheckout(index) {
     );
 
     loadCheckout();
+    
+    checkEmptyCheckout();
 
 }
 
@@ -428,6 +430,30 @@ function decreaseQtyCheckout(index) {
 }
 
 // ==========================================
+// Remove Grocery Product
+// ==========================================
+
+function removeItemCheckout(index) {
+
+    const cart =
+        JSON.parse(localStorage.getItem("cart")) || [];
+
+    if (!cart[index]) return;
+
+    cart.splice(index, 1);
+
+    localStorage.setItem(
+        "cart",
+        JSON.stringify(cart)
+    );
+
+    loadCheckout();
+
+    checkEmptyCheckout();
+
+}
+
+// ==========================================
 // Remove Product
 // ==========================================
 
@@ -444,6 +470,7 @@ function removePrintItem(index) {
     );
 
     loadCheckout();
+    checkEmptyCheckout();
 
 }
 
