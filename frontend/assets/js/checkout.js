@@ -1,4 +1,117 @@
 // ==========================================
+// Check Empty Checkout
+// ==========================================
+
+function checkEmptyCheckout() {
+
+    const checkoutContent =
+        document.getElementById("checkout-content");
+
+    const emptyCheckout =
+        document.getElementById("empty-checkout");
+
+    const checkoutFooter =
+        document.getElementById("checkout-footer");
+
+
+    // Normal grocery cart
+    const cart =
+        JSON.parse(
+            localStorage.getItem("cart")
+        ) || [];
+
+
+    // Print cart
+    const printCart =
+        JSON.parse(
+            localStorage.getItem("printCart")
+        ) || [];
+
+
+    // Total items
+    const totalItems =
+        cart.length + printCart.length;
+
+
+    console.log("Grocery Cart:", cart);
+    console.log("Print Cart:", printCart);
+    console.log("Total Checkout Items:", totalItems);
+
+
+    // ==========================================
+    // EMPTY
+    // ==========================================
+
+    if (totalItems === 0) {
+
+        if (checkoutContent) {
+
+            checkoutContent.style.display =
+                "none";
+
+        }
+
+        if (emptyCheckout) {
+
+            emptyCheckout.style.display =
+                "flex";
+
+        }
+
+        if (checkoutFooter) {
+
+            checkoutFooter.style.display =
+                "none";
+
+        }
+
+        return false;
+
+    }
+
+
+    // ==========================================
+    // ITEMS AVAILABLE
+    // ==========================================
+
+    if (checkoutContent) {
+
+        checkoutContent.style.display =
+            "block";
+
+    }
+
+    if (emptyCheckout) {
+
+        emptyCheckout.style.display =
+            "none";
+
+    }
+
+    if (checkoutFooter) {
+
+        checkoutFooter.style.display =
+            "flex";
+
+    }
+
+    return true;
+
+}
+
+
+// Run immediately
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        checkEmptyCheckout();
+
+    }
+);
+
+// ==========================================
 // Orymart Checkout
 // ==========================================
 function showToast(message) {
