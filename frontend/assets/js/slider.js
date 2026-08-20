@@ -1,5 +1,5 @@
 // ==========================================
-// Dynamic Banner Slider - Optimized
+// OryMart Dynamic Banner Slider - Fast
 // ==========================================
 
 const slides = document.getElementById("bannerSlides");
@@ -8,6 +8,64 @@ const dotsBox = document.getElementById("bannerDots");
 let currentIndex = 0;
 let totalSlides = 0;
 let autoSlide = null;
+
+const BANNER_CACHE_KEY = "orymart_banners_cache";
+const BANNER_CACHE_TIME = 30 * 60 * 1000;
+
+
+// ==========================================
+// Render Banners
+// ==========================================
+
+function renderBanners(banners) {
+
+    if (!slides || !dotsBox || !banners.length) return;
+
+    slides.innerHTML = banners.map((banner, index) => {
+
+        const isFirst = index === 0;
+
+        return `
+            <div class="slide">
+
+                <a href="${banner.link || "#"}">
+
+                    <img
+                        src="${banner.image}"
+                        alt="${banner.title || "Orymart Banner"}"
+                        width="1200"
+                        height="525"
+                        ${isFirst
+                            ? 'loading="eager" fetchpriority="high"'
+                            : 'loading="lazy"'}
+                        decoding="async">
+
+                </a>
+
+            </div>
+        `;
+
+    }).join("");
+
+
+    dotsBox.innerHTML = banners.map((banner, index) => {
+
+        return `
+            <span
+                class="dot ${index === 0 ? "active" : ""}"
+                data-index="${index}">
+            </span>
+        `;
+
+    }).join("");
+
+
+    totalSlides = banners.length;
+    currentIndex = 0;
+
+    initSlider();
+
+}
 
 
 // ==========================================
@@ -18,14 +76,61 @@ async function loadBanners() {
 
     if (!slides || !dotsBox) return;
 
+
+    // ======================================
+    // 1. Show Cache Immediately
+    // ======================================
+
     try {
 
-        const controller = new AbortController();
+        const cached =
+            localStorage.getItem(BANNER_CACHE_KEY);
 
-        // Don't allow a slow API to block the homepage
-        const timeout = setTimeout(() => {
-            controller.abort();
-        }, 5000);
+        if (cached) {
+
+            const data = JSON.parse(cached);
+
+            if (
+                data.banners &&
+                Array.isArray(data.banners) &&
+                data.banners.length
+            ) {
+
+                renderBanners(data.banners);
+
+                console.log(
+                    "⚡ Banners loaded from cache"
+                );
+
+            }
+
+        }
+
+    } catch (error) {
+
+        console.warn(
+            "Banner cache error:",
+            error
+        );
+
+    }
+
+
+    // ======================================
+    // 2. API Background Update
+    // ======================================
+
+    try {
+
+        const controller =
+            new AbortController();
+
+        const timeout =
+            setTimeout(() => {
+
+                controller.abort();
+
+            }, 5000);
 
 
         const response = await fetch(
@@ -36,82 +141,59 @@ async function loadBanners() {
             }
         );
 
+
         clearTimeout(timeout);
 
 
         if (!response.ok) {
-            throw new Error("Failed to load banners");
+
+            throw new Error(
+                "Failed to load banners"
+            );
+
         }
 
 
-        const banners = await response.json();
+        const banners =
+            await response.json();
 
 
-        const activeBanners = banners
-            .filter(banner => banner.status)
-            .sort((a, b) => a.order - b.order);
+        const activeBanners =
+            banners
+                .filter(
+                    banner => banner.status
+                )
+                .sort(
+                    (a, b) => a.order - b.order
+                );
 
 
-        slides.innerHTML = "";
-        dotsBox.innerHTML = "";
-
-        totalSlides = activeBanners.length;
+        if (!activeBanners.length) return;
 
 
-        if (!totalSlides) {
-            return;
-        }
+        // ==================================
+        // Save Cache
+        // ==================================
+
+        localStorage.setItem(
+            BANNER_CACHE_KEY,
+            JSON.stringify({
+                banners: activeBanners,
+                savedAt: Date.now()
+            })
+        );
 
 
-        // ==========================================
-        // Create Banner HTML
-        // ==========================================
+        // ==================================
+        // Update Screen
+        // ==================================
 
-        slides.innerHTML = activeBanners.map((banner, index) => {
-
-            const isFirst = index === 0;
-
-            return `
-                <div class="slide">
-
-                    <a
-                        href="${banner.link || "#"}">
-
-                        <img
-                            src="${banner.image}"
-                            alt="${banner.title || "Orymart Banner"}"
-                            width="1200"
-                            height="525"
-                            ${isFirst
-                                ? 'loading="eager" fetchpriority="high"'
-                                : 'loading="lazy"'}
-                            decoding="async">
-
-                    </a>
-
-                </div>
-            `;
-
-        }).join("");
+        renderBanners(activeBanners);
 
 
-        // ==========================================
-        // Create Dots
-        // ==========================================
-
-        dotsBox.innerHTML = activeBanners.map((banner, index) => {
-
-            return `
-                <span
-                    class="dot ${index === 0 ? "active" : ""}"
-                    data-index="${index}">
-                </span>
-            `;
-
-        }).join("");
-
-
-        initSlider();
+        console.log(
+            "✅ Fresh banners loaded"
+        );
 
 
     } catch (error) {
@@ -120,8 +202,6 @@ async function loadBanners() {
             "Banner API unavailable:",
             error.message
         );
-
-        // Keep homepage usable even if API is slow/down
 
     }
 
@@ -167,7 +247,9 @@ function nextSlide() {
     currentIndex++;
 
     if (currentIndex >= totalSlides) {
+
         currentIndex = 0;
+
     }
 
     updateSlider();
@@ -186,7 +268,9 @@ function previousSlide() {
     currentIndex--;
 
     if (currentIndex < 0) {
+
         currentIndex = totalSlides - 1;
+
     }
 
     updateSlider();
@@ -240,91 +324,75 @@ function initSlider() {
     currentIndex = 0;
 
 
-    // Dot Click
-
     const dots =
         dotsBox.querySelectorAll(".dot");
 
 
     dots.forEach(dot => {
 
-        dot.addEventListener("click", () => {
+        dot.addEventListener(
+            "click",
+            () => {
 
-            currentIndex =
-                Number(dot.dataset.index);
+                currentIndex =
+                    Number(dot.dataset.index);
 
-            updateSlider();
+                updateSlider();
 
-            startSlider();
+                startSlider();
 
-        });
+            }
+        );
 
     });
 
 
-    // Desktop Hover
+    slides.onmouseenter =
+        stopSlider;
 
-    slides.addEventListener(
-        "mouseenter",
-        stopSlider
-    );
+    slides.onmouseleave =
+        startSlider;
 
-    slides.addEventListener(
-        "mouseleave",
-        startSlider
-    );
-
-
-    // Mobile Swipe
 
     let startX = 0;
 
 
-    slides.addEventListener(
-        "touchstart",
-        (e) => {
+    slides.ontouchstart = (e) => {
 
-            startX =
-                e.touches[0].clientX;
+        startX =
+            e.touches[0].clientX;
 
-            stopSlider();
+        stopSlider();
 
-        },
-        { passive: true }
-    );
+    };
 
 
-    slides.addEventListener(
-        "touchend",
-        (e) => {
+    slides.ontouchend = (e) => {
 
-            const endX =
-                e.changedTouches[0].clientX;
+        const endX =
+            e.changedTouches[0].clientX;
 
-            const difference =
-                startX - endX;
+        const difference =
+            startX - endX;
 
 
-            if (difference > 50) {
+        if (difference > 50) {
 
-                nextSlide();
+            nextSlide();
 
-            } else if (difference < -50) {
+        } else if (difference < -50) {
 
-                previousSlide();
+            previousSlide();
 
-            }
+        }
 
 
-            startSlider();
+        startSlider();
 
-        },
-        { passive: true }
-    );
+    };
 
 
     updateSlider();
-
     startSlider();
 
 }
