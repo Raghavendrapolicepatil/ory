@@ -153,21 +153,3 @@
     }
 
 }
-
-/* PRINT EDIT BUTTON */
-
-.checkout-item button.edit-btn {
-    background: #16a34a !important;
-    color: #ffffff !important;
-    border: none !important;
-    padding: 8px 14px !important;
-    border-radius: 8px !important;
-    font-size: 13px !important;
-    font-weight: 600 !important;
-    cursor: pointer !important;
-}
-
-.checkout-item button.edit-btn:hover {
-    background: #15803d !important;
-    color: #ffffff !important;
-}
