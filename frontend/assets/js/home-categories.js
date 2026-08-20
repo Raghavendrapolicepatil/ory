@@ -9,22 +9,15 @@ async function loadHomeCategories() {
 
     if (!grid) return;
 
-
     try {
 
         const controller =
             new AbortController();
 
-
-        // Maximum 5 seconds for API
-
         const timeout =
             setTimeout(() => {
-
                 controller.abort();
-
             }, 5000);
-
 
         const response =
             await fetch(
@@ -35,34 +28,24 @@ async function loadHomeCategories() {
                 }
             );
 
-
         clearTimeout(timeout);
 
-
         if (!response.ok) {
-
-            throw new Error(
-                "Failed to load categories"
-            );
-
+            throw new Error("Failed to load categories");
         }
-
 
         const categories =
             await response.json();
-
 
         const activeCategories =
             categories.filter(
                 category => category.status
             );
 
-
         const html =
             activeCategories.map(category => {
 
                 return `
-
                     <a
                         href="category-products.html?category=${category.slug}"
                         class="category-card">
@@ -73,19 +56,14 @@ async function loadHomeCategories() {
                             loading="lazy"
                             decoding="async">
 
-                        <span>
-                            ${category.name}
-                        </span>
+                        <span>${category.name}</span>
 
                     </a>
-
                 `;
 
             }).join("");
 
-
         grid.innerHTML = html;
-
 
     } catch (error) {
 
@@ -94,15 +72,7 @@ async function loadHomeCategories() {
             error.message
         );
 
-        // Don't block the rest of the homepage
-
     }
-
 }
-
-
-// ======================================
-// Start
-// ======================================
 
 loadHomeCategories();
