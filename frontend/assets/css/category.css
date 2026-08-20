@@ -153,3 +153,31 @@
     }
 
 }
+
+/* ==========================================
+   PRINT EDIT BUTTON
+========================================== */
+
+.checkout-item .edit-btn {
+    border: none;
+    background: #16a34a;
+    color: #fff;
+
+    padding: 8px 14px;
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.checkout-item .edit-btn:hover {
+    background: #15803d;
+}
+
+.checkout-item .edit-btn:active {
+    transform: scale(.96);
+}
