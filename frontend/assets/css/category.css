@@ -154,30 +154,20 @@
 
 }
 
-/* ==========================================
-   PRINT EDIT BUTTON
-========================================== */
+/* PRINT EDIT BUTTON */
 
-.checkout-item .edit-btn {
-    border: none;
-    background: #16a34a;
-    color: #fff;
-
-    padding: 8px 14px;
-    border-radius: 8px;
-
-    font-size: 13px;
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: .2s;
+.checkout-item button.edit-btn {
+    background: #16a34a !important;
+    color: #ffffff !important;
+    border: none !important;
+    padding: 8px 14px !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
 }
 
-.checkout-item .edit-btn:hover {
-    background: #15803d;
-}
-
-.checkout-item .edit-btn:active {
-    transform: scale(.96);
+.checkout-item button.edit-btn:hover {
+    background: #15803d !important;
+    color: #ffffff !important;
 }
