@@ -1,3 +1,84 @@
+/* ============================= */
+/* Header */
+/* ============================= */
+
+.orders-header{
+
+    position:sticky;
+
+    top:0;
+
+    z-index:100;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    background:var(--white);
+
+    padding:18px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+
+}
+
+.back-btn{
+
+    width:45px;
+
+    height:45px;
+
+    border:none;
+
+    border-radius:50%;
+
+    background:var(--primary-light);
+
+    color:var(--primary);
+
+    cursor:pointer;
+
+    font-size:18px;
+
+    transition:.25s;
+
+}
+
+.back-btn:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}
+
+.header-title{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.header-title h2{
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.header-title p{
+
+    color:var(--text-light);
+
+    font-size:13px;
+
+}
+
+
 /* ==========================================
    COUPONS COMING SOON
 ========================================== */
