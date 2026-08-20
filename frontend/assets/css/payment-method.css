@@ -1,0 +1,230 @@
+/* ==========================================
+   PAYMENT METHOD
+========================================== */
+
+body {
+    margin: 0;
+    background: #f5f7f9;
+    font-family: inherit;
+}
+
+
+/* Header */
+
+.payment-header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+
+    padding: 15px 18px;
+
+    background: #fff;
+
+    box-shadow:
+        0 2px 10px rgba(0,0,0,.07);
+}
+
+.payment-header h2 {
+    margin: 0;
+
+    font-size: 20px;
+    color: #222;
+}
+
+
+/* Back */
+
+.back-btn {
+    width: 42px;
+    height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eef9f1;
+    color: #16a34a;
+
+    text-decoration: none;
+}
+
+
+/* Coming Soon */
+
+.coming-soon-box {
+
+    max-width: 500px;
+
+    margin: 0 auto;
+
+    min-height: 75vh;
+
+    padding: 40px 20px;
+
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+}
+
+
+/* Icon */
+
+.coming-icon {
+
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eaf8ee;
+
+    color: #16a34a;
+
+    font-size: 38px;
+
+    margin-bottom: 20px;
+}
+
+
+.coming-soon-box h1 {
+
+    margin: 0 0 10px;
+
+    font-size: 27px;
+
+    color: #222;
+}
+
+
+.coming-soon-box > p {
+
+    max-width: 350px;
+
+    margin: 0 0 22px;
+
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+}
+
+
+/* Payment list */
+
+.payment-list {
+
+    width: 100%;
+
+    background: #fff;
+
+    border-radius: 16px;
+
+    padding: 5px 16px;
+
+    box-shadow:
+        0 5px 18px rgba(0,0,0,.06);
+
+    margin-bottom: 18px;
+}
+
+
+.payment-list div {
+
+    display: flex;
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid #eee;
+
+    color: #444;
+
+    font-size: 14px;
+
+    font-weight: 600;
+}
+
+
+.payment-list div:last-child {
+    border-bottom: none;
+}
+
+
+.payment-list i {
+
+    width: 35px;
+    height: 35px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 9px;
+
+    background: #f0fdf4;
+
+    color: #16a34a;
+}
+
+
+/* COD */
+
+.available-text {
+
+    color: #15803d !important;
+
+    font-weight: 600;
+
+    margin-bottom: 20px !important;
+}
+
+
+/* Button */
+
+.shop-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    min-width: 200px;
+
+    height: 48px;
+
+    padding: 0 20px;
+
+    border-radius: 12px;
+
+    background: #16a34a;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 700;
+}
+
+
+.shop-btn:hover {
+    background: #15803d;
+}
