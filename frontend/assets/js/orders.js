@@ -29,14 +29,48 @@ async function loadOrders() {
         }
 
         showLoading();
+const [groceryResult, printResult] =
+    await Promise.allSettled([
 
-        const [groceryRes, printRes] = await Promise.all([
-            fetch(GROCERY_API),
-            fetch(PRINT_API)
-        ]);
+        fetch(GROCERY_API),
 
-        const groceryOrders = await groceryRes.json();
-        const printOrders = await printRes.json();
+        fetch(PRINT_API)
+
+    ]);
+
+
+// ==========================================
+// Grocery Orders
+// ==========================================
+
+let groceryOrders = [];
+
+if (
+    groceryResult.status === "fulfilled" &&
+    groceryResult.value.ok
+) {
+
+    groceryOrders =
+        await groceryResult.value.json();
+
+}
+
+
+// ==========================================
+// Print Orders
+// ==========================================
+
+let printOrders = [];
+
+if (
+    printResult.status === "fulfilled" &&
+    printResult.value.ok
+) {
+
+    printOrders =
+        await printResult.value.json();
+
+}
 
         console.log("Logged User:", userData);
 console.log("Print Orders:", printOrders);
@@ -123,11 +157,15 @@ function showEmpty() {
 
     emptyOrders.classList.remove("hidden");
 
+    errorBox.classList.add("hidden");
+
 }
 
 function hideEmpty() {
 
     emptyOrders.classList.add("hidden");
+
+    errorBox.classList.add("hidden");
 
 }
 
@@ -136,6 +174,8 @@ function showError() {
     loadingScreen.classList.add("hidden");
 
     ordersContainer.classList.add("hidden");
+
+    emptyOrders.classList.add("hidden");
 
     errorBox.classList.remove("hidden");
 
