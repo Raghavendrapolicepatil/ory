@@ -32,14 +32,10 @@
     display: block;
     width: 100%;
     height: auto;
-    aspect-ratio: 16 / 7;
-    object-fit: cover;
+    aspect-ratio: 1200 / 525;
+    object-fit: contain;
     border-radius: 20px;
-
-    /* Prevent layout shift */
     background: #f5f5f5;
-
-    /* Better image rendering/loading */
     image-rendering: auto;
 }
 
@@ -69,6 +65,7 @@
     background: #111;
 }
 
+
 /* ==========================================
    MOBILE
 ========================================== */
@@ -84,8 +81,8 @@
     }
 
     .slide img {
-        aspect-ratio: 16 / 8;
-        object-fit: cover;
+        aspect-ratio: 1200 / 525;
+        object-fit: contain;
         border-radius: 18px;
     }
 
@@ -98,6 +95,7 @@
     }
 }
 
+
 /* ==========================================
    TABLET
 ========================================== */
@@ -109,9 +107,11 @@
     }
 
     .slide img {
-        aspect-ratio: 16 / 7;
+        aspect-ratio: 1200 / 525;
+        object-fit: contain;
     }
 }
+
 
 /* ==========================================
    LAPTOP
@@ -123,6 +123,7 @@
         padding: 18px 20px 10px;
     }
 }
+
 
 /* ==========================================
    DESKTOP
