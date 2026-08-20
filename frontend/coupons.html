@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Coupons | Orymart</title>
+
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css">
+
+    <link
+        rel="stylesheet"
+        href="assets/css/coupons.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="coupons-page">
+
+    <!-- Header -->
+
+    <header class="coupons-header">
+
+        <a
+            href="profile.html"
+            class="back-btn">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+        </a>
+
+        <div>
+
+            <h2>Coupons</h2>
+
+            <p>Save more on your orders</p>
+
+        </div>
+
+    </header>
+
+
+    <!-- Coupons -->
+
+    <main class="coupons-container">
+
+        <!-- Coupon 1 -->
+
+        <div class="coupon-card">
+
+            <div class="coupon-icon">
+
+                <i class="fa-solid fa-tag"></i>
+
+            </div>
+
+            <div class="coupon-info">
+
+                <h3>WELCOME10</h3>
+
+                <p>
+                    Get 10% OFF on your first order
+                </p>
+
+                <small>
+                    Min. order ₹299
+                </small>
+
+            </div>
+
+            <button
+                class="apply-btn"
+                onclick="applyCoupon('WELCOME10')">
+
+                Apply
+
+            </button>
+
+        </div>
+
+
+        <!-- Coupon 2 -->
+
+        <div class="coupon-card">
+
+            <div class="coupon-icon">
+
+                <i class="fa-solid fa-percent"></i>
+
+            </div>
+
+            <div class="coupon-info">
+
+                <h3>SAVE50</h3>
+
+                <p>
+                    Get ₹50 OFF on your order
+                </p>
+
+                <small>
+                    Min. order ₹499
+                </small>
+
+            </div>
+
+            <button
+                class="apply-btn"
+                onclick="applyCoupon('SAVE50')">
+
+                Apply
+
+            </button>
+
+        </div>
+
+
+        <!-- Coming Soon -->
+
+        <div class="coupon-coming">
+
+            <div class="coming-icon">
+
+                <i class="fa-solid fa-ticket"></i>
+
+            </div>
+
+            <h2>More Coupons Coming Soon</h2>
+
+            <p>
+                Keep shopping with Orymart.
+                More exciting offers are on the way.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<div id="coupon-toast" class="coupon-toast"></div>
+
+
+<script src="assets/js/coupons.js"></script>
+<script src="assets/js/theme.js"></script>
+
+</body>
+
+</html>
