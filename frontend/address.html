@@ -5,15 +5,18 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Saved Addresses | Snackible</title>
+    <title>Saved Addresses | Orymart</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/address.css">
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -21,7 +24,9 @@
 
 <div class="app">
 
-    <!-- Header -->
+    <!-- ==========================
+         Header
+    =========================== -->
 
     <header class="address-header">
 
@@ -31,21 +36,33 @@
 
         </a>
 
-        <h2>Saved Addresses</h2>
+        <div class="header-title">
 
-        <span></span>
+            <h2>Saved Addresses</h2>
+
+            <p>Choose where you want your order</p>
+
+        </div>
 
     </header>
 
-    <!-- Address List -->
 
-    <div id="address-list">
+    <!-- ==========================
+         Address List
+    =========================== -->
 
-    </div>
+    <main id="address-list">
 
-    <!-- Add Address -->
+    </main>
 
-    <button id="add-address-btn" class="add-address-btn">
+
+    <!-- ==========================
+         Add Address Button
+    =========================== -->
+
+    <button
+        id="add-address-btn"
+        class="add-address-btn">
 
         <i class="fa-solid fa-plus"></i>
 
@@ -55,19 +72,37 @@
 
 </div>
 
+
 <!-- ==========================
      Address Popup
-========================== -->
+=========================== -->
 
-<div class="address-popup" id="address-popup">
+<div
+    class="address-popup"
+    id="address-popup">
 
     <div class="popup-content">
 
+        <!-- Header -->
+
         <div class="popup-header">
 
-            <h2>Add New Address</h2>
+            <div>
 
-            <button id="close-popup">
+                <h2 id="popup-title">
+                    Add New Address
+                </h2>
+
+                <p>
+                    Enter your delivery details
+                </p>
+
+            </div>
+
+            <button
+                type="button"
+                id="close-popup"
+                class="close-popup">
 
                 <i class="fa-solid fa-xmark"></i>
 
@@ -75,51 +110,128 @@
 
         </div>
 
+
+        <!-- ==========================
+             Current Location
+        =========================== -->
+
+        <button
+            type="button"
+            id="current-location-btn"
+            class="current-location-btn">
+
+            <i class="fa-solid fa-location-crosshairs"></i>
+
+            <span>Use Current Location</span>
+
+        </button>
+
+        <p
+            id="location-status"
+            class="location-status">
+        </p>
+
+
+        <!-- ==========================
+             Address Form
+        =========================== -->
+
         <form id="address-form">
 
             <div class="address-type">
 
                 <button
                     type="button"
-                    class="type-btn active">
+                    class="type-btn active"
+                    data-type="Home">
 
-                    🏠 Home
+                    <i class="fa-solid fa-house"></i>
+                    Home
 
                 </button>
 
                 <button
                     type="button"
-                    class="type-btn">
+                    class="type-btn"
+                    data-type="Work">
 
-                    🏢 Work
+                    <i class="fa-solid fa-briefcase"></i>
+                    Work
+
+                </button>
+
+                <button
+                    type="button"
+                    class="type-btn"
+                    data-type="Other">
+
+                    <i class="fa-solid fa-location-dot"></i>
+                    Other
 
                 </button>
 
             </div>
 
+
+            <!-- Name -->
+
+            <label>
+                Full Name
+            </label>
+
             <input
                 type="text"
                 id="full-name"
-                placeholder="Full Name"
+                placeholder="Enter full name"
                 required>
+
+
+            <!-- Mobile -->
+
+            <label>
+                Mobile Number
+            </label>
 
             <input
                 type="tel"
                 id="mobile"
-                placeholder="Mobile Number"
+                placeholder="10-digit mobile number"
+                maxlength="10"
+                inputmode="numeric"
                 required>
+
+
+            <!-- House -->
+
+            <label>
+                House / Flat
+            </label>
 
             <input
                 type="text"
                 id="house"
-                placeholder="House No / Flat"
+                placeholder="House No / Flat / Building"
                 required>
+
+
+            <!-- Street -->
+
+            <label>
+                Area / Street
+            </label>
 
             <input
                 type="text"
                 id="street"
-                placeholder="Area / Street"
+                placeholder="Area / Street / Landmark"
                 required>
+
+
+            <!-- City -->
+
+            <label>
+                City
+            </label>
 
             <input
                 type="text"
@@ -127,15 +239,45 @@
                 value="Afzalpur"
                 required>
 
+
+            <!-- Pincode -->
+
+            <label>
+                Pincode
+            </label>
+
             <input
-                type="text"
+                type="tel"
                 id="pincode"
-                placeholder="Pincode"
+                placeholder="6-digit pincode"
+                maxlength="6"
+                inputmode="numeric"
                 required>
+
+
+            <!-- Location information -->
+
+            <div
+                id="location-info"
+                class="location-info hidden">
+
+                <i class="fa-solid fa-location-dot"></i>
+
+                <span>
+                    Current location detected
+                </span>
+
+            </div>
+
+
+            <!-- Save -->
 
             <button
                 type="submit"
-                class="save-address">
+                class="save-address"
+                id="save-address-btn">
+
+                <i class="fa-solid fa-check"></i>
 
                 Save Address
 
@@ -146,6 +288,7 @@
     </div>
 
 </div>
+
 
 <script src="assets/js/address.js"></script>
 <script src="assets/js/theme.js"></script>
