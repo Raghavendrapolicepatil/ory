@@ -1,4 +1,161 @@
 /* ==========================================
+   EMPTY CHECKOUT
+========================================== */
+
+.empty-checkout {
+
+    min-height: 65vh;
+
+    display: none;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 40px 20px;
+
+}
+
+
+/* Icon */
+
+.empty-checkout-icon {
+
+    width: 90px;
+    height: 90px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: #eaf8ee;
+
+    color: #16a34a;
+
+    font-size: 38px;
+
+    margin-bottom: 22px;
+
+}
+
+
+/* Heading */
+
+.empty-checkout h2 {
+
+    margin: 0 0 8px;
+
+    font-size: 24px;
+
+    color: #222;
+
+}
+
+
+/* Text */
+
+.empty-checkout p {
+
+    max-width: 330px;
+
+    margin: 0 0 24px;
+
+    color: #777;
+
+    font-size: 14px;
+
+    line-height: 1.6;
+
+}
+
+
+/* Continue Shopping */
+
+.continue-shopping-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    min-width: 210px;
+
+    height: 50px;
+
+    padding: 0 22px;
+
+    border-radius: 13px;
+
+    background: #16a34a;
+
+    color: #fff;
+
+    text-decoration: none;
+
+    font-size: 15px;
+
+    font-weight: 700;
+
+    box-shadow:
+        0 8px 20px rgba(22, 163, 74, .22);
+
+    transition: .2s;
+
+}
+
+.continue-shopping-btn:hover {
+
+    background: #15803d;
+
+}
+
+.continue-shopping-btn:active {
+
+    transform: scale(.97);
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 480px) {
+
+    .empty-checkout {
+
+        min-height: 60vh;
+
+        padding: 30px 18px;
+
+    }
+
+    .empty-checkout-icon {
+
+        width: 78px;
+        height: 78px;
+
+        font-size: 32px;
+
+    }
+
+    .empty-checkout h2 {
+
+        font-size: 22px;
+
+    }
+
+}
+
+/* ==========================================
    PATIL GROCERIES CHECKOUT
 ========================================== */
 
