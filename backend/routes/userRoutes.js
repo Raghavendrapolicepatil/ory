@@ -7,43 +7,104 @@ const {
     loginUser,
     getUsers,
     sendOTP,
-    verifyOTP
+    verifyOTP,
+    sendForgotPasswordOTP,
+    resetPassword
 } = require("../controllers/userController");
 
+
+// ==========================================
 // Register
-router.post("/register", registerUser);
+// ==========================================
 
+router.post(
+    "/register",
+    registerUser
+);
+
+
+// ==========================================
 // Login
-router.post("/login", loginUser);
+// ==========================================
 
-// OTP
-router.post("/send-otp", sendOTP);
-router.post("/verify-otp", verifyOTP);
+router.post(
+    "/login",
+    loginUser
+);
 
-// Get all users
-router.get("/", getUsers);
 
-// Delete user
-router.delete("/:id", async (req, res) => {
+// ==========================================
+// Registration OTP
+// ==========================================
 
-    try {
+router.post(
+    "/send-otp",
+    sendOTP
+);
 
-        const User = require("../models/user");
+router.post(
+    "/verify-otp",
+    verifyOTP
+);
 
-        await User.findByIdAndDelete(req.params.id);
 
-        res.json({
-            message: "User Deleted Successfully"
-        });
+// ==========================================
+// Forgot Password OTP
+// ==========================================
 
-    } catch (err) {
+router.post(
+    "/forgot-password/send-otp",
+    sendForgotPasswordOTP
+);
 
-        res.status(500).json({
-            message: err.message
-        });
+router.post(
+    "/forgot-password/reset",
+    resetPassword
+);
+
+
+// ==========================================
+// Get All Users
+// ==========================================
+
+router.get(
+    "/",
+    getUsers
+);
+
+
+// ==========================================
+// Delete User
+// ==========================================
+
+router.delete(
+    "/:id",
+    async (req, res) => {
+
+        try {
+
+            const User =
+                require("../models/user");
+
+            await User.findByIdAndDelete(
+                req.params.id
+            );
+
+            res.json({
+                message:
+                    "User Deleted Successfully"
+            });
+
+        } catch (err) {
+
+            res.status(500).json({
+                message: err.message
+            });
+
+        }
 
     }
+);
 
-});
 
 module.exports = router;

@@ -202,6 +202,263 @@ const verifyOTP = async (req, res) => {
 };
 
 // ===============================
+// Send OTP for Forgot Password
+// ===============================
+
+const sendForgotPasswordOTP = async (req, res) => {
+
+    try {
+
+        const { phone } = req.body;
+
+
+        // Required field
+        if (!phone) {
+
+            return res.status(400).json({
+                message: "Phone number is required"
+            });
+
+        }
+
+
+        // Find user
+        const user =
+            await User.findOne({ phone });
+
+
+        if (!user) {
+
+            return res.status(404).json({
+                message: "Phone number is not registered"
+            });
+
+        }
+
+
+        // Generate 4 digit OTP
+        const otp =
+            Math.floor(
+                1000 + Math.random() * 9000
+            ).toString();
+
+
+        // OTP valid for 5 minutes
+        const otpExpiresAt =
+            new Date(
+                Date.now() + 5 * 60 * 1000
+            );
+
+
+        // Save OTP
+        user.otp = otp;
+
+        user.otpExpiresAt =
+            otpExpiresAt;
+
+        await user.save();
+
+
+        // Add +91
+        let phoneNumber = phone;
+
+
+        if (!phoneNumber.startsWith("+")) {
+
+            phoneNumber =
+                "+91" + phoneNumber;
+
+        }
+
+
+        // 2Factor API
+        const url =
+            `https://2factor.in/API/V1/${process.env.TWOFACTOR_API_KEY}/SMS/` +
+            `${encodeURIComponent(phoneNumber)}/${otp}/OTP1`;
+
+
+        const response =
+            await fetch(url);
+
+
+        const data =
+            await response.text();
+
+
+        console.log(
+            "Forgot Password 2Factor Response:",
+            data
+        );
+
+
+        if (!response.ok) {
+
+            user.otp = null;
+            user.otpExpiresAt = null;
+
+            await user.save();
+
+
+            return res.status(500).json({
+                message:
+                    "Failed to send OTP"
+            });
+
+        }
+
+
+        res.json({
+            message:
+                "OTP sent successfully"
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Forgot Password OTP Error:",
+            error
+        );
+
+
+        res.status(500).json({
+            message:
+                error.message
+        });
+
+    }
+
+};// ===============================
+// Reset Password
+// ===============================
+
+const resetPassword = async (req, res) => {
+
+    try {
+
+        const {
+            phone,
+            otp,
+            password
+        } = req.body;
+
+
+        // Required fields
+        if (!phone || !otp || !password) {
+
+            return res.status(400).json({
+                message:
+                    "Phone, OTP and password are required"
+            });
+
+        }
+
+
+        // Find user
+        const user =
+            await User.findOne({ phone });
+
+
+        if (!user) {
+
+            return res.status(404).json({
+                message:
+                    "User not found"
+            });
+
+        }
+
+
+        // Check OTP
+        if (user.otp !== otp) {
+
+            return res.status(400).json({
+                message:
+                    "Invalid OTP"
+            });
+
+        }
+
+
+        // Check OTP expiry
+        if (
+            !user.otpExpiresAt ||
+            user.otpExpiresAt < new Date()
+        ) {
+
+            user.otp = null;
+            user.otpExpiresAt = null;
+
+            await user.save();
+
+
+            return res.status(400).json({
+                message:
+                    "OTP expired. Please request a new OTP."
+            });
+
+        }
+
+
+        // Password length
+        if (password.length < 6) {
+
+            return res.status(400).json({
+                message:
+                    "Password must be at least 6 characters"
+            });
+
+        }
+
+
+        // Hash new password
+        const hashedPassword =
+            await bcrypt.hash(
+                password,
+                10
+            );
+
+
+        // Update password
+        user.password =
+            hashedPassword;
+
+
+        // Clear OTP
+        user.otp = null;
+
+        user.otpExpiresAt = null;
+
+
+        await user.save();
+
+
+        res.json({
+
+            message:
+                "Password reset successfully"
+
+        });
+
+
+    } catch (error) {
+
+        console.error(
+            "Reset Password Error:",
+            error
+        );
+
+
+        res.status(500).json({
+            message:
+                error.message
+        });
+
+    }
+
+};
+
+// ===============================
 // Register
 // ===============================
 const registerUser = async (req, res) => {
@@ -379,5 +636,7 @@ module.exports = {
     loginUser,
     getUsers,
     sendOTP,
-    verifyOTP
+    verifyOTP,
+    sendForgotPasswordOTP,
+    resetPassword
 };
