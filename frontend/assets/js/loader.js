@@ -1,13 +1,13 @@
-window.addEventListener("load",()=>{
+document.addEventListener("DOMContentLoaded", () => {
 
-    setTimeout(()=>{
+    setTimeout(() => {
 
         document.getElementById("loader")
-        .classList.add("hide");
+            .classList.add("hide");
 
         document.getElementById("app")
-        .style.display="block";
+            .style.display = "block";
 
-    },1200);
+    }, 1200);
 
 });
