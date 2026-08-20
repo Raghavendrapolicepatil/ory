@@ -19,7 +19,6 @@ const sendOTP = async (req, res) => {
         const {
             name,
             phone,
-            email,
             password
         } = req.body;
 
@@ -37,19 +36,6 @@ const sendOTP = async (req, res) => {
             return res.status(400).json({
                 message: "Phone already registered"
             });
-        }
-
-        // Check email only if provided
-        if (email) {
-
-            const emailExists = await User.findOne({ email });
-
-            if (emailExists) {
-                return res.status(400).json({
-                    message: "Email already registered"
-                });
-            }
-
         }
 
         // Generate 4 digit OTP
@@ -74,7 +60,7 @@ const sendOTP = async (req, res) => {
 
             phone,
 
-            email: email || undefined,
+           
 
             password: hashedPassword,
 
@@ -181,8 +167,6 @@ const verifyOTP = async (req, res) => {
 
             phone: pendingUser.phone,
 
-            email: pendingUser.email || undefined,
-
             password: pendingUser.password,
 
             phoneVerified: true
@@ -199,7 +183,6 @@ const verifyOTP = async (req, res) => {
             user: {
                 id: user._id,
                 name: user.name,
-                email: user.email,
                 phone: user.phone,
                 phoneVerified: user.phoneVerified,
                 role: user.role
@@ -221,43 +204,72 @@ const verifyOTP = async (req, res) => {
 // ===============================
 // Register
 // ===============================
-
 const registerUser = async (req, res) => {
 
     try {
 
-        const { name, email, phone, password } = req.body;
+        const {
+            name,
+            phone,
+            password
+        } = req.body;
 
-        const exists = await User.findOne({ email });
 
-        if (exists) {
+        if (!name || !phone || !password) {
+
             return res.status(400).json({
-                message: "Email already registered"
+                message:
+                    "Name, phone and password are required"
             });
+
         }
 
-        const phoneExists = await User.findOne({ phone });
+
+        const phoneExists =
+            await User.findOne({ phone });
+
 
         if (phoneExists) {
+
             return res.status(400).json({
-                message: "Phone already registered"
+                message:
+                    "Phone already registered"
             });
+
         }
 
-        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const hashedPassword =
+            await bcrypt.hash(password, 10);
+
 
         await User.create({
+
             name,
-            email,
+
             phone,
-            password: hashedPassword
+
+            password: hashedPassword,
+
+            phoneVerified: false
+
         });
+
 
         res.status(201).json({
-            message: "Registration Successful"
+
+            message:
+                "Registration Successful"
+
         });
 
+
     } catch (error) {
+
+        console.error(
+            "Register Error:",
+            error
+        );
 
         res.status(500).json({
             message: error.message
@@ -320,7 +332,6 @@ const loginUser = async (req, res) => {
             user: {
                 id: user._id,
                 name: user.name,
-                email: user.email,
                 phone: user.phone,
                 phoneVerified: user.phoneVerified,
                 role: user.role

@@ -13,19 +13,11 @@ const userSchema = new mongoose.Schema({
         unique: true
     },
 
-    email: {
-        type: String,
-        required: false,
-        unique: true,
-        sparse: true
-    },
-
     password: {
         type: String,
         required: true
     },
 
-    // Phone OTP verification
     phoneVerified: {
         type: Boolean,
         default: false

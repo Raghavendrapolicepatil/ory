@@ -13,12 +13,6 @@ const pendingRegistrationSchema = new mongoose.Schema({
         unique: true
     },
 
-    email: {
-        type: String,
-        required: false,
-        sparse: true
-    },
-
     password: {
         type: String,
         required: true
