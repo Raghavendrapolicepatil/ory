@@ -34,145 +34,189 @@ href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 
 </header>
 
-<!-- Delivery Address -->
+<!-- Empty Checkout -->
 
-<section class="checkout-card">
+<section
+    id="empty-checkout"
+    class="empty-checkout"
+    style="display:none;">
 
-<div class="card-title">
+    <div class="empty-checkout-icon">
 
-<i class="fa-solid fa-location-dot"></i>
+        <i class="fa-solid fa-basket-shopping"></i>
 
-<h3>Delivery Address</h3>
+    </div>
 
-</div>
+    <h2>Your Cart is Empty</h2>
 
-<div id="delivery-address">
+    <p>
+        Looks like you haven't added anything to your cart yet.
+    </p>
 
-<p>No Address Selected</p>
+    <a
+        href="index.html"
+        class="continue-shopping-btn">
 
-</div>
+        <i class="fa-solid fa-cart-shopping"></i>
 
-<a href="address.html" class="change-btn">
+        Continue Shopping
 
-Change Address
-
-</a>
-
-</section>
-
-<!-- Shopping Bag -->
-
-<section class="checkout-card">
-
-<div class="card-title">
-
-<i class="fa-solid fa-bag-shopping"></i>
-
-<h3>Shopping Bag</h3>
-
-</div>
-
-<div id="checkout-items">
-
-<!-- JS -->
-
-</div>
+    </a>
 
 </section>
 
-<!-- Bill Details -->
 
-<section class="checkout-card">
 
-<div class="card-title">
+<div id="checkout-content">
 
-<i class="fa-solid fa-file-invoice"></i>
+    <!-- Delivery Address -->
 
-<h3>Bill Details</h3>
+    <section class="checkout-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            <h3>Delivery Address</h3>
+
+        </div>
+
+        <div id="delivery-address">
+
+            <p>No Address Selected</p>
+
+        </div>
+
+        <a href="address.html" class="change-btn">
+            Change Address
+        </a>
+
+    </section>
+
+
+    <!-- Shopping Bag -->
+
+    <section class="checkout-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-bag-shopping"></i>
+
+            <h3>Shopping Bag</h3>
+
+        </div>
+
+        <div id="checkout-items"></div>
+
+    </section>
+
+
+    <!-- Bill Details -->
+
+    <section class="checkout-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-file-invoice"></i>
+
+            <h3>Bill Details</h3>
+
+        </div>
+
+        <div class="bill-row">
+
+            <span>Items Total</span>
+
+            <span id="items-total">₹0</span>
+
+        </div>
+
+        <div class="bill-row">
+
+            <span>Delivery Fee</span>
+
+            <span id="delivery-fee">₹0</span>
+
+        </div>
+
+        <p id="delivery-message"
+           class="delivery-message"></p>
+
+        <div class="bill-row">
+
+            <span>Platform Fee</span>
+
+            <span id="platform-fee">₹0</span>
+
+        </div>
+
+        <hr>
+
+        <div class="bill-row total">
+
+            <span>Grand Total</span>
+
+            <span id="grand-total">₹0</span>
+
+        </div>
+
+    </section>
+
+
+    <!-- Payment -->
+
+    <section class="checkout-card">
+
+        <div class="card-title">
+
+            <i class="fa-solid fa-wallet"></i>
+
+            <h3>Payment Method</h3>
+
+        </div>
+
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                value="COD"
+                checked>
+
+            Cash on Delivery
+
+        </label>
+
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                value="UPI">
+
+            UPI
+
+        </label>
+
+        <label class="payment-option">
+
+            <input
+                type="radio"
+                name="payment"
+                value="Card">
+
+            Credit / Debit Card
+
+        </label>
+
+    </section>
 
 </div>
-
-<div class="bill-row">
-
-<span>Items Total</span>
-
-<span id="items-total">₹0</span>
-
-</div>
-
-<div class="bill-row">
-
-<span>Delivery Fee</span>
-
-<span id="delivery-fee">₹0</span>
-
-</div>
-
-<p id="delivery-message" class="delivery-message"></p>
-
-<div class="bill-row">
-
-<span>Platform Fee</span>
-
-<span id="platform-fee">₹0</span>
-
-</div>
-
-<hr>
-
-<div class="bill-row total">
-
-<span>Grand Total</span>
-
-<span id="grand-total">₹0</span>
-
-</div>
-
-</section>
-
-<!-- Payment -->
-
-<section class="checkout-card">
-
-<div class="card-title">
-
-<i class="fa-solid fa-wallet"></i>
-
-<h3>Payment Method</h3>
-
-</div>
-
-<label class="payment-option">
-
-<input type="radio" name="payment" value="COD" checked>
-
-Cash on Delivery
-
-</label>
-
-<label class="payment-option">
-
-<input type="radio" name="payment" value="UPI">
-
-UPI
-
-</label>
-
-<label class="payment-option">
-
-<input type="radio" name="payment" value="Card">
-
-Credit / Debit Card
-
-</label>
-
-</section>
-
-</div>
-
 <!-- Footer -->
 
-<div class="checkout-footer">
+<div
+    class="checkout-footer"
+    id="checkout-footer">
 
 <div>
 
