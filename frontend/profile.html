@@ -5,15 +5,23 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>My Profile | Orymart</title>
+    <title>My Account | Orymart</title>
 
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/profile.css">
+    <link
+        rel="stylesheet"
+        href="assets/css/style.css">
 
-    <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link
+        rel="stylesheet"
+        href="assets/css/profile.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
 
 </head>
 
@@ -21,11 +29,15 @@
 
 <div class="app">
 
-    <!-- Header -->
+    <!-- ==========================================
+         HEADER
+    ========================================== -->
 
     <header class="profile-header">
 
-        <a href="index.html" class="back-btn">
+        <a
+            href="index.html"
+            class="back-btn">
 
             <i class="fa-solid fa-arrow-left"></i>
 
@@ -37,9 +49,14 @@
 
     </header>
 
-    <!-- User -->
 
-    <section class="profile-card">
+    <!-- ==========================================
+         GUEST USER
+    ========================================== -->
+
+    <section
+        class="profile-card guest-profile"
+        id="guestProfile">
 
         <div class="profile-image">
 
@@ -47,11 +64,49 @@
 
         </div>
 
-        <h2>Guest User</h2>
+        <h2>Welcome to Orymart</h2>
 
-        <p>+91 XXXXXXXXXX</p>
+        <p>Login to access your account</p>
 
-        <button class="edit-btn">
+        <button
+            type="button"
+            class="edit-btn"
+            id="loginBtn">
+
+            Login with OTP
+
+        </button>
+
+    </section>
+
+
+    <!-- ==========================================
+         LOGGED IN USER
+    ========================================== -->
+
+    <section
+        class="profile-card user-profile"
+        id="userProfile"
+        style="display:none;">
+
+        <div class="profile-image">
+
+            <i class="fa-solid fa-user"></i>
+
+        </div>
+
+        <h2 id="userName">
+            Orymart User
+        </h2>
+
+        <p id="userPhone">
+            +91 XXXXXXXXXX
+        </p>
+
+        <button
+            type="button"
+            class="edit-btn"
+            id="editProfileBtn">
 
             Edit Profile
 
@@ -59,11 +114,19 @@
 
     </section>
 
-    <!-- Menu -->
+
+    <!-- ==========================================
+         ACCOUNT MENU
+    ========================================== -->
 
     <section class="profile-menu">
 
-        <a href="orders.html" class="menu-item">
+
+        <!-- My Orders -->
+
+        <a
+            href="orders.html"
+            class="menu-item">
 
             <i class="fa-solid fa-box"></i>
 
@@ -73,17 +136,27 @@
 
         </a>
 
-        <a href="address.html" class="menu-item">
 
-             <i class="fa-solid fa-location-dot"></i>
+        <!-- Addresses -->
 
-             <span>Saved Addresses</span>
+        <a
+            href="address.html"
+            class="menu-item">
+
+            <i class="fa-solid fa-location-dot"></i>
+
+            <span>Saved Addresses</span>
 
             <i class="fa-solid fa-angle-right"></i>
-        
+
         </a>
 
-        <a href="wishlist.html" class="menu-item">
+
+        <!-- Wishlist -->
+
+        <a
+            href="wishlist.html"
+            class="menu-item">
 
             <i class="fa-solid fa-heart"></i>
 
@@ -93,7 +166,12 @@
 
         </a>
 
-        <a href="payment-method.html" class="menu-item">
+
+        <!-- Payment -->
+
+        <a
+            href="payment-method.html"
+            class="menu-item">
 
             <i class="fa-solid fa-credit-card"></i>
 
@@ -103,7 +181,12 @@
 
         </a>
 
-        <a href="coupons.html" class="menu-item">
+
+        <!-- Coupons -->
+
+        <a
+            href="coupons.html"
+            class="menu-item">
 
             <i class="fa-solid fa-tag"></i>
 
@@ -113,7 +196,12 @@
 
         </a>
 
-        <a href="help.html" class="menu-item">
+
+        <!-- Help -->
+
+        <a
+            href="help.html"
+            class="menu-item">
 
             <i class="fa-solid fa-headset"></i>
 
@@ -122,8 +210,13 @@
             <i class="fa-solid fa-angle-right"></i>
 
         </a>
-    
-        <a href="settings.html" class="menu-item">
+
+
+        <!-- Settings -->
+
+        <a
+            href="settings.html"
+            class="menu-item">
 
             <i class="fa-solid fa-gear"></i>
 
@@ -133,7 +226,12 @@
 
         </a>
 
-        <a href="about.html" class="menu-item">
+
+        <!-- About -->
+
+        <a
+            href="about.html"
+            class="menu-item">
 
             <i class="fa-solid fa-circle-info"></i>
 
@@ -143,31 +241,51 @@
 
         </a>
 
-        <a href="privacy.html" class="menu-item">
 
-    <i class="fa-solid fa-shield-halved"></i>
+        <!-- Privacy -->
 
-    <span>Privacy Policy</span>
+        <a
+            href="privacy.html"
+            class="menu-item">
 
-    <i class="fa-solid fa-angle-right"></i>
+            <i class="fa-solid fa-shield-halved"></i>
 
-</a>
+            <span>Privacy Policy</span>
 
-        <a href="terms.html" class="menu-item">
+            <i class="fa-solid fa-angle-right"></i>
 
-    <i class="fa-solid fa-file-contract"></i>
+        </a>
 
-    <span>Terms & Conditions</span>
 
-    <i class="fa-solid fa-angle-right"></i>
+        <!-- Terms -->
 
-</a>
+        <a
+            href="terms.html"
+            class="menu-item">
 
-        <a href="login.html" class="menu-item logout">
+            <i class="fa-solid fa-file-contract"></i>
 
-            <i class="fa-solid fa-right-from-bracket"></i>
+            <span>Terms & Conditions</span>
 
-            <span>Logout</span>
+            <i class="fa-solid fa-angle-right"></i>
+
+        </a>
+
+
+        <!-- Login / Logout -->
+
+        <a
+            href="login.html"
+            class="menu-item logout"
+            id="authBtn">
+
+            <i
+                class="fa-solid fa-right-from-bracket"
+                id="authIcon"></i>
+
+            <span id="authText">
+                Login with OTP
+            </span>
 
             <i class="fa-solid fa-angle-right"></i>
 
@@ -177,8 +295,11 @@
 
 </div>
 
+
 <script src="assets/js/profile.js"></script>
+
 <script src="assets/js/theme.js"></script>
+
 </body>
 
 </html>
