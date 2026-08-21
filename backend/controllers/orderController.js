@@ -10,15 +10,14 @@ const placeOrder = async (req, res) => {
     try {
 
 const {
-
-    user,
     products,
     address,
     location,
     paymentMethod,
     totalAmount
-
 } = req.body;
+
+const user = req.user._id;
 
         // ==========================
         // Check Stock
@@ -119,24 +118,23 @@ const order = await Order.create({
     }
 
 };
-
 // ==========================================
-// Get All Orders
+// Get User Orders
 // ==========================================
 
 const getOrders = async (req, res) => {
 
     try {
 
-        const orders = await Order.find()
+        const orders = await Order.find({
+            user: req.user._id
+        })
 
-            .populate("user", "name email")
+        .populate("user", "name phone")
 
-            .sort({
-
-                createdAt: -1
-
-            });
+        .sort({
+            createdAt: -1
+        });
 
         res.json(orders);
 
@@ -153,7 +151,6 @@ const getOrders = async (req, res) => {
     }
 
 };
-
 // ==========================================
 // Get Single Order
 // ==========================================
@@ -162,9 +159,15 @@ const getOrderById = async (req, res) => {
 
     try {
 
-        const order = await Order.findById(req.params.id)
+        const order = await Order.findOne({
 
-            .populate("user", "name email");
+    _id: req.params.id,
+
+    user: req.user._id
+
+})
+
+.populate("user", "name phone");
 
         if (!order) {
 

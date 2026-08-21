@@ -16,23 +16,25 @@ const {
 
 } = require("../controllers/orderController");
 
+const protect = require("../middleware/authMiddleware");
+
 // ==========================================
 // Place Order
 // ==========================================
 
-router.post("/", placeOrder);
+router.post("/", protect, placeOrder);
 
 // ==========================================
 // Get All Orders
 // ==========================================
 
-router.get("/", getOrders);
+router.get("/", protect, getOrders);
 
 // ==========================================
 // Get Single Order
 // ==========================================
 
-router.get("/:id", getOrderById);
+router.get("/:id", protect, getOrderById);
 
 // ==========================================
 // Update Order Status

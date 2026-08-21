@@ -1,4 +1,16 @@
 // ==========================================
+// Authentication Check
+// ==========================================
+
+const token = localStorage.getItem("token");
+
+if (!token) {
+
+    window.location.replace("login.html");
+
+}
+
+// ==========================================
 // Orymart Orders
 // ==========================================
 
@@ -29,12 +41,21 @@ async function loadOrders() {
         }
 
         showLoading();
+const authHeaders = {
+    "Authorization": `Bearer ${token}`,
+    "Content-Type": "application/json"
+};
+
 const [groceryResult, printResult] =
     await Promise.allSettled([
 
-        fetch(GROCERY_API),
+        fetch(GROCERY_API, {
+            headers: authHeaders
+        }),
 
-        fetch(PRINT_API)
+        fetch(PRINT_API, {
+            headers: authHeaders
+        })
 
     ]);
 
