@@ -623,9 +623,19 @@ alert("✅ Print order placed successfully!");
             const finalTotal =
                 total + deliveryCharge + PLATFORM;
 
-            console.log("Going to place order...");
+          console.log("Going to place order...");
 
-           const token = localStorage.getItem("token");
+const token = localStorage.getItem("token");
+
+if (!token) {
+
+    alert("Please login first.");
+
+    window.location.href = "login.html";
+
+    return;
+
+}
 
 const response = await fetch(
     "https://snackible-backend.onrender.com/api/orders",
@@ -638,59 +648,69 @@ const response = await fetch(
         },
 
         body: JSON.stringify({
-            // tumhara existing order data
+
+            products: cart.map(item => ({
+
+                productId: Number(
+                    String(item.id).split("-")[0]
+                ),
+
+                variant: item.variant,
+
+                weight: item.weight,
+
+                name: item.name,
+
+                image: item.image,
+
+                quantity: item.qty,
+
+                price: item.price
+
+            })),
+
+            totalAmount: finalTotal,
+
+            address: addressBox.innerText,
+
+            location: userLocation,
+
+            paymentMethod: payment
+
         })
+
     }
 );
 
-                    body: JSON.stringify({
+const data = await response.json();
 
-                        user: user.id,
+console.log("Status:", response.status);
 
-                        products: cart.map(item => ({
+if (!response.ok) {
 
-                            productId: Number(
-                                String(item.id).split("-")[0]
-                            ),
+    alert(
+        data.message ||
+        "Order Failed"
+    );
 
-                            variant: item.variant,
+    return;
 
-                            weight: item.weight,
+}
 
-                            name: item.name,
+           const data = await response.json();
 
-                            image: item.image,
+console.log("Status:", response.status);
 
-                            quantity: item.qty,
+if (!response.ok) {
 
-                            price: item.price
+    alert(
+        data.message ||
+        "Order Failed"
+    );
 
-                        })),
+    return;
 
-                        totalAmount: finalTotal,
-
-                        address: addressBox.innerText,
-
-                        location: userLocation,
-
-                        paymentMethod: payment
-
-                    })
-
-                }
-            );
-
-            const data = await response.json();
-
-            console.log("Status:", response.status);
-
-            if (!response.ok) {
-
-                alert(data.message || "Order Failed");
-
-                return;
-
-            }
+}
 
         }
 
