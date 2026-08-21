@@ -681,7 +681,6 @@ const response = await fetch(
 
     }
 );
-
 const data = await response.json();
 
 console.log("Status:", response.status);
@@ -697,29 +696,15 @@ if (!response.ok) {
 
 }
 
-           const data = await response.json();
+localStorage.removeItem("cart");
+localStorage.removeItem("printCart");
 
-console.log("Status:", response.status);
+alert("Order Placed Successfully");
 
-if (!response.ok) {
-
-    alert(
-        data.message ||
-        "Order Failed"
-    );
-
-    return;
-
+window.location.href = "order-success.html";
 }
 
-        }
 
-        localStorage.removeItem("cart");
-        localStorage.removeItem("printCart");
-
-        alert("Order Placed Successfully");
-
-        window.location.href = "order-success.html";
 
     } catch (err) {
 
