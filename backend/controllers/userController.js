@@ -1,10 +1,22 @@
-const PendingRegistration = require("../models/pendingRegistration");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
 
 
 // ==========================================
-// Helper: Send SMS OTP
+// Helper: Generate OTP
+// ==========================================
+
+const generateOTP = () => {
+
+    return Math.floor(
+        1000 + Math.random() * 9000
+    ).toString();
+
+};
+
+
+// ==========================================
+// Helper: Send SMS OTP using 2Factor
 // ==========================================
 
 const sendSMSOTP = async (phone, otp) => {
@@ -30,232 +42,16 @@ const sendSMSOTP = async (phone, otp) => {
     }
 
     return data;
-};
-
-
-// ==========================================
-// Generate OTP
-// ==========================================
-
-const generateOTP = () => {
-
-    return Math.floor(
-        1000 + Math.random() * 9000
-    ).toString();
 
 };
 
 
 // ==========================================
-// Registration - Send OTP
+// Send OTP
+// Login + New User
 // ==========================================
 
 const sendOTP = async (req, res) => {
-
-    try {
-
-        const { name, phone } = req.body;
-
-        if (!name || !phone) {
-
-            return res.status(400).json({
-                message: "Name and phone number are required"
-            });
-
-        }
-
-        // Check existing user
-        const phoneExists =
-            await User.findOne({ phone });
-
-        if (phoneExists) {
-
-            return res.status(400).json({
-                message: "Phone already registered"
-            });
-
-        }
-
-        const otp = generateOTP();
-
-        const otpExpiresAt =
-            new Date(Date.now() + 5 * 60 * 1000);
-
-        // Remove old pending registration
-        await PendingRegistration.deleteOne({
-            phone
-        });
-
-        // Create pending registration
-        await PendingRegistration.create({
-
-            name,
-            phone,
-            otp,
-            otpExpiresAt
-
-        });
-
-        // Send SMS
-        try {
-
-            await sendSMSOTP(phone, otp);
-
-        } catch (smsError) {
-
-            await PendingRegistration.deleteOne({
-                phone
-            });
-
-            throw smsError;
-
-        }
-
-        res.json({
-            message: "OTP sent successfully"
-        });
-
-    } catch (error) {
-
-        console.error(
-            "Registration OTP Error:",
-            error
-        );
-
-        res.status(500).json({
-            message: error.message
-        });
-
-    }
-
-};
-
-
-// ==========================================
-// Registration - Verify OTP
-// ==========================================
-
-const verifyOTP = async (req, res) => {
-
-    try {
-
-        const { phone, otp } = req.body;
-
-        if (!phone || !otp) {
-
-            return res.status(400).json({
-                message: "Phone and OTP are required"
-            });
-
-        }
-
-        const pendingUser =
-            await PendingRegistration.findOne({
-                phone
-            });
-
-        if (!pendingUser) {
-
-            return res.status(404).json({
-                message:
-                    "Registration session not found. Please request a new OTP."
-            });
-
-        }
-
-        // Check OTP
-        if (pendingUser.otp !== otp) {
-
-            return res.status(400).json({
-                message: "Invalid OTP"
-            });
-
-        }
-
-        // Check expiry
-        if (
-            !pendingUser.otpExpiresAt ||
-            pendingUser.otpExpiresAt < new Date()
-        ) {
-
-            await PendingRegistration.deleteOne({
-                phone
-            });
-
-            return res.status(400).json({
-                message:
-                    "OTP expired. Please request a new OTP."
-            });
-
-        }
-
-        // Create user
-        const user = await User.create({
-
-            name: pendingUser.name,
-
-            phone: pendingUser.phone,
-
-            phoneVerified: true
-
-        });
-
-        // Remove pending registration
-        await PendingRegistration.deleteOne({
-            phone
-        });
-
-        // Generate JWT
-        const token = jwt.sign(
-            { id: user._id },
-            process.env.JWT_SECRET,
-            { expiresIn: "7d" }
-        );
-
-        res.status(201).json({
-
-            message: "Registration Successful",
-
-            token,
-
-            user: {
-
-                id: user._id,
-
-                name: user.name,
-
-                phone: user.phone,
-
-                phoneVerified:
-                    user.phoneVerified,
-
-                role: user.role
-
-            }
-
-        });
-
-    } catch (error) {
-
-        console.error(
-            "Verify Registration OTP Error:",
-            error
-        );
-
-        res.status(500).json({
-            message: error.message
-        });
-
-    }
-
-};
-
-
-// ==========================================
-// Login - Send OTP
-// ==========================================
-
-const sendLoginOTP = async (req, res) => {
 
     try {
 
@@ -269,24 +65,12 @@ const sendLoginOTP = async (req, res) => {
 
         }
 
-        // Find user
-        const user =
-            await User.findOne({ phone });
-
-        if (!user) {
-
-            return res.status(404).json({
-                message:
-                    "Phone number is not registered"
-            });
-
-        }
-
-        if (!user.phoneVerified) {
+        // Validate phone
+        if (!/^[0-9]{10}$/.test(phone)) {
 
             return res.status(400).json({
                 message:
-                    "Please verify your phone number first"
+                    "Please enter a valid 10-digit phone number"
             });
 
         }
@@ -296,36 +80,106 @@ const sendLoginOTP = async (req, res) => {
         const otpExpiresAt =
             new Date(Date.now() + 5 * 60 * 1000);
 
-        user.otp = otp;
 
-        user.otpExpiresAt =
-            otpExpiresAt;
+        // ======================================
+        // Existing user
+        // ======================================
 
-        await user.save();
+        const user = await User.findOne({ phone });
+
+
+        if (user) {
+
+            user.otp = otp;
+
+            user.otpExpiresAt =
+                otpExpiresAt;
+
+            await user.save();
+
+        }
+
+
+        // ======================================
+        // New user
+        // ======================================
+
+        // OTP for new users is temporarily stored
+        // in memory for this request.
+        // We use a temporary collection below.
+
+        else {
+
+            const PendingOTP =
+                require("../models/pendingRegistration");
+
+            await PendingOTP.deleteOne({
+                phone
+            });
+
+            await PendingOTP.create({
+
+                name: "OryMart User",
+
+                phone,
+
+                otp,
+
+                otpExpiresAt
+
+            });
+
+        }
+
+
+        // ======================================
+        // Send SMS
+        // ======================================
 
         try {
 
-            await sendSMSOTP(phone, otp);
+            await sendSMSOTP(
+                phone,
+                otp
+            );
 
         } catch (smsError) {
 
-            user.otp = null;
-            user.otpExpiresAt = null;
+            if (user) {
 
-            await user.save();
+                user.otp = null;
+
+                user.otpExpiresAt = null;
+
+                await user.save();
+
+            } else {
+
+                const PendingOTP =
+                    require("../models/pendingRegistration");
+
+                await PendingOTP.deleteOne({
+                    phone
+                });
+
+            }
 
             throw smsError;
 
         }
 
+
         res.json({
-            message: "OTP sent successfully"
+
+            message:
+                "OTP sent successfully"
+
         });
 
     } catch (error) {
 
         console.error(
-            "Login OTP Error:",
+            "Send OTP Error:",
             error
         );
 
@@ -339,10 +193,11 @@ const sendLoginOTP = async (req, res) => {
 
 
 // ==========================================
-// Login - Verify OTP
+// Verify OTP
+// Existing User + New User
 // ==========================================
 
-const verifyLoginOTP = async (req, res) => {
+const verifyOTP = async (req, res) => {
 
     try {
 
@@ -357,61 +212,163 @@ const verifyLoginOTP = async (req, res) => {
 
         }
 
-        const user =
+
+        // ======================================
+        // Check existing user
+        // ======================================
+
+        let user =
             await User.findOne({ phone });
 
-        if (!user) {
 
-            return res.status(404).json({
-                message:
-                    "Phone number is not registered"
-            });
+        // ======================================
+        // Existing User
+        // ======================================
 
-        }
+        if (user) {
 
-        // Check OTP
-        if (user.otp !== otp) {
+            // Check OTP
+            if (user.otp !== otp) {
 
-            return res.status(400).json({
-                message: "Invalid OTP"
-            });
+                return res.status(400).json({
+                    message: "Invalid OTP"
+                });
 
-        }
+            }
 
-        // Check expiry
-        if (
-            !user.otpExpiresAt ||
-            user.otpExpiresAt < new Date()
-        ) {
+            // Check expiry
+            if (
+                !user.otpExpiresAt ||
+                user.otpExpiresAt < new Date()
+            ) {
 
+                user.otp = null;
+
+                user.otpExpiresAt = null;
+
+                await user.save();
+
+                return res.status(400).json({
+                    message:
+                        "OTP expired. Please request a new OTP."
+                });
+
+            }
+
+            // Verify phone
+            user.phoneVerified = true;
+
+            // Clear OTP
             user.otp = null;
+
             user.otpExpiresAt = null;
 
             await user.save();
 
-            return res.status(400).json({
-                message:
-                    "OTP expired. Please request a new OTP."
+        }
+
+
+        // ======================================
+        // New User
+        // ======================================
+
+        else {
+
+            const PendingOTP =
+                require("../models/pendingRegistration");
+
+
+            const pendingUser =
+                await PendingOTP.findOne({
+                    phone
+                });
+
+
+            if (!pendingUser) {
+
+                return res.status(404).json({
+                    message:
+                        "OTP session expired. Please request a new OTP."
+                });
+
+            }
+
+
+            // Check OTP
+            if (pendingUser.otp !== otp) {
+
+                return res.status(400).json({
+                    message: "Invalid OTP"
+                });
+
+            }
+
+
+            // Check expiry
+            if (
+                !pendingUser.otpExpiresAt ||
+                pendingUser.otpExpiresAt < new Date()
+            ) {
+
+                await PendingOTP.deleteOne({
+                    phone
+                });
+
+                return res.status(400).json({
+                    message:
+                        "OTP expired. Please request a new OTP."
+                });
+
+            }
+
+
+            // Create new user
+            user = await User.create({
+
+                name: "OryMart User",
+
+                phone,
+
+                phoneVerified: true
+
+            });
+
+
+            // Delete pending OTP
+            await PendingOTP.deleteOne({
+                phone
             });
 
         }
 
-        // Clear OTP
-        user.otp = null;
-        user.otpExpiresAt = null;
 
-        await user.save();
-
+        // ======================================
         // Generate JWT
+        // ======================================
+
         const token = jwt.sign(
-            { id: user._id },
+
+            {
+                id: user._id
+            },
+
             process.env.JWT_SECRET,
-            { expiresIn: "7d" }
+
+            {
+                expiresIn: "7d"
+            }
+
         );
+
+
+        // ======================================
+        // Response
+        // ======================================
 
         res.json({
 
-            message: "Login Successful",
+            message:
+                "Login Successful",
 
             token,
 
@@ -435,7 +392,7 @@ const verifyLoginOTP = async (req, res) => {
     } catch (error) {
 
         console.error(
-            "Verify Login OTP Error:",
+            "Verify OTP Error:",
             error
         );
 
@@ -480,10 +437,6 @@ module.exports = {
 
     sendOTP,
     verifyOTP,
-
-    sendLoginOTP,
-    verifyLoginOTP,
-
     getUsers
 
 };

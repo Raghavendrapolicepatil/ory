@@ -3,63 +3,34 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    getUsers,
-
-    // Registration OTP
     sendOTP,
     verifyOTP,
-
-    // Login OTP
-    sendLoginOTP,
-    verifyLoginOTP
-
+    getUsers
 } = require("../controllers/userController");
 
 
-// ==========================================
-// Registration OTP
-// ==========================================
-
+// Send OTP
 router.post(
     "/send-otp",
     sendOTP
 );
 
+
+// Verify OTP
 router.post(
     "/verify-otp",
     verifyOTP
 );
 
 
-// ==========================================
-// Login OTP
-// ==========================================
-
-router.post(
-    "/send-login-otp",
-    sendLoginOTP
-);
-
-router.post(
-    "/verify-login-otp",
-    verifyLoginOTP
-);
-
-
-// ==========================================
-// Get All Users
-// ==========================================
-
+// Get Users
 router.get(
     "/",
     getUsers
 );
 
 
-// ==========================================
 // Delete User
-// ==========================================
-
 router.delete(
     "/:id",
     async (req, res) => {
