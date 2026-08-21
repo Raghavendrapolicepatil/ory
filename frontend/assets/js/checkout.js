@@ -625,14 +625,23 @@ alert("✅ Print order placed successfully!");
 
             console.log("Going to place order...");
 
-            const response = await fetch(
-                "https://snackible-backend.onrender.com/api/orders",
-                {
-                    method: "POST",
+           const token = localStorage.getItem("token");
 
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
+const response = await fetch(
+    "https://snackible-backend.onrender.com/api/orders",
+    {
+        method: "POST",
+
+        headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`
+        },
+
+        body: JSON.stringify({
+            // tumhara existing order data
+        })
+    }
+);
 
                     body: JSON.stringify({
 
