@@ -1,43 +1,30 @@
 // ==========================================
-// Orymart Login
+// OryMart Phone + OTP Login
 // ==========================================
 
 const loginForm = document.getElementById("loginForm");
 
 const login = document.getElementById("login");
 
-const password = document.getElementById("password");
+const sendOtpBtn = document.getElementById("sendOtpBtn");
 
-const togglePassword = document.getElementById("togglePassword");
+const otpSection = document.getElementById("otpSection");
 
+const otpInput = document.getElementById("otp");
 
-// ==========================================
-// Show / Hide Password
-// ==========================================
-
-togglePassword.addEventListener("click", () => {
-
-    if (password.type === "password") {
-
-        password.type = "text";
-
-        togglePassword.innerHTML =
-            '<i class="ri-eye-off-line"></i>';
-
-    } else {
-
-        password.type = "password";
-
-        togglePassword.innerHTML =
-            '<i class="ri-eye-line"></i>';
-
-    }
-
-});
+const verifyOtpBtn = document.getElementById("verifyOtpBtn");
 
 
 // ==========================================
-// Login
+// Backend URL
+// ==========================================
+
+const API_URL =
+    "https://snackible-backend.onrender.com/api/users";
+
+
+// ==========================================
+// Send Login OTP
 // ==========================================
 
 loginForm.addEventListener("submit", async (e) => {
@@ -45,7 +32,6 @@ loginForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     const phone = login.value.trim();
-    const passwordValue = password.value;
 
     // Phone validation
     if (!/^[0-9]{10}$/.test(phone)) {
@@ -56,25 +42,114 @@ loginForm.addEventListener("submit", async (e) => {
 
     }
 
+    sendOtpBtn.disabled = true;
+
+    sendOtpBtn.textContent = "Sending OTP...";
+
     try {
 
         const response = await fetch(
-    "https://snackible-backend.onrender.com/api/users/login",
+            `${API_URL}/send-login-otp`,
             {
 
                 method: "POST",
 
                 headers: {
-
                     "Content-Type": "application/json"
+                },
 
+                body: JSON.stringify({
+                    phone: phone
+                })
+
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+
+            alert(data.message);
+
+            sendOtpBtn.disabled = false;
+
+            sendOtpBtn.textContent = "Send OTP";
+
+            return;
+
+        }
+
+        // Show OTP section
+        otpSection.style.display = "block";
+
+        // Disable phone
+        login.disabled = true;
+
+        sendOtpBtn.style.display = "none";
+
+        otpInput.focus();
+
+        alert("OTP sent successfully 📱");
+
+        // Try automatic OTP reading
+        startOTPListener();
+
+    }
+
+    catch (error) {
+
+        console.error("Send Login OTP Error:", error);
+
+        alert("Unable to send OTP. Please try again.");
+
+        sendOtpBtn.disabled = false;
+
+        sendOtpBtn.textContent = "Send OTP";
+
+    }
+
+});
+
+
+// ==========================================
+// Verify Login OTP
+// ==========================================
+
+verifyOtpBtn.addEventListener("click", async () => {
+
+    const phone = login.value.trim();
+
+    const otp = otpInput.value.trim();
+
+    if (!/^[0-9]{4}$/.test(otp)) {
+
+        alert("Please enter the 4-digit OTP");
+
+        return;
+
+    }
+
+    verifyOtpBtn.disabled = true;
+
+    verifyOtpBtn.textContent = "Verifying...";
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/verify-login-otp`,
+            {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
                 },
 
                 body: JSON.stringify({
 
                     phone: phone,
 
-                    password: passwordValue
+                    otp: otp
 
                 })
 
@@ -83,42 +158,44 @@ loginForm.addEventListener("submit", async (e) => {
 
         const data = await response.json();
 
-        if (response.ok) {
+        if (!response.ok) {
 
-            alert("Login Successful ✅");
+            alert(data.message);
 
-            localStorage.setItem(
-                "token",
-                data.token
-            );
+            verifyOtpBtn.disabled = false;
 
-            localStorage.setItem(
-                "user",
-                JSON.stringify(data.user)
-            );
+            verifyOtpBtn.textContent = "Verify & Login";
 
-
-            // Admin
-            if (data.user.role === "admin") {
-
-                window.location.href =
-                    "admin/dashboard.html";
-
-            }
-
-            // Normal User
-            else {
-
-                window.location.href =
-                    "index.html";
-
-            }
+            return;
 
         }
 
+        // Save login session
+        localStorage.setItem(
+            "token",
+            data.token
+        );
+
+        localStorage.setItem(
+            "user",
+            JSON.stringify(data.user)
+        );
+
+        alert("Login Successful ✅");
+
+        // Admin
+        if (data.user.role === "admin") {
+
+            window.location.href =
+                "admin/dashboard.html";
+
+        }
+
+        // Normal user
         else {
 
-            alert(data.message);
+            window.location.href =
+                "index.html";
 
         }
 
@@ -126,10 +203,76 @@ loginForm.addEventListener("submit", async (e) => {
 
     catch (error) {
 
-        console.error("Login Error:", error);
+        console.error(
+            "Verify Login OTP Error:",
+            error
+        );
 
-        alert("Server Error");
+        alert("Unable to verify OTP. Please try again.");
+
+        verifyOtpBtn.disabled = false;
+
+        verifyOtpBtn.textContent =
+            "Verify & Login";
 
     }
 
 });
+
+
+// ==========================================
+// Automatic OTP Detection
+// ==========================================
+
+async function startOTPListener() {
+
+    if (!("OTPCredential" in window)) {
+
+        console.log(
+            "Automatic OTP reading is not supported."
+        );
+
+        return;
+
+    }
+
+    const controller = new AbortController();
+
+    setTimeout(() => {
+
+        controller.abort();
+
+    }, 60000);
+
+    try {
+
+        const credential =
+            await navigator.credentials.get({
+
+                otp: {
+                    transport: ["sms"]
+                },
+
+                signal: controller.signal
+
+            });
+
+        if (!credential) return;
+
+        otpInput.value = credential.code;
+
+        // Automatically verify
+        verifyOtpBtn.click();
+
+    }
+
+    catch (error) {
+
+        console.log(
+            "Automatic OTP reading unavailable:",
+            error
+        );
+
+    }
+
+}
