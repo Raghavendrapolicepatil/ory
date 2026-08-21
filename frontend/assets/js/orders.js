@@ -2,9 +2,9 @@
 // Authentication Check
 // ==========================================
 
-const token = localStorage.getItem("token");
+const authToken = localStorage.getItem("token");
 
-if (!token) {
+if (!authToken) {
 
     window.location.replace("login.html");
 
@@ -42,7 +42,7 @@ async function loadOrders() {
 
         showLoading();
 const authHeaders = {
-    "Authorization": `Bearer ${token}`,
+    "Authorization": `Bearer ${authToken}`,
     "Content-Type": "application/json"
 };
 
