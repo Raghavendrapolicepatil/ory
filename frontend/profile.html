@@ -114,7 +114,6 @@
 
     </section>
 
-
     <!-- ==========================================
          ACCOUNT MENU
     ========================================== -->
@@ -136,6 +135,50 @@
 
         </a>
 
+        <!-- ==========================================
+     EDIT PROFILE MODAL
+========================================== -->
+
+<div
+    id="editProfileModal"
+    class="edit-profile-modal">
+
+    <div class="edit-profile-box">
+
+        <h3>Edit Profile</h3>
+
+        <p>Update your name</p>
+
+        <input
+            type="text"
+            id="editNameInput"
+            placeholder="Enter your name"
+            maxlength="50"
+            autocomplete="name">
+
+        <div class="edit-profile-actions">
+
+            <button
+                type="button"
+                id="cancelEditBtn">
+
+                Cancel
+
+            </button>
+
+            <button
+                type="button"
+                id="saveEditBtn">
+
+                Save
+
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 
         <!-- Addresses -->
 
@@ -294,6 +337,12 @@
     </section>
 
 </div>
+
+<!-- ==========================================
+     PROFILE TOAST
+========================================== -->
+
+<div id="profileToast" class="profile-toast"></div>
 
 
 <script src="assets/js/profile.js"></script>

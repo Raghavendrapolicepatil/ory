@@ -30,6 +30,41 @@ const authText =
 const authIcon =
     document.getElementById("authIcon");
 
+const editProfileModal =
+    document.getElementById("editProfileModal");
+
+const editNameInput =
+    document.getElementById("editNameInput");
+
+const cancelEditBtn =
+    document.getElementById("cancelEditBtn");
+
+const saveEditBtn =
+    document.getElementById("saveEditBtn");
+
+// ==========================================
+// Toast
+// ==========================================
+
+function showToast(message) {
+
+    const toast =
+        document.getElementById("profileToast");
+
+    if (!toast) return;
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
+}
+
 
 // ==========================================
 // Load Profile
@@ -57,7 +92,6 @@ function loadProfile() {
             "none";
 
 
-        // Login button
         authText.textContent =
             "Login with OTP";
 
@@ -72,7 +106,6 @@ function loadProfile() {
             "login.html";
 
         return;
-
     }
 
 
@@ -100,7 +133,6 @@ function loadProfile() {
         window.location.reload();
 
         return;
-
     }
 
 
@@ -121,7 +153,10 @@ function loadProfile() {
             : "";
 
 
-    // Logout button
+    // ======================================
+    // Logout Button
+    // ======================================
+
     authText.textContent =
         "Logout";
 
@@ -173,12 +208,25 @@ if (editProfileBtn) {
                     "login.html";
 
                 return;
-
             }
 
 
-            const user =
-                JSON.parse(savedUser);
+            let user;
+
+            try {
+
+                user =
+                    JSON.parse(savedUser);
+
+            } catch (error) {
+
+                console.error(
+                    "User data error:",
+                    error
+                );
+
+                return;
+            }
 
 
             const newName =
@@ -194,7 +242,6 @@ if (editProfileBtn) {
             ) {
 
                 return;
-
             }
 
 
@@ -212,7 +259,8 @@ if (editProfileBtn) {
                 user.name;
 
 
-            alert(
+            // Toast
+            showToast(
                 "Profile updated successfully! ✅"
             );
 
@@ -236,15 +284,14 @@ if (authBtn) {
                 localStorage.getItem("token");
 
 
-            // Guest → normal login link
+            // Guest
             if (!token) {
 
                 return;
-
             }
 
 
-            // Logged-in → logout
+            // Logged-in user
             e.preventDefault();
 
 
@@ -257,7 +304,6 @@ if (authBtn) {
             if (!confirmLogout) {
 
                 return;
-
             }
 
 
