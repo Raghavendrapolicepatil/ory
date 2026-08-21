@@ -1,4 +1,16 @@
 // ==========================================
+// Already Logged In Check
+// ==========================================
+
+const existingToken = localStorage.getItem("token");
+
+if (existingToken) {
+
+    window.location.replace("index.html");
+
+}
+
+// ==========================================
 // OryMart Phone + OTP
 // ==========================================
 
