@@ -2,288 +2,352 @@
    PROFILE PAGE
 ========================================== */
 
-body{
-    background:#f5f5f5;
+body {
+    background: #f5f5f5;
 }
 
-/* Header */
 
-.profile-header{
+/* ==========================================
+   HEADER
+========================================== */
 
-    position:sticky;
-    top:0;
-    z-index:1000;
+.profile-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
-    background:#fff;
+    background: #fff;
 
-    padding:16px 20px;
+    padding: 16px 20px;
 
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
-
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
 }
 
-.profile-header h2{
-
-    font-size:22px;
-    font-weight:700;
-    color:#222;
-
+.profile-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #222;
 }
 
-.back-btn{
 
-    width:42px;
-    height:42px;
+/* ==========================================
+   BACK BUTTON
+========================================== */
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.back-btn {
+    width: 42px;
+    height: 42px;
 
-    text-decoration:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    color:#222;
+    text-decoration: none;
 
-    background:#f2f2f2;
+    color: #222;
+    background: #f2f2f2;
 
-    border-radius:50%;
+    border-radius: 50%;
 
-    transition:.3s;
-
+    transition: .2s ease;
 }
 
-.back-btn:hover{
-
-    background:#16a34a;
-    color:#fff;
-
+.back-btn:hover {
+    background: #16a34a;
+    color: #fff;
 }
 
-/* Profile Card */
 
-.profile-card{
+/* ==========================================
+   PROFILE CARD
+========================================== */
 
-    background:#fff;
+.profile-card {
+    background: #fff;
 
-    margin:20px 16px;
+    margin: 20px 16px;
 
-    border-radius:20px;
+    border-radius: 20px;
 
-    padding:30px 20px;
+    padding: 30px 20px;
 
-    text-align:center;
+    text-align: center;
 
-    box-shadow:0 5px 20px rgba(0,0,0,.08);
-
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
 }
 
-.profile-image{
 
-    width:100px;
-    height:100px;
+/* ==========================================
+   PROFILE IMAGE
+========================================== */
 
-    margin:auto;
+.profile-image {
+    width: 100px;
+    height: 100px;
 
-    border-radius:50%;
+    margin: auto;
 
-    background:#16a34a;
+    border-radius: 50%;
 
-    display:flex;
-    justify-content:center;
-    align-items:center;
+    background: #16a34a;
 
-    color:#fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    font-size:42px;
+    color: #fff;
 
+    font-size: 42px;
 }
 
-.profile-card h2{
 
-    margin-top:18px;
+/* ==========================================
+   PROFILE TEXT
+========================================== */
 
-    font-size:24px;
+.profile-card h2 {
+    margin-top: 18px;
 
-    color:#222;
+    font-size: 24px;
 
+    color: #222;
 }
 
-.profile-card p{
+.profile-card p {
+    margin-top: 8px;
 
-    margin-top:8px;
+    color: #777;
 
-    color:#777;
-
-    font-size:15px;
-
+    font-size: 15px;
 }
 
-.edit-btn{
 
-    margin-top:20px;
+/* ==========================================
+   EDIT / LOGIN BUTTON
+========================================== */
 
-    border:none;
+.edit-btn {
+    margin-top: 20px;
 
-    background:#16a34a;
+    border: none;
 
-    color:#fff;
+    background: #16a34a;
 
-    padding:12px 28px;
+    color: #fff;
 
-    border-radius:30px;
+    padding: 12px 28px;
 
-    cursor:pointer;
+    border-radius: 30px;
 
-    font-size:15px;
+    cursor: pointer;
 
-    font-weight:600;
+    font-size: 15px;
 
-    transition:.3s;
+    font-weight: 600;
 
+    transition: .2s ease;
 }
 
-.edit-btn:hover{
+.edit-btn:hover {
+    background: #15803d;
 
-    background:#15803d;
-
+    transform: translateY(-1px);
 }
 
-/* Menu */
 
-.profile-menu{
+/* ==========================================
+   PROFILE MENU
+========================================== */
 
-    margin:0 16px 100px;
-
+.profile-menu {
+    margin: 0 16px 100px;
 }
 
-.menu-item{
+.menu-item {
+    display: flex;
 
-    display:flex;
+    justify-content: space-between;
+    align-items: center;
 
-    justify-content:space-between;
+    text-decoration: none;
 
-    align-items:center;
+    color: #222;
 
-    text-decoration:none;
+    background: #fff;
 
-    color:#222;
+    padding: 18px;
 
-    background:#fff;
+    margin-bottom: 12px;
 
-    padding:18px;
+    border-radius: 16px;
 
-    margin-bottom:12px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .06);
 
-    border-radius:16px;
-
-    box-shadow:0 3px 12px rgba(0,0,0,.06);
-
-    transition:.3s;
-
+    transition: .2s ease;
 }
 
-.menu-item:hover{
-
-    transform:translateY(-2px);
-
+.menu-item:hover {
+    transform: translateY(-2px);
 }
 
-.menu-item span{
 
-    flex:1;
+/* ==========================================
+   MENU TEXT
+========================================== */
 
-    margin-left:15px;
+.menu-item span {
+    flex: 1;
 
-    font-size:16px;
+    margin-left: 15px;
 
-    font-weight:500;
+    font-size: 16px;
 
+    font-weight: 500;
 }
 
-.menu-item i:first-child{
 
-    width:22px;
+/* ==========================================
+   MENU ICON
+========================================== */
 
-    font-size:20px;
+.menu-item i:first-child {
+    width: 22px;
 
-    color:#16a34a;
+    font-size: 20px;
 
+    color: #16a34a;
 }
 
-.menu-item i:last-child{
-
-    color:#999;
-
+.menu-item i:last-child {
+    color: #999;
 }
 
-.logout{
 
-    color:#ef4444;
+/* ==========================================
+   LOGOUT
+========================================== */
 
+.menu-item.logout {
+    color: #ef4444;
 }
 
-.logout i:first-child{
-
-    color:#ef4444;
-
+.menu-item.logout i:first-child {
+    color: #ef4444;
 }
 
-/* Mobile */
 
-@media(max-width:768px){
+/* ==========================================
+   GUEST LOGIN
+========================================== */
 
-    .profile-card{
+#authBtn:not(.logout) {
+    color: #16a34a;
+}
 
-        padding:25px 15px;
+#authBtn:not(.logout) i:first-child {
+    color: #16a34a;
+}
 
+
+/* ==========================================
+   GUEST PROFILE
+========================================== */
+
+.guest-profile .profile-image {
+    background: #16a34a;
+}
+
+.guest-profile h2 {
+    font-size: 23px;
+}
+
+
+/* ==========================================
+   LOGGED-IN PROFILE
+========================================== */
+
+.user-profile .profile-image {
+    background: #16a34a;
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 768px) {
+
+    .profile-header {
+        padding: 14px 16px;
     }
 
-    .profile-image{
-
-        width:85px;
-        height:85px;
-
-        font-size:34px;
-
+    .profile-header h2 {
+        font-size: 20px;
     }
 
-    .profile-card h2{
+    .profile-card {
+        padding: 25px 15px;
 
-        font-size:22px;
+        margin: 16px 12px;
+    }
 
+    .profile-image {
+        width: 85px;
+        height: 85px;
+
+        font-size: 34px;
+    }
+
+    .profile-card h2 {
+        font-size: 22px;
+    }
+
+    .menu-item {
+        padding: 16px;
     }
 
 }
 
-/* Desktop */
 
-@media(min-width:992px){
+/* ==========================================
+   DESKTOP
+========================================== */
 
-    .app{
+@media (min-width: 992px) {
 
-    width:100%;
+    .app {
+        width: 100%;
 
-    max-width:1400px;
+        max-width: 1400px;
 
-    margin:0 auto;
+        margin: 0 auto;
 
-    background:#fff;
+        background: #fff;
 
-    min-height:100vh;
+        min-height: 100vh;
 
-    overflow-x:hidden;
+        overflow-x: hidden;
+    }
 
 }
 
-}
 
-.profile{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    cursor:pointer;
-    text-decoration:none;
+/* ==========================================
+   PROFILE LINK
+========================================== */
+
+.profile {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    cursor: pointer;
+
+    text-decoration: none;
 }
