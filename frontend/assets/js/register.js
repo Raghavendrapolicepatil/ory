@@ -1,20 +1,27 @@
 // ==========================================
-// Orymart Register + OTP
+// OryMart Register + OTP
 // ==========================================
 
-const registerForm = document.getElementById("registerForm");
+const registerForm =
+    document.getElementById("registerForm");
 
-const nameInput = document.getElementById("name");
-const phoneInput = document.getElementById("phone");
-const passwordInput = document.getElementById("password");
-const confirmPassword = document.getElementById("confirmPassword");
+const nameInput =
+    document.getElementById("name");
 
-const togglePassword = document.getElementById("togglePassword");
+const phoneInput =
+    document.getElementById("phone");
 
-const sendOtpBtn = document.getElementById("sendOtpBtn");
-const otpSection = document.getElementById("otpSection");
-const otpInput = document.getElementById("otp");
-const verifyOtpBtn = document.getElementById("verifyOtpBtn");
+const sendOtpBtn =
+    document.getElementById("sendOtpBtn");
+
+const otpSection =
+    document.getElementById("otpSection");
+
+const otpInput =
+    document.getElementById("otp");
+
+const verifyOtpBtn =
+    document.getElementById("verifyOtpBtn");
 
 
 // ==========================================
@@ -26,130 +33,31 @@ const API_URL =
 
 
 // ==========================================
-// Show / Hide Password
+// Send Registration OTP
 // ==========================================
 
-togglePassword.addEventListener("click", () => {
+registerForm.addEventListener(
+    "submit",
+    async (e) => {
 
-    if (passwordInput.type === "password") {
+        e.preventDefault();
 
-        passwordInput.type = "text";
+        const name =
+            nameInput.value.trim();
 
-        togglePassword.innerHTML =
-            '<i class="ri-eye-off-line"></i>';
-
-    } else {
-
-        passwordInput.type = "password";
-
-        togglePassword.innerHTML =
-            '<i class="ri-eye-line"></i>';
-
-    }
-
-});
+        const phone =
+            phoneInput.value.trim();
 
 
-// ==========================================
-// Send OTP
-// ==========================================
+        // ======================================
+        // Name Validation
+        // ======================================
 
-registerForm.addEventListener("submit", async (e) => {
-
-    e.preventDefault();
-
-    const name =
-        nameInput.value.trim();
-
-    const phone =
-        phoneInput.value.trim();
-
-    const password =
-        passwordInput.value;
-
-    const confirmPasswordValue =
-        confirmPassword.value;
-
-
-    // ======================================
-    // Password Check
-    // ======================================
-
-    if (password !== confirmPasswordValue) {
-
-        alert("Passwords do not match");
-
-        return;
-
-    }
-
-
-    // ======================================
-    // Phone Validation
-    // ======================================
-
-    if (!/^[0-9]{10}$/.test(phone)) {
-
-        alert(
-            "Please enter a valid 10-digit phone number"
-        );
-
-        return;
-
-    }
-
-
-    // ======================================
-    // Disable Button
-    // ======================================
-
-    sendOtpBtn.disabled = true;
-
-    sendOtpBtn.textContent =
-        "Sending OTP...";
-
-
-    try {
-
-        const response =
-            await fetch(
-                `${API_URL}/send-otp`,
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        name: name,
-
-                        phone: phone,
-
-                        password: password
-
-                    })
-
-                }
-            );
-
-
-        const data =
-            await response.json();
-
-
-        if (!response.ok) {
+        if (!name) {
 
             alert(
-                data.message ||
-                "Unable to send OTP"
+                "Please enter your full name"
             );
-
-            sendOtpBtn.disabled = false;
-
-            sendOtpBtn.textContent =
-                "Send OTP";
 
             return;
 
@@ -157,63 +65,130 @@ registerForm.addEventListener("submit", async (e) => {
 
 
         // ======================================
-        // Show OTP Section
+        // Phone Validation
         // ======================================
 
-        otpSection.style.display =
-            "block";
+        if (!/^[0-9]{10}$/.test(phone)) {
+
+            alert(
+                "Please enter a valid 10-digit mobile number"
+            );
+
+            return;
+
+        }
 
 
         // ======================================
-        // Disable Registration Fields
+        // Disable Button
         // ======================================
 
-        nameInput.disabled = true;
-
-        phoneInput.disabled = true;
-
-        passwordInput.disabled = true;
-
-        confirmPassword.disabled = true;
-
-
-        sendOtpBtn.style.display =
-            "none";
-
-
-        otpInput.focus();
-
-
-        alert(
-            "OTP sent successfully 📱"
-        );
-
-    }
-
-
-    catch (error) {
-
-        console.error(
-            "Send OTP Error:",
-            error
-        );
-
-        alert(
-            "Unable to send OTP. Please try again."
-        );
-
-        sendOtpBtn.disabled = false;
+        sendOtpBtn.disabled = true;
 
         sendOtpBtn.textContent =
-            "Send OTP";
+            "Sending OTP...";
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/send-otp`,
+                    {
+
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "application/json"
+                        },
+
+                        body: JSON.stringify({
+
+                            name: name,
+
+                            phone: phone
+
+                        })
+
+                    }
+                );
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                alert(
+                    data.message ||
+                    "Unable to send OTP"
+                );
+
+                sendOtpBtn.disabled =
+                    false;
+
+                sendOtpBtn.textContent =
+                    "Send OTP";
+
+                return;
+
+            }
+
+
+            // ==================================
+            // Show OTP Section
+            // ==================================
+
+            otpSection.style.display =
+                "block";
+
+
+            // Disable registration fields
+            nameInput.disabled = true;
+
+            phoneInput.disabled = true;
+
+            sendOtpBtn.style.display =
+                "none";
+
+
+            otpInput.focus();
+
+
+            alert(
+                "OTP sent successfully 📱"
+            );
+
+        }
+
+
+        catch (error) {
+
+            console.error(
+                "Send OTP Error:",
+                error
+            );
+
+            alert(
+                "Unable to send OTP. Please try again."
+            );
+
+            sendOtpBtn.disabled =
+                false;
+
+            sendOtpBtn.textContent =
+                "Send OTP";
+
+        }
 
     }
-
-});
+);
 
 
 // ==========================================
-// Verify OTP
+// Verify Registration OTP
 // ==========================================
 
 verifyOtpBtn.addEventListener(
@@ -242,7 +217,8 @@ verifyOtpBtn.addEventListener(
         }
 
 
-        verifyOtpBtn.disabled = true;
+        verifyOtpBtn.disabled =
+            true;
 
         verifyOtpBtn.textContent =
             "Verifying...";
@@ -254,6 +230,7 @@ verifyOtpBtn.addEventListener(
                 await fetch(
                     `${API_URL}/verify-otp`,
                     {
+
                         method: "POST",
 
                         headers: {
@@ -295,13 +272,37 @@ verifyOtpBtn.addEventListener(
             }
 
 
+            // ==================================
+            // Save Login Session
+            // ==================================
+
+            if (data.token) {
+
+                localStorage.setItem(
+                    "token",
+                    data.token
+                );
+
+            }
+
+            if (data.user) {
+
+                localStorage.setItem(
+                    "user",
+                    JSON.stringify(data.user)
+                );
+
+            }
+
+
             alert(
-                "Registration Successful ✅"
+                "Account Created Successfully ✅"
             );
 
 
+            // Go to home
             window.location.href =
-                "login.html";
+                "index.html";
 
         }
 

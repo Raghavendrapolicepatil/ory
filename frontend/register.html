@@ -13,8 +13,8 @@
 <link rel="stylesheet" href="assets/css/login.css">
 
 <link
-href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
-rel="stylesheet">
+    href="https://cdn.jsdelivr.net/npm/remixicon@4.6.0/fonts/remixicon.css"
+    rel="stylesheet">
 
 </head>
 
@@ -27,8 +27,8 @@ rel="stylesheet">
 <div class="login-logo">
 
 <img
-src="assets/icons/icon-512.png"
-alt="Orymart">
+    src="assets/icons/icon-512.png"
+    alt="Orymart">
 
 <h1>Create Account</h1>
 
@@ -36,114 +36,88 @@ alt="Orymart">
 
 </div>
 
+
 <form id="registerForm">
 
-<!-- Name -->
+<!-- ==========================================
+     Name
+========================================== -->
 
 <div class="input-box">
 
 <i class="ri-user-line"></i>
 
 <input
-type="text"
-id="name"
-placeholder="Full Name"
-required>
+    type="text"
+    id="name"
+    placeholder="Full Name"
+    autocomplete="name"
+    required>
 
 </div>
 
 
-<!-- Phone -->
+<!-- ==========================================
+     Phone
+========================================== -->
 
 <div class="input-box">
 
 <i class="ri-phone-line"></i>
 
 <input
-type="tel"
-id="phone"
-placeholder="Phone Number"
-maxlength="10"
-inputmode="numeric"
-required>
+    type="tel"
+    id="phone"
+    placeholder="Mobile Number"
+    maxlength="10"
+    inputmode="numeric"
+    autocomplete="tel"
+    required>
 
 </div>
 
 
-<!-- Password -->
-
-<div class="input-box">
-
-<i class="ri-lock-line"></i>
-
-<input
-type="password"
-id="password"
-placeholder="Password"
-required>
+<!-- ==========================================
+     Send OTP
+========================================== -->
 
 <button
-type="button"
-id="togglePassword">
-
-<i class="ri-eye-line"></i>
-
-</button>
-
-</div>
-
-
-<!-- Confirm Password -->
-
-<div class="input-box">
-
-<i class="ri-lock-password-line"></i>
-
-<input
-type="password"
-id="confirmPassword"
-placeholder="Confirm Password"
-required>
-
-</div>
-
-
-<!-- Send OTP -->
-
-<button
-type="submit"
-class="login-btn"
-id="sendOtpBtn">
+    type="submit"
+    class="login-btn"
+    id="sendOtpBtn">
 
 Send OTP
 
 </button>
 
 
-<!-- OTP Section -->
+<!-- ==========================================
+     OTP Section
+========================================== -->
 
 <div
-id="otpSection"
-style="display: none;">
+    id="otpSection"
+    style="display:none;">
 
 <div class="input-box">
 
 <i class="ri-shield-keyhole-line"></i>
 
 <input
-type="text"
-id="otp"
-placeholder="Enter OTP"
-maxlength="4"
-inputmode="numeric">
+    type="text"
+    id="otp"
+    placeholder="Enter OTP"
+    maxlength="4"
+    inputmode="numeric"
+    autocomplete="one-time-code">
 
 </div>
 
 
 <button
-type="button"
-class="login-btn"
-id="verifyOtpBtn">
+    type="button"
+    class="login-btn"
+    id="verifyOtpBtn">
 
 Verify OTP
 
@@ -154,6 +128,10 @@ Verify OTP
 </form>
 
 
+<!-- ==========================================
+     Login Link
+========================================== -->
+
 <div class="login-links">
 
 <p>
@@ -161,9 +139,7 @@ Verify OTP
 Already have an account?
 
 <a href="login.html">
-
-Login
-
+    Login
 </a>
 
 </p>
