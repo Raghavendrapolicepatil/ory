@@ -30,18 +30,22 @@
     src="assets/icons/icon-512.png"
     alt="Orymart">
 
-<h1>Welcome Back</h1>
+<h1>Welcome to Orymart</h1>
 
-<p>Login with your mobile number</p>
+<p>Login or create your account with mobile number</p>
 
 </div>
 
 
 <form id="loginForm">
 
-<!-- Phone Number -->
+<!-- ==========================================
+     MOBILE NUMBER
+========================================== -->
 
-<div class="input-box">
+<div
+    class="input-box"
+    id="phoneBox">
 
 <i class="ri-phone-line"></i>
 
@@ -57,25 +61,42 @@
 </div>
 
 
-<!-- Send OTP -->
+<!-- ==========================================
+     CONTINUE
+========================================== -->
 
 <button
     type="submit"
     class="login-btn"
     id="sendOtpBtn">
 
-Send OTP
+Continue
 
 </button>
 
 
-<!-- OTP -->
+<!-- ==========================================
+     OTP SECTION
+========================================== -->
 
 <div
     id="otpSection"
-    style="display: none;">
+    style="display:none;">
 
-<div class="input-box">
+<div class="otp-title">
+
+<h3>Enter OTP</h3>
+
+<p>
+We sent a 4-digit OTP to your mobile number
+</p>
+
+</div>
+
+
+<div
+    class="input-box"
+    id="otpBox">
 
 <i class="ri-shield-keyhole-line"></i>
 
@@ -85,7 +106,8 @@ Send OTP
     placeholder="Enter OTP"
     maxlength="4"
     inputmode="numeric"
-    autocomplete="one-time-code">
+    autocomplete="one-time-code"
+    pattern="[0-9]*">
 
 </div>
 
@@ -95,7 +117,17 @@ Send OTP
     class="login-btn"
     id="verifyOtpBtn">
 
-Verify & Login
+Verify
+
+</button>
+
+
+<button
+    type="button"
+    class="resend-btn"
+    id="resendOtpBtn">
+
+Resend OTP
 
 </button>
 
@@ -104,19 +136,22 @@ Verify & Login
 </form>
 
 
+<!-- ==========================================
+     SKIP
+========================================== -->
+
 <div class="login-links">
 
-<p>
+<a
+    href="index.html"
+    class="skip-link">
 
-Don't have an account?
+Skip for now
 
-<a href="register.html">
-    Register
 </a>
 
-</p>
-
 </div>
+
 
 </div>
 
