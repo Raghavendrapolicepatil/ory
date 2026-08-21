@@ -3,34 +3,17 @@ const express = require("express");
 const router = express.Router();
 
 const {
-    registerUser,
-    loginUser,
     getUsers,
+
+    // Registration OTP
     sendOTP,
     verifyOTP,
-    sendForgotPasswordOTP,
-    resetPassword
+
+    // Login OTP
+    sendLoginOTP,
+    verifyLoginOTP
+
 } = require("../controllers/userController");
-
-
-// ==========================================
-// Register
-// ==========================================
-
-router.post(
-    "/register",
-    registerUser
-);
-
-
-// ==========================================
-// Login
-// ==========================================
-
-router.post(
-    "/login",
-    loginUser
-);
 
 
 // ==========================================
@@ -49,17 +32,17 @@ router.post(
 
 
 // ==========================================
-// Forgot Password OTP
+// Login OTP
 // ==========================================
 
 router.post(
-    "/forgot-password/send-otp",
-    sendForgotPasswordOTP
+    "/send-login-otp",
+    sendLoginOTP
 );
 
 router.post(
-    "/forgot-password/reset",
-    resetPassword
+    "/verify-login-otp",
+    verifyLoginOTP
 );
 
 
