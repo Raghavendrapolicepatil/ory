@@ -32,9 +32,15 @@ async function loadDashboard() {
 
         // Orders
 
-        const orderRes = await fetch(`${API}/orders`);
-        const orders = await orderRes.json();
+        const token = localStorage.getItem("token");
 
+const orderRes = await fetch(`${API}/admin/orders`, {
+    headers: {
+        "Authorization": `Bearer ${token}`
+    }
+});
+
+const orders = await orderRes.json();
         ordersCount.textContent = orders.length;
 
         // Users
