@@ -440,9 +440,7 @@ function createProductCard(product){
 
         </div>
 
-        <div class="delivery-tag">
-            ⚡ 15 mins
-        </div>
+      
 
        <div
     class="product-name"
