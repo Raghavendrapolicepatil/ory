@@ -25,6 +25,7 @@ const bannerRoutes = require("./routes/bannerRoutes");
 const path = require("path");
 const uploadRoutes = require("./routes/uploadRoutes");
 const printOrdersRoute = require("./routes/printOrdersRoutes");
+const adminOrderRoutes = require("./routes/adminOrderRoutes");
 
 // API Routes
 app.use("/api/products", productRoutes);
@@ -33,6 +34,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/cart", cartRoutes);
 app.use("/api/address", addressRoutes);
 app.use("/api/orders", orderRoutes);
+app.use("/api/admin/orders", adminOrderRoutes);
 app.use("/api/settings", settingsRoutes);
 app.use("/api/banners", bannerRoutes);
 app.use("/api/upload", uploadRoutes);

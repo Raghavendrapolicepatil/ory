@@ -1,4 +1,4 @@
-const API = "https://snackible-backend.onrender.com/api/orders";
+const API = "https://snackible-backend.onrender.com/api/admin/orders";
 
 const ordersTable = document.getElementById("ordersTable");
 const searchInput = document.getElementById("searchOrder");
@@ -14,7 +14,17 @@ async function loadOrders() {
 
     try {
 
-        const res = await fetch(API);
+        const token = localStorage.getItem("token");
+
+const res = await fetch(API, {
+
+    headers: {
+
+        "Authorization": `Bearer ${token}`
+
+    }
+
+});
         const orders = await res.json();
 
         allOrders = orders;
@@ -123,11 +133,13 @@ async function updateStatus(id, status) {
 
             method: "PUT",
 
-            headers: {
+           headers: {
 
-                "Content-Type": "application/json"
+    "Content-Type": "application/json",
 
-            },
+    "Authorization": `Bearer ${localStorage.getItem("token")}`
+
+},
 
             body: JSON.stringify({
 
@@ -161,7 +173,16 @@ async function viewOrder(id) {
 
     try {
 
-        const res = await fetch(`${API}/${id}`);
+        const res = await fetch(`${API}/${id}`, {
+
+    headers: {
+
+        "Authorization":
+            `Bearer ${localStorage.getItem("token")}`
+
+    }
+
+});
 
         const order = await res.json();
 

@@ -151,6 +151,39 @@ const getOrders = async (req, res) => {
     }
 
 };
+
+// ==========================================
+// Get All Orders - Admin
+// ==========================================
+
+const getAdminOrders = async (req, res) => {
+
+    try {
+
+        const orders = await Order.find()
+
+            .populate("user", "name phone email")
+
+            .sort({
+                createdAt: -1
+            });
+
+        res.json(orders);
+
+    }
+
+    catch (error) {
+
+        res.status(500).json({
+
+            message: error.message
+
+        });
+
+    }
+
+};
+
 // ==========================================
 // Get Single Order
 // ==========================================
@@ -278,6 +311,8 @@ module.exports = {
     placeOrder,
 
     getOrders,
+
+    getAdminOrders,
 
     getOrderById,
 
