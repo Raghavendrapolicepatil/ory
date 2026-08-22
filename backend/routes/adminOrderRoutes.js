@@ -20,7 +20,8 @@ router.use(protect);
 router.use(admin);
 
 // ==========================================
-// Admin Orders
+// Admin Ordersrouter.use(admin);
+
 // ==========================================
 
 router.get("/", getAdminOrders);
