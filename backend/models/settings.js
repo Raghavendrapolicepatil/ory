@@ -84,6 +84,50 @@ const settingsSchema = new mongoose.Schema({
 
         default: "Open"
 
+    },
+
+        // ==========================================
+    // DELIVERY LOCATION SETTINGS
+    // ==========================================
+
+    deliveryEnabled: {
+
+        type: Boolean,
+
+        default: true
+
+    },
+
+    serviceArea: {
+
+        type: String,
+
+        default: "Afzalpur"
+
+    },
+
+    deliveryRadius: {
+
+        type: Number,
+
+        default: 5
+
+    },
+
+    storeLatitude: {
+
+        type: Number,
+
+        default: 0
+
+    },
+
+    storeLongitude: {
+
+        type: Number,
+
+        default: 0
+
     }
 
 }, {
@@ -91,5 +135,6 @@ const settingsSchema = new mongoose.Schema({
     timestamps: true
 
 });
+
 
 module.exports = mongoose.model("Settings", settingsSchema);
