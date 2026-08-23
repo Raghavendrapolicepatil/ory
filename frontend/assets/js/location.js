@@ -1,27 +1,14 @@
 // ==========================================
-// ORYMART LOCATION + 5 KM DELIVERY CHECK
+// ORYMART LOCATION + ADMIN DELIVERY CHECK
 // ==========================================
+
+const API = "https://snackible-backend.onrender.com/api/settings";
 
 const locationText = document.getElementById("location-name");
 
-// ==========================================
-// ORYMART DELIVERY CONFIG
-// ==========================================
-
-// IMPORTANT:
-// Yahan apne OryMart store / village ka exact
-// latitude and longitude daalo.
-
-const ORYMART_LOCATION = {
-    latitude: 17.2056196,   // <-- YOUR LATITUDE
-    longitude: 76.3641935  // <-- YOUR LONGITUDE
-};
-
-const DELIVERY_RADIUS_KM = 5;
-
 
 // ==========================================
-// CALCULATE DISTANCE
+// DISTANCE CALCULATOR
 // ==========================================
 
 function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -32,11 +19,10 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
     const dLon = (lon2 - lon1) * Math.PI / 180;
 
     const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.sin(dLat / 2) ** 2 +
         Math.cos(lat1 * Math.PI / 180) *
         Math.cos(lat2 * Math.PI / 180) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
+        Math.sin(dLon / 2) ** 2;
 
     const c = 2 * Math.atan2(
         Math.sqrt(a),
@@ -48,62 +34,185 @@ function calculateDistance(lat1, lon1, lat2, lon2) {
 
 
 // ==========================================
+// GET ADMIN DELIVERY SETTINGS
+// ==========================================
+
+async function getDeliverySettings() {
+
+    const response = await fetch(API);
+
+    if (!response.ok) {
+        throw new Error("Unable to load delivery settings");
+    }
+
+    return await response.json();
+}
+
+
+// ==========================================
 // CHECK DELIVERY AREA
 // ==========================================
 
-function checkDeliveryArea(lat, lon, city) {
+async function checkDeliveryArea(lat, lon, city) {
 
-    const distance = calculateDistance(
-        lat,
-        lon,
-        ORYMART_LOCATION.latitude,
-        ORYMART_LOCATION.longitude
-    );
+    try {
 
-    console.log("User distance:", distance.toFixed(2), "KM");
+        const settings = await getDeliverySettings();
+
+        console.log("Admin Delivery Settings:", settings);
 
 
-    // ======================================
-    // WITHIN 5 KM
-    // ======================================
+        // ======================================
+        // DELIVERY SERVICE OFF
+        // ======================================
 
-    if (distance <= DELIVERY_RADIUS_KM) {
+        if (settings.deliveryEnabled === false) {
 
-        const userLocation = {
+            saveLocation(
+                city,
+                lat,
+                lon,
+                null,
+                false
+            );
 
-            city: city,
+            locationText.textContent = "Coming Soon";
 
-            latitude: lat,
+            setTimeout(() => {
+                window.location.href = "coming-soon.html";
+            }, 500);
 
-            longitude: lon,
-
-            distance: Number(distance.toFixed(2)),
-
-            deliveryAvailable: true
-
-        };
+            return false;
+        }
 
 
-        localStorage.setItem(
-            "userLocation",
-            JSON.stringify(userLocation)
+        // ======================================
+        // ADMIN STORE LOCATION
+        // ======================================
+
+        const storeLat = Number(settings.storeLatitude);
+        const storeLon = Number(settings.storeLongitude);
+
+        const radius = Number(settings.deliveryRadius);
+
+
+        // ======================================
+        // CHECK VALID SETTINGS
+        // ======================================
+
+        if (
+            !Number.isFinite(storeLat) ||
+            !Number.isFinite(storeLon) ||
+            !Number.isFinite(radius) ||
+            radius <= 0
+        ) {
+
+            console.error(
+                "Invalid delivery settings:",
+                settings
+            );
+
+            locationText.textContent =
+                "Location Error";
+
+            return false;
+        }
+
+
+        // ======================================
+        // CALCULATE DISTANCE
+        // ======================================
+
+        const distance = calculateDistance(
+            lat,
+            lon,
+            storeLat,
+            storeLon
         );
 
-        localStorage.setItem(
-            "userCity",
-            city
+
+        console.log(
+            `User distance: ${distance.toFixed(2)} KM`
+        );
+
+        console.log(
+            `Allowed radius: ${radius} KM`
         );
 
 
-        locationText.textContent = city;
+        // ======================================
+        // WITHIN DELIVERY AREA
+        // ======================================
 
-        return true;
+        if (distance <= radius) {
+
+            saveLocation(
+                city,
+                lat,
+                lon,
+                distance,
+                true
+            );
+
+            locationText.textContent = city;
+
+            return true;
+        }
+
+
+        // ======================================
+        // OUTSIDE DELIVERY AREA
+        // ======================================
+
+        saveLocation(
+            city,
+            lat,
+            lon,
+            distance,
+            false
+        );
+
+        locationText.textContent = "Coming Soon";
+
+
+        setTimeout(() => {
+
+            window.location.href =
+                "coming-soon.html";
+
+        }, 500);
+
+
+        return false;
+
     }
 
+    catch (error) {
 
-    // ======================================
-    // OUTSIDE 5 KM
-    // ======================================
+        console.error(
+            "Delivery Check Error:",
+            error
+        );
+
+        locationText.textContent =
+            "Location Error";
+
+        return false;
+    }
+}
+
+
+// ==========================================
+// SAVE USER LOCATION
+// ==========================================
+
+function saveLocation(
+    city,
+    lat,
+    lon,
+    distance,
+    deliveryAvailable
+) {
 
     const userLocation = {
 
@@ -113,9 +222,13 @@ function checkDeliveryArea(lat, lon, city) {
 
         longitude: lon,
 
-        distance: Number(distance.toFixed(2)),
+        distance:
+            distance !== null
+                ? Number(distance.toFixed(2))
+                : null,
 
-        deliveryAvailable: false
+        deliveryAvailable:
+            deliveryAvailable
 
     };
 
@@ -125,26 +238,10 @@ function checkDeliveryArea(lat, lon, city) {
         JSON.stringify(userLocation)
     );
 
-
     localStorage.setItem(
         "userCity",
         city
     );
-
-
-    locationText.textContent = "Coming Soon";
-
-
-    // Redirect to Coming Soon page
-
-    setTimeout(() => {
-
-        window.location.href = "coming-soon.html";
-
-    }, 500);
-
-
-    return false;
 }
 
 
@@ -152,27 +249,38 @@ function checkDeliveryArea(lat, lon, city) {
 // SHOW SAVED LOCATION
 // ==========================================
 
-const savedLocation =
-    JSON.parse(localStorage.getItem("userLocation"));
+async function checkSavedLocation() {
+
+    const savedLocation =
+        JSON.parse(
+            localStorage.getItem("userLocation")
+        );
 
 
-if (savedLocation) {
-
-    if (savedLocation.deliveryAvailable === false) {
-
-        locationText.textContent = "Coming Soon";
-
-    } else {
+    if (!savedLocation) {
 
         locationText.textContent =
-            savedLocation.city || "Select Location";
+            "Select Location";
 
+        return;
     }
 
-} else {
 
-    locationText.textContent = "Select Location";
+    // If previously marked outside area
+    if (
+        savedLocation.deliveryAvailable === false
+    ) {
 
+        locationText.textContent =
+            "Coming Soon";
+
+        return;
+    }
+
+
+    locationText.textContent =
+        savedLocation.city ||
+        "Select Location";
 }
 
 
@@ -217,29 +325,35 @@ async function getUserLocation() {
                     await response.json();
 
 
+                const address =
+                    data.address || {};
+
+
                 const city =
-                    data.address.city ||
-                    data.address.city_district ||
-                    data.address.county ||
-                    data.address.town ||
-                    data.address.suburb ||
-                    data.address.village ||
-                    data.address.municipality ||
-                    data.address.state ||
+                    address.city ||
+                    address.city_district ||
+                    address.county ||
+                    address.town ||
+                    address.suburb ||
+                    address.village ||
+                    address.municipality ||
+                    address.state ||
                     "Unknown";
 
 
                 // ==================================
-                // CHECK 5 KM
+                // CHECK AGAINST ADMIN SETTINGS
                 // ==================================
 
-                checkDeliveryArea(
+                await checkDeliveryArea(
                     lat,
                     lon,
                     city
                 );
 
-            } catch (error) {
+            }
+
+            catch (error) {
 
                 console.error(error);
 
@@ -259,9 +373,13 @@ async function getUserLocation() {
         },
 
         {
+
             enableHighAccuracy: true,
+
             timeout: 10000,
+
             maximumAge: 300000
+
         }
 
     );
@@ -269,7 +387,14 @@ async function getUserLocation() {
 
 
 // ==========================================
-// ASK LOCATION ONLY AFTER USER CLICK
+// INITIALIZE
+// ==========================================
+
+checkSavedLocation();
+
+
+// ==========================================
+// ASK LOCATION AFTER CLICK
 // ==========================================
 
 locationText.addEventListener(
