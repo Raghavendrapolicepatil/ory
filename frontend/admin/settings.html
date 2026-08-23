@@ -226,6 +226,50 @@ placeholder="WhatsApp Number">
 
 </div>
 
+<!-- Delivery Location -->
+
+<div class="setting-card">
+
+    <h3>📍 Delivery Location</h3>
+
+    <div class="switch">
+
+        <label for="deliveryEnabled">
+            Delivery Service
+        </label>
+
+        <input
+            type="checkbox"
+            id="deliveryEnabled">
+
+    </div>
+
+    <input
+        type="text"
+        id="serviceArea"
+        placeholder="Service Area">
+
+    <input
+        type="number"
+        id="deliveryRadius"
+        placeholder="Delivery Radius (KM)"
+        min="1"
+        step="0.1">
+
+    <input
+        type="number"
+        id="storeLatitude"
+        placeholder="Store Latitude"
+        step="any">
+
+    <input
+        type="number"
+        id="storeLongitude"
+        placeholder="Store Longitude"
+        step="any">
+
+</div>
+
 <button id="saveSettings">
 
 <i class="ri-save-line"></i>
