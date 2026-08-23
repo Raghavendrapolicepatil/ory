@@ -1,6 +1,6 @@
 const Order = require("../models/order");
 const Product = require("../models/product");
-
+const Settings = require("../models/settings");
 // ==========================================
 // Place Order
 // ==========================================
@@ -18,6 +18,128 @@ const {
 } = req.body;
 
 const user = req.user._id;
+
+        // ==========================
+        // CHECK DELIVERY LOCATION
+        // ==========================
+
+        const settings = await Settings.findOne();
+
+        if (!settings) {
+
+            return res.status(500).json({
+
+                message: "Store delivery settings not available"
+
+            });
+
+        }
+
+        // Delivery disabled from Admin
+        if (settings.deliveryEnabled === false) {
+
+            return res.status(403).json({
+
+                message: "Delivery is currently unavailable"
+
+            });
+
+        }
+
+        // Customer location required
+        if (
+            !location ||
+            typeof location.latitude !== "number" ||
+            typeof location.longitude !== "number"
+        ) {
+
+            return res.status(400).json({
+
+                message: "Please select your delivery location"
+
+            });
+
+        }
+
+        const userLat = location.latitude;
+        const userLon = location.longitude;
+
+        const storeLat = Number(settings.storeLatitude);
+        const storeLon = Number(settings.storeLongitude);
+        const deliveryRadius = Number(settings.deliveryRadius);
+
+        if (
+            !Number.isFinite(storeLat) ||
+            !Number.isFinite(storeLon) ||
+            !Number.isFinite(deliveryRadius) ||
+            deliveryRadius <= 0
+        ) {
+
+            return res.status(500).json({
+
+                message: "Invalid store delivery location settings"
+
+            });
+
+        }
+
+        // ==========================
+        // DISTANCE CALCULATION
+        // ==========================
+
+        const R = 6371;
+
+        const dLat =
+            (storeLat - userLat) *
+            Math.PI / 180;
+
+        const dLon =
+            (storeLon - userLon) *
+            Math.PI / 180;
+
+        const a =
+            Math.sin(dLat / 2) ** 2 +
+            Math.cos(userLat * Math.PI / 180) *
+            Math.cos(storeLat * Math.PI / 180) *
+            Math.sin(dLon / 2) ** 2;
+
+        const c =
+            2 *
+            Math.atan2(
+                Math.sqrt(a),
+                Math.sqrt(1 - a)
+            );
+
+        const distance = R * c;
+
+        console.log(
+            `Customer distance: ${distance.toFixed(2)} KM`
+        );
+
+        console.log(
+            `Allowed radius: ${deliveryRadius} KM`
+        );
+
+
+        // ==========================
+        // OUTSIDE DELIVERY AREA
+        // ==========================
+
+        if (distance > deliveryRadius) {
+
+            return res.status(403).json({
+
+                message:
+                    `Sorry, delivery is available only within ${deliveryRadius} KM of Orymart.`,
+
+                distance:
+                    Number(distance.toFixed(2)),
+
+                deliveryRadius
+
+            });
+
+        }
 
         // ==========================
         // Check Stock
