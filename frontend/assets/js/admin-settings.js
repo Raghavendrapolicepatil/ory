@@ -24,10 +24,23 @@ const whatsappNumber = document.getElementById("whatsappNumber");
 
 const storeStatus = document.getElementById("storeStatus");
 
-const saveBtn = document.getElementById("saveSettings");
 
 // ==========================================
-// Load Settings
+// DELIVERY LOCATION
+// ==========================================
+
+const deliveryEnabled = document.getElementById("deliveryEnabled");
+const serviceArea = document.getElementById("serviceArea");
+const deliveryRadius = document.getElementById("deliveryRadius");
+const storeLatitude = document.getElementById("storeLatitude");
+const storeLongitude = document.getElementById("storeLongitude");
+
+
+const saveBtn = document.getElementById("saveSettings");
+
+
+// ==========================================
+// LOAD SETTINGS
 // ==========================================
 
 async function loadSettings() {
@@ -38,38 +51,72 @@ async function loadSettings() {
 
         const data = await res.json();
 
+
+        // Store
         storeName.value = data.storeName || "";
         storePhone.value = data.storePhone || "";
         storeEmail.value = data.storeEmail || "";
         storeAddress.value = data.storeAddress || "";
 
-        deliveryCharge.value = data.deliveryCharge || 20;
-        freeDeliveryAbove.value = data.freeDeliveryAbove || 199;
-        minimumOrder.value = data.minimumOrder || 99;
+
+        // Delivery
+        deliveryCharge.value = data.deliveryCharge ?? 20;
+        freeDeliveryAbove.value = data.freeDeliveryAbove ?? 199;
+        minimumOrder.value = data.minimumOrder ?? 99;
         deliveryTime.value = data.deliveryTime || "20-30 mins";
 
-        platformFee.value = data.platformFee || 0;
 
-        freeGiftAbove.value = data.freeGiftAbove || 499;
+        // Fees
+        platformFee.value = data.platformFee ?? 0;
+
+
+        // Gift
+        freeGiftAbove.value = data.freeGiftAbove ?? 499;
         giftProduct.value = data.giftProduct || "";
 
+
+        // Contact
         supportNumber.value = data.supportNumber || "";
         whatsappNumber.value = data.whatsappNumber || "";
 
+
+        // Store Status
         storeStatus.value = data.storeStatus || "Open";
+
+
+        // ======================================
+        // DELIVERY LOCATION
+        // ======================================
+
+        deliveryEnabled.checked =
+            data.deliveryEnabled ?? true;
+
+        serviceArea.value =
+            data.serviceArea || "Afzalpur";
+
+        deliveryRadius.value =
+            data.deliveryRadius ?? 5;
+
+        storeLatitude.value =
+            data.storeLatitude ?? "";
+
+        storeLongitude.value =
+            data.storeLongitude ?? "";
+
 
     }
 
     catch (err) {
 
-        console.log(err);
+        console.log("Settings Load Error:", err);
 
     }
 
 }
 
+
 // ==========================================
-// Save Settings
+// SAVE SETTINGS
 // ==========================================
 
 saveBtn.addEventListener("click", async () => {
@@ -78,27 +125,59 @@ saveBtn.addEventListener("click", async () => {
 
         const body = {
 
+            // Store
             storeName: storeName.value,
             storePhone: storePhone.value,
             storeEmail: storeEmail.value,
             storeAddress: storeAddress.value,
 
+
+            // Delivery
             deliveryCharge: Number(deliveryCharge.value),
             freeDeliveryAbove: Number(freeDeliveryAbove.value),
             minimumOrder: Number(minimumOrder.value),
             deliveryTime: deliveryTime.value,
 
+
+            // Fees
             platformFee: Number(platformFee.value),
 
+
+            // Gift
             freeGiftAbove: Number(freeGiftAbove.value),
             giftProduct: giftProduct.value,
 
+
+            // Contact
             supportNumber: supportNumber.value,
             whatsappNumber: whatsappNumber.value,
 
-            storeStatus: storeStatus.value
+
+            // Store Status
+            storeStatus: storeStatus.value,
+
+
+            // ==================================
+            // DELIVERY LOCATION
+            // ==================================
+
+            deliveryEnabled:
+                deliveryEnabled.checked,
+
+            serviceArea:
+                serviceArea.value,
+
+            deliveryRadius:
+                Number(deliveryRadius.value),
+
+            storeLatitude:
+                Number(storeLatitude.value),
+
+            storeLongitude:
+                Number(storeLongitude.value)
 
         };
+
 
         const res = await fetch(API, {
 
@@ -114,24 +193,43 @@ saveBtn.addEventListener("click", async () => {
 
         });
 
+
         const data = await res.json();
 
-        alert(data.message || "Settings Saved");
+
+        if (!res.ok) {
+
+            throw new Error(
+                data.message || "Settings update failed"
+            );
+
+        }
+
+
+        alert(
+            data.message ||
+            "Settings Saved Successfully"
+        );
+
 
     }
 
     catch (err) {
 
-        console.log(err);
+        console.log("Settings Save Error:", err);
 
-        alert("Unable to save settings");
+        alert(
+            err.message ||
+            "Unable to save settings"
+        );
 
     }
 
 });
 
+
 // ==========================================
-// Start
+// START
 // ==========================================
 
 loadSettings();
