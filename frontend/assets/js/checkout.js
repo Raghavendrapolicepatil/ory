@@ -537,6 +537,33 @@ placeOrderBtn.addEventListener("click", async () => {
             return;
         }
 
+        // ==========================================
+// CHECK ORYMART DELIVERY AREA
+// ==========================================
+
+if (
+    !userLocation ||
+    typeof userLocation.latitude !== "number" ||
+    typeof userLocation.longitude !== "number"
+) {
+
+    alert("📍 Please select your delivery location first.");
+
+    return;
+}
+
+
+// If location was already checked and is outside delivery area
+if (userLocation.deliveryAvailable === false) {
+
+    alert(
+        "🚫 Delivery unavailable.\n\n" +
+        "Orymart delivery is currently available only within 5 KM."
+    );
+
+    return;
+}
+
        // -----------------------------
 // Print Order
 // -----------------------------
