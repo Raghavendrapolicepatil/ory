@@ -8,7 +8,7 @@ const itemTotal = document.getElementById("item-total");
 const grandTotal = document.getElementById("grand-total");
 const checkoutTotal = document.getElementById("checkout-total");
 
-const DELIVERY_CHARGE = 20;
+const DELIVERY_CHARGE = 0;
 const PLATFORM_FEE = 5;
 
 function renderCart() {
