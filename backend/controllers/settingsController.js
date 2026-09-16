@@ -22,11 +22,11 @@ const getSettings = async (req, res) => {
 
                 storeAddress: "",
 
-                deliveryCharge: 20,
+                deliveryCharge: 0,
 
-                freeDeliveryAbove: 199,
+                freeDeliveryAbove: 5,
 
-                minimumOrder: 99,
+                minimumOrder: 5,
 
                 platformFee: 0,
 
