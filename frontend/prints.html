@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <title>Print Documents</title>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link
+        rel="stylesheet"
+        href="assets/css/print.css">
+
+</head>
+
+<body>
+
+<main class="print-page">
+
+    <!-- =========================
+            Header
+    ========================== -->
+
+    <header class="print-header">
+
+        <button
+    type="button"
+    class="back-btn"
+    onclick="window.location.href='index.html'">
+
+    <i class="fa-solid fa-arrow-left"></i>
+
+</button>
+
+        <div class="header-content">
+
+            <h1>Print Documents</h1>
+
+            <p>
+                Upload PDF or Images for Printing
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+            Upload Section
+    ========================== -->
+
+    <section class="upload-section">
+
+        <label
+            class="upload-box"
+            for="fileInput">
+
+            <div class="upload-icon">
+
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+
+            </div>
+
+            <h2>Upload Files</h2>
+
+            <p>
+                PDF, JPG, PNG, JPEG
+            </p>
+
+        </label>
+
+        <input
+            type="file"
+            id="fileInput"
+            accept="application/pdf,image/*"
+            multiple
+            hidden>
+
+    </section>
+        <!-- =========================
+            Preview Section
+    ========================== -->
+
+    <section class="preview-section">
+
+        <div class="section-title">
+
+            <h2>Preview</h2>
+
+            <div class="page-navigation">
+
+                <button
+                    type="button"
+                    class="nav-btn"
+                    id="prevPage">
+
+                    <i class="fa-solid fa-chevron-left"></i>
+
+                </button>
+
+                <span id="pageIndicator">
+
+                    Page 0 / 0
+
+                </span>
+
+                <button
+                    type="button"
+                    class="nav-btn"
+                    id="nextPage">
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div
+            class="preview-box"
+            id="previewBox">
+
+            <div class="empty-preview">
+
+                <i class="fa-regular fa-file-lines"></i>
+
+                <p>
+                    Select a file to preview
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+            Uploaded Files
+    ========================== -->
+
+    <section class="uploaded-files-section">
+
+        <div class="section-title">
+
+            <h2>Uploaded Files</h2>
+
+            <span id="fileCount">
+
+                0 Files
+
+            </span>
+
+        </div>
+
+        <div
+            class="uploaded-files-list"
+            id="uploadedFilesList">
+
+            <!-- JS will render uploaded files here -->
+
+        </div>
+
+    </section>
+        <!-- =========================
+            Print Options
+    ========================== -->
+
+    <section class="print-options">
+
+        <!-- Paper Size -->
+
+        <div class="option-card">
+
+            <h3>Paper Size</h3>
+
+            <div
+                class="option-chips"
+                id="paperSize">
+
+                <button
+                    type="button"
+                    class="chip active"
+                    data-size="A4">
+                    A4
+                </button>
+
+                <button
+                    type="button"
+                    class="chip"
+                    data-size="A3">
+                    A3
+                </button>
+
+                <button
+                    type="button"
+                    class="chip"
+                    data-size="A5">
+                    A5
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Print Type -->
+
+        <div class="option-card">
+
+            <h3>Print Type</h3>
+
+            <div
+                class="option-chips"
+                id="printType">
+
+                <button
+                    type="button"
+                    class="chip active"
+                    data-type="bw">
+                    B&W
+                </button>
+
+                <button
+                    type="button"
+                    class="chip"
+                    data-type="colour">
+                    Colour
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Print Side -->
+
+        <div class="option-card">
+
+            <h3>Print Side</h3>
+
+            <div
+                class="option-chips"
+                id="printSide">
+
+                <button
+                    type="button"
+                    class="chip active"
+                    data-side="single">
+                    Single Side
+                </button>
+
+                <button
+                    type="button"
+                    class="chip"
+                    data-side="double">
+                    Front & Back
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- Copies -->
+
+        <div class="option-card">
+
+            <h3>Copies</h3>
+
+            <div class="copies-box">
+
+                <button
+                    type="button"
+                    id="decreaseCopies">
+                    −
+                </button>
+
+                <span id="copiesCount">
+                    1
+                </span>
+
+                <button
+                    type="button"
+                    id="increaseCopies">
+                    +
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =========================
+        Bottom Cart
+========================== -->
+
+<div class="bottom-cart">
+
+    <div class="cart-details">
+
+        <span id="bottomPages">
+            0 Pages
+        </span>
+
+        <span id="bottomSheets">
+            0 Sheets
+        </span>
+
+    </div>
+
+    <div class="price-info">
+
+        <strong id="bottomPrice">
+            ₹0.00
+        </strong>
+
+    </div>
+
+    <button
+        type="button"
+        class="add-cart-btn"
+        id="addToCartBtn">
+
+        <i class="fa-solid fa-cart-plus"></i>
+
+        Add to Cart
+
+    </button>
+
+</div>
+
+
+<!-- PDF.js -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<!-- JS -->
+
+<script src="assets/js/print.js"></script>
+
+</body>
+</html>
