@@ -141,66 +141,85 @@ const user = req.user._id;
 
         }
 
+
         // ==========================
-        // Check Stock
+        // VALIDATE PRODUCTS + DEAL LIMIT + STOCK
         // ==========================
+
+        if (!Array.isArray(products) || products.length === 0) {
+            return res.status(400).json({
+                message: "Your cart is empty"
+            });
+        }
+
+        // Group quantities by actual product ID.
+        // Variants such as "123-500g" and "123-1kg"
+        // still belong to the same base product.
+        const validatedProducts = new Map();
 
         for (const item of products) {
-
             const productId =
-    typeof item.productId === "string"
-        ? Number(item.productId.split("-")[0])
-        : item.productId;
+                typeof item.productId === "string"
+                    ? Number(item.productId.split("-")[0])
+                    : Number(item.productId);
 
-const product = await Product.findOne({
+            const quantity = Number(item.quantity);
 
-    id: productId
+            if (
+                !Number.isSafeInteger(productId) ||
+                productId <= 0 ||
+                !Number.isSafeInteger(quantity) ||
+                quantity < 1
+            ) {
+                return res.status(400).json({
+                    message: "Invalid product or quantity"
+                });
+            }
 
-});
+            const existing = validatedProducts.get(productId);
+
+            const totalQuantity =
+                (existing ? existing.quantity : 0) + quantity;
+
+            const product = existing
+                ? existing.product
+                : await Product.findOne({ id: productId });
 
             if (!product) {
-
                 return res.status(404).json({
-
                     message: "Product not found"
-
                 });
-
             }
 
-            if (product.stock < item.quantity) {
-
+            // Each Today's Deal product: maximum 1 per order.
+            // Also catches duplicate entries and different variants.
+            if (product.todayDeal === true && totalQuantity > 1) {
                 return res.status(400).json({
-
-                    message: `${product.name} is out of stock`
-
+                    message:
+                        `${product.name}: Today's Deal allows only 1 quantity per order.`
                 });
-
             }
 
+            if (product.stock < totalQuantity) {
+                return res.status(400).json({
+                    message:
+                        `${product.name}: only ${product.stock} quantity available.`
+                });
+            }
+
+            validatedProducts.set(productId, {
+                product,
+                quantity: totalQuantity
+            });
         }
 
         // ==========================
-        // Reduce Stock
+        // REDUCE STOCK
         // ==========================
 
-        for (const item of products) {
-
-            const productId =
-    typeof item.productId === "string"
-        ? Number(item.productId.split("-")[0])
-        : item.productId;
-
-const product = await Product.findOne({
-
-    id: productId
-
-});
-
-            product.stock -= item.quantity;
-
+        for (const { product, quantity } of validatedProducts.values()) {
+            product.stock -= quantity;
             await product.save();
-
         }
 
         // ==========================
