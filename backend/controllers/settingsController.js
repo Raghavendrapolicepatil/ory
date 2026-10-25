@@ -24,9 +24,9 @@ const getSettings = async (req, res) => {
 
                 deliveryCharge: 0,
 
-                freeDeliveryAbove: 5,
+                freeDeliveryAbove: 0,
 
-                minimumOrder: 5,
+                minimumOrder: 0,
 
                 platformFee: 0,
 
