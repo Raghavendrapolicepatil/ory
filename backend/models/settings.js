@@ -110,7 +110,7 @@ const settingsSchema = new mongoose.Schema({
 
         type: Number,
 
-        default: 5
+        default: 0
 
     },
 
