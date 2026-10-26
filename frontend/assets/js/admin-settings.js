@@ -61,8 +61,8 @@ async function loadSettings() {
 
         // Delivery
         deliveryCharge.value = data.deliveryCharge ?? 0;
-        freeDeliveryAbove.value = data.freeDeliveryAbove ?? 5;
-        minimumOrder.value = data.minimumOrder ?? 5;
+        freeDeliveryAbove.value = data.freeDeliveryAbove ?? 0;
+        minimumOrder.value = data.minimumOrder ?? 0;
         deliveryTime.value = data.deliveryTime || "20-30 mins";
 
 
