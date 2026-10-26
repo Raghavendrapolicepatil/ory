@@ -136,7 +136,7 @@ function showToast(message) {
 // Settings
 // ==========================================
 
-const FREE_DELIVERY_LIMIT = 5;
+const FREE_DELIVERY_LIMIT = 0;
 
 const DELIVERY = (cartTotal) =>
     cartTotal >= FREE_DELIVERY_LIMIT ? 0 : 20;
