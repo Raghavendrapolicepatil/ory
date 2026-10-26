@@ -20,7 +20,7 @@ const settingsSchema = new mongoose.Schema({
 
         type: Number,
 
-        default: 20
+        default: 0
 
     },
 
