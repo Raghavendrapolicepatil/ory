@@ -322,6 +322,12 @@ loadVariants(product.variants || []);
     document.getElementById("bestSeller").checked = product.bestSeller || false;
     document.getElementById("newArrival").checked = product.newArrival || false;
     document.getElementById("trending").checked = product.trending || false;
+    // First Order Offer
+document.getElementById("firstOrderOffer").checked =
+    product.firstOrderOffer || false;
+
+document.getElementById("firstOrderOfferPrice").value =
+    product.firstOrderOfferPrice ?? "";
 
     if(product.image){
 
@@ -350,6 +356,27 @@ loadVariants(product.variants || []);
 form.addEventListener("submit", async (e)=>{
 
     e.preventDefault();
+
+    const offerEnabled =
+    document.getElementById("firstOrderOffer").checked;
+
+const offerPrice =
+    Number(document.getElementById("firstOrderOfferPrice").value);
+
+const regularPrice =
+    Number(document.getElementById("price").value);
+
+if (
+    offerEnabled &&
+    (
+        !offerPrice ||
+        offerPrice <= 0 ||
+        offerPrice >= regularPrice
+    )
+) {
+    showToast("Offer price must be greater than 0 and less than regular price");
+    return;
+}
 
     const product={
 
@@ -407,7 +434,14 @@ description: document.getElementById("description").value.trim(),
 
         newArrival:document.getElementById("newArrival").checked,
 
-        trending:document.getElementById("trending").checked,
+        trending: document.getElementById("trending").checked,
+
+// First Order Offer
+firstOrderOffer: document.getElementById("firstOrderOffer").checked,
+
+firstOrderOfferPrice: document.getElementById("firstOrderOffer").checked
+    ? Number(document.getElementById("firstOrderOfferPrice").value)
+    : null,
 
 variants: getVariants()
 

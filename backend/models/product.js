@@ -44,13 +44,23 @@ const productSchema = new mongoose.Schema({
 
     description: String,
 
-    // Pricing
-    price: Number,
+   // Pricing
+price: Number,
 
-    mrp: Number,
+mrp: Number,
 
-    discount: String,
+discount: String,
 
+// First Order Offer
+firstOrderOffer: {
+    type: Boolean,
+    default: false
+},
+
+firstOrderOfferPrice: {
+    type: Number,
+    default: null
+},
     // Inventory
     weight: String,
 

@@ -86,6 +86,24 @@ router.post("/", async (req, res) => {
                 message: "MRP Required"
             });
 
+            // First Order Offer Validation
+if (req.body.firstOrderOffer) {
+
+    const offerPrice = Number(req.body.firstOrderOfferPrice);
+    const regularPrice = Number(req.body.price);
+
+    if (
+        !offerPrice ||
+        offerPrice <= 0 ||
+        offerPrice >= regularPrice
+    ) {
+        return res.status(400).json({
+            message: "Offer price must be greater than 0 and less than regular price"
+        });
+    }
+
+}
+
         const lastProduct = await Product
             .findOne()
             .sort({ id: -1 });
@@ -108,9 +126,16 @@ router.post("/", async (req, res) => {
 
             price: req.body.price,
 
-            mrp: req.body.mrp,
+mrp: req.body.mrp,
 
-            discount: req.body.discount || "",
+discount: req.body.discount || "",
+
+// First Order Offer
+firstOrderOffer: req.body.firstOrderOffer || false,
+
+firstOrderOfferPrice: req.body.firstOrderOffer
+    ? Number(req.body.firstOrderOfferPrice)
+    : null,
 
             stock: req.body.stock || 0,
 
@@ -172,6 +197,23 @@ router.put("/:id", async (req, res) => {
 
     try {
 
+        // First Order Offer Validation
+if (req.body.firstOrderOffer) {
+
+    const offerPrice = Number(req.body.firstOrderOfferPrice);
+    const regularPrice = Number(req.body.price);
+
+    if (
+        !offerPrice ||
+        offerPrice <= 0 ||
+        offerPrice >= regularPrice
+    ) {
+        return res.status(400).json({
+            message: "Offer price must be greater than 0 and less than regular price"
+        });
+    }
+
+}
         const product = await Product.findOneAndUpdate(
 
             {
